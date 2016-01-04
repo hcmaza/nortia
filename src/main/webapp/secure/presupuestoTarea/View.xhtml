@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPresupuestoTareaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_descripcion}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.descripcion}" title="#{bundle.ViewPresupuestoTareaTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_costounitario}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.costounitario}" title="#{bundle.ViewPresupuestoTareaTitle_costounitario}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_cantidad}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.cantidad}" title="#{bundle.ViewPresupuestoTareaTitle_cantidad}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_total}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.total}" title="#{bundle.ViewPresupuestoTareaTitle_total}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_aportecomitente}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.aportecomitente}" title="#{bundle.ViewPresupuestoTareaTitle_aportecomitente}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_aporteuniversidad}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.aporteuniversidad}" title="#{bundle.ViewPresupuestoTareaTitle_aporteuniversidad}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_aporteorganismo}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.aporteorganismo}" title="#{bundle.ViewPresupuestoTareaTitle_aporteorganismo}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_id}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.id}" title="#{bundle.ViewPresupuestoTareaTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_rubro}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.rubro}" title="#{bundle.ViewPresupuestoTareaTitle_rubro}"/>
+                    <h:outputText value="#{bundle.ViewPresupuestoTareaLabel_tarea}"/>
+                    <h:outputText value="#{presupuestoTareaController.selected.tarea}" title="#{bundle.ViewPresupuestoTareaTitle_tarea}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{presupuestoTareaController.destroyAndView}" value="#{bundle.ViewPresupuestoTareaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPresupuestoTareaEditLink}"/>
+                <br />
+                <h:commandLink action="#{presupuestoTareaController.prepareCreate}" value="#{bundle.ViewPresupuestoTareaCreateLink}" />
+                <br />
+                <h:commandLink action="#{presupuestoTareaController.prepareList}" value="#{bundle.ViewPresupuestoTareaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPresupuestoTareaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,249 @@
+/*body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px !important;
+}*/
+
+html {
+	height: 100%;
+        
+        background: url("#{resource['img:/fondo3.jpg']}") no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+	display: block;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    
+    font-size: 12px !important;
+
+/*    background-image: url("#{resource['img:/tramaMediaClara.jpg']}");
+    background-repeat: repeat;*/
+    
+    height: 100%;
+}
+
+.left {
+    text-align: left !important;
+}
+.right {
+    text-align: right !important;
+}
+
+.center {
+    text-align: center;
+}
+
+a {
+    color: #e33b06;
+}
+
+table {
+    empty-cells: show;
+}
+
+.fondoTextura{
+    background-image: url("#{resource['img:/tweed.png']}");
+    background-repeat: repeat;
+}
+
+.sinBordes tr, .sinBordes td {
+    border: none !important;
+}
+
+/*.ui-widget-content{
+    background: #21B2CE !important;
+    background-color: #21B2CE !important;
+}*/
+
+// Todas las cabeceras
+
+.ui-widget-header{
+  background: none !important;
+  background-color: #878787 !important;
+}
+
+.ui-datatable-header {
+    background: #21B2CE !important;
+    background-color: #21B2CE !important;
+    border: none;
+}
+
+.ui-datatable-tablewrapper table th:first-child {
+    border-left: inherit;
+    border-right: none;
+}
+
+.ui-datatable-tablewrapper table thead:first-child {
+    border-left: inherit;
+    border-right: none;
+}
+
+.ui-datatable.sinBordesVerticales .ui-datatable-data thead,
+.ui-datatable.sinBordesVerticales .ui-datatable-data th,
+.ui-datatable.sinBordesVerticales .ui-datatable-data tr,
+.ui-datatable.sinBordesVerticales .ui-datatable-data-empty tr,
+.ui-datatable.sinBordesVerticales .ui-datatable-data td,
+.ui-datatable.sinBordesVerticales .ui-datatable-data-empty td{
+    border-left: none !important;
+    border-right: none !important;
+}
+
+/*.sinBordesVerticales tr, .sinBordesVerticales td{
+    border-left: none !important;
+    botder-right: none !important;
+}*/
+
+.sinFondo tr, .sinBordes td{
+    background: none !important;
+}
+
+.ui-widget {
+    font-size: 12px !important;
+}
+
+.rounded-corners {
+
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    -khtml-border-radius: 11px;        
+    border-radius: 11px;
+    /*behavior: url(border-radius.htc); NO*/
+    /*behavior: url("#{resource['css:/border-radius.htc']}"); //FUNCIONA*/
+}
+
+.cabecera1 {
+    text-align: right;
+    font-size: 48px !important;
+    font-family: 'Varela Round';
+    color: white;
+    margin: 0px 10px;
+    padding-top: 85px;
+    line-height: 10px;
+}
+
+.cabecera2 {
+    text-align: right;
+    font-size: 16px !important;
+    font-family: 'Montserrat';
+    color: skyblue;
+    line-height: 10px;
+    margin: 30px 10px;
+    
+}
+
+.pie1 {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 15px !important;
+    font-family: 'Montserrat';
+    color: white;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+/*    src: local('Montserrat-Bold'), url(https://themes.googleusercontent.com/static/fonts/montserrat/v4/IQHow_FEYlDC4Gzy_m8fcgFhaRv2pGgT5Kf0An0s4MM.woff) format('woff');*/
+    src: local('Montserrat-Bold'), url("#{resource['fonts:/Montserrat-Bold.ttf']}");
+}
+@font-face {
+    font-family: 'Varela Round';
+    font-style: normal;
+    font-weight: 400;
+    /*src: local('Varela Round'), local('VarelaRound-Regular'), url(https://themes.googleusercontent.com/static/fonts/varelaround/v4/APH4jr0uSos5wiut5cpjrnhCUOGz7vYGh680lGh-uXM.woff) format('woff');*/
+    src: local('Varela Round'), local('VarelaRound-Regular'), url("#{resource['fonts:/VarelaRound-Regular.ttf']}");;
+}
+
+
+.wrapper {
+	width: 100%;
+	min-width: 1000px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+}
+
+
+/* Header
+-----------------------------------------------------------------------------*/
+.header {
+	/*height: 18%;*/
+        width: 950px;
+        height: 191px;
+        margin: 0 auto;
+        background-color: #003366; 
+/*        background-color: transparent;*/
+        background-image: url("#{resource['img:/vinculacionTecnologica.png']}");        
+        background-size: 100%;
+        background-repeat: no-repeat ;
+        
+        /*position: relative;*/
+}
+
+/* Middle
+-----------------------------------------------------------------------------*/
+.middle {
+	width: 100%;
+	padding: 0 0 100px;
+	position: relative;
+}
+.middle:after {
+	display: table;
+	clear: both;
+	content: '';
+}
+.container {
+	width: 100%;
+	float: left;
+	//overflow: hidden;
+}
+
+.menu1{
+    width: 950px; 
+    margin: 6px auto 6px auto;
+    
+}
+.content {
+	
+}
+
+/* Left Sidebar
+-----------------------------------------------------------------------------*/
+/*.left-sidebar {
+        float: left;
+	width: 15%;
+	margin-left: -100%;
+	position: relative;
+	background: #B5E3FF;
+}
+*/
+
+/* Footer
+-----------------------------------------------------------------------------*/
+.footer {
+        width: 950px;
+        /*min-width: 100%;*/        
+        background-color: #444444;    
+	margin: auto ;
+	height: 5%;
+        vertical-align: middle;
+        text-align: center;
+	position: relative;
+        /*background-color: #6685A3; */
+
+}
+
+.ui-icon-imprimir{   
+    width: 32px;   
+    height: 32px;   
+    background-image: url("#{resource['img/print_printer.png']}");   
+} 
+
+.ui-icon-cancelar{
+    background-image: url("#{resource['img/cancel.jpg']}") !important;
+}

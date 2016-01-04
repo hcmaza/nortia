@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tareas" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="14f6227a-5f40-47ee-bf7d-55f474469004">
+	<property name="ireport.zoom" value="1.0000000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Java\\Proyecto Wayra\\src\\main\\webapp\\secure\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="equipo" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="apellido" class="java.lang.String"/>
+	<field name="numerodocumento" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="profesion" class="java.lang.String"/>
+	<field name="tipodocumentoid.tipodocumento" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="17">
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="15" backcolor="#8A8A8A" uuid="e1dc1c08-6fa6-4067-9948-490b16699052">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="221" height="15" forecolor="#FFFFFF" uuid="71394450-38ad-4c1f-889d-76bec1a23374"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Integrante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="0" width="90" height="15" forecolor="#FFFFFF" uuid="a03ab0f2-7269-4615-8884-6abe1905cb31"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="0" width="178" height="15" forecolor="#FFFFFF" uuid="9446bc02-4c57-4d19-841b-d21318578750"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Profesión]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="0" width="283" height="15" forecolor="#FFFFFF" uuid="1278f746-b9d1-4d61-94f5-6b6f2cbe0833"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="221" height="15" uuid="7b08553d-e5e6-4e4e-b8de-9738dc8a64ac"/>
+				<textFieldExpression><![CDATA[$F{apellido} + ", " + $F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="0" width="90" height="15" uuid="ccffb2ca-3780-42f1-b5e5-74e43340f72c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tipodocumentoid.tipodocumento} + ": " + $F{numerodocumento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="331" y="0" width="178" height="15" uuid="66d9dd05-a2f7-4a1a-82e9-c09a42c57964"/>
+				<textFieldExpression><![CDATA[$F{profesion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="519" y="0" width="283" height="15" uuid="4892b738-73bc-49fd-8f65-251bfbf5b024"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="9"/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

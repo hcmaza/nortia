@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePasajeroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePasajeroLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{pasajeroController.selected.id}" title="#{bundle.CreatePasajeroTitle_id}" required="true" requiredMessage="#{bundle.CreatePasajeroRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreatePasajeroLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{pasajeroController.selected.nombre}" title="#{bundle.CreatePasajeroTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.CreatePasajeroLabel_apellido}" for="apellido" />
+                    <h:inputText id="apellido" value="#{pasajeroController.selected.apellido}" title="#{bundle.CreatePasajeroTitle_apellido}" />
+                    <h:outputLabel value="#{bundle.CreatePasajeroLabel_dni}" for="dni" />
+                    <h:inputText id="dni" value="#{pasajeroController.selected.dni}" title="#{bundle.CreatePasajeroTitle_dni}" />
+                    <h:outputLabel value="#{bundle.CreatePasajeroLabel_trasladoid}" for="trasladoid" />
+                    <h:selectOneMenu id="trasladoid" value="#{pasajeroController.selected.trasladoid}" title="#{bundle.CreatePasajeroTitle_trasladoid}" >
+                        <f:selectItems value="#{trasladoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{pasajeroController.create}" value="#{bundle.CreatePasajeroSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{pasajeroController.prepareList}" value="#{bundle.CreatePasajeroShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePasajeroIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

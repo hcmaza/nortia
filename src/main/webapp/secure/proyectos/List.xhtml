@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="head">
+
+        </ui:define>
+        
+        <ui:define name="body">
+            <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
+            <f:event type="preRenderView" listener="#{proyectoController.buscarProyectosAgenteTrue(agenteController.selected)}"></f:event>
+
+            <h:form >
+                <p:panel id="pprincipal" header="Lista de Proyectos" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+
+
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="No hay registros" rendered="#{proyectoController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{proyectoController.items.rowCount > 0}">
+
+                        <p:dataTable 
+                            id="tbl" 
+                            value="#{proyectoController.items}"  
+                            var="item" 
+                            widgetVar="tblW"
+                            rowKey="#{item.id}" 
+                            emptyMessage="No se encontraron resultados para el criterio de busqueda"
+                            paginator="true" rows="10" paginatorPosition="bottom"
+                            draggableColumns="true"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="10,15,30" 
+                            rowIndexVar="indice"
+                            rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                            styleClass="tabla"
+                            >
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fecha}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column id="columnaNombre" filterBy="#{item.nombre}" filterMatchMode="contains" sortBy="#{item.nombre}">
+                                <f:facet name="header">
+                                    <h:outputText value="Titulo del proyecto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column id="columnaAgente" filterBy="#{item.agenteid.apellido}" filterMatchMode="contains" sortBy="#{item.agenteid.apellido}">
+                                <f:facet name="header">
+                                    <h:outputText value="Responsable"/>
+                                </f:facet>
+                                <h:outputText value="#{item.agenteid.apellido}, #{item.agenteid.nombres}"/>
+                            </p:column>
+                            <p:column id="columnaTipoProyecto" filterBy="#{item.tipoproyectoid}" filterMatchMode="exact" filterOptions="#{tipoproyectoController.itemsAvailableSelectOne}" sortBy="#{item.tipoproyectoid.tipo}">
+                                <f:facet name="header">
+                                    <h:outputText value="Tipo de Proyecto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoproyectoid.tipo}"/>
+                            </p:column>
+                            <p:column id="columnaConvocatoria" filterBy="#{item.convocatoriaid}" filterMatchMode="exact" filterOptions="#{convocatoriaController.itemsAvailableSelectOne}" sortBy="#{item.convocatoriaid.convocatoria}">
+                                <f:facet name="header">
+                                    <h:outputText value="Convocatoria"/>
+                                </f:facet>
+                                <h:outputText value="#{item.convocatoriaid.convocatoria}"/>
+                            </p:column>
+                            <p:column id="columnaEstadoProyecto" filterMatchMode="exact" filterOptions="#{estadoProyectoController.itemsAvailableSelectOne}" sortBy="#{item.estadoproyectoid.estado}">
+                                <f:facet name="header">
+                                    <h:outputText value="Estado" />
+                                </f:facet>                        
+                                <h:outputText value="#{item.estadoproyectoid.estado}"/>
+                            </p:column>
+                            <p:column exportable="false">
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+
+                                <p:menuButton value="Opciones" disabled="#{!(item.estadoproyectoid.id eq 1 || item.estadoproyectoid.id eq 6 || item.estadoproyectoid.id eq 8 || item.estadoproyectoid.id eq 12 || item.estadoproyectoid.id eq 2 || item.estadoproyectoid.id eq 11)}" >
+                                    <c:if test="#{request.isUserInRole('Administrador')}" > 
+                                        
+                                        <p:menuitem value="Evaluar Idea-Proyecto" rendered="#{item.estadoproyectoid.id eq 1}" action="#{proyectoController.prepareCreateEvaluacion()}" ajax="false" icon="ui-icon-check" styleClass="menuAncho">
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+
+                                        <p:menuitem value="Formalizar" rendered="#{item.estadoproyectoid.id eq 6}" action="#{proyectoController.prepareFormalizar()}" ajax="false" icon="ui-icon-script" styleClass="menuAncho">
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Crear Desembolso" rendered="#{item.estadoproyectoid.id eq 8}" action="#{desembolsoController.prepareCreate()}" ajax="false" icon="ui-icon-plus" styleClass="menuAncho">
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Evaluar Solicitudes" rendered="#{item.estadoproyectoid.id eq 12}" action="#{solicitudactaController.prepareCreate()}" ajax="false" icon="ui-icon-note" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Crear Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionController.prepareCreate()}" ajax="false" icon="ui-icon-suitcase" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Evaluar Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionController.prepareEvaluacion()}" ajax="false" icon="ui-icon-tag" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:separator rendered="#{item.estadoproyectoid.id eq 12}" />
+                                        
+                                        <p:menuitem value="Lista: Desembolsos" rendered="#{item.estadoproyectoid.id eq 12}" action="#{desembolsoController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Lista: Solicitudes" rendered="#{item.estadoproyectoid.id eq 12}" action="#{solicitudController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Lista: Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                    </c:if>
+
+                                    <c:if test="#{request.isUserInRole('Docente')}" > 
+
+                                        <p:menuitem value="Plan, Equipo y Presupuesto" rendered="#{item.estadoproyectoid.id eq 2 }" action="#{proyectoController.CrearConEtapa}" ajax="false" icon="ui-icon-circle-check" styleClass="menuAncho"/>
+                                        
+                                        <p:menuitem value="Editar" rendered="#{item.estadoproyectoid.id eq 6 || item.estadoproyectoid.id eq 11}" action="#{proyectoController.prepareEditEtapa}" ajax="false" icon="ui-icon-pencil" styleClass="menuAncho"/>
+
+                                        <p:menuitem value="Crear Solicitudes" rendered="#{item.estadoproyectoid.id eq 12}" action="#{solicitudController.prepareCreate}" ajax="false" icon="ui-icon-cart" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Crear Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{solicitudController.prepareCreate}" ajax="false" icon="ui-icon-suitcase" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Avance del Proyecto" rendered="#{item.estadoproyectoid.id eq 12}" action="#{proyectoController.prepareAvance}" ajax="false" icon="ui-icon-pencil" styleClass="menuAncho"/>
+                                        
+                                        <p:menuitem value="Modificar Presupuesto" rendered="#{item.estadoproyectoid.id eq 8 || item.estadoproyectoid.id eq 12}" action="#{modificacionpresupuestoController.prepareCreate()}" ajax="false" icon="ui-icon-calculator" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:separator rendered="#{item.estadoproyectoid.id eq 8 || item.estadoproyectoid.id eq 12}" />
+                                        
+                                        <p:menuitem value="Lista: Desembolsos" rendered="#{item.estadoproyectoid.id eq 12}" action="#{desembolsoController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Lista: Solicitudes" rendered="#{item.estadoproyectoid.id eq 12}" action="#{solicitudController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Lista: Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                        
+                                        <p:menuitem value="Lista: Cambios en Presupuesto" rendered="#{item.estadoproyectoid.id eq 8 || item.estadoproyectoid.id eq 12}" action="#{modificacionpresupuestoController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                            <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        </p:menuitem>
+                                    </c:if>
+                                </p:menuButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+
+                    <br />
+                    <p:panel header="Exportar">  
+                        <h:commandLink action="#{proyectoController.imprimirListaIdeasProyecto()}">  
+                            <p:graphicImage value="/resources/img/print_printer.png" />  
+                        </h:commandLink>                          
+                        <h:commandLink action="#{proyectoController.pdfListaIdeasProyecto()}">  
+                            <p:graphicImage value="/resources/img/pdf.png" />  
+                        </h:commandLink>                          
+                        <h:commandLink>  
+                            <p:graphicImage value="/resources/img/excel.png" />  
+                            <p:dataExporter type="xls" target="tbl" fileName="datos" pageOnly="true"/>  
+                        </h:commandLink>  
+                        <h:commandLink>  
+                            <p:graphicImage value="/resources/img/csv.png" />  
+                            <p:dataExporter type="csv" target="tbl" fileName="datos" pageOnly="true"/>  
+                        </h:commandLink>  
+
+                        <h:commandLink>  
+                            <p:graphicImage value="/resources/img/xml.png" />  
+                            <p:dataExporter type="xml" target="tbl" fileName="datos" pageOnly="true"/>  
+                        </h:commandLink>  
+                    </p:panel>  
+                    <br />
+                    <h:link outcome="/index" value="Inicio"/>
+                </p:panel>
+                
+                <script>
+                    //$('.ui-menu').addClass('menu-ancho');
+                    $('div').find('.ui-menu-dynamic').addClass('menu-ancho');
+                </script>
+                
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

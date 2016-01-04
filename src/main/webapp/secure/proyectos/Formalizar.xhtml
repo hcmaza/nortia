@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/template.xhtml">       
+        <ui:define name="body">
+            <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
+<script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
+<script src="#{request.contextPath}/resources/js/exporting.js"></script>           
+                 
+            <h:form id="form" >
+                    <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;" >
+                                    <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />                                                        
+                                    <p:panelGrid columns="2" styleClass="sinBordes sinFondo" columnClasses="left,right"> 
+                                        <h:outputLabel value="CUDAP" for="cudap" />
+                                        <p:inputText id="cudap" value="#{proyectoController.selected.cudap}" title="CUDAP" />
+                                        <h:outputLabel value="Fecha de Resolucion" for="fecharesolucion" />
+                                        <p:calendar id="fecharesolucion" value="#{proyectoController.selected.fecharesolucion}" title="Fecha de Resolución"/>                                         
+                                        <h:outputLabel value="N° Resolucion" for="resolucion" />
+                                        <p:inputText id="resolucion" value="#{proyectoController.selected.resolucion}" title="Resolucion" />
+                                        <h:outputLabel value="Fecha Expediente" for="fechaexpediente" />
+                                        <p:calendar id="fechaexpediente" value="#{proyectoController.selected.fechaexpediente}" title="Fecha de Expediente"/> 
+                                        <h:outputLabel value="N° Expediente" for="expediente" />
+                                        <p:inputText id="expediente" value="#{proyectoController.selected.expediente}" title="Expediente" />     
+                                        
+                                    </p:panelGrid>
+                        <p:separator />
+                        <div align="center" >
+                            <p:commandButton icon="ui-icon-disk" value="Guardar" actionListener="#{proyectoController.setFormalizar}"  />  
+                            <p:commandButton icon="ui-icon-close" value="Cancelar" action="List" ajax="false" />
+                        </div>
+                    </p:panel>
+                    <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="false"  header="Formalización del Proyecto" >
+                        Proyecto Formalizado Satisfactoriamente!!!
+                        <div align="center" >
+                            <h:panelGrid columns="2">
+                                <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfFormalizarProyecto()}" ajax="false"  />
+                                <p:commandButton value="OK" ajax="false" action="List" onclick="PF('dfinal').hide();" />
+                            </h:panelGrid>
+                        </div>
+                    </p:dialog>                
+            </h:form> 
+
+                 </ui:define>
+    </ui:composition>    
+            
+</html>

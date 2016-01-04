@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="body">
+            <f:event type="preRenderView" listener="#{proyectoController.buscarProyectosaEvaluar()}" ></f:event>
+
+            <h:form >
+                <p:panel id="pprincipal" header="Lista de Proyectos" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+
+
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="No hay registros" rendered="#{proyectoController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{proyectoController.items.rowCount > 0}">
+                        <h:outputText value="#{proyectoController.pagination.pageFirstItem + 1}..#{proyectoController.pagination.pageLastItem + 1}/#{proyectoController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{proyectoController.previous}" value="#{bundle.Previous} #{proyectoController.pagination.pageSize}" rendered="#{proyectoController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{proyectoController.next}" value="#{bundle.Next} #{proyectoController.pagination.pageSize}" rendered="#{proyectoController.pagination.hasNextPage}"/>&nbsp;
+                        
+                        <p:dataTable 
+                            id="tbl" 
+                            value="#{proyectoController.items}"  
+                            var="item" 
+                            widgetVar="tblW"
+                            rowKey="#{item.id}" 
+                            emptyMessage="No se encontraron resultados para el criterio de busqueda"
+                            paginator="true" rows="10" paginatorPosition="bottom"
+                            draggableColumns="true"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="10,15,30">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fecha}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column id="columnaNombre" filterBy="#{item.nombre}" filterMatchMode="contains" sortBy="#{item.nombre}">
+                                <f:facet name="header">
+                                    <h:outputText value="Titulo del proyecto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column id="columnaAgente" filterBy="#{item.agenteid.apellido}" filterMatchMode="contains" sortBy="#{item.agenteid.apellido}">
+                                <f:facet name="header">
+                                    <h:outputText value="Responsable"/>
+                                </f:facet>
+                                <h:outputText value="#{item.agenteid.apellido}, #{item.agenteid.nombres}"/>
+                            </p:column>
+<!--                            <p:column id="columnaDuracion" filterBy="#{item.duracion}" filterMatchMode="contains" sortBy="#{item.duracion}">
+                                <f:facet name="header">
+                                    <h:outputText value="DuraciÃ³n (Meses)"/>
+                                </f:facet>
+                                <h:outputText value="#{item.duracion}"/>
+                            </p:column>-->
+                            <p:column id="columnaTipoProyecto" filterBy="#{item.tipoproyectoid}" filterMatchMode="exact" filterOptions="#{tipoproyectoController.itemsAvailableSelectOne}" sortBy="#{item.tipoproyectoid.tipo}">
+                                <f:facet name="header">
+                                    <h:outputText value="Tipo de Proyecto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipoproyectoid.tipo}"/>
+                            </p:column>
+                            <p:column id="columnaConvocatoria" filterBy="#{item.convocatoriaid}" filterMatchMode="exact" filterOptions="#{convocatoriaController.itemsAvailableSelectOne}" sortBy="#{item.convocatoriaid.convocatoria}">
+                                <f:facet name="header">
+                                    <h:outputText value="Convocatoria"/>
+                                </f:facet>
+                                <h:outputText value="#{item.convocatoriaid.convocatoria}"/>
+                            </p:column>
+                            <p:column id="columnaEstadoProyecto" filterMatchMode="exact" filterOptions="#{estadoProyectoController.itemsAvailableSelectOne}" sortBy="#{item.estadoproyectoid.estado}">
+                                <f:facet name="header">
+                                    <h:outputText value="Estado" />
+                                </f:facet>                        
+                                <h:outputText value="#{item.estadoproyectoid.estado}"/>
+                            </p:column>
+                            <p:column style="width: 30px;" exportable="false">
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <p:commandButton action="Edit" title="Editar" ajax="false" icon="ui-icon-plus" style="margin: 1px;" />
+                                
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+
+                    <br />
+                    <p:panel header="Exportar">  
+                        <h:commandLink action="#{proyectoController.imprimirListaIdeasProyecto()}">  
+                            <p:graphicImage value="/resources/img/print_printer.png" />  
+                        </h:commandLink>                          
+                        <h:commandLink action="#{proyectoController.pdfListaIdeasProyecto()}">  
+                            <p:graphicImage value="/resources/img/pdf.png" />  
+                        </h:commandLink>                          
+                        <h:commandLink>  
+                            <p:graphicImage value="/resources/img/excel.png" />  
+                            <p:dataExporter type="xls" target="tbl" fileName="datos" pageOnly="true"/>  
+                        </h:commandLink>  
+                        <h:commandLink>  
+                            <p:graphicImage value="/resources/img/csv.png" />  
+                            <p:dataExporter type="csv" target="tbl" fileName="datos" pageOnly="true"/>  
+                        </h:commandLink>  
+
+                        <h:commandLink>  
+                            <p:graphicImage value="/resources/img/xml.png" />  
+                            <p:dataExporter type="xml" target="tbl" fileName="datos" pageOnly="true"/>  
+                        </h:commandLink>  
+                    </p:panel>  
+                    <br />
+                    <h:link outcome="/index" value="Inicio"/>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

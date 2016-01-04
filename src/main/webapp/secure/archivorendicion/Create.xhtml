@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateArchivorendicionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateArchivorendicionLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{archivorendicionController.selected.id}" title="#{bundle.CreateArchivorendicionTitle_id}" required="true" requiredMessage="#{bundle.CreateArchivorendicionRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateArchivorendicionLabel_nombrearchivo}" for="nombrearchivo" />
+                    <h:inputText id="nombrearchivo" value="#{archivorendicionController.selected.nombrearchivo}" title="#{bundle.CreateArchivorendicionTitle_nombrearchivo}" />
+                    <h:outputLabel value="#{bundle.CreateArchivorendicionLabel_archivo}" for="archivo" />
+                    <h:inputText id="archivo" value="#{archivorendicionController.selected.archivo}" title="#{bundle.CreateArchivorendicionTitle_archivo}" />
+                    <h:outputLabel value="#{bundle.CreateArchivorendicionLabel_rendicionid}" for="rendicionid" />
+                    <h:selectOneMenu id="rendicionid" value="#{archivorendicionController.selected.rendicionid}" title="#{bundle.CreateArchivorendicionTitle_rendicionid}" >
+                        <f:selectItems value="#{rendicionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{archivorendicionController.create}" value="#{bundle.CreateArchivorendicionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{archivorendicionController.prepareList}" value="#{bundle.CreateArchivorendicionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateArchivorendicionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

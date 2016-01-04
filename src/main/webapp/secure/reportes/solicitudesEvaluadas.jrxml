@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="solicitudesEvaluadas" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="780753e8-2b7f-4c9e-bae6-18ef94f4a212">
+	<property name="ireport.zoom" value="0.9075000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="186"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="dtsSolicitudes" uuid="3f06d532-bec3-4b70-90bc-bf901c5ab5e4">
+		<field name="id" class="java.lang.Integer"/>
+		<field name="presupuestotarea.tarea.etapaid.etapa" class="java.lang.String"/>
+		<field name="presupuestotarea.tarea.tarea" class="java.lang.String"/>
+		<field name="tiposolicitudid.tiposolicitud" class="java.lang.String"/>
+		<field name="presupuestotarea.rubro.abreviado" class="java.lang.String"/>
+		<field name="importe" class="java.lang.Number"/>
+	</subDataset>
+	<parameter name="solicitudes" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Java\\Proyecto Wayra\\src\\main\\webapp\\secure\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="total" class="java.lang.Float"/>
+	<parameter name="saldoItem" class="java.lang.Float"/>
+	<parameter name="saldoRubro" class="java.lang.Float"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="137" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="802" height="134" uuid="f0812402-1584-4bd8-bec4-771bf0f5c358"/>
+				<imageExpression><![CDATA["imagenes/wayra6.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="302">
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="5" width="802" height="15" backcolor="#00CCFF" uuid="cf532e9d-68c7-433c-b9f9-e1ebdba0ce79">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="11" y="5" width="175" height="15" forecolor="#FFFFFF" uuid="03b40a49-7be4-4b03-8d0f-04200b1de0f3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitud Aprobada]]></text>
+			</staticText>
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="24" width="802" height="15" backcolor="#8A8A8A" uuid="0295e084-db8d-4b38-bc64-6d1760958a59">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<componentElement>
+				<reportElement x="0" y="42" width="802" height="40" uuid="15b02dfa-5e2a-4150-9455-8ddddda7ed23"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="dtsSolicitudes" uuid="7e4f1ff7-f045-459b-9c1b-6a93f27c5917">
+						<dataSourceExpression><![CDATA[$P{solicitudes}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="39" uuid="8cae8a23-54e2-4901-a31b-569664de66b5">
+						<jr:detailCell height="16" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="31" height="15" uuid="7c213b08-300c-4cb9-baf0-f178de0a017e"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="224" uuid="c9ef0f04-cd55-4bcc-a579-00be3ccfe7f1">
+						<jr:detailCell height="16" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="214" height="15" uuid="f57da2a1-8325-4716-8af1-fb180dd4f88f"/>
+								<textFieldExpression><![CDATA[$F{presupuestotarea.tarea.etapaid.etapa}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="223" uuid="c240a7d5-74a2-4d81-bef9-b0dc76836073">
+						<jr:detailCell height="16" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="214" height="15" uuid="1169f77a-e7ef-4cec-8dbc-f948572458ae"/>
+								<textFieldExpression><![CDATA[$F{presupuestotarea.tarea.tarea}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="101" uuid="4f1a16b7-ee07-42f6-afe6-c590752f96be">
+						<jr:detailCell height="16" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="94" height="15" uuid="56cd41b7-dbe6-424a-ab31-c231639ff1f9"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{tiposolicitudid.tiposolicitud}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="135" uuid="b4716ca1-4080-4e63-8649-4a635fa87d63">
+						<jr:detailCell height="16" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="126" height="15" uuid="d33a69e3-f318-42a8-a60c-316efee5cc1c"/>
+								<textFieldExpression><![CDATA[$F{presupuestotarea.rubro.abreviado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="86" uuid="c585ac0e-f7a0-4507-ad00-0b7e578b2fe6">
+						<jr:detailCell height="16" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="15" uuid="989ab295-4df7-43ad-8eee-16dcf89e91a4"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA["$ " + $F{importe}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="24" width="31" height="15" forecolor="#FFFFFF" uuid="cdbaef1a-8948-4cf5-836a-0b840a1eedba"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="24" width="214" height="15" forecolor="#FFFFFF" uuid="b84d4aab-a6b7-45c8-a9b8-7f6a1e2c0978"/>
+				<text><![CDATA[Etapa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="24" width="214" height="15" forecolor="#FFFFFF" uuid="8b7774c0-2dfe-4c85-a5ff-358a49a5fef2"/>
+				<text><![CDATA[Tarea]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="24" width="94" height="15" forecolor="#FFFFFF" uuid="314da919-37d6-450f-89c1-910ef114fe57"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tipo de Solicitud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="587" y="24" width="126" height="15" forecolor="#FFFFFF" uuid="ea2f5328-1faa-464f-a13a-c35c28baf611"/>
+				<text><![CDATA[Rubro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="722" y="24" width="80" height="15" forecolor="#FFFFFF" uuid="44defcb7-ffd3-4c2b-80c8-8fec6d2c117d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="103" width="722" height="20" uuid="f8f5465a-cde3-4aaf-8ebf-40766b5de64b"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Solicitado]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="722" y="103" width="80" height="20" uuid="11ceb61a-f8eb-4860-9a93-212c42cb602b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$ " + $P{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="97" width="802" height="1" uuid="6ad74af2-aa94-4012-9765-17f977817e8a"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="722" y="193" width="80" height="20" uuid="7b99245a-1813-488a-8b02-12193bce9588"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$ " + $P{saldoItem}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="188" width="802" height="1" uuid="ebcd9492-0c25-4468-be12-a0d7527ad1ac"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="193" width="722" height="20" uuid="81c9422a-aa04-4797-90ab-51ebf9377c76"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Saldo Disponible en el Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="224" width="722" height="20" uuid="84310424-f803-4de5-9780-ca0deb1a7a72"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Saldo Disponible en el Rubro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="722" y="224" width="80" height="20" uuid="62d01275-cad7-4885-aeba-583a7dbd82a7"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["$ " + $P{saldoRubro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="67">
+			<staticText>
+				<reportElement x="531" y="13" width="271" height="17" uuid="f1034c89-e9aa-421f-b17d-b67698d9a46d"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="48" width="742" height="13" backcolor="#E6E6E6" uuid="dd4e237c-ba31-4de4-b0a6-32744f135099"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="742" y="48" width="60" height="13" backcolor="#E6E6E6" uuid="b6233673-9d97-4f3f-885c-a029b7182cdb"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="48" width="100" height="13" uuid="ea0eac5b-cb5f-4e1b-b943-8ea6bfe38115"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="531" y="6" width="271" height="1" uuid="4ae318aa-4e39-40a5-86f4-a231866286a6"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="equipo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="780753e8-2b7f-4c9e-bae6-18ef94f4a212">
+	<property name="ireport.zoom" value="0.9982500000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dtsTareas" uuid="6bbaea7c-d606-491d-bd16-a613cb4e1fd5">
+		<field name="etapaid.etapa" class="java.lang.String"/>
+		<field name="tarea" class="java.lang.String"/>
+		<field name="avance" class="java.lang.Integer"/>
+		<field name="fechainicio" class="java.util.Date"/>
+		<field name="fechafin" class="java.util.Date"/>
+		<field name="fechamodificacion" class="java.util.Date"/>
+	</subDataset>
+	<parameter name="equipo" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="tareas" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Java\\Proyecto Wayra\\src\\main\\webapp\\secure\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="fecha" class="java.util.Date"/>
+	<field name="tipoproyectoid.tipo" class="java.lang.String"/>
+	<field name="estadoproyectoid.estado" class="java.lang.String"/>
+	<field name="localizacion" class="java.lang.String"/>
+	<field name="duracion" class="java.lang.Short"/>
+	<field name="avanceproyectoid.avance" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="139" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="802" height="139" uuid="f0812402-1584-4bd8-bec4-771bf0f5c358"/>
+				<imageExpression><![CDATA["imagenes/wayra6.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="268">
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="57" width="802" height="15" backcolor="#8A8A8A" uuid="4b098153-fe86-4bc9-af17-9935e834cd69">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="23" width="802" height="15" backcolor="#8A8A8A" uuid="be6bd4bd-f0e4-4f14-8fa8-6f62e8fc40c9">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="23" width="410" height="15" forecolor="#FFFFFF" uuid="2be3f657-b4d9-4e72-9313-656af7965327"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Título del Proyecto]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="38" width="410" height="15" uuid="bcd4ab87-f14d-46c4-a72c-bb84b8ecdf55"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="420" y="23" width="84" height="15" forecolor="#FFFFFF" uuid="77d15c5d-12f9-4e3a-8688-760a28497a31"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Presentación]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="420" y="38" width="84" height="15" uuid="f13e7f41-04f5-4aaf-9f07-8af056b82408"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="514" y="23" width="288" height="15" forecolor="#FFFFFF" uuid="3a69fd82-5376-4365-97bc-f83baabb84a6"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tipo de Proyecto]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="514" y="38" width="288" height="15" uuid="4f002dde-fd68-4ec5-a5eb-04d7850679c1"/>
+				<textFieldExpression><![CDATA[$F{tipoproyectoid.tipo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="57" width="201" height="15" forecolor="#FFFFFF" uuid="d3d50706-e9ac-4d21-9785-d626be92ea47"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Estado del Proyecto]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="72" width="201" height="15" uuid="ea622fc5-7277-47b6-9bf2-0ecea54b54c3"/>
+				<textFieldExpression><![CDATA[$F{estadoproyectoid.estado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="211" y="57" width="304" height="15" forecolor="#FFFFFF" uuid="1778335b-c756-4c34-8288-811ed1ab048e"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Lugar]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="211" y="72" width="304" height="15" uuid="d06c9da5-b626-4ef7-abaf-567dcbd93d2c"/>
+				<textFieldExpression><![CDATA[$F{localizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="525" y="57" width="90" height="15" forecolor="#FFFFFF" uuid="47ef4a24-921f-495a-b976-6d28a586296c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Duración (Meses)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="525" y="72" width="90" height="15" uuid="2cfd6995-f6a9-4920-9554-6fb12cec76da"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{duracion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="625" y="57" width="177" height="15" forecolor="#FFFFFF" uuid="fe01e09a-0671-44b5-99bb-a1890833b50a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Avance]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="625" y="72" width="177" height="15" uuid="c76ae463-766a-4ace-9947-c7651064de26"/>
+				<textFieldExpression><![CDATA[$F{avanceproyectoid.avance}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="214" width="802" height="48" uuid="54a66b7f-569c-4dfe-8ee0-6d527d2743e8"/>
+				<subreportParameter name="tareas"/>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<dataSourceExpression><![CDATA[$P{tareas}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["tareas.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="5" width="802" height="15" backcolor="#000000" uuid="cf532e9d-68c7-433c-b9f9-e1ebdba0ce79">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="11" y="5" width="175" height="15" forecolor="#FFFFFF" uuid="03b40a49-7be4-4b03-8d0f-04200b1de0f3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Información General]]></text>
+			</staticText>
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="101" width="802" height="15" backcolor="#000000" uuid="56dd264a-1139-467e-b48f-01dcb44c80dc">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="11" y="101" width="175" height="15" forecolor="#FFFFFF" uuid="dd66152b-6036-450a-87d8-825262686b67">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Equipo de Trabajo]]></text>
+			</staticText>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="120" width="802" height="65" isPrintInFirstWholeBand="true" uuid="34468c4d-b878-48c1-8f2f-d770d645d69c"/>
+				<subreportParameter name="SUBREPORT_DIR"/>
+				<subreportParameter name="equipo"/>
+				<dataSourceExpression><![CDATA[$P{equipo}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["equipoTrabajo.jasper"]]></subreportExpression>
+			</subreport>
+			<rectangle radius="0">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="195" width="802" height="15" backcolor="#000000" uuid="e22484be-3a79-4587-959c-307cf290f536">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="195" width="175" height="15" forecolor="#FFFFFF" uuid="f1e79102-4021-4a58-92cb-0dc78e4177fc">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tareas]]></text>
+			</staticText>
+		</band>
+		<band height="282" splitType="Prevent">
+			<rectangle radius="0">
+				<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="802" height="15" backcolor="#000000" uuid="751cfcbb-fb90-4770-9f43-1146518d0963">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="11" y="0" width="175" height="15" forecolor="#FFFFFF" uuid="ead41c74-0977-41ff-a8af-027911087d29">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diagrama de Gantt]]></text>
+			</staticText>
+			<ganttChart>
+				<chart isShowLegend="true">
+					<reportElement positionType="Float" x="0" y="15" width="802" height="100" uuid="a45a84b6-432c-4c0b-a26f-63f67dc28a8c"/>
+					<chartTitle position="Top"/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<ganttDataset>
+					<dataset>
+						<datasetRun subDataset="dtsTareas" uuid="5d34519b-ec15-45ab-9f0a-7aed8a9ed6bd">
+							<dataSourceExpression><![CDATA[$P{tareas}.cloneDataSource()]]></dataSourceExpression>
+						</datasetRun>
+					</dataset>
+					<ganttSeries>
+						<seriesExpression><![CDATA["Planificado"]]></seriesExpression>
+						<taskExpression><![CDATA[$F{tarea}]]></taskExpression>
+						<subtaskExpression><![CDATA[$F{tarea}]]></subtaskExpression>
+						<startDateExpression><![CDATA[$F{fechainicio}]]></startDateExpression>
+						<endDateExpression><![CDATA[$F{fechafin}]]></endDateExpression>
+					</ganttSeries>
+					<ganttSeries>
+						<seriesExpression><![CDATA["Actual"]]></seriesExpression>
+						<taskExpression><![CDATA[$F{tarea}]]></taskExpression>
+						<subtaskExpression><![CDATA[$F{tarea}]]></subtaskExpression>
+						<startDateExpression><![CDATA[$F{fechainicio}]]></startDateExpression>
+						<endDateExpression><![CDATA[$F{fechamodificacion}]]></endDateExpression>
+					</ganttSeries>
+				</ganttDataset>
+				<barPlot isShowLabels="true" isShowTickLabels="true" isShowTickMarks="true">
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat verticalTickLabels="true"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</ganttChart>
+		</band>
+	</detail>
+</jasperReport>

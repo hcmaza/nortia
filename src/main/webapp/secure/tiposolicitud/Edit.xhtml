@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Editar Tipo de Solicitud"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+
+            <h:form>
+                <p:panel id="pprincipal" header="Editar Tipo de Solicitud" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                    
+                    <p:fieldset legend="Información del Tipo de Solicitud">
+                        <p:panelGrid styleClass="sinBordes sinFondo" style="width: 100%">
+                            <p:row>
+                                <p:column style="width: 40%;">
+                                    <h:outputLabel value="Tipo de Solicitud" for="tiposolicitud"  style="font-weight: bold;" />
+                                </p:column>
+                                <p:column style="width: 60%;">
+                                    <p:inputText id="tiposolicitud" value="#{tiposolicitudController.selected.tiposolicitud}" style="width: 100%;"  title="* Este campo es obligatorio"  required="true" requiredMessage="El campo tipo de solicitud es obligatorio" />
+                                    <p:message for="tiposolicitud" display="icon"  /> 
+                                    <p:tooltip id="ttTipoSolicitud" for="tiposolicitud" showEvent="focus" hideEvent="blur" />                                    
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:fieldset>
+
+                    <p:separator/>
+                    <p:commandButton action="#{tiposolicitudController.update}" value="Guardar Tipo de Solicitud" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update="pprincipal" oncomplete="PF('dfinal').show();" />
+                    <p:commandButton action="#{tiposolicitudController.prepareList}" value="Lista de Tipos de Solicitud" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document" ajax="false" />
+                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
+                    <p:separator/>
+
+                </p:panel>
+
+            </h:form>
+            
+            <h:form>
+                 <p:dialog id="dfinal" widgetVar="dfinal" modal="true" header="Edición de Tipo de Solicitud" >
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <p:messages autoUpdate="true"/>
+                    </h:panelGroup>
+                    <p:separator />
+                    <div align="center" >
+                        <p:commandButton value="Volver a la Lista" action="#{tiposolicitudController.prepareList()}" ajax="false" />
+                    </div>
+
+                </p:dialog>
+            </h:form>            
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTrasladoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTrasladoLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{trasladoController.selected.id}" title="#{bundle.EditTrasladoTitle_id}" required="true" requiredMessage="#{bundle.EditTrasladoRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditTrasladoLabel_fechahoraviaje}" for="fechahoraviaje" />
+                    <h:inputText id="fechahoraviaje" value="#{trasladoController.selected.fechahoraviaje}" title="#{bundle.EditTrasladoTitle_fechahoraviaje}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTrasladoLabel_fechahoraregreso}" for="fechahoraregreso" />
+                    <h:inputText id="fechahoraregreso" value="#{trasladoController.selected.fechahoraregreso}" title="#{bundle.EditTrasladoTitle_fechahoraregreso}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTrasladoLabel_destino}" for="destino" />
+                    <h:inputText id="destino" value="#{trasladoController.selected.destino}" title="#{bundle.EditTrasladoTitle_destino}" />
+                    <h:outputLabel value="#{bundle.EditTrasladoLabel_proyectoid}" for="proyectoid" />
+                    <h:selectOneMenu id="proyectoid" value="#{trasladoController.selected.proyectoid}" title="#{bundle.EditTrasladoTitle_proyectoid}" >
+                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTrasladoLabel_responsableid}" for="responsableid" />
+                    <h:selectOneMenu id="responsableid" value="#{trasladoController.selected.responsableid}" title="#{bundle.EditTrasladoTitle_responsableid}" >
+                        <f:selectItems value="#{agenteController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{trasladoController.update}" value="#{bundle.EditTrasladoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTrasladoViewLink}"/>
+                <br />
+                <h:commandLink action="#{trasladoController.prepareList}" value="#{bundle.EditTrasladoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTrasladoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

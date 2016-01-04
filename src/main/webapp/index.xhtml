@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <ui:composition template="/template.xhtml">
+        <ui:define name="head">
+
+        </ui:define>
+
+    <ui:define name="body">
+           
+        <h:form id="formindex">
+          
+        <!--     <c:if test="# {request.isUserInRole('Administrador')}" > 
+                 <p:notificationBar autoDisplay="true" rendered="# {proyectoController.buscarIdeasProyectosEvaluar()>0}" position="top" effect="slide" styleClass="top" widgetVar="bar">
+                     <div align="center" >
+                        <br />
+                        <h:outputText value="Usted tiene # {proyectoController.buscarIdeasProyectosEvaluar()} Ideas Proyectos a Evaluar" style="font-size:24px; font-weight: bold; color: #0000cc" />
+                        <br /> 
+                        <br />
+                        <p:commandButton value="OK" onclick="PF('bar').hide()" type="button" icon="ui-icon-arrow-1-n"/>
+                     </div>
+                    </p:notificationBar>
+             </c:if> -->
+            <p:panel id="pprincipal" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                <!--<img src="resources/img/Logo_UNDEC _normal.png" style="height: 170px; width: 164px; vertical-align: top; border-radius: 6px; display: inline-block; text-align: right;"/>-->
+
+                <p:panelGrid style="margin: 0 auto; width: 100%;" styleClass="sinBordes" >
+                    <p:row>
+                        <p:column style="width: 60%; vertical-align: top; ">
+                            <p:fieldset id="uvt" legend="UNdeC - Unidad de Vinculación Tecnológica">
+                                
+                                <p:panelGrid >
+                                    <p:row>
+                                        <p:column style="width: 25%">
+                                            <p:graphicImage value="/resources/img/Logo_UNDEC_normal.png" style="width: 100%" />
+                                        </p:column>
+                                        <p:column style="width: 75%">
+                                            <p:graphicImage value="/resources/img/logo-vinculacion-tecnologica.png" style="width: 100%" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2" style="width: 100%">
+                                            <p style="text-align: justify">
+                                                Esta unidad es la encargada de potenciar, vincular y transferir los conocimientos que se generan en el ámbito universitario, tanto de los grupos de investigación, institutos y laboratorios de la Universidad al sistema socio-productivo de la región, provincial, nacional e internacional. De esta manera actúa como enlace institucional otros centros del Sistema Nacional de Innovación y con todo el sistema socio-productivo, haciendo de unidad de interface entre las necesidades y demandas científico-tecnológicas de la sociedad y los conocimientos que se generan en el ámbito universitario.
+                                            </p>
+                                            
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:fieldset>
+                        </p:column>
+                        <p:column style="width: 40%;">
+                            <p:fieldset id="novedades" legend="Noticias UNdeC" style="margin-bottom: 10px;">
+                                <p:feedReader size="7" value="http://undec.edu.ar/rss.php" var="feedu">
+                                    <h:outputText value="# {feedu.title}" style="font-weight: bold;display:block; background-color: #6684A3"/>
+                                    <h:outputText value="# {feedu.description.value}" escape="false"/>
+                                    <p:separator />
+                                </p:feedReader>
+                            </p:fieldset>
+                            <p:fieldset id="tweeter" legend="Twitter @UNdeC">
+                                <p:feedReader size="5" value="https://queryfeed.net/tw?q=undec" var="feed">
+                                    <h:outputText value="#{feed.description.value}" escape="false"/>
+                                    <p:separator />
+                                </p:feedReader>
+                            </p:fieldset>
+                        </p:column>
+                    </p:row>
+
+                 </p:panelGrid>
+
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+</html>

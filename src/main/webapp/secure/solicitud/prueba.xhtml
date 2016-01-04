@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
+    </h:head>
+    
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="body">
+            <h:form>
+                <h1>Prueba: Dialogo [Toma 4 - 0kkkk] - En Dialogos</h1>
+        
+                <p:commandButton value="Dialogo Worksss!" actionListener="#{dialogosController.dialogo()}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+    <application>
+ 
+        <!-- Configuracion Primefaces -->
+        <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+        <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+        <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+        <!--        <el-resolver>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver</el-resolver>-->
+        <!-- __ -->
+        
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <locale-config>
+            <default-locale>es_ES</default-locale>
+        </locale-config>
+        
+    </application>
+    
+    <!--    <factory>
+        <exception-handler-factory>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory</exception-handler-factory>
+    </factory>-->
+    
+    <navigation-rule>
+        <from-view-id>/secure/solicitud/Solicitud.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ViewSolicitud</from-outcome>
+            <to-view-id>/secure/solicitud/View.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/secure/proyectos/List.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>CreateEvaluacionIdeaProyecto</from-outcome>
+            <to-view-id>/secure/evaluacionideaproyecto/Create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>CreateSolicitud</from-outcome>
+            <to-view-id>/secure/solicitudes/Create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>CreateRendicion</from-outcome>
+            <to-view-id>/secure/rendicion/Create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>CreateSolicitudActa</from-outcome>
+            <to-view-id>/secure/solicitudacta/Create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>CreateDesembolso</from-outcome>
+            <to-view-id>/secure/desembolso/Create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>CreateEvaluacionRendicion</from-outcome>
+            <to-view-id>/secure/rendicion/Evaluacion.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ListDesembolsosPorProyecto</from-outcome>
+            <to-view-id>/secure/desembolso/ListDesembolsosPorProyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ListSolicitudesPorProyecto</from-outcome>
+            <to-view-id>/secure/solicitudes/ListSolicitudesPorProyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ListRendicionesPorProyecto</from-outcome>
+            <to-view-id>/secure/rendicion/ListRendicionesPorProyecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>CreateModificacionPresupuesto</from-outcome>
+            <to-view-id>/secure/modificacionpresupuesto/Create.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>ListModificacionesPorProyecto</from-outcome>
+            <to-view-id>/secure/modificacionpresupuesto/ListModificacionesPorProyecto.xhtml</to-view-id>
+        </navigation-case>
+        
+    </navigation-rule>
+</faces-config>

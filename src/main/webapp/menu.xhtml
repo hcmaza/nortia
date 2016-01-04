@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <f:event type="preRenderView" listener="#{notificacionController.contarnotificaciones()}" ></f:event> 
+
+    <h:form id="formmenu" styleClass="menu1 rounded-corners">
+        <p:growl id="growlnotificaciones" redisplay="false" showDetail="true" sticky="true"  />  
+
+        <p:menubar autoDisplay="Home"   >
+
+            <c:if test="#{request.isUserInRole('Administrador')}" > 
+
+                <p:submenu label="Proyectos" icon="ui-icon-pencil">  
+                    <p:menuitem value="Listado de Proyectos" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/List.xhtml' icon="ui-icon-arrowreturnthick-1-w" />                     
+                </p:submenu>
+                <p:submenu label="Reportes" icon="ui-icon-print">                      
+                    <p:menuitem value="Gastos por Convocatoria" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/GastosPorConvocatoria.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
+                    <p:menuitem value="Plan y Equipo de Trabajo" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/PlanTrabajoyEquipo.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
+                    <p:menuitem value="Estado del Proyecto" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/estadoProyecto.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
+                </p:submenu>
+
+                <p:submenu label="Sistema" icon="ui-icon-pencil">  
+                    <p:menuitem value="Agente" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/agente/List.xhtml' />  
+                    <p:menuitem value="Beneficiario" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/beneficiario/List.xhtml'  />  
+                    <p:menuitem value="Comitente" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/comitente/List.xhtml'  />  
+                    <p:menuitem value="Convocatoria" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/convocatoria/List.xhtml'  />  
+                    <p:menuitem value="Dependencia" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/dependencia/List.xhtml'  />  
+                    <p:menuitem value="Evaluacion" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/evaluacion/List.xhtml'  />  
+                    <p:menuitem value="Preguntas" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/pregunta/List.xhtml'  />  
+                    <p:menuitem value="Tipos de Evaluación" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoevaluacion/List.xhtml'  />  
+                    <p:menuitem value="Fuente de Financiamiento" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/fuentefinanciamiento/List.xhtml'  />  
+                    <p:menuitem value="Perfil" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/perfil/List.xhtml'  />  
+                    <p:menuitem value="Rubro" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/rubro/List.xhtml'  />  
+                    <p:menuitem value="Sector" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/sector/List.xhtml'  />  
+                    <p:menuitem value="Tipo de Documento" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipodocumento/List.xhtml'  />  
+                    <p:menuitem value="Tipo de Financiamiento" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipofinanciamiento/List.xhtml'  />  
+                    <p:menuitem value="Usuarios" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/usuario/List.xhtml'  />  
+                    <p:menuitem value="Tipo de Entidad" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoentidad/List.xhtml'  />  
+                    <p:menuitem value="Tipo de proyecto" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoproyecto/List.xhtml'  />  
+                    <p:menuitem value="Avance de proyecto" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/avanceproyecto/List.xhtml'  />  
+                    <p:menuitem value="Tipo de Solicitud" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tiposolicitud/List.xhtml'  />  
+                    <p:menuitem value="Estado de Solicitud" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/estadosolicitud/List.xhtml'  />  
+                    <p:menuitem value="Vehículo" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/vehiculo/List.xhtml'  />  
+                </p:submenu>
+                <p:submenu label="Datos Externos">  
+                    <p:menuitem value="Importar Datos desde Mapuche" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/DatosMapuche/Migrar.xhtml'  />  
+                </p:submenu> 
+
+                <p:submenu label="Ayuda" icon="ui-icon-help">  
+                    <p:menuitem value="Acerca de ..." onclick="PF('dabout').show()" />  
+                    <p:submenu label="Manual" icon="ui-icon-search">  
+
+                    </p:submenu>  
+                </p:submenu> 
+
+                <p:submenu label="Mi Cuenta" icon="ui-icon-help">  
+                    <p:menuitem value="Mi Cuenta" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/micuenta/Edit.xhtml' icon="ui-icon-close" />  
+                </p:submenu> 
+
+
+
+                <f:facet name="options"> 
+                    
+                    <p:outputLabel value="Bienvenido #{request.getUserPrincipal()}" style="font-family: 'Montserrat'; font-size: 12px !important; margin-right: 10px;"/>
+
+
+                    <p:commandButton actionListener="#{usuarioController.logout()}" value="Salir" style="font-size: 12px !important;" /> 
+                    <div id="noti_Container">
+                        <p:commandButton value="Notificaciones" actionListener="#{notificacionController.notificar()}" update=":formmenu:growlnotificaciones" />
+                        <div class="noti_bubble">#{notificacionController.contadornotifadministrador}</div>
+                        
+                    </div>
+                </f:facet>  
+
+            </c:if>
+
+            <c:if test="#{!request.isUserInRole('Administrador')}" > 
+
+                <p:submenu label="Ideas-Proyecto" icon="ui-icon-document">  
+                    <p:menuitem value="Nueva Idea-Proyecto" action="#{proyectoController.prepareSolicitud()}" />  
+                    <p:menuitem value="Listado de Ideas-Proyecto" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/solicitud/List.xhtml' />  
+
+                </p:submenu>  
+
+                <p:submenu label="Proyectos" icon="ui-icon-pencil">  
+                    <p:menuitem value="Lista de Proyectos" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/List.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
+                </p:submenu>
+
+                <p:submenu label="Ayuda" icon="ui-icon-help">  
+                    <p:menuitem value="Acerca de ..." onclick="PF('dabout').show()" />  
+                    <p:submenu label="Manual" icon="ui-icon-search">  
+
+                    </p:submenu>  
+                </p:submenu> 
+
+                <p:submenu label="Mi Cuenta" icon="ui-icon-help">  
+                    <p:menuitem value="Mi Cuenta" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/micuenta/Edit.xhtml' icon="ui-icon-close" />  
+                </p:submenu> 
+
+                <f:facet name="options">  
+                    <p:outputLabel value="Bienvenido #{request.getUserPrincipal()}" style="font-family: 'Montserrat'; font-size: 12px !important; margin-right: 5px; margin-top: 4px; float: left; "/>
+
+                    <p:commandButton actionListener="#{usuarioController.logout()}" value="Salir" style="float: right; margin-left: 10px;" /> 
+
+                    <div id="noti_Container" >
+                        <p:commandButton value="Notificaciones" actionListener="#{notificacionController.notificar()}" update=":formmenu:growlnotificaciones" />
+                        <div class="noti_bubble">#{notificacionController.contadornotifadministrador}</div>
+
+                    </div>
+
+                </f:facet>  
+
+            </c:if>                    
+
+        </p:menubar> 
+    </h:form>
+
+</html>

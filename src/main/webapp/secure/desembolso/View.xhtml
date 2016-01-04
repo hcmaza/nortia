@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewDesembolsoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewDesembolsoLabel_id}"/>
+                    <h:outputText value="#{desembolsoController.selected.id}" title="#{bundle.ViewDesembolsoTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewDesembolsoLabel_fechadesembolso}"/>
+                    <h:outputText value="#{desembolsoController.selected.fechadesembolso}" title="#{bundle.ViewDesembolsoTitle_fechadesembolso}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewDesembolsoLabel_fechacarga}"/>
+                    <h:outputText value="#{desembolsoController.selected.fechacarga}" title="#{bundle.ViewDesembolsoTitle_fechacarga}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewDesembolsoLabel_numerodesembolso}"/>
+                    <h:outputText value="#{desembolsoController.selected.numerodesembolso}" title="#{bundle.ViewDesembolsoTitle_numerodesembolso}"/>
+                    <h:outputText value="#{bundle.ViewDesembolsoLabel_numerocuentabancaria}"/>
+                    <h:outputText value="#{desembolsoController.selected.numerocuentabancaria}" title="#{bundle.ViewDesembolsoTitle_numerocuentabancaria}"/>
+                    <h:outputText value="#{bundle.ViewDesembolsoLabel_monto}"/>
+                    <h:outputText value="#{desembolsoController.selected.monto}" title="#{bundle.ViewDesembolsoTitle_monto}"/>
+                    <h:outputText value="#{bundle.ViewDesembolsoLabel_proyectoid}"/>
+                    <h:outputText value="#{desembolsoController.selected.proyectoid}" title="#{bundle.ViewDesembolsoTitle_proyectoid}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{desembolsoController.destroyAndView}" value="#{bundle.ViewDesembolsoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewDesembolsoEditLink}"/>
+                <br />
+                <h:commandLink action="#{desembolsoController.prepareCreate}" value="#{bundle.ViewDesembolsoCreateLink}" />
+                <br />
+                <h:commandLink action="#{desembolsoController.prepareList}" value="#{bundle.ViewDesembolsoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewDesembolsoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

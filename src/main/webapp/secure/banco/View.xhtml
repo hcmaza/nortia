@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewBancoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewBancoLabel_id}"/>
+                    <h:outputText value="#{bancoController.selected.id}" title="#{bundle.ViewBancoTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewBancoLabel_razonsocial}"/>
+                    <h:outputText value="#{bancoController.selected.razonsocial}" title="#{bundle.ViewBancoTitle_razonsocial}"/>
+                    <h:outputText value="#{bundle.ViewBancoLabel_sucursal}"/>
+                    <h:outputText value="#{bancoController.selected.sucursal}" title="#{bundle.ViewBancoTitle_sucursal}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{bancoController.destroyAndView}" value="#{bundle.ViewBancoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewBancoEditLink}"/>
+                <br />
+                <h:commandLink action="#{bancoController.prepareCreate}" value="#{bundle.ViewBancoCreateLink}" />
+                <br />
+                <h:commandLink action="#{bancoController.prepareList}" value="#{bundle.ViewBancoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewBancoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

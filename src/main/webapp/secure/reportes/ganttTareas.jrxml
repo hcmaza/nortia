@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Etapas y Tareas del Proyecto" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isTitleNewPage="true" isIgnorePagination="true" uuid="72ebd43c-52f2-46f0-9568-e638c814fc71">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+	<field name="etapaid.etapa" class="java.lang.String"/>
+	<field name="fechainicio" class="java.util.Date"/>
+	<field name="fechafin" class="java.util.Date"/>
+	<field name="tarea" class="java.lang.String"/>
+	<field name="estado" class="java.lang.Integer"/>
+	<field name="etapaid" class="java.lang.String"/>
+	<group name="nada">
+		<groupHeader>
+			<band height="594">
+				<ganttChart>
+					<chart isShowLegend="true" evaluationTime="Report" renderType="draw">
+						<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="842" height="560" printWhenGroupChanges="nada" uuid="14fa1a42-5578-404b-87e1-4f1ad54441bd"/>
+						<chartTitle>
+							<titleExpression><![CDATA["Diagrama de Gantt"]]></titleExpression>
+						</chartTitle>
+						<chartSubtitle/>
+						<chartLegend textColor="#FFFFFF" backgroundColor="#000000"/>
+					</chart>
+					<ganttDataset>
+						<ganttSeries>
+							<seriesExpression><![CDATA[$F{etapaid.etapa}]]></seriesExpression>
+							<taskExpression><![CDATA[$F{tarea}]]></taskExpression>
+							<subtaskExpression><![CDATA[$F{tarea}]]></subtaskExpression>
+							<startDateExpression><![CDATA[$F{fechainicio}]]></startDateExpression>
+							<endDateExpression><![CDATA[$F{fechafin}]]></endDateExpression>
+						</ganttSeries>
+					</ganttDataset>
+					<barPlot>
+						<plot/>
+						<itemLabel/>
+						<categoryAxisFormat>
+							<axisFormat/>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat/>
+						</valueAxisFormat>
+					</barPlot>
+				</ganttChart>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+</jasperReport>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tareas" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="14f6227a-5f40-47ee-bf7d-55f474469004">
+	<property name="ireport.zoom" value="1.0000000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="tareas" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Java\\Proyecto Wayra\\src\\main\\webapp\\secure\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="tarea" class="java.lang.String"/>
+	<field name="etapaid.etapa" class="java.lang.String"/>
+	<field name="fechainicio" class="java.util.Date"/>
+	<field name="fechafin" class="java.util.Date"/>
+	<field name="avance" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<columnHeader>
+		<band height="16">
+			<rectangle radius="0">
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="15" backcolor="#8A8A8A" uuid="14bc9af5-5569-4a2f-b54d-f8bab3c13a65">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="230" height="15" forecolor="#FFFFFF" uuid="8853625c-67b3-4ddd-b6c1-2fdf1d2e45cf"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Etapa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="232" height="15" forecolor="#FFFFFF" uuid="2ba7e45e-8448-43b4-a7a6-b1b23623078f"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Tarea]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="0" width="100" height="15" forecolor="#FFFFFF" uuid="30df5307-db7c-4116-94f8-96a0d1c698d2"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="592" y="0" width="100" height="15" forecolor="#FFFFFF" uuid="45ce105b-6e60-40ae-aea6-d944660bba57"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha de Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="0" width="100" height="15" forecolor="#FFFFFF" uuid="78bff098-2099-498a-ba36-6598f021748c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha de Fin]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="240" y="0" width="232" height="15" uuid="404d5d1f-4ddb-4b73-860c-e23b2374ad6d"/>
+				<textFieldExpression><![CDATA[$F{tarea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="230" height="15" uuid="acdc6935-9ddb-4f3d-9da6-7a730574178c"/>
+				<textFieldExpression><![CDATA[$F{etapaid.etapa}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="592" y="0" width="100" height="15" uuid="398ea4bc-b272-44e1-a815-23db43bba31f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fechainicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="482" y="0" width="100" height="15" uuid="ad70cac2-694a-4644-bf31-6139d744e300"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{avance} + " %"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="702" y="0" width="100" height="15" uuid="57a6aa84-5c44-4089-9410-5898323a5159"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fechafin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="9"/>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,482 @@
+/*body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px !important;
+}*/
+
+.ui-widget {
+    font-size: 12px !important;
+    font-family: Verdana,Arial,sans-serif !important;
+}
+
+html {
+    height: 100%;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+
+body {
+    font-family: Verdana, Helvetica, sans-serif;
+
+    font-size: 12px !important;
+
+    background-image: url("#{resource['img:/tramaMediaClara.jpg']}");
+    background-repeat: repeat;
+
+    height: 100%;
+}
+
+.left {
+    text-align: left !important;
+}
+.right {
+    text-align: right !important;
+}
+
+.center {
+    text-align: center;
+}
+
+a {
+    color: #e33b06;
+}
+
+table {
+    empty-cells: show;
+}
+
+.menu-ancho{
+    width: 220px !important;
+}
+
+/*.ui-menu{
+    
+}*/
+
+.fondoTextura{
+    background-image: url("#{resource['img:/tweed.png']}");
+    background-repeat: repeat;
+}
+
+.sinBordes tr, .sinBordes td {
+    border: none !important;
+}
+
+.centradoTotal {
+    position: absolute;
+    height: 100px;
+    top: 0;
+    bottom: 0;
+    margin:auto;
+}
+
+.fieldSetCentrado110 .ui-fieldset-content{
+    height: 100% !important;
+}
+
+.fieldSetCentrado70 .ui-fieldset-content{
+    height: 70% !important;
+}
+
+.centrarEnFieldSet{
+    
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    height: 70%;
+    width: 100%;
+}
+
+/*.fieldSetCentrado30 .ui-fieldset, .ui-fieldset .ui-fieldset-legend {*/
+.fieldSetCentrado30 .ui-fieldset-legend {
+/*background-color: transparent;
+border-color: transparent;*/
+    position: absolute;
+}
+
+.centrarEnFieldSet30{
+    
+    display: block;
+    margin: 0 0 auto 150px;
+    text-align: center;
+    height: 70%;
+    width: auto;
+}
+
+.centrarEnFieldSetAnchoTotal{
+    
+    display: block;
+    margin: 0 0 auto 235px;
+    text-align: center;
+    height: 70%;
+    width: auto;
+}
+
+/* Color 00C7F6 Seleccion de Dario*/
+/* Color 2 82CADC Seleccion de Dario*/ 
+/* Color anterior: #21B2CE*/
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{
+    /*    background: none !important;
+        background-image: none !important;
+        background-color: #82CADC !important;*/
+}
+
+.ui-state-default{
+    /*    background: none !important;
+        background-image: none !important;
+        background-color: #D0DBDF !important;*/
+}
+
+/*.ui-widget-header{
+  background: none !important;
+  background-color: #878787 !important;
+}*/
+
+/* DATATABLE */
+
+.ui-datatable-header {
+    background: #00C7F6 !important;
+    background-color: #00C7F6 !important;
+    color: white;
+    border: none;
+}
+
+.ui-datatable table, .ui-datatable-resizable table {
+    table-layout: auto !important;
+}
+
+.ui-datatable-scrollable table {
+    table-layout: fixed !important;
+}
+
+.esconder-cabecera-columnas table thead tr {
+    display: none;
+}
+
+/* TREETABLE */
+
+.ui-treetable-header {
+    background: #00C7F6 !important;
+    background-color: #00C7F6 !important;
+    color: white;
+    border: none;
+}
+
+.ui-treetable table, .ui-treetable-resizable table {
+    table-layout: auto !important;
+}
+
+.ui-treetable-scrollable table {
+    table-layout: fixed !important;
+}
+
+/* TABS a la IZQUIERDA >> Prespuesto Tarea en CrearConEtapa*/
+
+/** tabs **/
+.ui-tabs.ui-tabs-left > .ui-tabs-nav {
+   width: 15%;
+}
+/** panels **/
+.ui-tabs.ui-tabs-left > .ui-tabs-panels {
+   width: 85%;
+}
+
+/* PANEL GRID */
+
+.sinFondo tr, .sinBordes td{
+    background: none !important;
+}
+
+/* ACCORDION y TABS */
+
+.tabDario {
+/*  background: #00C7F6 !important;
+  background-color: #00C7F6 !important;
+  color: white;
+  font-weight: bold;*/
+}
+
+/* RATING >> ESTRELLAS */
+
+.ui-rating-star-on { color: #00C7F6 !important; }
+
+/* ESTILOS FILAS de DATATABLE */
+
+.filaResaltada1{
+    background: none repeat scroll 0 0 #FFFFFF !important;
+}
+
+.filaResaltada2{
+    background: none repeat scroll 0 0 #F1F7F9 !important;
+}
+
+.fuente10{
+    font-size: 10px !important;
+}
+
+.fuente11{
+    font-size: 11px !important;
+}
+
+.tabla tbody td {
+  //border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 2px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.tabla thead td {
+  //border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 2px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.tablaArbol tbody td {
+  //border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 2px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.tablaArbol thead td {
+  //border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 2px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.tablaArbol tr{
+    height: 30px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
+    
+}
+
+
+.panelgrid tbody td {
+  //border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 1px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.panelgrid thead td {
+  //border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 1px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.pie1 {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 15px !important;
+    font-family: 'Montserrat';
+    color: white;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    /*    src: local('Montserrat-Bold'), url(https://themes.googleusercontent.com/static/fonts/montserrat/v4/IQHow_FEYlDC4Gzy_m8fcgFhaRv2pGgT5Kf0An0s4MM.woff) format('woff');*/
+    src: local('Montserrat-Bold'), url("#{resource['fonts:/Montserrat-Bold.ttf']}");
+}
+@font-face {
+    font-family: 'Varela Round';
+    font-style: normal;
+    font-weight: 400;
+    /*src: local('Varela Round'), local('VarelaRound-Regular'), url(https://themes.googleusercontent.com/static/fonts/varelaround/v4/APH4jr0uSos5wiut5cpjrnhCUOGz7vYGh680lGh-uXM.woff) format('woff');*/
+    src: local('Varela Round'), local('VarelaRound-Regular'), url("#{resource['fonts:/VarelaRound-Regular.ttf']}");;
+}
+
+
+.wrapper {
+    width: 100%;
+    min-width: 1000px;
+    /* min-height: 100%;*/
+    height: auto !important;
+    height: 100%;
+}
+
+.rounded-corners {
+
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    -khtml-border-radius: 11px;        
+    border-radius: 11px;
+    /*behavior: url(border-radius.htc); NO*/
+    /*behavior: url("#{resource['css:/border-radius.htc']}"); //FUNCIONA*/
+}
+
+.cabecera1 {
+    text-align: left;
+    font-size: 48px !important;
+    font-family: 'Varela Round';
+    //color: white;
+    color: #6684A3;
+    margin: 0px 10px;
+    padding-top: 85px;
+    line-height: 10px;
+}
+
+.cabecera2 {
+    text-align: left;
+    font-size: 16px !important;
+    font-family: 'Montserrat';
+    color: skyblue;
+    line-height: 10px;
+    margin: 30px 10px;
+
+}
+
+.imagenCabecera {
+    
+}
+
+/* Header
+-----------------------------------------------------------------------------*/
+.header {
+    /*height: 18%;*/
+    
+    width: 950px;
+    height: 80px;
+    
+    margin: 0 auto;
+    //background-color: #003366; 
+    background-color: #DBE8F0; 
+    //background-color: #FFFFFF; 
+    /*        background-color: transparent;*/
+    //background-image: url("#{resource['img:/vinculacionTecnologica.png']}");        
+    background-image: url("#{resource['img:/logo-nortia3.png']}");        
+    background-size: 40%;
+    background-repeat: no-repeat ;
+    
+    background-position-x: 10px;
+
+    /*position: relative;*/
+}
+
+/* Middle
+-----------------------------------------------------------------------------*/
+.middle {
+    width: 100%;
+    padding: 0 0 5px;
+    position: relative;
+}
+.middle:after {
+    display: table;
+    clear: both;
+    content: '';
+}
+.container {
+    width: 100%;
+    float: left;
+    //overflow: hidden;
+}
+
+.menu1{
+    width: 950px; 
+    margin: 6px auto 6px auto;
+
+}
+.content {
+
+}
+
+/* Left Sidebar
+-----------------------------------------------------------------------------*/
+/*.left-sidebar {
+        float: left;
+        width: 15%;
+        margin-left: -100%;
+        position: relative;
+        background: #B5E3FF;
+}
+*/
+
+/* Footer
+-----------------------------------------------------------------------------*/
+.footer {
+    width: 950px;
+    /*min-width: 100%;*/        
+    background-color: #444444;    
+    margin: auto ;
+    height: 5%;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    /*background-color: #6685A3; */
+
+}
+
+.ui-icon-imprimir{   
+    width: 32px;   
+    height: 32px;   
+    background-image: url("#{resource['img/print_printer.png']}");   
+} 
+
+.ui-icon-cancelar{
+    background-image: url("#{resource['img/cancel.jpg']}") !important;
+}
+
+.bubble {
+    background: none repeat scroll 0% 0% #E02424;
+    position: absolute;
+    right: 5px;
+    top: -5px;
+    padding: 2px 6px;
+    color: #FFF;
+    font: bold 0.9em Tahoma,Arial,Helvetica;
+    border-radius: 3px;
+}
+
+#noti_Container {
+    position:absolute;
+    //padding: 10px 1px 20px 1px;
+    width:110px;
+    height:16px;
+    display: table;
+    left: 500px;
+}
+.noti_bubble {
+    position:absolute;
+    top: 3px;
+    right:-6px;
+    padding:3px 7px 3px 7px;
+    background-color:red;
+    color:white;
+    font-weight:bold;
+    font-size:0.80em;
+
+    border-radius:40px;
+    box-shadow:3px 3px 3px gray;
+}
+
+.colorGris{
+    color: #878787;
+}
+
+.colorAzul{
+    color: teal;
+}
+
+.colorVerde{
+    color: #94D352;
+}
+
+.colorRojo{
+    color: #E02424;
+}
+
+.customTitleBar > .ui-panel-titlebar {
+    background: #35B3D1;
+    }
