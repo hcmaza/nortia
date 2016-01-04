@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class FuentefinanciamientoFacade extends AbstractFacade<Fuentefinanciamiento> {
-    @PersistenceContext(unitName = "ar.edu.undec_SYSGAP_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "NORTIAPU")
     private EntityManager em;
 
     @Override

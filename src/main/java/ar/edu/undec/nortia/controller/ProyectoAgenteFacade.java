@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ProyectoAgenteFacade extends AbstractFacade<ProyectoAgente> {
-    @PersistenceContext(unitName = "ar.edu.undec_SYSGAP_war_1.0-SNAPSHOTPU")
+    @PersistenceContext(unitName = "NORTIAPU")
     private EntityManager em;
 
     @Override
