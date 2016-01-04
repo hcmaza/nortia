@@ -60,7 +60,7 @@ table {
     background-color: #21B2CE !important;
 }*/
 
-// Todas las cabeceras
+ /*Todas las cabeceras*/
 
 .ui-widget-header{
   background: none !important;
@@ -200,7 +200,7 @@ table {
 .container {
 	width: 100%;
 	float: left;
-	//overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .menu1{
