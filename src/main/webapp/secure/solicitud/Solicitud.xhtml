@@ -5,17 +5,18 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <!--<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>-->    
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="head">
-
-        </ui:define>
-
-        <ui:define name="body">
-
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="subheader">
+        Page Header
+    </ui:define>
+    
+    <ui:define name="content">
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card TexAlCenter">
             <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
             <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
 
@@ -29,14 +30,14 @@
             <h:form id="formprincipal" enctype="multipart/form-data" >
                 <p:growl globalOnly="true" for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
 
-                <p:panel id="pprincipal" header="Alta Idea-Proyecto" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                <p:panel id="pprincipal" header="Alta Idea-Proyecto" >
 
                     <div align="right" style="margin: 10px;">
                         <p:clock pattern="dd.MM.yyyy HH:mm:ss " />  
                     </div>
 
-                    <p:panel header="Título de la Idea Proyecto" id="titulo" style="margin-bottom:10px;" >
-                        <p:inputText required="true" requiredMessage="Ingrese el titulo del proyecto" style="font-weight:bold;font-size:larger;width: 100%"  id="nombre" value="#{proyectoController.selected.nombre}" title="Nombre del Proyecto" />
+                    <p:panel  header="Título de la Idea Proyecto" id="titulo" style="margin-bottom:10px;" >
+                        <p:inputText required="true" requiredMessage="Ingrese el titulo del proyecto" style="font-weight:bold;font-size:larger;width: 90%"  id="nombre" value="#{proyectoController.selected.nombre}" title="Nombre del Proyecto" />
                         <br />
                     </p:panel>
 
@@ -44,15 +45,15 @@
                         <p:row>
                             <p:column style="width:50%; padding-left: 0px;">
                                 <p:panel header="Tipo de Proyecto" style="margin: 0px 0px 10px 0px; width: 100%;"  >  
-                                    <p:selectOneMenu id="tipoproyectoid" value="#{proyectoController.selected.tipoproyectoid}" required="true" requiredMessage="Seleccione Tipo de Proyecto" style="width: 100%;">
+                                    <p:selectOneMenu id="tipoproyectoid" value="#{proyectoController.selected.tipoproyectoid}" required="true" requiredMessage="Seleccione Tipo de Proyecto" >
                                         <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}"/>
                                     </p:selectOneMenu>    
                                 </p:panel>                            
                             </p:column>
 
-                            <p:column style="width:50%; padding-right: 6px;">
-                                <p:panel header="Avance de la Idea-Proyecto" style="margin: 0px 0px 10px 0px; width: 100%;">             
-                                    <p:selectOneMenu widgetVar="wavanceproyectoid" id="avanceproyectoid"  value="#{proyectoController.selected.avanceproyectoid}" label="Avance Proyecto" required="true" requiredMessage="Seleccione el estado de avance" style="width: 100%;" >
+                            <p:column style="width:50%">
+                                <p:panel header="Avance de la Idea-Proyecto" >             
+                                    <p:selectOneMenu widgetVar="wavanceproyectoid" id="avanceproyectoid"  value="#{proyectoController.selected.avanceproyectoid}" label="Avance Proyecto" required="true" requiredMessage="Seleccione el estado de avance"  >
                                         <f:selectItems  value="#{avanceproyectoController.itemsAvailableSelectOne}"/>
                                     </p:selectOneMenu>
                                 </p:panel>                            
@@ -173,13 +174,13 @@
                                     <p:row>
                                         <p:column style="width: 100%;" colspan="2">
                                             <p:outputLabel style="font-weight:bold;font-size:larger"  value="Diagnostico y resumen descriptivo" for="resumen" />                                            
-                                            <p:inputTextarea rows="5" id="resumen" value="#{proyectoController.selected.resumen}" title="Resumen" autoResize="true" required="true" requiredMessage="Ingrese Diagnostico y resumen descriptivo " style="width: 100%;" />
+                                            <p:inputTextarea rows="5" id="resumen" value="#{proyectoController.selected.resumen}" title="Resumen" maxlength="500" autoResize="true" required="true" requiredMessage="Ingrese Diagnostico y resumen descriptivo " style="width: 100%;" />
                                         </p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column style="width: 100%;" colspan="2" >
                                             <p:outputLabel style="font-weight:bold;font-size:larger" value="Objetivos y Resultados Esperados" for="observaciones" />                                                                                
-                                            <p:inputTextarea rows="3" id="observaciones" value="#{proyectoController.selected.observaciones}" title="Observaciones" autoResize="true" required="true" requiredMessage="Objetivos y Resultados Esperados" style="width: 100%;"/>
+                                            <p:inputTextarea rows="3" id="observaciones" value="#{proyectoController.selected.observaciones}" title="Observaciones" maxlength="500" autoResize="true" required="true" requiredMessage="Objetivos y Resultados Esperados" style="width: 100%;"/>
                                         </p:column>                                
                                     </p:row>
 
@@ -792,7 +793,9 @@
                 </p:dialog>
 
             </h:form>
-
+            </div>
+            </div>
+        </div>
         </ui:define>
     </ui:composition>
 

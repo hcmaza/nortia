@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="subheader">
+        Page Header
+    </ui:define>
     
-    <ui:composition template="/template.xhtml">
-        <ui:define name="head">
-
-        </ui:define>
-
-    <ui:define name="body">
+    <ui:define name="content">
+        
+        <div class="Container100">
+            <div class="ContainerIndent">
+                <div class="Card TexAlCenter">
            
         <h:form id="formindex">
           
@@ -27,10 +28,10 @@
                      </div>
                     </p:notificationBar>
              </c:if> -->
-            <p:panel id="pprincipal" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+           
                 <!--<img src="resources/img/Logo_UNDEC _normal.png" style="height: 170px; width: 164px; vertical-align: top; border-radius: 6px; display: inline-block; text-align: right;"/>-->
 
-                <p:panelGrid style="margin: 0 auto; width: 100%;" styleClass="sinBordes" >
+                <h:panelGrid style="margin: 0 auto; width: 100%;" >
                     <p:row>
                         <p:column style="width: 60%; vertical-align: top; ">
                             <p:fieldset id="uvt" legend="UNdeC - Unidad de Vinculación Tecnológica">
@@ -72,11 +73,14 @@
                         </p:column>
                     </p:row>
 
-                 </p:panelGrid>
+                 </h:panelGrid>
 
-            </p:panel>
+         
         </h:form>
+    </div>
+            </div>
+        </div>
+        
     </ui:define>
 
 </ui:composition>
-</html>
