@@ -12,7 +12,7 @@
         </ui:define>
         <ui:define name="body">
             <h:form>
-                <p:panel id="pprincipal" header="Editar Convocatoria" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                <p:panel id="pprincipal" header="Editar Convocatoria" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden; margin-bottom: 5px;" >
 
                     <p:fieldset legend="Información General" style="display: inline-block; width: 46%; float: left;">
                         <p:panelGrid styleClass="sinBordes sinFondo">
@@ -40,6 +40,18 @@
                             </p:row>
                             <p:row >
                                 <p:column style="width: 40%;">
+                                    <p:outputLabel value="Tipo de Financiamiento" for="tipofinanciamientoid" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column style="width: 60%;">
+                                    <p:selectOneMenu id="tipofinanciamientoid" value="#{convocatoriaController.selected.tipofinanciamientoid}" style="width: 100%;" label="* Este campo es requerido" required="true" requiredMessage="El campo tipo de financiamiento es requerido" >
+                                        <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="tipofinanciamientoid" display="icon"  /> 
+                                    <p:tooltip id="ttTipoFinanciamiento" for="tipofinanciamientoid" showEvent="focus" hideEvent="blur" />
+                                </p:column>
+                            </p:row>
+                            <p:row >
+                                <p:column style="width: 40%;">
                                     <p:outputLabel value="Organismo" for="organismo" style="font-weight: bold;"/>
                                 </p:column>
                                 <p:column style="width: 60%;">
@@ -62,10 +74,12 @@
                             </p:row>
                             <p:row >
                                 <p:column style="width: 40%;">
-                                    <p:outputLabel value="Monto Financiamiento" for="montofinanciamiento" style="font-weight: bold;" />
+                                    <p:outputLabel value="Monto de Financiamiento" for="montofinanciamiento" style="font-weight: bold;" />
                                 </p:column>
                                 <p:column style="width: 60%;">
-                                    <p:inputText id="montofinanciamiento" value="#{convocatoriaController.selected.montofinanciamiento}" style="width: 100%;" title="* Este campo es requerido"  required="true" requiredMessage="El campo monto de financiamiento es requerido" validatorMessage="El Monto debe ser un valor positivo, no debe superar los 9 digitos enteros y 2 decimales" />
+                                    <p:inputText id="montofinanciamiento" value="#{convocatoriaController.selected.montofinanciamiento}" style="width: 100%;" title="* Este campo es requerido"  required="true" requiredMessage="El campo monto de financiamiento es requerido" validatorMessage="El Monto debe ser un valor positivo, no debe superar los 9 digitos enteros y 2 decimales">
+                                        <f:convertNumber type="number" groupingUsed="false" locale="en-US"  /> 
+                                    </p:inputText>
                                     <p:message for="montofinanciamiento" display="icon"  /> 
                                     <p:tooltip id="ttMontoFinanciamiento" for="montofinanciamiento" showEvent="focus" hideEvent="blur" />
                                 </p:column>
@@ -102,8 +116,17 @@
                                 </p:row>
                             </p:panelGrid>
                         </p:tab>
+                        
                         <p:tab title="Documentación">
                             <p:panelGrid styleClass="sinBordes sinFondo">
+                                <p:row >
+                                    <p:column style="width: 40%;">
+                                        <p:outputLabel value="Link" for="link" style="font-weight: bold;"/>
+                                    </p:column>
+                                    <p:column style="width: 60%;">
+                                        <p:inputText id="link" value="#{convocatoriaController.selected.link}" title="Link" style="width: 100%;"/>
+                                    </p:column>
+                                </p:row>
                                 <p:row>
                                     <p:column style="width: 40%;">
                                         <p:outputLabel value="Bases" for="fuploadBases" style="font-weight: bold;"/>
@@ -114,14 +137,6 @@
                                                           sizeLimit="10000000" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/"  >
                                             </p:fileUpload>    
                                         </h:form>
-                                    </p:column>
-                                </p:row>
-                                <p:row >
-                                    <p:column style="width: 40%;">
-                                        <p:outputLabel value="Link" for="link" style="font-weight: bold;"/>
-                                    </p:column>
-                                    <p:column style="width: 60%;">
-                                        <p:inputText id="link" value="#{convocatoriaController.selected.link}" title="Link" style="width: 100%;"/>
                                     </p:column>
                                 </p:row>
                                 <p:row>
@@ -140,7 +155,7 @@
                         </p:tab>
                     </p:accordionPanel>
 
-                    <p:panel header="Descripción" toggleable="true" style="margin-bottom: 5px; clear: both; width: 100%;"  collapsed="true">
+                    <p:panel header="Descripción" toggleable="true" style="margin-bottom: 5px; clear: both; width: 100%;"  collapsed="false">
                         <p:panelGrid styleClass="sinBordes sinFondo" style="vertical-align: top; width: 100%; min-width: 100%;">
                             <p:row>
                                 <p:column style="width: 150px; vertical-align: top;">

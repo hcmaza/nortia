@@ -281,8 +281,10 @@ public class ConvocatoriaController implements Serializable {
 
         try {
             current.setBases(event.getFile().getContents());
+            System.out.println("ConvocatoriaController >> handleFileUploadBases >> Archivo Subido");
 
         } catch (Exception e) {
+            System.out.println("ConvocatoriaController >> handleFileUploadBases >> Error");
             e.printStackTrace();
         }
     }

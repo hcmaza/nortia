@@ -11,10 +11,10 @@
             <h:outputText value="Nueva Convocatoria"></h:outputText>
         </ui:define>
         <ui:define name="body">
-            <h:form>
+            <h:form id="formprincipal">
                 <p:panel id="pprincipal" header="Nueva Convocatoria" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
 
-                    <p:fieldset legend="Información General" style="display: inline-block; width: 46%; float: left;">
+                    <p:fieldset legend="Información General" style="display: inline-block; width: 46%; float: left; margin-bottom: 5px;">
                         <p:panelGrid styleClass="sinBordes sinFondo">
                             <p:row>
                                 <p:column style="width: 40%;">
@@ -36,6 +36,18 @@
                                     </p:selectOneMenu>
                                     <p:message for="tipoproyectoid" display="icon"  /> 
                                     <p:tooltip id="ttTipoProyecto" for="tipoproyectoid" showEvent="focus" hideEvent="blur" />
+                                </p:column>
+                            </p:row>
+                            <p:row >
+                                <p:column style="width: 40%;">
+                                    <p:outputLabel value="Tipo de Financiamiento" for="tipofinanciamientoid" style="font-weight: bold;"/>
+                                </p:column>
+                                <p:column style="width: 60%;">
+                                    <p:selectOneMenu id="tipofinanciamientoid" value="#{convocatoriaController.selected.tipofinanciamientoid}" style="width: 100%;" label="* Este campo es requerido" required="true" requiredMessage="El campo tipo de financiamiento es requerido" >
+                                        <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}"/>
+                                    </p:selectOneMenu>
+                                    <p:message for="tipofinanciamientoid" display="icon"  /> 
+                                    <p:tooltip id="ttTipoFinanciamiento" for="tipofinanciamientoid" showEvent="focus" hideEvent="blur" />
                                 </p:column>
                             </p:row>
                             <p:row >
@@ -62,10 +74,12 @@
                             </p:row>
                             <p:row >
                                 <p:column style="width: 40%;">
-                                    <p:outputLabel value="Monto Financiamiento" for="montofinanciamiento" style="font-weight: bold;" />
+                                    <p:outputLabel value="Monto de Financiamiento" for="montofinanciamiento" style="font-weight: bold;" />
                                 </p:column>
                                 <p:column style="width: 60%;">
-                                    <p:inputText id="montofinanciamiento" value="#{convocatoriaController.selected.montofinanciamiento}" style="width: 100%;" title="* Este campo es requerido"  required="true" requiredMessage="El campo monto de financiamiento es requerido" validatorMessage="El Monto debe ser un valor positivo, no debe superar los 9 digitos enteros y 2 decimales" />
+                                    <p:inputText id="montofinanciamiento" value="#{convocatoriaController.selected.montofinanciamiento}" style="width: 100%;" title="* Este campo es requerido"  required="true" requiredMessage="El campo monto de financiamiento es requerido" validatorMessage="El Monto debe ser un valor positivo, no debe superar los 9 digitos enteros y 2 decimales">
+                                        <f:convertNumber type="number" groupingUsed="false" locale="en-US"  /> 
+                                    </p:inputText>
                                     <p:message for="montofinanciamiento" display="icon"  /> 
                                     <p:tooltip id="ttMontoFinanciamiento" for="montofinanciamiento" showEvent="focus" hideEvent="blur" />
                                 </p:column>
@@ -78,7 +92,7 @@
                             <p:panelGrid styleClass="sinBordes sinFondo">
                                 <p:row >
                                     <p:column style="width: 40%;">
-                                        <h:outputLabel value="Fecha Publicación" for="fechapublicacion" style="font-weight: bold;" />
+                                        <h:outputLabel value="Fecha de Publicación" for="fechapublicacion" style="font-weight: bold;" />
                                     </p:column>
                                     <p:column style="width: 60%;">
                                         <p:calendar id="fechapublicacion" styleClass="calendarFilter" value="#{convocatoriaController.selected.fechapublicacion}" style="width: 100%;" />
@@ -104,19 +118,6 @@
                         </p:tab>
                         <p:tab title="Documentación">
                             <p:panelGrid styleClass="sinBordes sinFondo">
-                                <p:row>
-                                    <p:column style="width: 40%;">
-                                        <p:outputLabel value="Bases" for="fuploadBases" style="font-weight: bold;"/>
-                                    </p:column>
-                                    <p:column style="width: 60%;">
-                                        <h:form id="fuploadBases" enctype="multipart/form-data">
-                                            <p:fileUpload label="Bases para subir" id="basesConvocatoria" fileUploadListener="#{convocatoriaController.handleFileUploadBases}" mode="advanced"  
-                                                          sizeLimit="10000000" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/"  >
-
-                                            </p:fileUpload>    
-                                        </h:form>
-                                    </p:column>
-                                </p:row>
                                 <p:row >
                                     <p:column style="width: 40%;">
                                         <p:outputLabel value="Link" for="link" style="font-weight: bold;"/>
@@ -127,12 +128,24 @@
                                 </p:row>
                                 <p:row>
                                     <p:column style="width: 40%;">
+                                        <p:outputLabel value="Bases" for="fuploadBases" style="font-weight: bold;"/>
+                                    </p:column>
+                                    <p:column style="width: 60%;">
+                                        <h:form id="fuploadBases" enctype="multipart/form-data">
+                                            <p:fileUpload label="Bases para subir" id="basesConvocatoria" fileUploadListener="#{convocatoriaController.handleFileUploadBases}" mode="advanced"  
+                                                          sizeLimit="10000000" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update="fuploadBases"  >
+                                            </p:fileUpload>
+                                        </h:form>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column style="width: 40%;">
                                         <p:outputLabel value="Formulario" for="fuploadFormulario" style="font-weight: bold;" />
                                     </p:column>
                                     <p:column style="width: 60%;">
                                         <h:form id="fuploadFormulario" enctype="multipart/form-data">
                                             <p:fileUpload label="Formulario para subir" id="formularioConvocatoria" fileUploadListener="#{convocatoriaController.handleFileUploadFormulario}" mode="advanced"  
-                                                          sizeLimit="10000000" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/"  >
+                                                          sizeLimit="10000000" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update="fuploadFormulario" >
                                                 
 
                                             </p:fileUpload>    
@@ -142,8 +155,10 @@
                             </p:panelGrid>    
                         </p:tab>
                     </p:accordionPanel>
+                    
+                    <br />
 
-                    <p:panel header="Descripción" toggleable="true" style="margin-bottom: 5px; clear: both; width: 100%;"  collapsed="true">
+                    <p:panel header="Descripción" toggleable="true" style="margin-bottom: 5px; clear: both; width: 100%;"  collapsed="false">
                         <p:panelGrid styleClass="sinBordes sinFondo" style="vertical-align: top; width: 100%; min-width: 100%;">
                             <p:row>
                                 <p:column style="width: 150px; vertical-align: top;">
