@@ -6,17 +6,17 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
         <ui:define name="title">
             <h:outputText value="#{bundle.ListProyectoTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
 
-                <p:panel id="pprincipal" header="Lista de Proyectos" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                <p:panel id="pprincipal" header="Lista de Proyectos" >
 
                     <h:outputText escape="false" value="#{bundle.ListProyectoEmpty}" rendered="#{proyectoController.items.rowCount == 0}"/>
 
@@ -131,7 +131,7 @@
 
 
             </h:form>
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 
 </html>

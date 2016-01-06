@@ -7,9 +7,9 @@
       xmlns:p="http://primefaces.org/ui"
       >
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
 
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
 
             <f:event type="preRenderView" listener="#{proyectoController.buscarTodos()}" ></f:event> 
 
@@ -185,7 +185,7 @@
                 </p:dialog>
             </h:form>
 
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 
 </html>

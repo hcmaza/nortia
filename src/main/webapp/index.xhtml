@@ -56,21 +56,7 @@
                                 </p:panelGrid>
                             </p:fieldset>
                         </p:column>
-                        <p:column style="width: 40%;">
-                            <p:fieldset id="novedades" legend="Noticias UNdeC" style="margin-bottom: 10px;">
-                                <p:feedReader size="7" value="http://undec.edu.ar/rss.php" var="feedu">
-                                    <h:outputText value="# {feedu.title}" style="font-weight: bold;display:block; background-color: #6684A3"/>
-                                    <h:outputText value="# {feedu.description.value}" escape="false"/>
-                                    <p:separator />
-                                </p:feedReader>
-                            </p:fieldset>
-                            <p:fieldset id="tweeter" legend="Twitter @UNdeC">
-                                <p:feedReader size="5" value="https://queryfeed.net/tw?q=undec" var="feed">
-                                    <h:outputText value="#{feed.description.value}" escape="false"/>
-                                    <p:separator />
-                                </p:feedReader>
-                            </p:fieldset>
-                        </p:column>
+                        
                     </p:row>
 
                  </h:panelGrid>

@@ -6,14 +6,14 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
         <ui:define name="title">
             <h:outputText value="Editar Tipo de Solicitud"></h:outputText>
         </ui:define>
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
 
             <h:form>
-                <p:panel id="pprincipal" header="Editar Tipo de Solicitud" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                <p:panel id="pprincipal" header="Editar Tipo de Solicitud" >
                     
                     <p:fieldset legend="Información del Tipo de Solicitud">
                         <p:panelGrid styleClass="sinBordes sinFondo" style="width: 100%">
@@ -52,7 +52,7 @@
 
                 </p:dialog>
             </h:form>            
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 
 </html>

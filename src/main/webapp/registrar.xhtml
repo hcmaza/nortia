@@ -12,6 +12,11 @@ and open the template in the editor.
         <title>Sistema de Gestión y  Administración de Proyectos</title>
     </h:head>
     <h:body>
+        <script type="text/javascript"> 
+                    function tabWizard() {
+                        wregistrar.loadStep(wregistrar.cfg.steps[1], true);
+                    }
+         </script>
         <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
               
         <p:dialog modal="true" widgetVar="statusDialog" header="Espere Por Favor"   
@@ -27,46 +32,46 @@ and open the template in the editor.
             <h:form id="formresgistrar">
                 
                 <p:messages autoUpdate="true" />
-                     <p:wizard flowListener="#{usuarioController.onFlowProcess}">
+                     <p:wizard id="wregistrar" flowListener="#{usuarioController.onFlowProcess}">
                          <p:tab id="Cuil" title="Cuil">
-                            <p:panel header="Ingrese su Cuil">
+                            
                                 <p:messages />
                              <h:panelGrid columns="3" >
-                                  <h:outputLabel value="Cuil" for="cuil" />
-                                  <p:inputMask id="cuil" value="#{usuarioController.selecteda.cuil}" mask="99-99999999-9"/>
                                   
-                                  <p:commandButton update="datospersonales" actionListener="#{usuarioController.buscarAgenteCuil(usuarioController.selecteda.cuil)}" value="Buscar" />     
+                                 <p:inputText placeholder="Ingrese documento o cuil" id="cuil" value="#{usuarioController.selecteda.cuil}" />
+                                  
+                                 <p:commandButton actionListener="#{usuarioController.buscarAgenteCuil(usuarioController.selecteda.cuil)}" value="Buscar" onclick="tabWizard();"  />     
                                 
                              </h:panelGrid>
-                            </p:panel>
+                            
                          </p:tab>
                         <p:tab id="datospersonales" title="Datos Personales">
                            
  
                                 <h:panelGrid id="panelp" columns="3">
-                                        <h:outputLabel value="Apellido" for="apellido" />
-                                        <h:inputText maxlength="30" id="apellido" value="#{usuarioController.selecteda.apellido}" title="Apellido" required="true" />
+                                        <p:outputLabel value="Apellido" for="apellido" />
+                                        <p:inputText maxlength="30" id="apellido" value="#{usuarioController.selecteda.apellido}" title="Apellido" required="true" />
                                         <p:message for="apellido" /> 
-                                        <h:outputLabel value="Nombres" for="nombres" />
-                                        <h:inputText maxlength="45" id="nombres" value="#{usuarioController.selecteda.nombres}" title="Nombres" required="true" />
+                                        <p:outputLabel value="Nombres" for="nombres" />
+                                        <p:inputText maxlength="45" id="nombres" value="#{usuarioController.selecteda.nombres}" title="Nombres" required="true" />
                                         <p:message for="nombres" /> 
                                         <p:outputLabel value="Tipo de Documento" for="tipodocumentoid" />
-                                        <h:selectOneMenu id="tipodocumentoid" value="#{usuarioController.selecteda.tipodocumentoid}" title="Tipo de Documento" required="true" >
+                                        <p:selectOneMenu id="tipodocumentoid" value="#{usuarioController.selecteda.tipodocumentoid}" title="Tipo de Documento" required="true" >
                                             <f:selectItems value="#{tipodocumentoController.itemsAvailableSelectOne}"/>
-                                        </h:selectOneMenu>
+                                        </p:selectOneMenu>
                                         <p:message for="tipodocumentoid" /> 
-                                        <h:outputLabel value="N° de Documento" for="numerodocumento" />
-                                        <h:inputText id="numerodocumento" value="#{usuarioController.selecteda.numerodocumento}" title="Numero de Documento" required="true" />
+                                        <p:outputLabel value="N° de Documento" for="numerodocumento" />
+                                        <p:inputText id="numerodocumento" value="#{usuarioController.selecteda.numerodocumento}" title="Numero de Documento" required="true" />
                                         <p:message for="numerodocumento" /> 
-                                        <h:outputLabel value="Teléfono" for="telefono" />
-                                        <h:inputText id="telefono" value="#{usuarioController.selecteda.telefono}" title="Telefono" required="true" />
+                                        <p:outputLabel value="Teléfono" for="telefono" />
+                                        <p:inputText id="telefono" value="#{usuarioController.selecteda.telefono}" title="Telefono" required="true" />
                                         <p:message for="telefono" /> 
-                                        <h:outputLabel value="Celular" for="celular" />
-                                        <h:inputText id="celular" value="#{usuarioController.selecteda.celular}" title="Celular" required="true" />
+                                        <p:outputLabel value="Celular" for="celular" />
+                                        <p:inputText id="celular" value="#{usuarioController.selecteda.celular}" title="Celular" required="true" />
                                         <p:message for="celular" /> 
                                         
-                                        <h:outputLabel value="Domicilio" for="domicilio" />
-                                        <h:inputText maxlength="200"  id="domicilio" value="#{usuarioController.selecteda.domicilio}" title="Domicilio" required="true" />
+                                        <p:outputLabel value="Domicilio" for="domicilio" />
+                                        <p:inputText maxlength="200"  id="domicilio" value="#{usuarioController.selecteda.domicilio}" title="Domicilio" required="true" />
                                         <p:message for="domicilio" />
                                 </h:panelGrid>
                             
@@ -77,30 +82,30 @@ and open the template in the editor.
                         <p:outputLabel style="color: red" value=" (por ej: usuario@undec.edu.ar) para poder validar su registracion. Muchas Gracias." />
                 
                             <h:panelGrid columns="3" >
-                                <h:outputLabel value="Email" for="email" />
-                                <h:inputText id="email" value="#{usuarioController.selecteda.email}" validatorMessage="El email tiene que ser del modo loquesea@undec.edu.ar" required="true" >
+                                <p:outputLabel value="Email" for="email" />
+                                <p:inputText id="email" value="#{usuarioController.selecteda.email}" validatorMessage="El email tiene que ser del modo loquesea@undec.edu.ar" required="true" >
                                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@undec.edu.ar" />
-                                </h:inputText>
+                                </p:inputText>
                                 <p:message for="email" /> 
-                                <h:outputLabel value="Otro Email" for="otroemail" />
+                                <p:outputLabel value="Otro Email" for="otroemail" />
 
-                                <h:inputText id="otroemail" value="#{usuarioController.selecteda.otroemail}" validatorMessage="Email Incorrecto" required="true" >
+                                <p:inputText id="otroemail" value="#{usuarioController.selecteda.otroemail}" validatorMessage="Email Incorrecto" required="true" >
                                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-                                </h:inputText>   
+                                </p:inputText>   
                                 <p:message for="otroemail" /> 
-                                <h:outputLabel value="Profesion" for="profesion" />
-                                <h:inputText maxlength="70" id="profesion" value="#{usuarioController.selecteda.profesion}" title="Profesion" required="true" />
+                                <p:outputLabel value="Profesion" for="profesion" />
+                                <p:inputText maxlength="70" id="profesion" value="#{usuarioController.selecteda.profesion}" title="Profesion" required="true" />
                                 <p:message for="profesion" /> 
-                                <h:outputLabel value="Dependencia" for="dependenciaid" />
-                                <h:selectOneMenu id="dependenciaid" value="#{usuarioController.selecteda.dependenciaid}" title="Dependencia" required="true" >
+                                <p:outputLabel value="Dependencia" for="dependenciaid" />
+                                <p:selectOneMenu id="dependenciaid" value="#{usuarioController.selecteda.dependenciaid}" title="Dependencia" required="true" >
                                     <f:selectItems value="#{dependenciaController.itemsAvailableSelectOne}"/>
-                                </h:selectOneMenu>
+                                </p:selectOneMenu>
                                 <p:message for="dependenciaid" /> 
                             </h:panelGrid>
                         </p:tab>
                         <p:tab id="datosusuario" title="Datos de Usuario"> 
                             <h:panelGrid columns="3" >
-                            <h:outputText value="Name"/>
+                            <p:outputLabel value="Name"/>
                             <p:inputText id="nombreusuario" maxlength="16" value="#{usuarioController.selected.usuarionombre}" title="Name" required="true" />
                             <p:message for="nombreusuario" /> 
                             <p:outputLabel value="Password" for="usuarioclave" />

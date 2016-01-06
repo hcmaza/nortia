@@ -6,13 +6,13 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
         <ui:define name="title">
             <h:outputText value="Nueva Convocatoria"></h:outputText>
         </ui:define>
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
             <h:form id="formprincipal">
-                <p:panel id="pprincipal" header="Nueva Convocatoria" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                <p:panel id="pprincipal" header="Nueva Convocatoria" >
 
                     <p:fieldset legend="Información General" style="display: inline-block; width: 46%; float: left; margin-bottom: 5px;">
                         <p:panelGrid styleClass="sinBordes sinFondo">
@@ -194,7 +194,7 @@
 
                 </p:dialog>
             </h:form>
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 
 </html>

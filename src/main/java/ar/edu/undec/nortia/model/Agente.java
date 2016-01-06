@@ -78,7 +78,7 @@ public class Agente implements Serializable {
     @Column(name = "profesion")
     private String profesion;
     //@Pattern(regexp="/^\\d{2}\\-\\d{8}\\-\\d{1}$/")
-    @Pattern(regexp="^[0-9]{2}-[0-9]{8}-[0-9]$")
+    //@Pattern(regexp="^[0-9]{2}-[0-9]{8}-[0-9]$")
     @Size(max = 15)
     @Column(name = "cuil")
     private String cuil;
