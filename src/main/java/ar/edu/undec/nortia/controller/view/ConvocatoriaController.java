@@ -8,6 +8,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -258,6 +260,29 @@ public class ConvocatoriaController implements Serializable {
         
         items= new ListDataModel(getFacade().findConvocatoriafinanciamiento(tipoproyectoid, tipofinanciamientoid));
         this.tablafiltrada= getFacade().findConvocatoriafinanciamiento(tipoproyectoid, tipofinanciamientoid);
+    }
+    
+    // buscar convocatorias entre fechas
+    public void findConvocatoriasEnFecha(Date fecha){
+        items = new ListDataModel(getFacade().findConvocatoriasEnFecha(fecha));
+        this.tablafiltrada = getFacade().findConvocatoriasEnFecha(fecha);
+    }
+    
+    // buscar convocatorias por tipo de proyecto, tipo de financiamiento, abierta en una fecha determinada
+    public void findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(int tipoproyecto, int tipofinanciamiento){
+        
+        System.out.println("Tipo de Proyecto= " + tipoproyecto + " - Tipo de Financiamiento= " + tipofinanciamiento);
+        
+        items = new ListDataModel(getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date()));
+        this.tablafiltrada = getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date());
+        
+        Iterator i = items.iterator();
+        
+        while(i.hasNext()){
+            Convocatoria c = (Convocatoria) i.next();
+            System.out.println("Convocatoria Por Tipo de Proyecto y Tipo de Financiamiento Actual >> " + c.getConvocatoria());
+        }
+        
     }
     
     public StreamedContent getFileConvocatoria() {          

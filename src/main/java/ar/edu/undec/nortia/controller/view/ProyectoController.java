@@ -2261,7 +2261,15 @@ public class ProyectoController implements Serializable {
 
     public String prepareSolicitud() {
 
-        current = null;
+        //current = null;
+        current = new Proyecto();
+        
+        // filtramos la lista de convocatorias con las que se encuentran abiertas actualmente
+        FacesContext context = FacesContext.getCurrentInstance();
+        ConvocatoriaController convocatoriacontroller = (ConvocatoriaController) context.getApplication().evaluateExpressionGet(context, "#{convocatoriaController}", ConvocatoriaController.class);        
+        convocatoriacontroller.findConvocatoriasEnFecha(new Date());
+        
+        
         this.recreateModel();
         
         return "/secure/solicitud/Solicitud.xhtml";
