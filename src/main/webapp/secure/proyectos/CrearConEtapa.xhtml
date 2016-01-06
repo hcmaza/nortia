@@ -30,8 +30,10 @@
 
                 <p:tooltip/>
 
-
-                <p:panel header="Elaborar Proyecto" >
+                <p:commandButton value="Idea Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogIdeaProyecto()}">
+        
+    </p:commandButton>
+                <p:panel header="Elaborar Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
 
                     <p:tabView id="tabview1" >
 
@@ -136,16 +138,14 @@
                                 </p:column>
                             </p:dataTable>
 
-                            <p:panel id="resumenequipo" header="Resumen del Equipo de Trabajo" style="margin-top: 10px;">
+                            <p:panel id="resumenequipo" header="Resumen del Equipo de Trabajo" style="margin-top: 10px;" collapsed="true" toggleable="true" toggleTitle="Ver Resumen del Equipo de Trabajo">
 
                                 <p:dataTable id="tresumenequipo" value="#{etapaController.paprincipal}" var="resumenagentes" 
                                              rowIndexVar="indice"
                                              rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
                                              styleClass="tabla"
                                              >
-                                    <f:facet name="header">
-                                        Equipo de Trabajo y Actividades
-                                    </f:facet>
+                                    
                                     <p:columnGroup type="header">
                                         <p:row>
                                             <p:column rowspan="2" headerText="Agente" />
@@ -214,12 +214,10 @@
 
                         <p:tab id="paneletapas" title="Plan de Trabajo">
 
-                            <p:commandButton id="btn_addetapa" update=":forme:etapa :forme:resultadoesperado :forme:tareasdeproyecto" action="#{etapaController.rearmarEtapasProyecto}" onclick="PF('dialogoetapa').show();" value="Agregar Etapa" immediate="true" style="margin-top: 5px; margin-bottom: 5px; " > </p:commandButton>  
+                            <p:commandButton id="btn_addetapa" alt="Agregar Etapa" update=":forme:etapa :forme:resultadoesperado :forme:tareasdeproyecto" icon="fa fa-plus" action="#{etapaController.rearmarEtapasProyecto}" onclick="PF('dialogoetapa').show();" immediate="true" style="margin-top: 5px; margin-bottom: 5px; " > </p:commandButton>  
 
                             <p:treeTable id="treetableetapas" value="#{etapaController.root}" var="document">
-                                <f:facet name="header">
-                                    Plan de Trabajo: Etapas y Tareas
-                                </f:facet>
+                                
                                 <p:column headerText="Etapa/Tarea">
                                     <h:outputText value="#{document.tarea}" />
                                 </p:column>
@@ -390,18 +388,18 @@
                 <p:dialog id="dtarea" header="Tarea en Etapa #{etapaController.selected.etapa}" widgetVar="dtarea" resizable="false" onShow="PF('wizardtarea').select(0);" 
                           showEffect="clip" hideEffect="fold" modal="true">  
 
-                    <p:tabView id="wizardtarea" style="width: 830px;" activeIndex="0" widgetVar="wizardtarea" >
+                    <p:tabView id="wizardtarea" activeIndex="0" widgetVar="wizardtarea" >
 
                         <p:tab id="tab1" title="Tarea" >
 
-                            <p:panelGrid style="width: 100%;">
+                            <p:panelGrid>
 
                                 <p:row>
                                     <p:column>
                                         <p:outputLabel style="font-weight: bold" value="Tarea:" for="tarea" />
                                     </p:column>
                                     <p:column colspan="5">
-                                        <p:inputText  size="70" required="true" id="tarea" value="#{tareaController.selected.tarea}" title="Tarea" style="width: 100%;" />
+                                        <p:inputText  size="70" required="true" id="tarea" value="#{tareaController.selected.tarea}" title="Tarea" />
                                     </p:column>
                                 </p:row>
                                 <p:row>
@@ -409,7 +407,7 @@
                                         <p:outputLabel style="font-weight: bold" value="Descripcion:" for="descripcion" />
                                     </p:column>
                                     <p:column colspan="5">
-                                        <p:inputTextarea cols="70" rows="3" id="descripcion" value="#{tareaController.selected.descripcion}" title="Descripcion" style="width: 100%;" />
+                                        <p:inputTextarea cols="70" rows="3" id="descripcion" value="#{tareaController.selected.descripcion}" title="Descripcion" />
                                     </p:column>
                                 </p:row>
                                 <p:row>
@@ -548,7 +546,7 @@
 
                         <p:tab id="tab3" title="Presupuesto/Tarea">
 
-                            <p:tabView style="width: 100%; margin: 10px 0 10px 0;" id="tabrubros" value="#{rubroController.rubroslist}" var="rub" orientation="left" >
+                            <p:tabView style="margin: 10px 0 10px 0;" id="tabrubros" value="#{rubroController.rubroslist}" var="rub" orientation="left" >
                                 <p:tab title="#{rub.abreviado}" >
 
                                     <p:commandButton rendered="#{item.rubro.id.intValue() ne 5}" id="cagregarpresupuestotarea" value="Agregar Presupuesto a la Tarea" onclick="PF('dialogopresupuesto').show()" update=":formd:wizardtarea:tabrubros :formpresupuesto:panelpresupuesto" action="#{presupuestoTareaController.reinit(rub)}" style="margin-bottom: 5px;" />
@@ -701,7 +699,7 @@
 
             <h:form id="forme" >
                 <p:dialog id="dialogoetapa" maximizable="false" minimizable="false" header="Agregar Etapa"
-                          resizable="false" widgetVar="dialogoetapa" modal="true" style="width: 80%;" >
+                          resizable="false" widgetVar="dialogoetapa" modal="true" >
                     <p:growl id="msgs" showDetail="true" />
                     <p:panelGrid columns="2" styleClass="sinBordes">
                         <p:outputLabel style="font-weight: bold" value="Nombre de Etapa:" for="etapa" />
@@ -816,49 +814,49 @@
 
                     <p:growl id="msgs" showDetail="true" />
                     <h:panelGrid id="panel" columns="3">
-                        <h:outputLabel value="Apellido" for="apellido" />
-                        <h:inputText maxlength="30" id="apellido" value="#{agenteViewController.agente1.apellido}" title="Apellido" required="true" />
+                        <p:outputLabel value="Apellido" for="apellido" />
+                        <p:inputText maxlength="30" id="apellido" value="#{agenteViewController.agente1.apellido}" title="Apellido" required="true" />
                         <p:message for="apellido" /> 
-                        <h:outputLabel value="Nombres" for="nombres" />
-                        <h:inputText maxlength="45" id="nombres" value="#{agenteViewController.agente1.nombres}" title="Nombres" required="true" />
+                        <p:outputLabel value="Nombres" for="nombres" />
+                        <p:inputText maxlength="45" id="nombres" value="#{agenteViewController.agente1.nombres}" title="Nombres" required="true" />
                         <p:message for="nombres" /> 
                         <p:outputLabel value="Tipo de Documento" for="tipodocumentoid" />
-                        <h:selectOneMenu id="tipodocumentoid" value="#{agenteViewController.agente1.tipodocumentoid}" title="Tipo de Documento" required="true" >
+                        <p:selectOneMenu id="tipodocumentoid" value="#{agenteViewController.agente1.tipodocumentoid}" title="Tipo de Documento" required="true" >
                             <f:selectItems value="#{tipodocumentoController.itemsAvailableSelectOne}"/>
-                        </h:selectOneMenu>
+                        </p:selectOneMenu>
                         <p:message for="tipodocumentoid" /> 
-                        <h:outputLabel value="N° de Documento" for="numerodocumento" />
-                        <h:inputText id="numerodocumento" value="#{agenteViewController.agente1.numerodocumento}" title="Numero de Documento" required="true" />
+                        <p:outputLabel value="N° de Documento" for="numerodocumento" />
+                        <p:inputText id="numerodocumento" value="#{agenteViewController.agente1.numerodocumento}" title="Numero de Documento" required="true" />
                         <p:message for="numerodocumento" />
-                        <h:outputLabel value="Cuil" for="cuil" />
+                        <p:outputLabel value="Cuil" for="cuil" />
                         <p:inputMask id="cuil" value="#{agenteViewController.agente1.cuil}" mask="99-99999999-9"/>
                         <p:message for="cuil" />             
-                        <h:outputLabel value="Teléfono" for="telefono" />
-                        <h:inputText id="telefono" value="#{agenteViewController.agente1.telefono}" title="Telefono" required="true" />
+                        <p:outputLabel value="Teléfono" for="telefono" />
+                        <p:inputText id="telefono" value="#{agenteViewController.agente1.telefono}" title="Telefono" required="true" />
                         <p:message for="telefono" /> 
-                        <h:outputLabel value="Celular" for="celular" />
-                        <h:inputText id="celular" value="#{agenteViewController.agente1.celular}" title="Celular" required="false" />
+                        <p:outputLabel value="Celular" for="celular" />
+                        <p:inputText id="celular" value="#{agenteViewController.agente1.celular}" title="Celular" required="false" />
                         <p:message for="celular" /> 
-                        <h:outputLabel value="Email" for="email" />
-                        <h:inputText id="email" value="#{agenteViewController.agente1.email}" validatorMessage="Email Incorrecto" required="true" >
+                        <p:outputLabel value="Email" for="email" />
+                        <p:inputText id="email" value="#{agenteViewController.agente1.email}" validatorMessage="Email Incorrecto" required="true" >
                             <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-                        </h:inputText>
+                        </p:inputText>
                         <p:message for="email" /> 
-                        <h:outputLabel value="Otro Email" for="otroemail" />
+                        <p:outputLabel value="Otro Email" for="otroemail" />
 
-                        <h:inputText id="otroemail" value="#{agenteViewController.agente1.otroemail}" >
+                        <p:inputText id="otroemail" value="#{agenteViewController.agente1.otroemail}" >
                             <!--   <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" /> -->
-                        </h:inputText>   
+                        </p:inputText>   
                         <p:message for="otroemail" /> 
 
-                        <h:outputLabel value="Domicilio" for="domicilio" />
-                        <h:inputText maxlength="200"  id="domicilio" value="#{agenteViewController.agente1.domicilio}" title="Domicilio" required="true" />
+                        <p:outputLabel value="Domicilio" for="domicilio" />
+                        <p:inputText maxlength="200"  id="domicilio" value="#{agenteViewController.agente1.domicilio}" title="Domicilio" required="true" />
                         <p:message for="domicilio" />
-                        <h:outputLabel value="Profesion" for="profesion" />
-                        <h:inputText maxlength="70" id="profesion" value="#{agenteViewController.agente1.profesion}" title="Profesion" required="true" />
+                        <p:outputLabel value="Profesion" for="profesion" />
+                        <p:inputText maxlength="70" id="profesion" value="#{agenteViewController.agente1.profesion}" title="Profesion" required="true" />
                         <p:message for="profesion" /> 
-                        <h:outputLabel value="Especialidad" for="especialidad" />
-                        <h:inputText maxlength="70" id="especialidad" value="#{agenteViewController.agente1.especialidad}" title="Especialidad" required="true" />
+                        <p:outputLabel value="Especialidad" for="especialidad" />
+                        <p:inputText maxlength="70" id="especialidad" value="#{agenteViewController.agente1.especialidad}" title="Especialidad" required="true" />
                         <p:message for="especialidad" /> 
 
                         <p:commandButton onclick="rc()" oncomplete="PF('dregistrar').hide()" update=":formd:wizardtarea:advancedfiltro :form:tabview1:advancedfiltroa" value="Crear" />

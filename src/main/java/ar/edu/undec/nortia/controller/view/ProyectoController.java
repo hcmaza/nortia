@@ -48,6 +48,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -2378,5 +2379,14 @@ public class ProyectoController implements Serializable {
         System.out.println("fffffffffffff4fffffffffff");
         return "Avance";
      }
+     
+     // muestro en un dialog la ideaproyecto 
+     public void mostrarDialogIdeaProyecto() {
+        Map<String,Object> options = new HashMap<String, Object>();
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("modal", true);
+        RequestContext.getCurrentInstance().openDialog("viewideaproyectoreporte", options, null);
+    }
 
 }
