@@ -19,6 +19,89 @@
         <h:outputScript name="js/layout.js" library="adamantium-layout" />
 
         <ui:insert name="head" />
+        
+        <script type="text/javascript">
+            function indicador()
+            {
+                this.cfg.seriesDefaults.rendererOptions = {
+                    label: '%',
+                    //diameter: 100,
+                    //labelPosition: 'bottom',
+                    //labelHeightAdjust: -5,
+                    padding: 0,
+                    pad: 0,
+                    min: 0,
+                    max: 100,
+                    //intervalOuterRadius: 50,
+                    intervalColors:['#21B2CE', '#9C4DAD', '#FF964A', '#5ACB73', '#CE4131', '#DED7A5']
+                };
+            }
+            
+            function torta()
+            {
+                //this.cfg.title = "zxc";
+                this.cfg.grid = {
+                    backgroundColor: 'transparent', 
+                    drawBorder: false, 
+                    shadow: false
+                };
+            }
+            
+            function ejecutadofecha()
+            {
+                this.cfg.grid = {
+                    backgroundColor: 'transparent', 
+                    drawBorder: false, 
+                    shadow: false
+                };
+                //this.cfg.title = "zxc";
+                this.cfg.AxisTickRenderer = {
+                    //show: false,
+                    showLabel: false,
+                    showMark: false
+                };
+                this.cfg.AxisLabelRenderer = {
+                    show: false,
+                    showLabel: false,
+                    label: ''
+                };
+                this.cfg.axesDefaults = {
+                    show: false,
+                    showTickMarks: false
+                };
+                
+                // asdjasdl
+                this.cfg.axesDefaults.tickOptions = {
+                    //show: false
+                    showLabel: false
+                };
+                
+                this.cfg.axes.xaxis = {
+                  renderer: $.jqplot.CategoryAxisRenderer  
+                };
+            }
+            
+            function tortaPresupuesto()
+            {
+                this.cfg.seriesDefaults.rendererOptions = {
+                    diameter: 160,
+                    showDataLabels: true,
+                };
+            }
+            
+            function keyupDelay(request, cfg, delay) {
+                delay = delay || 800; // si no se especifica el delay, por default es 1s
+                
+                console.log("DELAYYYY");
+                
+                setTimeout(function() {
+                    cfg.onstart = null;
+                    request.send(cfg)
+                }, delay);
+                return false;
+            }
+            
+        </script>
     </h:head>
 
     <h:body>

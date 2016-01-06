@@ -70,15 +70,8 @@
                                     <h:outputText value="Financiamiento" />
                                 </f:facet>                                                
                                 <h:outputText value="#{item.fuentefinanciamientoid.fuentefinanciamiento}"/>
-                            </p:column>                    
-
-<!--                            <p:column id="columnaConvocatoria" filterBy="{item.convocatoriaid}" filterMatchMode="exact" filterOptions="{convocatoriaController.itemsAvailableSelectOne}" sortBy="{item.convocatoriaid.convocatoria}">
-                                <f:facet name="header">
-                                    <h:outputText value="Convocatoria" />
-                                </f:facet>                                                
-                                <h:outputText value="{item.convocatoriaid.convocatoria}"/>
-                            </p:column>-->
-
+                            </p:column>    
+                            
                             <p:column id="columnaPresupuesto" >
                                 <f:facet name="header">
                                     <h:outputText value="Presupuesto" />
@@ -98,22 +91,8 @@
                                     <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
                                 </p:commandButton>
                                 <p:commandButton icon="ui-icon-pencil" action="#{proyectoController.prepareEdit}" ajax="false" />
-                                <!--                                <p:commandButton id="selectButton" update=":formDialogoProyecto:verProy" oncomplete="PF('verProyecto').show()" icon="ui-icon-search" title="Ver">
-                                                                    <f:setPropertyActionListener value="{item}" target="{proyectoController.selected}" />
-                                                                </p:commandButton>
-                                                                <p:commandButton id="selectButton" update=":formDialogoProyecto:verProy" oncomplete="PF('verProyecto').show()" icon="ui-icon-search" title="Editar">
-                                                                    <f:setPropertyActionListener value="{item}" target="{proyectoController.selected}" />
-                                                                </p:commandButton>                                -->
                             </p:column>    
 
-                            <!--                            <p:column>
-                                                            <f:facet name="header">
-                                                                <h:outputText value="&nbsp;"/>
-                                                            </f:facet>
-                                                            <p:commandLink action="{proyectoController.prepareView}" value="Ver" ajax="false" />
-                                                            <h:outputText value=" "/>
-                                                            <p:commandLink action="{proyectoController.prepareEdit}" value="Editar" ajax="false" />
-                                                        </p:column>-->
                         </p:dataTable>
                     </h:panelGroup>
 
