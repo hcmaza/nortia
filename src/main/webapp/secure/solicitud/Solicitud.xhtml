@@ -93,13 +93,13 @@
 
                                                                 <p:separator rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
 
-                                                                <p:panelGrid id="pgcomitente" styleClass="sinBordes sinFondo" style="width: 100%;" >
+                                                                <p:panelGrid id="pgcomitente" styleClass="sinBordes sinFondo" style="width: 100%; margin-top: 10px;" >
                                                                     <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}">
-                                                                        <p:column><p:outputLabel style="font-weight:bold;" value="Tipo"/></p:column>
-                                                                        <p:column><p:outputLabel style="font-weight:bold;" value="Contacto"/></p:column>
-                                                                        <p:column><p:outputLabel style="font-weight:bold;" value="Cargo del Contacto"/></p:column>
-                                                                        <p:column><p:outputLabel style="font-weight:bold;" value="Sector" /></p:column>
-                                                                        <p:column></p:column>
+                                                                        <p:column styleClass="BoldGrayBack" ><p:outputLabel style="font-weight:bold; color: white; " value="Tipo"/></p:column>
+                                                                        <p:column styleClass="BoldGrayBack" ><p:outputLabel style="font-weight:bold; color: white; " value="Contacto"/></p:column>
+                                                                        <p:column styleClass="BoldGrayBack" ><p:outputLabel style="font-weight:bold; color: white; " value="Cargo del Contacto"/></p:column>
+                                                                        <p:column styleClass="BoldGrayBack" ><p:outputLabel style="font-weight:bold; color: white; " value="Sector" /></p:column>
+                                                                        <p:column styleClass="BoldGrayBack" ></p:column>
                                                                     </p:row>
                                                                     <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}">
                                                                         <p:column>
@@ -140,15 +140,15 @@
 
                                             <p:fieldset legend="Responsable Técnico" style="margin-bottom:5px">
                                                 <!-- RESPONSABLE TECNICO -->
-                                                <p:panelGrid id="pagente" columns="7"  styleClass="sinBordes sinFondo" style="width: 100%;" >  
+                                                <p:panelGrid id="pagente" columns="7" columnClasses="BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack" styleClass="sinBordes sinFondo" style="width: 100%;" >  
 
-                                                    <p:outputLabel style="font-weight:bold;" value="Apellido"/>
-                                                    <p:outputLabel style="font-weight:bold;" value="Nombres"/>
-                                                    <p:outputLabel style="font-weight:bold;" value="Documento"/>
-                                                    <p:outputLabel style="font-weight:bold;" value="Profesion"/>
-                                                    <p:outputLabel style="font-weight:bold;" value="Especialidad"/>                            
-                                                    <p:outputLabel style="font-weight:bold;" value="Email"/>
-                                                    <p:outputLabel style="font-weight:bold;" value="Dependencia"/>
+                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Apellido"/>
+                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Nombres"/>
+                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Documento"/>
+                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Profesion"/>
+                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Especialidad"/>                            
+                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Email"/>
+                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Dependencia"/>
                                                     <p:outputLabel value="#{agenteController.selected.apellido}" title="Apellido" />
                                                     <p:outputLabel value="#{agenteController.selected.nombres}" title="Nombres" />
                                                     <p:outputLabel value="#{agenteController.selected.tipodocumentoid.tipodocumento} - #{agenteController.selected.numerodocumento}" title="Tipo de Documento" rendered="#{not empty agenteController.selected.tipodocumentoid.tipodocumento}"/>
@@ -487,70 +487,27 @@
                                                     <f:facet name="header">
                                                         Equipo de Trabajo de la Idea-Proyecto
                                                     </f:facet>
-                                                    <p:column styleClass="center">
+                                                    <p:column styleClass="TexAlCenter">
                                                         <f:facet name="header">
                                                             <h:outputText value="Cuil"/>
                                                         </f:facet>
                                                         <h:outputText value="#{agentea.agente.cuil}"/>
                                                     </p:column>
-                                                    <p:column>
+                                                    <p:column styleClass="TexAlCenter">
                                                         <f:facet name="header">
                                                             <h:outputText value="Nombre y Apellido"/>
                                                         </f:facet>
                                                         <h:outputText value="#{agentea.agente.apellido}, #{agentea.agente.nombres}"/>
                                                     </p:column>
-                                                    <!--                                    <p:column>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Email"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText value="{agentea.agente.email}"/>
-                                                                                        </p:column>
                                                     
-                                                                                        <p:column>
-                                                                                            <f:facet name="header">
-                                                                                                <h:outputText value="Profesion"/>
-                                                                                            </f:facet>
-                                                                                            <h:outputText value="{agentea.agente.profesion}"/>
-                                                                                        </p:column>-->
-                                                    <p:column styleClass="center">
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Dedicación" style="font-weight: bold;" title="Ingrese las horas dedicadas al proyecto por semana." />
-                                                        </f:facet>
-                                                        <p:cellEditor>
-                                                            <f:facet name="output">
-                                                                <h:outputText id="horasdedicacion" value="#{agentea.horasdisponibles} hs/semana" title="Horas que va a dedicar el agente al proyecto por semana." />
-                                                                <p:tooltip id="toolTipHorasDedicacion" for="horasdedicacion" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                            <f:facet name="input">
-                                                                <p:inputText id="ihorasdisponibles" value="#{agentea.horasdisponibles}" maxlength="2" size="2"  title="Horas que va a dedicar el agente al proyecto por semana." />
-                                                                <p:tooltip id="toolTipInputHorasDedicacion" for="ihorasdisponibles" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                        </p:cellEditor>
-                                                    </p:column>
-
-                                                    <p:column styleClass="text-align: center" >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Participación" style="font-weight: bold;" title="Click e indique si el agente es consultor externo." />
-                                                        </f:facet>
-                                                        <p:cellEditor>
-                                                            <f:facet name="output"> 
-                                                                <h:outputLabel  id="ssconsultorexterno" value="#{agentea.consultorexterno eq 'TRUE' ? 'Consultor':'Docente'}"  /> 
-                                                            </f:facet>
-                                                            <f:facet name="input">
-                                                                <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="#{agentea.consultorexterno}" >
-                                                                    <p:ajax update="@this :formprincipal:tabviewTodo:agentesa" />
-                                                                </p:selectBooleanButton>
-                                                            </f:facet>    
-                                                        </p:cellEditor>
-                                                    </p:column>    
-
-                                                    <p:column >
+                                                    <p:column styleClass="TexAlCenter" >
                                                         <f:facet name="header">
                                                             <h:outputText value="Función en el Proyecto" style="font-weight: bold;" title="Ingrese la función del agente en el proyecto." />
                                                         </f:facet>
                                                         <p:cellEditor>
                                                             <f:facet name="output">
-                                                                <h:outputLabel id="outputfuncion" value="#{agentea.funcionproyecto}" title="Función a cumplir por el agente en el proyecto." />
+                                                                <!--<h:outputLabel id="outputfuncion" value="# {agentea.funcionproyecto}" title="Función a cumplir por el agente en el proyecto." />-->
+                                                                <p:inputText id="outputfuncion" value="#{agentea.funcionproyecto}" title="Función que va cumplir el agente en el proyecto." />
                                                                 <p:tooltip id="toolTipOutputFuncion" for="outputfuncion" showEvent="focus" hideEvent="blur" />
                                                             </f:facet>
                                                             <f:facet name="input">
@@ -559,6 +516,43 @@
                                                             </f:facet>
                                                         </p:cellEditor>
                                                     </p:column>   
+                                                   
+                                                    <p:column styleClass="TexAlCenter" style="vertical-align: middle;" >
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Participación" style="font-weight: bold;" title="Click e indique si el agente es consultor externo." />
+                                                        </f:facet>
+                                                        <p:cellEditor>
+                                                            <f:facet name="output">
+                                                                <p:selectBooleanCheckbox  id="ssconsultorexterno" value="#{agentea.consultorexterno}" style="width:20px; " />
+                                                                <h:outputLabel  id="labelConsultorexterno" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  /> 
+                                                            </f:facet>
+                                                            <f:facet name="input">
+<!--                                                            <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="# {agentea.consultorexterno}"  >
+                                                                    <p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />
+                                                                </p:selectBooleanButton>-->
+                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="#{agentea.consultorexterno}" style="width:20px; " >
+                                                                    <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion" oncomplete="$(function(){PrimeFaces.focus(':formprincipal:tabviewTodo:horasdedicacion');});"  />
+                                                                </p:selectBooleanCheckbox>
+                                                                <h:outputLabel  id="labelConsultorexterno2" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"  style="font-size: 18px; " /> 
+                                                            </f:facet>    
+                                                        </p:cellEditor>
+                                                    </p:column>   
+                                                    <p:column styleClass="TexAlCenter">
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="Ingrese las horas dedicadas al proyecto por semana." />
+                                                        </f:facet>
+                                                        <p:cellEditor>
+                                                            <f:facet name="output">
+                                                                <!--<h:outputText id="horasdedicacion" value="# {agentea.horasdisponibles}" title="Horas que va a dedicar el agente al proyecto por semana." />-->
+                                                                <p:inputText id="horasdedicacion" value="#{agentea.horasdisponibles}" disabled="#{agentea.consultorexterno eq 'FALSE'}" maxlength="2" size="2"  title="Horas que va a dedicar el agente al proyecto por semana." />
+                                                                <p:tooltip id="toolTipHorasDedicacion" for="horasdedicacion" showEvent="focus" hideEvent="blur" />
+                                                            </f:facet>
+                                                            <f:facet name="input">
+                                                                <p:inputText id="ihorasdisponibles" value="#{agentea.horasdisponibles}" disabled="#{agentea.consultorexterno eq 'FALSE'}" maxlength="2" size="2"  title="Horas que va a dedicar el agente al proyecto por semana." />
+                                                                <p:tooltip id="toolTipInputHorasDedicacion" for="ihorasdisponibles" showEvent="focus" hideEvent="blur" />
+                                                            </f:facet>
+                                                        </p:cellEditor>
+                                                    </p:column>
 
                                                     <p:column>
                                                         <f:facet name="header">
