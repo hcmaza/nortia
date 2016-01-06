@@ -7,9 +7,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
        
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
             <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
 <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
 <script src="#{request.contextPath}/resources/js/exporting.js"></script>
@@ -29,7 +29,7 @@
               
             <h:form id="form" >
                 
-                <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" toggleable="true" collapsed="true" toggleTitle="Descripcion del Proyecto" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;" >
+                <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" toggleable="true" collapsed="true" toggleTitle="Descripcion del Proyecto"  >
                                     <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
                        
 
@@ -262,9 +262,9 @@
                         </h:panelGrid>
                     </p:panel>
                 
-                <p:separator style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;" />
+                <p:separator  />
                 
-                <p:tabView id="tabview1" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;" >
+                <p:tabView id="tabview1"  >
                         <p:tab id="panelequipo" title="Equipo de Trabajo" >
                               
                 
@@ -414,7 +414,7 @@
                         <br />
                         <p:panel id="contenedor" header="Gantt" toggleable="true" collapsed="true" toggleTitle="Ver Gantt"  >
     
-                                <div id="containergrafico"  style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;" >
+                                <div id="containergrafico"   >
 
 
                                </div>
@@ -507,7 +507,7 @@
               
               <!-- containergrafico -->
               <br />
-               <p:panel id="resumenequipo" header="Resumen del Equipo de trabajo" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;" >
+               <p:panel id="resumenequipo" header="Resumen del Equipo de trabajo"  >
                    <p:dataTable id="tresumenequipo" value="#{etapaController.paprincipal}" var="resumenagentes"  >
                                     
                                     <p:columnGroup type="header">
@@ -683,7 +683,7 @@
         }
     }
 </script>
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 
 </html>

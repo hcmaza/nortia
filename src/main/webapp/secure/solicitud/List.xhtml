@@ -6,14 +6,14 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
 
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
             <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
             <f:event type="preRenderView" listener="#{proyectoController.buscarProyectosAgenteFalse(agenteController.selected.id)}" ></f:event>
 
             <h:form >
-                <p:panel id="pprincipal" header="Lista de Ideas-Proyecto" style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;">
+                <p:panel id="pprincipal" header="Lista de Ideas-Proyecto" >
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
@@ -146,7 +146,7 @@
 
 
             </h:form>
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 
 </html>

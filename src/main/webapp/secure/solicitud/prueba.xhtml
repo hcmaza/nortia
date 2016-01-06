@@ -9,15 +9,15 @@
         <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
     </h:head>
     
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
 
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
             <h:form>
                 <h1>Prueba: Dialogo [Toma 4 - 0kkkk] - En Dialogos</h1>
         
                 <p:commandButton value="Dialogo Worksss!" actionListener="#{dialogosController.dialogo()}" />
             </h:form>
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 </html>
 

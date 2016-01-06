@@ -12,7 +12,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>PrimeFaces Adamantium - Responsive Layout</title>
+        <title>Nortia</title>
         
         <h:outputScript name="js/ripple-effect.js" library="adamantium-layout" />
         <h:outputScript name="js/perfect-scrollbar.js" library="adamantium-layout" />
@@ -35,7 +35,7 @@
             
             <div class="Container100 TexAlCenter Gray FontAdamantiumRegular">
                 <div class="EmptyBox30"></div>
-                PrimeFaces Adamantium Theme And Layout | All rights reserved.
+                Nortia - Universidad Nacional de Chilecito | All rights reserved.
             </div>
 
         </div>
@@ -49,6 +49,19 @@
                 <h:outputText value="" />
             </f:facet>
         </p:ajaxStatus>
+        
+        <h:form id="formabout">
+            <p:dialog id="dabout" widgetVar="dabout" header="Acerca de ..." closable="true" >
+                <p:graphicImage value="/resources/img/vinculacionTecnologica.png" />
+                <!--  <p:gmap zoom="15" type="hybrid" center="-29.156567,-67.470834" style="width: 400px;height: 200px" /> -->
+                Version 1.0
+                <br />
+                Copyright 2014-#{utilidades.anoActual}, The Wolberg, Leguiza, Paez Yañez, Cruz, Maza - Development Team
+                <br />
+                This Software is realeased under the The Wolberg, Leguiza, Paez Yañez, Cruz, Maza.
+            </p:dialog>
+        </h:form>
+
 
         <h:outputStylesheet name="css/core-layout.css" library="adamantium-layout" />
         <h:outputStylesheet name="css/animate.css" library="adamantium-layout" />

@@ -4,7 +4,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
     
     
     <!-- TOPBAR START -->
@@ -22,13 +23,13 @@
         
         <ul id="top-menu">
             <li>
-                <a class="menulink Animated05"><i class="icon-search"></i> <span>Search</span></a>
+                <a class="menulink Animated05"><i class="icon-search"></i> <span>Buscar</span></a>
                 <ul style="margin-left:-150px;">
                     <li><span class="PadWithBorder10 DispBlock"><p:inputText placeholder="Search here" styleClass="Wid60"/> <p:button icon="fa fa-search" styleClass="Fright"/></span></li>
                 </ul>
             </li>
             <li>
-                <a class="menulink Animated05"><i class="icon-chat"></i> <span>Messages</span></a>
+                <a class="menulink Animated05"><i class="icon-chat"></i> <span>Mensajes</span></a>
                 <ul style="margin-left:-130px;">
                     <li><a href="#"><i class="icon-comment-alt2-stroke Fs18 Blue Fright"></i> <span class="FontAdamantiumBold">Clark Davenport</span><br/><span class="Fs12">Hi, How is going ?</span></a></li>
                     <li><a href="#"><i class="icon-comment-alt2-stroke Fs18 Red Fright"></i> <span class="FontAdamantiumBold">Jack Sparrow</span><br/><span class="Fs12">Test Results</span></a></li>
@@ -37,7 +38,7 @@
                 </ul>
             </li>
             <li>
-                <a class="menulink Animated05"><i class="icon-calendar"></i> <span>Calendar</span></a>
+                <a class="menulink Animated05"><i class="icon-calendar"></i> <span>Calendario</span></a>
                 <ul style="margin-left:-135px;">
                     <li><a href="#"><i class="icon-alarmclock Fs18 Red Fright"></i> <span class="FontAdamantiumBold">Meeting With John</span><br/><span class="Fs12">13:30 - 18.08.2015</span></a></li>
                     <li><a href="#"><i class="icon-alarmclock Fs18 Red Fright"></i> <span class="FontAdamantiumBold">Dinner With Boss</span><br/><span class="Fs12">14:45 - 18.08.2015</span></a></li>
@@ -46,7 +47,7 @@
                 </ul>
             </li>
             <li>
-                <a class="menulink Animated05"><i class="icon-alarm animated swing infinite"></i> <span>Alerts</span></a>
+                <a class="menulink Animated05"><i class="icon-alarm animated swing infinite"></i> <span>Alertas</span></a>
                 <ul style="margin-left:-155px;">
                     <li><a href="#"><i class="icon-cd Fs20 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Reports Exported</span><br/><span class="Fs12">Recorded To File System</span></a></li>
                     <li><a href="#"><i class="icon-cd Fs20 Red Fright"></i> <span class="FontAdamantiumBold Red">Bug Alert</span><br/><span class="Fs12">SportX Tools</span></a></li>
@@ -54,16 +55,50 @@
                     <li><a href="#"><i class="icon-cd Fs20 Orange Fright"></i> <span class="FontAdamantiumBold Orange">Download Completed</span><br/><span class="Fs12">SportX Tools</span></a></li>
                 </ul>
             </li>
+            <c:if test="#{request.isUserInRole('Administrador')}" >
             <li>
-                <a class="menulink Animated05"><i class="icon-settings"></i> <span>Settings</span></a>
-                <ul style="margin-left:-145px;">
-                    <li><a href="#"><i class="icon-brightness Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Brightness</span></a></li>
-                    <li><a href="#"><i class="icon-users Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Accounts</span></a></li>
-                    <li><a href="#"><i class="icon-attachment Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Attachments</span></a></li>
-                    <li><a href="#"><i class="icon-lock-stroke Fs18 Fleft MarRight10"></i> <span class="FontAdamantiumBold"> Log Out System</span></a></li>
-                </ul>
+                <a class="menulink Animated05"><i class="icon-settings"></i> <span>Configuración</span></a>
+                <ul>
+                     <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/agente/List.xhtml'><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Agente</span></a></li>  
+                     <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/beneficiario/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Beneficiario</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/comitente/List.xhtml'  ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Comitente</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/convocatoria/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Convocatoria</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/dependencia/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Dependencia</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/evaluacion/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Evaluacion</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/pregunta/List.xhtml'  ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Preguntas</span></a></li>  
+                     <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoevaluacion/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Tipos de Evaluación</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/fuentefinanciamiento/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Fuente de Financiamiento</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/perfil/List.xhtml'  ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Perfil</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/rubro/List.xhtml'  ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Rubro</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/sector/List.xhtml'  ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Sector</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipodocumento/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Tipo de Documento</span></a></li>  
+                     <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipofinanciamiento/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Tipo de Financiamiento</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/usuario/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Usuarios</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoentidad/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Tipo de Entidad</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoproyecto/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Tipo de Proyecto</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/avanceproyecto/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Avance de Proyecto</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tiposolicitud/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Tipo de Solicitud</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/estadosolicitud/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Estado de Solicitud</span></a></li>  
+                    <li><a href='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/vehiculo/List.xhtml' ><i class="icon-cd Fs14 Blue Fright"></i> <span class="FontAdamantiumBold Blue">Vehículo</span></a></li>  
+                      
+                
+                     
+                </ul>  
+            </li>
+          </c:if>
+            <li>
+                <span>
+        <h:form>
+        <p:splitButton value="Bienvenido, #{request.getUserPrincipal()}" icon="fa fa-slideshare" styleClass="Fleft">
+            <p:menuitem value="Mi Cuenta" icon="fa fa-cogs" url="#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/micuenta/Edit.xhtml" />
+                        <p:menuitem value="Log Out" icon="fa fa-close" actionListener="#{usuarioController.logout()}" />
+                        
+                    </p:splitButton> 
+        </h:form>
+                </span>
             </li>
         </ul>
+        
     </div>
     <!-- TOPBAR END -->
     

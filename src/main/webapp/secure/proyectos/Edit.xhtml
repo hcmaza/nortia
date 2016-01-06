@@ -7,9 +7,9 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="/WEB-INF/template.xhtml">
        
-        <ui:define name="body">
+        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
             <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
 <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
 <script src="#{request.contextPath}/resources/js/exporting.js"></script>
@@ -32,7 +32,7 @@
 
                 <p:tooltip/>
 
-                <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" toggleable="true" collapsed="true" toggleTitle="Descripcion del Proyecto" style="margin-bottom: 5px; width: 950px; margin: 0 auto; overflow: hidden;" >
+                <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" toggleable="true" collapsed="true" toggleTitle="Descripcion del Proyecto"  >
                     <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
 
 
@@ -267,7 +267,7 @@
 
                 </p:panel>
 
-                <p:panel header="Elaborar Proyecto" style="width: 950px; margin: 0 auto 5px; overflow: hidden;" >
+                <p:panel header="Elaborar Proyecto"  >
 
                     <p:tabView id="tabview1" >
 
@@ -513,7 +513,7 @@
                             <br />
                             <p:panel id="contenedor" header="Gantt" toggleable="true" collapsed="true" toggleTitle="Ver Gantt"  >
 
-                                <div id="containergrafico"  style="padding: 0px; width: 950px; margin: 0 auto; overflow: hidden;" >
+                                <div id="containergrafico"   >
 
 
                                 </div>
@@ -1277,7 +1277,7 @@
                     }
                 }
             </script>
-        </ui:define>
+        </div>         </div>         </ui:define>
     </ui:composition>
 
 </html>
