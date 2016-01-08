@@ -78,6 +78,9 @@ public class Etapa implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "resultadoesperado")
     private String resultadoesperado;
+    @Size(max = 2147483647)
+    @Column(name = "resultadoobtenido")
+    private String resultadoobtenido;
 
     public Etapa() {
     }
@@ -160,6 +163,15 @@ public class Etapa implements Serializable {
     public void setResultadoesperado(String resultadoesperado) {
         this.resultadoesperado = resultadoesperado;
     }
+
+    public String getResultadoobtenido() {
+        return resultadoobtenido;
+    }
+
+    public void setResultadoobtenido(String resultadoobtenido) {
+        this.resultadoobtenido = resultadoobtenido;
+    }
+    
     
     
 

@@ -2354,15 +2354,12 @@ public class ProyectoController implements Serializable {
      public String prepareAvance(){
          
           current = (Proyecto) getItems().getRowData();
-        System.out.println("fffffffffffff1fffffffffff");
         FacesContext context = FacesContext.getCurrentInstance();
         EtapaController etapacontroller = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
-        System.out.println("ffffffffffff2ffffffffffff");
         etapacontroller.setEtapas(this.ejbetapa.findByProyecto(current));
         //etapacontroller.agregaralListadoEtapas();
-        etapacontroller.prepareEditarListadoEtapas();
+        etapacontroller.prepareAvanceListadoEtapas();
         etapacontroller.agentesProyecto();
-        System.out.println("ffffffffffffff3ffffffffff");
         //proyecto Agente
         ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
 
@@ -2388,5 +2385,43 @@ public class ProyectoController implements Serializable {
         options.put("modal", true);
         RequestContext.getCurrentInstance().openDialog("viewideaproyectoreporte", options, null);
     }
+     
+     public void mostrarDialogProyecto() {
+        Map<String,Object> options = new HashMap<String, Object>();
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("modal", true);
+        RequestContext.getCurrentInstance().openDialog("viewproyectoreporte", options, null);
+    }
+     
+    //preparo la vista del proyecto 
+    public String prepareViewEtapa() {
+        current = (Proyecto) getItems().getRowData();
+        System.out.println("fffffffffffff1fffffffffff");
+        FacesContext context = FacesContext.getCurrentInstance();
+        EtapaController etapacontroller = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
+        System.out.println("ffffffffffff2ffffffffffff");
+        etapacontroller.setEtapas(this.ejbetapa.findByProyecto(current));
+        //etapacontroller.agregaralListadoEtapas();
+        etapacontroller.prepareEditarListadoEtapas();
+        etapacontroller.agentesProyecto();
+        System.out.println("ffffffffffffff3ffffffffff");
+        //proyecto Agente
+        ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
+
+        proyectoagentecontroller.setEquipotrabajo(ejbproyectoagente.buscarEquipoTrabajo(current.getId()));
+        ArchivoproyectoController archivoproyectoController = (ArchivoproyectoController) context.getApplication().evaluateExpressionGet(context, "#{archivoproyectoController}", ArchivoproyectoController.class);
+        archivoproyectoController.findporProyectoEdit(current.getId());
+
+        etapacontroller.agentesProyecto();
+
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+
+        presupuestotareacontroller.armarPresupuestoNodos();
+
+        System.out.println("fffffffffffff4fffffffffff");
+        return "viewproyectoreporte";
+    }
+
 
 }

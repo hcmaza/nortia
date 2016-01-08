@@ -1,5 +1,6 @@
 package ar.edu.undec.nortia.controller.view;
 
+import ar.edu.undec.nortia.controller.EtapaFacade;
 import ar.edu.undec.nortia.model.Tareaavance;
 import ar.edu.undec.nortia.controller.view.util.JsfUtil;
 import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
@@ -23,6 +24,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "tareaavanceController")
 @SessionScoped
@@ -35,6 +37,8 @@ public class TareaavanceController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Tareaavance> tareasavancesdeproyecto = new ArrayList<Tareaavance>() ;
+    @EJB
+    private EtapaFacade ejbetapa;
     
     public TareaavanceController() {
     }
@@ -247,4 +251,21 @@ public class TareaavanceController implements Serializable {
         current = tav;
     }
     
+    public void enviarInformeAvance(){
+        
+        try{
+            Etapa e = new Etapa();
+            e=this.current.getTareaid().getEtapaid();
+            e.setEstado("Terminada");
+            ejbetapa.edit(e);
+            
+            RequestContext.getCurrentInstance().execute("PF('dfinal').show()");
+            this.current=null;
+        
+        
+        //faltaaaaaaaaaaaaaaaaaaaaa
+        }catch(Exception e){
+            System.out.println("Error"+e);
+        }
+    }
 }

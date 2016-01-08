@@ -610,6 +610,13 @@ public class EtapaController implements Serializable {
             t.setFechainicio(etapa.getFechainicio());
             t.setFechafin(etapa.getFechafin());
             t.setDias(etapa.getDias());
+            
+            if(etapa.getEstado()==null){
+            }else{
+                if(etapa.getEstado().equals("Terminada")){
+                    t.setEstado(-1);
+                }
+            }
             TreeNode et = new DefaultTreeNode(t, root);
             et.setExpanded(true);
             for (Tarea tarea : etapa.getTareaList()) {
@@ -786,5 +793,47 @@ public class EtapaController implements Serializable {
     public void onTreeNodeUnselect(NodeUnselectEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Unselected", event.getTreeNode().toString());
         FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    //para avance
+    public void prepareAvanceListadoEtapas() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        TareaController tareacontroller = (TareaController) context.getApplication().evaluateExpressionGet(context, "#{tareaController}", TareaController.class);
+
+        int contardias = 0;
+        Date mindia = new Date("2999/12/12");
+        Date maxdia = new Date("2001/01/01");
+        root = new DefaultTreeNode(new Tarea(), null);
+        root.setExpanded(true);
+
+        for (Etapa etapa : etapas) {
+            Tarea t = new Tarea();
+            t.setTarea(etapa.getEtapa());
+            t.setFechainicio(etapa.getFechainicio());
+            t.setFechafin(etapa.getFechafin());
+            t.setDias(etapa.getDias());
+            
+            if(etapa.getEstado()==null){
+            }else{
+                if(etapa.getEstado().equals("Terminada")){
+                    t.setEstado(-1);
+                }
+            }
+            TreeNode et = new DefaultTreeNode(t, root);
+            et.setExpanded(true);
+            for (Tarea tarea : etapa.getTareaList()) {
+                if(etapa.getEstado()==null){
+                }else{
+                    if(tarea.getEtapaid().getEstado().equals("Terminada")){
+                        tarea.setEstado(-1);
+                    }
+                }
+                TreeNode tar = new DefaultTreeNode(tarea, et);
+            }
+            crearChart();
+            current = null;
+            tareacontroller.setTareasdeproyecto(null);
+        }
+
     }
 }

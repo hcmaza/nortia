@@ -5,53 +5,32 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core" >
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition template="/WEB-INF/template.xhtml">
-
+       
         <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
             <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
-            <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
-            <script src="#{request.contextPath}/resources/js/exporting.js"></script>
+<script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
+<script src="#{request.contextPath}/resources/js/exporting.js"></script>
             <f:event type="preRenderView" listener="#{presupuestoController.findProyecto(proyectoController.selected.id)}" />
-            <f:event type="preRenderView" listener="#{presupuestoController.sumarGastosView()}" />
+            <f:event type="preRenderView" listener="#{presupuestoController.sumarGastosEdit}" />
+           
+            
+ <h:form id="form" >
 
-            <!--     <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
-                  
-            <p:dialog modal="true" widgetVar="statusDialog" header="Espere Por Favor"   
-                    draggable="false" closable="false"> 
-                <div align="center">
-                    <p:graphicImage value="/resources/img/ajaxloadingbar.gif" /> 
-                </div>
-            </p:dialog>  -->
-
-
-            <h:form id="form" >
-
+              
                 <p:tooltip/>
 
                 <p:commandButton value="Idea Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogIdeaProyecto()}">
         
     </p:commandButton>
-                <p:panel header="Elaborar Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
+                <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
 
                     <p:tabView id="tabview1" >
 
                         <p:tab id="panelequipo" title="Equipo de Trabajo" >
-                                                                        <h:panelGrid columns="4">
-                                                <p:outputLabel style="font-weight: bold" value="Ingrese N° de Documento / Cuil " ></p:outputLabel>
-                                                <p:selectOneMenu  id="advancedfiltroa" value="#{agenteViewController.selected}" filter="true" filterMatchMode="contains"    >
-                                                    <!--<p:ajax update="@this, agregaraequipo" />-->
-                                                    <p:ajax update="agregaraequipo" />
-                                                    <f:selectItems value="#{agenteViewController.itemsAvailableSelectOne}"  />
-
-                                                </p:selectOneMenu> 
-
-                                                <h:panelGrid columns="6" id="agenteselecciona" >
-                                                    <p:commandButton title="Agregar al Equipo de Trabajo de la Idea-Proyecto" icon="ui-icon-plus" id="agregaraequipo" immediate="true" update="agentesa" action="#{proyectoAgenteController.agregarEquipo}" disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}" />
-                                                    <p:commandButton title="Nueva Persona" icon="ui-icon-person" onclick="PF('dregistrar').show();" />
-                                                </h:panelGrid>
-                                            </h:panelGrid>
+                                                          
 
                                             <div align="center">
                                                 <p:dataTable id="agentesa" value="#{proyectoAgenteController.equipotrabajo}" 
@@ -79,17 +58,10 @@
                                                         <f:facet name="header">
                                                             <h:outputText value="Función en el Proyecto" style="font-weight: bold;" title="Ingrese la función del agente en el proyecto." />
                                                         </f:facet>
-                                                        <p:cellEditor>
-                                                            <f:facet name="output">
-                                                                <!--<h:outputLabel id="outputfuncion" value="# {agentea.funcionproyecto}" title="Función a cumplir por el agente en el proyecto." />-->
-                                                                <p:inputText id="outputfuncion" value="#{agentea.funcionproyecto}" title="Función que va cumplir el agente en el proyecto." />
+                                                        
+                                                                <h:outputText id="outputfuncion" value="#{agentea.funcionproyecto}" title="Función que va cumplir el agente en el proyecto." />
                                                                 <p:tooltip id="toolTipOutputFuncion" for="outputfuncion" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                            <f:facet name="input">
-                                                                <p:inputText id="ifuncion" value="#{agentea.funcionproyecto}" title="Función que va cumplir el agente en el proyecto." />
-                                                                <p:tooltip id="toolTipInputFuncion" for="ifuncion" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                        </p:cellEditor>
+                                                          
                                                     </p:column>   
                                                    
                                                     
@@ -97,65 +69,32 @@
                                                         <f:facet name="header">
                                                             <h:outputText value="Participación" style="font-weight: bold;" title="Click e indique si el agente es consultor externo." />
                                                         </f:facet>
-                                                        <p:cellEditor>
-                                                            <f:facet name="output">
-                                                                <p:selectBooleanCheckbox  id="ssconsultorexterno" value="#{agentea.consultorexterno}" style="width:20px; " />
-                                                                <h:outputLabel  id="labelConsultorexterno" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  /> 
-                                                            </f:facet>
-                                                            <f:facet name="input">
-<!--                                                            <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="# {agentea.consultorexterno}"  >
-                                                                    <p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />
-                                                                </p:selectBooleanButton>-->
-                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="#{agentea.consultorexterno}" style="width:20px; " >
-                                                                    <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion" oncomplete="$(function(){PrimeFaces.focus(':formprincipal:tabviewTodo:horasdedicacion');});"  />
-                                                                </p:selectBooleanCheckbox>
-                                                                <h:outputLabel  id="labelConsultorexterno2" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"  style="font-size: 18px; " /> 
-                                                            </f:facet>    
-                                                        </p:cellEditor>
+                                                        <h:outputLabel  id="labelConsultorexterno" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  /> 
+                                                          
+                                                               
                                                     </p:column>   
                                                     <p:column styleClass="TexAlCenter">
                                                         <f:facet name="header">
-                                                            <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="Ingrese las horas dedicadas al proyecto por semana." />
+                                                            <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="horas dedicadas al proyecto por semana." />
                                                         </f:facet>
-                                                        <p:cellEditor>
-                                                            <f:facet name="output">
-                                                                <!--<h:outputText id="horasdedicacion" value="# {agentea.horasdisponibles}" title="Horas que va a dedicar el agente al proyecto por semana." />-->
-                                                                <p:inputText id="horasdedicacion" value="#{agentea.horasdisponibles}" disabled="#{agentea.consultorexterno eq 'TRUE'}" maxlength="2" size="2"  title="Horas que va a dedicar el agente al proyecto por semana." />
+                                                       
+                                                                <h:outputText id="horasdedicacion" value="#{agentea.horasdisponibles}" title="Horas que va a dedicar el agente al proyecto por semana." />
                                                                 <p:tooltip id="toolTipHorasDedicacion" for="horasdedicacion" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                            <f:facet name="input">
-                                                                <p:inputText id="ihorasdisponibles" value="#{agentea.horasdisponibles}" disabled="#{agentea.consultorexterno eq 'TRUE'}" maxlength="2" size="2"  title="Horas que va a dedicar el agente al proyecto por semana." />
-                                                                <p:tooltip id="toolTipInputHorasDedicacion" for="ihorasdisponibles" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                        </p:cellEditor>
+                                                            
                                                     </p:column>
                                                     <p:column styleClass="TexAlCenter">
                                                         <f:facet name="header">
-                                                            <h:outputText value="Honorario * mes" style="font-weight: bold;" title="Ingrese el monto a cobrar por mes en concepto de honorarios." />
+                                                            <h:outputText value="Honorario * mes" style="font-weight: bold;" title="Honorarios." />
                                                         </f:facet>
-                                                        <p:cellEditor>
-                                                            <f:facet name="output">
-                                                                
-                                                                <p:inputText id="honorario" value="#{agentea.honorario}" disabled="#{agentea.consultorexterno eq 'FALSE'}" maxlength="8" size="8"  title="Honorario que el Consultor Externo cobra" />
+                                                              
+                                                                <h:outputText id="honorario" value="#{agentea.honorario}" title="Honorario que el Consultor Externo cobra" />
                                                                 <p:tooltip id="toolTipHonorario" for="honorario" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                            <f:facet name="input">
-                                                                <p:inputText id="ihonorario" value="#{agentea.honorario}" disabled="#{agentea.consultorexterno eq 'FALSE'}" maxlength="8" size="8"  title="Honorario que el Consultor Externo cobra" />
-                                                                <p:tooltip id="toolTipInputHonorario" for="ihonorario" showEvent="focus" hideEvent="blur" />
-                                                            </f:facet>
-                                                        </p:cellEditor>
+                                                           
                                                     </p:column>
 
                                                     
                                                     
-                                                    <p:column>
-                                                        <f:facet name="header">
-                                                            <h:outputText value="&nbsp;"/>
-                                                        </f:facet>
-                                                        <p:commandButton immediate="true" id="cborrara" icon="ui-icon-trash" title="Quitar del Equipo de Trabajo" update="agentesa"  >
-                                                            <p:collector value="#{agentea}" removeFrom="#{proyectoAgenteController.equipotrabajo}" unique="true"/>
-                                                        </p:commandButton>
-                                                    </p:column>
+                                                    
                                                 </p:dataTable>
 
                                             </div>
@@ -166,7 +105,7 @@
 
                         <p:tab id="paneletapas" title="Plan de Trabajo">
 
-                            <p:commandButton id="btn_addetapa" alt="Agregar Etapa" update=":forme:etapa :forme:resultadoesperado :forme:tareasdeproyecto" icon="fa fa-plus" action="#{etapaController.rearmarEtapasProyecto}" onclick="PF('dialogoetapa').show();" immediate="true" style="margin-top: 5px; margin-bottom: 5px; " > </p:commandButton>  
+                            
 
                             <p:treeTable id="treetableetapas" value="#{etapaController.root}" var="document">
                                 
@@ -197,11 +136,9 @@
                                     </ui:repeat>
                                 </p:column>
                                 <p:column >
-                                    <p:commandButton title="Editar" rendered="#{document.estado eq null}" onclick="PF('dialogoetapa').show()" update=":forme:etapa :forme:tareasdeproyecto :forme:cetapa " action="#{etapaController.prepararEditarEtapaTreeTable(document)}" icon="ui-icon-search" immediate="true" style="margin: 3px;" />
+                                    <p:commandButton title="Ver" rendered="#{document.estado eq null}" onclick="PF('dialogoetapa').show()" update=":forme:etapa :forme:tareasdeproyecto :forme:cetapa " action="#{etapaController.prepararEditarEtapaTreeTable(document)}" icon="ui-icon-search" immediate="true" style="margin: 3px;" />
 
-                                    <p:commandButton title="Eliminar" update=":form:tabview1:treetableetapas :form:tabview1:contenedor :form:beanvalue" rendered="#{document.estado eq null}"  onclick="crearGrafico();" actionListener="#{etapaController.eliminarEtapaTreeTable(document)}" icon="ui-icon-trash" style="margin: 3px;" />
-                                </p:column>
-
+                                </p:column>  
                             </p:treeTable>
 
                             <h:commandLink>  
@@ -295,13 +232,7 @@
                             <p:fieldset legend="Archivos" >
                                 <h:panelGrid cellpadding="2" cellspacing="10" columnClasses="right,left" columns="3">    
 
-                                    <h:form id="fupload" enctype="multipart/form-data">
-                                        <p:fileUpload label="Documentacion para subir" id="documentacion" fileUploadListener="#{archivoproyectoController.handleFileUpload}" mode="advanced"  
-                                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update=":form:tabview1:tdocumentacionnombre1"   >
-
-                                        </p:fileUpload>    
-                                    </h:form>
-
+                                   
                                     <p:dataTable id="tdocumentacionnombre1" var="arc" 
                                                  value="#{archivoproyectoController.collectorArchivoProyecto}" 
                                                  rowIndexVar="indice"
@@ -324,13 +255,15 @@
                         </p:tab>
                     </p:tabView>
                 </p:panel>
+ 
+                        <br />
 
-                <div align="center" >
-                    <p:commandButton value="Enviar para evaluacion" actionListener="#{proyectoController.enviarEvaluarProyecto}" />
-                </div>
-                <br />
+                        <div align="center" >
+                            <p:commandButton value="Imprimir" actionListener="List" />
+                        </div>
+                       <br />
 
-                <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"  />
+               <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"  />
 
             </h:form>
             <h:form id="formd">
@@ -411,19 +344,6 @@
                             <!--      <div align="right" >
                                       <p:commandButton value="Agregar Persona" onclick="PF('dregistrar').show();" ></p:commandButton>
                                   </div> -->
-                            <h:panelGrid columns="3">
-                                <p:outputLabel style="font-weight: bold" value="Ingrese N° de Documento / Apellido" ></p:outputLabel>
-                                <p:selectOneMenu id="advancedfiltro" value="#{agenteViewController.selected}" filter="true" filterMatchMode="contains"   >
-                                    <p:ajax update="@this" />
-                                    <f:selectItems value="#{agenteViewController.itemsAvailableSelectOneProyectoAgente}"  />
-                                </p:selectOneMenu>
-                                <p:commandButton onclick="PF('dialogotareaagentepresupuesto').show()" value="Agregar al equipo de trabajo" update=":formd:paneltareaagentepresupuesto" actionListener="#{tareaAgenteController.armarTareaAgentePresupuesto()}"  >
-
-                                </p:commandButton>
-
-                            </h:panelGrid>
-
-
                             <p:dataTable id="tagentes" value="#{tareaAgenteController.tareasagentes}" var="tareaagente" 
                                          editable="true" editMode="cell" 
                                          rowIndexVar="indice"
@@ -474,15 +394,7 @@
 
                                 </p:column>
 
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="&nbsp;"/>
-                                    </f:facet>
-
-                                    <p:commandButton id="cborrara" immediate="true"  icon="ui-icon-trash" title="Eliminar" actionListener="#{tareaAgenteController.eliminarTareaAgente(tareaagente)}" update="tagentes :formd:wizardtarea:tabrubros"   >
-
-                                    </p:commandButton>
-                                </p:column>
+                                
                             </p:dataTable>
 
                         </p:tab>
@@ -492,7 +404,7 @@
                             <p:tabView id="tabrubros" value="#{rubroController.rubroslist}" var="rub" orientation="left"  >
                                 <p:tab title="#{rub.abreviado}" >
 
-                                    <p:commandButton rendered="#{item.rubro.id.intValue() ne 5}" id="cagregarpresupuestotarea" value="Agregar Presupuesto a la Tarea" onclick="PF('dialogopresupuesto').show()" update=":formd:wizardtarea:tabrubros :formpresupuesto:panelpresupuesto" action="#{presupuestoTareaController.reinit(rub)}" />
+                                    
 
                                     <p:dataTable id="tablepresupuestotarea" value="#{presupuestoTareaController.buscarRubroenlistaPresupuestoTarea(rub)}"  
                                                  var="item" 
@@ -528,9 +440,7 @@
                                         <p:column headerText="Total">
                                             <h:outputText value="#{item.total}"/>
                                         </p:column>
-                                        <p:column headerText="">
-                                            <p:commandButton rendered="#{item.rubro.id != 4 and (item.rubro.id != 5) }" icon="ui-icon-trash" title="Eliminar" update=":form:tabview1:tablepresupuesto :formd:wizardtarea:tabrubros" action="#{presupuestoTareaController.eliminarPresupuesto(item)}" process=":formd:wizardtarea:tabrubros" />
-                                        </p:column>
+                                        
                                         <p:columnGroup type="footer">
                                             <p:row>
                                                 <p:column footerText="Totales" />
@@ -560,83 +470,13 @@
                     <f:facet name="footer">
                         <div align="center" >
 
-                            <p:commandButton id="botontareaok" value="OK" oncomplete="PF('dtarea').hide();" actionListener="#{tareaController.armarTareasProyecto}" update=":forme:tareasdeproyecto"   ></p:commandButton>
+                            <p:commandButton id="botontareaok" value="OK" onclick="PF('dtarea').hide();" ></p:commandButton>
 
                         </div>
                     </f:facet>
 
                 </p:dialog>
-                <p:dialog id="dialogotareaagentepresupuesto" maximizable="false" modal="true" minimizable="false" header="Agente * Tarea * Presupuesto" closable="true" resizable="false" widgetVar="dialogotareaagentepresupuesto" >
-                    <p:panel id="paneltareaagentepresupuesto">
-                        <div align="center">   <p:outputLabel style="font-weight: bold" value=" Agente: #{agenteViewController.selected.cuil} - #{agenteViewController.selected.apellido}, #{agenteViewController.selected.nombres}" /> </div>
-                        <br />
-                        <h:panelGrid columns="2">
-
-                            <p:outputLabel value="Funcion en la tarea:" for="funcion" />
-
-                            <p:inputText size="100" id="funcion" value="#{tareaAgenteController.current2.funcion}" />
-                        </h:panelGrid>
-                        <br />
-                        <h:panelGrid columns="2">
-                            <p:outputLabel rendered="#{tareaAgenteController.current2.horasdedicadas > -1}" value="Horas dedicadas:" for="horasdedicadas" />
-                            <p:inputText size="10" rendered="#{tareaAgenteController.current2.horasdedicadas > -1}" id="horasdedicadas" value="#{tareaAgenteController.current2.horasdedicadas}" title="Horas Dedicadas" >
-                                <p:ajax event="keyup" listener="#{tareaAgenteController.onCellEdit()}" update=":formd:totalpresupuesto" />
-                            </p:inputText>
-                        </h:panelGrid>
-                        <br />
-                        <p:separator />
-                        <br />
-                        <div align="center" >
-                            <h:panelGrid columns="4">
-
-                                <p:outputLabel style="font-weight: bold" value="Costo unitario:" />
-                                <p:outputLabel style="font-weight: bold" id="costounitario" value="#{presupuestoTareaController.current2.costounitario}" title="Costounitario" >
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                </p:outputLabel>
-
-                                <p:outputLabel style="font-weight: bold" value="Cantidad:" for="cantidad" />
-                                <p:outputLabel style="font-weight: bold" id="cantidad" value="#{presupuestoTareaController.current2.cantidad}" title="Cantidad" >
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                </p:outputLabel>
-                            </h:panelGrid>
-                            <h:panelGrid columns="2">
-
-                                <p:outputLabel style="font-weight: 900" value="Total:" for="totalpresupuesto" />
-                                <p:outputLabel style="font-weight: 900" id="totalpresupuesto" value="$#{presupuestoTareaController.current2.total}" title="Total" >
-
-                                </p:outputLabel>
-
-                            </h:panelGrid>
-                            <br />
-                            <h:panelGrid columns="6">
-                                <p:outputLabel value="Aporte comitente:" for="aportecomitente" />
-
-                                <p:inputText size="10"  id="aportecomitente" value="#{presupuestoTareaController.current2.aportecomitente}" title="Aportecomitente" validatorMessage="Ingrese solo números"  >
-                                    <!--<f:validateDoubleRange minimum="0.00" maximum="15000000.00" />-->
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"  />
-                                </p:inputText>
-                                <p:outputLabel value="Aporte universidad:" for="aporteuniversidad" />
-                                <p:inputText size="10" id="aporteuniversidad" value="#{presupuestoTareaController.current2.aporteuniversidad}" title="Aporteuniversidad" >
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"  />
-                                </p:inputText>
-                                <p:outputLabel value="Aporte organismo:" for="aporteorganismo" />
-                                <p:inputText size="10" id="aporteorganismo" value="#{presupuestoTareaController.current2.aporteorganismo}" title="Aporteorganismo" >
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"  />
-                                </p:inputText>
-                            </h:panelGrid>
-                        </div>
-                        <br />
-                        <div align="center" >
-                            <p:commandButton id="agregaralpresupuesto" value="OK" action="#{tareaAgenteController.agregarEquipo()}"  update=":formpresupuesto:growlpresupuesto :formpresupuesto:panelpresupuesto :form:tabview1:tablepresupuesto :form:tabview1:pchartpresupuesto :form:tabview1:chartaportes :form:tabview1:chartrubros :formd:wizardtarea:tabrubros :formd:wizardtarea:tagentes " oncomplete="handleTareaAgentePresupuestoRequest(xhr, status, args)"  >
-
-                            </p:commandButton>
-
-                        </div>
-                    </p:panel>
-                </p:dialog>
+                
 
             </h:form>
 
@@ -656,10 +496,7 @@
                     <br />
                     
                     <p:fieldset legend="Tareas de la Etapa" >
-                        <p:commandButton update=":formd:wizardtarea" id="btn_add" action="#{tareaController.rearmarTareasProyecto}" onclick="PF('dtarea').show();" value="Agregar Tarea" immediate="true" style="margin-top: 5px; margin-bottom: 5px;" />  
-
-                        <br />
-
+                        
                         <p:dataTable id="tareasdeproyecto" value="#{tareaController.tareasdeproyecto}" var="item" 
                                      widgetVar="wtareasdeproyecto" >
 
@@ -709,11 +546,7 @@
 
                             <p:column exportable="false">  
 
-                                <p:commandButton id="cborrar" immediate="true" value="Eliminar" action="#{tareaController.removerTareadeProyecto}" update=":forme:tareasdeproyecto :form:beanvalue :form:tabview1:treetableetapas "  >
-                                    <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}" />
-                                </p:commandButton>
-                                <br />
-                                <p:commandButton id="ceditar" immediate="true" value="Editar" onclick="PF('dtarea').show()" update=":formd:wizardtarea" action="#{tareaController.editarTarea(item)}"  >
+                                <p:commandButton id="ceditar" immediate="true" value="Ver" onclick="PF('dtarea').show()" update=":formd:wizardtarea" action="#{tareaController.editarTarea(item)}"  >
                                     <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}" />  
                                 </p:commandButton>
                             </p:column>  
@@ -726,13 +559,12 @@
                     
                     <div align="center">
 
-                        <p:commandButton id ="cetapa" update=":form:tabview1:contenedor :form:tabview1:treetableetapas :form:beanvalue :form:tabview1:tablepresupuesto " onclick="PF('dialogoetapa').hide();
-                                crearGrafico();" value="Guardar Etapa" actionListener="#{etapaController.agregaralListadoEtapas}" />
+                        <p:commandButton id ="cetapa" onclick="PF('dialogoetapa').hide();" value="Ok" />
                     </div>
 
                 </p:dialog>
-                <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="false"  header="Plan y equipo de trabajo de Proyecto Creado" >
-                    Felicitaciones la Creación del plan y Equipo de trabajo del Proyecto fue creada Satisfactoriamente!!!
+                <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="true"  header="Plan y equipo de trabajo de Proyecto" >
+                   Plan y Equipo de trabajo del Proyecto 
                     <div align="center" >
 
                         <h:panelGrid columns="2">
@@ -746,144 +578,7 @@
 
             </h:form>
 
-            <h:form id="formresgistrar">
-                <p:dialog id="dialogoregistrar" maximizable="false" 
-                          minimizable="false"  header="Registrar Persona" closable="true"
-                          resizable="false" widgetVar="dregistrar" >
-
-
-                    <p:remoteCommand name="rc" update="msgs" actionListener="#{agenteViewController.registrar}" />
-
-                    <p:growl id="msgs" showDetail="true" />
-                    <h:panelGrid id="panel" columns="3">
-                        <p:outputLabel value="Apellido" for="apellido" />
-                        <p:inputText maxlength="30" id="apellido" value="#{agenteViewController.agente1.apellido}" title="Apellido" required="true" />
-                        <p:message for="apellido" /> 
-                        <p:outputLabel value="Nombres" for="nombres" />
-                        <p:inputText maxlength="45" id="nombres" value="#{agenteViewController.agente1.nombres}" title="Nombres" required="true" />
-                        <p:message for="nombres" /> 
-                        <p:outputLabel value="Tipo de Documento" for="tipodocumentoid" />
-                        <p:selectOneMenu id="tipodocumentoid" value="#{agenteViewController.agente1.tipodocumentoid}" title="Tipo de Documento" required="true" >
-                            <f:selectItems value="#{tipodocumentoController.itemsAvailableSelectOne}"/>
-                        </p:selectOneMenu>
-                        <p:message for="tipodocumentoid" /> 
-                        <p:outputLabel value="N° de Documento" for="numerodocumento" />
-                        <p:inputText id="numerodocumento" value="#{agenteViewController.agente1.numerodocumento}" title="Numero de Documento" required="true" />
-                        <p:message for="numerodocumento" />
-                        <p:outputLabel value="Cuil" for="cuil" />
-                        <p:inputMask id="cuil" value="#{agenteViewController.agente1.cuil}" mask="99-99999999-9"/>
-                        <p:message for="cuil" />             
-                        <p:outputLabel value="Teléfono" for="telefono" />
-                        <p:inputText id="telefono" value="#{agenteViewController.agente1.telefono}" title="Telefono" required="true" />
-                        <p:message for="telefono" /> 
-                        <p:outputLabel value="Celular" for="celular" />
-                        <p:inputText id="celular" value="#{agenteViewController.agente1.celular}" title="Celular" required="false" />
-                        <p:message for="celular" /> 
-                        <p:outputLabel value="Email" for="email" />
-                        <p:inputText id="email" value="#{agenteViewController.agente1.email}" validatorMessage="Email Incorrecto" required="true" >
-                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
-                        </p:inputText>
-                        <p:message for="email" /> 
-                        <p:outputLabel value="Otro Email" for="otroemail" />
-
-                        <p:inputText id="otroemail" value="#{agenteViewController.agente1.otroemail}" >
-                            <!--   <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" /> -->
-                        </p:inputText>   
-                        <p:message for="otroemail" /> 
-
-                        <p:outputLabel value="Domicilio" for="domicilio" />
-                        <p:inputText maxlength="200"  id="domicilio" value="#{agenteViewController.agente1.domicilio}" title="Domicilio" required="true" />
-                        <p:message for="domicilio" />
-                        <p:outputLabel value="Profesion" for="profesion" />
-                        <p:inputText maxlength="70" id="profesion" value="#{agenteViewController.agente1.profesion}" title="Profesion" required="true" />
-                        <p:message for="profesion" /> 
-                        <p:outputLabel value="Especialidad" for="especialidad" />
-                        <p:inputText maxlength="70" id="especialidad" value="#{agenteViewController.agente1.especialidad}" title="Especialidad" required="true" />
-                        <p:message for="especialidad" /> 
-
-                        <p:commandButton onclick="rc()" oncomplete="PF('dregistrar').hide()" update=":formd:wizardtarea:advancedfiltro :form:tabview1:advancedfiltroa" value="Crear" />
-                        <br />
-
-
-
-
-
-                    </h:panelGrid>
-
-
-
-
-                </p:dialog>
-
-            </h:form>
-            <h:form id="formpresupuesto">
-                <p:growl id="growlpresupuesto" showDetail="true" widgetVar="growlpresupuesto" autoUpdate="true" />
-                <p:dialog id="dialogopresupuesto" maximizable="false" 
-                          minimizable="false"  header="Presupuesto" closable="true"
-                          resizable="false" widgetVar="dialogopresupuesto" >
-                    <p:panel id="panelpresupuesto">
-
-                        <h:panelGrid columns="4">
-
-                            <p:outputLabel value="Rubro:" for="rubro" />
-
-                            <p:inputText id="rubro" readonly="true" value="#{presupuestoTareaController.selected.rubro.rubro}" />
-
-                            <p:outputLabel value="Descripcion:" for="descripcion" />
-                            <p:inputText size="50"  id="descripcion" value="#{presupuestoTareaController.selected.descripcion}" required="true" title="Descripcion" />
-                        </h:panelGrid>
-                        <h:panelGrid columns="5">
-
-                            <p:outputLabel value="Costo unitario:" for="costounitario" />
-                            <p:inputText id="costounitario" value="#{presupuestoTareaController.selected.costounitario}" title="Costounitario" >
-                                <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                <p:ajax event="keyup" listener="#{presupuestoTareaController.sumarTotalCurrent}" update="totalpresupuesto" />
-                            </p:inputText>
-                            <p:message for="costounitario"  />
-                            <p:outputLabel value="Cantidad:" for="cantidad" />
-                            <p:inputText size="10"  id="cantidad" value="#{presupuestoTareaController.selected.cantidad}" title="Cantidad" >
-                                <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                <p:ajax event="keyup" listener="#{presupuestoTareaController.sumarTotalCurrent}" update="totalpresupuesto" />
-                            </p:inputText>
-                        </h:panelGrid>
-                        <h:panelGrid columns="6">
-                            <p:outputLabel value="Aporte comitente:" for="aportecomitente" />
-
-                            <p:inputText size="10"  id="aportecomitente" value="#{presupuestoTareaController.selected.aportecomitente}" title="Aportecomitente" validatorMessage="Ingrese solo números"  >
-                                <!--<f:validateDoubleRange minimum="0.00" maximum="15000000.00" />-->
-                                <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes}"  />
-                            </p:inputText>
-                            <p:outputLabel value="Aporte universidad:" for="aporteuniversidad" />
-                            <p:inputText size="10" id="aporteuniversidad" value="#{presupuestoTareaController.selected.aporteuniversidad}" title="Aporteuniversidad" >
-                                <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes}"  />
-                            </p:inputText>
-                            <p:outputLabel value="Aporte organismo:" for="aporteorganismo" />
-                            <p:inputText size="10" id="aporteorganismo" value="#{presupuestoTareaController.selected.aporteorganismo}" title="Aporteorganismo" >
-                                <f:convertNumber type="number" groupingUsed="false" locale="es_AR" />
-                                <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes}"  />
-                            </p:inputText>
-                        </h:panelGrid>
-
-                        <h:panelGrid columns="2">
-
-                            <p:outputLabel value="Total:" for="totalpresupuesto" />
-                            <p:outputLabel id="totalpresupuesto" value="$#{presupuestoTareaController.selected.total}" title="Total" >
-
-                            </p:outputLabel>
-
-                        </h:panelGrid>
-
-                        <div align="center" >
-                            <p:commandButton id="agregaralpresupuesto" value="OK" onclick="PF('dialogopresupuesto').hide()" actionListener="#{presupuestoTareaController.agregarPresupuesto()}" update=":formpresupuesto:growlpresupuesto :formpresupuesto:panelpresupuesto :form:tabview1:tablepresupuesto :form:tabview1:pchartpresupuesto :form:tabview1:chartaportes :form:tabview1:chartrubros :formd:wizardtarea:tabrubros"  >
-
-                            </p:commandButton>
-
-                        </div>
-                    </p:panel>
-                </p:dialog>
-            </h:form>
+            
 
 
 

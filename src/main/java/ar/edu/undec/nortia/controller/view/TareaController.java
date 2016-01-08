@@ -1,5 +1,6 @@
 package ar.edu.undec.nortia.controller.view;
 
+import ar.edu.undec.nortia.controller.EtapaFacade;
 import ar.edu.undec.nortia.controller.RubroFacade;
 import ar.edu.undec.nortia.model.Tarea;
 import ar.edu.undec.nortia.controller.view.util.JsfUtil;
@@ -33,6 +34,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean(name = "tareaController")
 @SessionScoped
@@ -61,6 +63,10 @@ public class TareaController implements Serializable {
     
     @EJB
     private TareaavanceFacade ejbtareaavance; 
+    
+    @EJB
+    private EtapaFacade ejbetapa;
+    
     
     public TareaController() {
     }
@@ -503,11 +509,30 @@ public class TareaController implements Serializable {
          try{
            
               this.ejbtareaavance.edit(tareaavancecontroller.getSelected());
+              // Pregunto si la etapa de esa tarea esta completa si lo esta
+              // realizo el infome de avance de esa etapa
+              int contadortotaltareas = 0;
+              int contadortareascompletas = 0;
+              for(Tarea treal : ejbetapa.find(tareaavancecontroller.getSelected().getTareaid().getEtapaid().getId()).getTareaList()){
+                  if(ejbtareaavance.findLastDate(treal).getAvance()==100){
+                      ++contadortareascompletas;
+                      System.out.println("contadortareascompletas "+contadortareascompletas);
+                  
+                  }
+                  ++contadortotaltareas;
+                  System.out.println("contadortotaltareas "+contadortotaltareas);
+                  
+              }
+              if(contadortotaltareas==contadortareascompletas){
+                  System.out.println("igualessssssssssssssss");
+                  RequestContext.getCurrentInstance().execute("PF('dinformeavance').show()");
+                
+              }
+              //-----------------------------------
          }catch(Exception e){
              System.out.println("Error en armar tarea avance ="+e);
          }
-        tareaavancecontroller.setCurrent(null);
-        
+                
         etapacontroller.editarListadoEtapas();
        //crearChart();
        
