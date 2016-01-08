@@ -28,6 +28,8 @@
                                 </div>
                             </p:dialog>  -->
 
+<!--                            :formprincipal:tabviewTodo:pagente-->
+                            
                             <h:form id="formprincipal" enctype="multipart/form-data" >
                                 <p:growl globalOnly="true" for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
 
@@ -39,8 +41,9 @@
 
 
                                     <p:tabView id="tabviewTodo" styleClass="Fs12"> 
+                                     <!--<p:wizard id="tabviewTodo" flowListener="# {proyectoController.onFlowProcess}">-->
 
-                                        <p:tab title="Idea-Proyecto">
+                                        <p:tab id="tabideaproyecto" title="Idea-Proyecto">
 
                                             <p:inputText required="true" requiredMessage="Ingrese el nombre de la Idea-Proyecto" style="font-weight:bold;font-size:larger; "  id="nombre" value="#{proyectoController.selected.nombre}" title="Nombre de la Idea-Proyecto" placeholder="Nombre de la Idea-Proyecto" styleClass="ui-grid-col-12" />
                                             
@@ -63,7 +66,7 @@
 
                                         </p:tab>
 
-                                        <p:tab title="Comitente y Responsable">
+                                        <p:tab id="tabcomitente" title="Comitente y Responsable">
 
                                             <p:fieldset legend="Comitente" style="margin-bottom:5px">
                                                 <p:panelGrid id="pcomitente" styleClass="sinBordes sinFondo" style="width: 100%;"> 
@@ -166,7 +169,7 @@
 
                                         </p:tab>
 
-                                        <p:tab title="Documentación">
+                                        <p:tab id="tabdocumentacion" title="Documentación">
 
                                             <p:fieldset legend="Descripción de la Idea-Proyecto" style="margin-bottom:5px">
                                                 <!-- DESCRIPCIÓN -->
@@ -231,7 +234,8 @@
                                             </p:fieldset>
 
                                         </p:tab>
-                                        <p:tab title="Financiamiento y Convocatoria">
+                                         
+                                        <p:tab id="tabconvocatoria" title="Financiamiento y Convocatoria">
                                             <p:panelGrid columnClasses="right,left" styleClass="sinBordes sinFondo" style="width: 100%;">
                                                 <p:row>
                                                     <p:column>
@@ -325,7 +329,7 @@
 
                                         </p:tab>
 
-                                        <p:tab title="Presupuesto">
+                                        <p:tab id="tabpresupuesto" title="Presupuesto">
 
                                             <p:fieldset legend="Presupuesto" style="margin-bottom:5px">
 
@@ -462,7 +466,7 @@
 
                                         </p:tab>
 
-                                        <p:tab title="Equipo de Trabajo">
+                                        <p:tab id="tabequipotrabajo" title="Equipo de Trabajo">
                                             <h:panelGrid columns="4">
                                                 <p:outputLabel style="font-weight: bold" value="Ingrese N° de Documento / Cuil " ></p:outputLabel>
                                                 <p:selectOneMenu  id="advancedfiltroa" value="#{agenteViewController.selected}" filter="true" filterMatchMode="contains"    >
@@ -568,6 +572,7 @@
 
                                         </p:tab>
                                     </p:tabView>
+                                     <!--</p:wizard>-->
 
                                     <p:separator />
                                     <br />
@@ -831,6 +836,10 @@
 
                                     </h:panelGrid>
 
+                                </p:dialog>
+                                
+                                <p:dialog modal="true" widgetVar="statusDialog" header="Descargando Archivo" draggable="false" closable="false" resizable="false">
+                                    <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
                                 </p:dialog>
 
                             </h:form>

@@ -43,17 +43,22 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Rendicion.findByFecha", query = "SELECT r FROM Rendicion r WHERE r.fecha = :fecha"),
     @NamedQuery(name = "Rendicion.findByObservacion", query = "SELECT r FROM Rendicion r WHERE r.observacion = :observacion")})
 public class Rendicion implements Serializable {
+    
     @OneToMany(mappedBy = "rendicionid", cascade = CascadeType.ALL)
     private List<Archivorendicion> archivorendicionList;
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="rendicion_id_seq")
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
+    
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    
     @Size(max = 250)
     @Column(name = "observacion", length = 250)
     private String observacion;

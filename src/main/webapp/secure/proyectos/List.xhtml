@@ -125,6 +125,8 @@
                                         <p:menuitem value="Lista: Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
                                             <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
                                         </p:menuitem>
+                                        <p:menuitem value="Lista: Comprobantes Ejecutados" rendered="#{item.estadoproyectoid.id eq 12}" action="#{archivorendicionController.prepareListEjecutados}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
+                                        </p:menuitem>
                                     </c:if>
 
                                     <c:if test="#{request.isUserInRole('Docente')}" > 

@@ -58,6 +58,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -70,6 +71,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JTable;
@@ -87,6 +90,7 @@ import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -207,6 +211,10 @@ public class ProyectoController implements Serializable {
     private PresupuestoRubroFacade getFacadePresupuestoRubro() {
         return ejbpresupuestorubro;
     }
+    @PersistenceContext(unitName = "NORTIAPU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
     
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -2424,4 +2432,43 @@ public class ProyectoController implements Serializable {
     }
 
 
+     
+    /*
+     * WIZARD de ALTA DE IDEA-PROYECTO
+     */
+     
+    private boolean skip;
+
+    public boolean isSkip() {
+        return skip;
+    }
+
+    public void setSkip(boolean skip) {
+        this.skip = skip;
+    }
+     
+     /*
+     *   Metodo que maneja el flujo en el wizard de alta de idea-proyecto
+     */
+    public String onFlowProcess(FlowEvent event) {
+        if(skip) {
+            skip = false;   //reset in case user goes back
+            return "confirm";
+        }
+        else {
+            return event.getNewStep();
+        }
+    }
+
+    public void persist(Object object) {
+        try {
+            utx.begin();
+            em.persist(object);
+            utx.commit();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            throw new RuntimeException(e);
+        }
+    }
+     
 }

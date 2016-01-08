@@ -44,5 +44,20 @@ public class RendicionFacade extends AbstractFacade<Rendicion> {
             return new ArrayList<Rendicion>();
         }
     }
+    
+    public List<Rendicion> obtenerPorProyectoAprobadas(int proyectoid){
+        
+        // Estado de Solicitud >> Rendida = 6
+        
+        try {
+            Query consulta = em.createQuery("SELECT r FROM Rendicion r WHERE r.id IN (SELECT s.rendicionid.id FROM Solicitud s WHERE s.presupuestotarea.tarea.etapaid.proyectoid.id = :proyectoid AND s.estadosolicitudid.id = 6 ) ", Rendicion.class);
+            consulta.setParameter("proyectoid", proyectoid);
+            return consulta.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("RendicionFacade - obtenerPorProyectoAprobadas");
+            return new ArrayList<Rendicion>();
+        }
+    }
 
 }

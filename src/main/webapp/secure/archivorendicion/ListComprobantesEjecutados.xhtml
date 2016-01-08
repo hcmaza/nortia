@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Lista de Rendiciones"></h:outputText>
+        </ui:define>
+        <ui:define name="content">         
+            <div class="Container100">             
+                <div class="ContainerIndent">
+                    
+                    <f:event type="preRenderView" listener="#{rendicionController.obtenerPorProyecto(proyectoController.selected.id)}" ></f:event>
+
+                    <h:form id="form" styleClass="jsfcrud_list_form">
+
+                        <p:panel id="pprincipal" header="Proyecto Nº #{proyectoController.selected.id} - #{proyectoController.selected.nombre}: Lista de Rendiciones" >
+                            <p:growl id="message" autoUpdate="true" />
+
+                            <h:panelGroup >
+
+                                <p:dataTable
+                                    id="tbl" 
+                                    value="#{archivorendicionController.listaArchivos}" 
+                                    var="item" 
+                                    widgetVar="tblW"
+                                    rowKey="#{item.id}" 
+                                    emptyMessage="No se encontraron registros"
+                                    draggableColumns="true"
+                                    paginator="true"
+                                    paginatorPosition="bottom"
+                                    rows="20"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="5,10,25"                                              
+                                    rowIndexVar="indice"
+                                    rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                    styleClass="tabla">
+
+                                    <f:facet name="header">
+                                        Lista de Comprobantes
+                                    </f:facet>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechafactura}">
+                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"  />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Rendicion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.rendicionid}"/>
+                                    </p:column>
+                                    
+                                    <p:column filterBy="#{item.nrofactura}" filterMatchMode="contains">
+                                        <f:facet name="header">
+                                            <h:outputText value="Factura"/>
+                                        </f:facet>
+                                        <h:outputText value=" #{item.tipofactura} #{item.nrofactura}"/>
+                                    </p:column>
+                                    <p:column filterBy="#{item.proveedor}" filterMatchMode="contains">
+                                        <f:facet name="header">
+                                            <h:outputText value="Proveedor"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.proveedor}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.montofactura}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Monto"/>
+                                        </f:facet>
+                                        <h:outputText value="$ #{item.montofactura}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.montoaprobado}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Monto Aprobado"/>
+                                        </f:facet>
+                                        <h:outputText value="$ #{item.montoaprobado}"/>
+                                    </p:column>
+                                    
+                                    <p:column sortBy="#{item.aporteuniversidad}" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Aporte Universidad"/>
+                                        </f:facet>
+                                        <h:outputText value="$ #{item.aporteuniversidad}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.aporteorganismo}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Aporte Organismo"/>
+                                        </f:facet>
+                                        <h:outputText value="$ #{item.aporteorganismo}"/>
+                                    </p:column>
+                                    <p:column sortBy="#{item.aportecomitente}">
+                                        <f:facet name="header">
+                                            <h:outputText value="Aporte Comitente"/>
+                                        </f:facet>
+                                        <h:outputText value="$ #{item.aportecomitente}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Archivo del Comprobante"/>
+                                        </f:facet>
+                                        <p:commandButton value="Descargar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                            <p:fileDownload value="#{item.archivo}" />
+                                        </p:commandButton>
+                                    </p:column>                                    
+                                </p:dataTable>
+
+                                <p:separator/>
+                                <p:commandButton action="#{archivorendicionController.prepareCreate}" value="Nuevo Archivo de Rendición" ajax="false" />
+                                <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
+                                <p:separator/>
+
+                            </h:panelGroup>
+                        </p:panel>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":form:tbl,:form" style="float:left;" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="float: right;" />
+                        </p:confirmDialog>
+                    </h:form>
+                </div>         
+            </div>
+            
+            <script type="text/javascript">
+                function start() {
+                    PF('statusDialog').show();
+                }
+
+                function stop() {
+                    PF('statusDialog').hide();
+                }
+            </script>
+        </ui:define>
+    </ui:composition>
+
+</html>
