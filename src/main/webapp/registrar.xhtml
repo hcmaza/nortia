@@ -17,14 +17,7 @@ and open the template in the editor.
                         wregistrar.loadStep(wregistrar.cfg.steps[1], true);
                     }
          </script>
-        <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>  
-              
-        <p:dialog modal="true" widgetVar="statusDialog" header="Espere Por Favor"   
-                draggable="false" closable="false"> 
-            <div align="center">
-                <p:graphicImage value="/resources/img/ajaxloadingbar.gif" /> 
-            </div>
-        </p:dialog>  
+         
         <p:panel id="panel">
         <p:dialog id="dialogoregistrar" appendTo="@(body)" maximizable="false" visible="true" 
                   minimizable="false" modal="true" header="Registrar" closable="false"
@@ -32,7 +25,7 @@ and open the template in the editor.
             <h:form id="formresgistrar">
                 
                 <p:messages autoUpdate="true" />
-                     <p:wizard id="wregistrar" flowListener="#{usuarioController.onFlowProcess}">
+                <p:wizard id="wregistrar" flowListener="#{usuarioController.onFlowProcess}" widgetVar="wregistrar">
                          <p:tab id="Cuil" title="Cuil">
                             
                                 <p:messages />
@@ -40,7 +33,7 @@ and open the template in the editor.
                                   
                                  <p:inputText placeholder="Ingrese documento o cuil" id="cuil" value="#{usuarioController.selecteda.cuil}" />
                                   
-                                 <p:commandButton actionListener="#{usuarioController.buscarAgenteCuil(usuarioController.selecteda.cuil)}" value="Buscar" onclick="tabWizard();"  />     
+                                 <p:commandButton actionListener="#{usuarioController.buscarAgenteCuil(usuarioController.selecteda.cuil)}" value="Buscar" oncomplete="PF('wregistrar').loadStep('datospersonales',true)"  />     
                                 
                              </h:panelGrid>
                             
