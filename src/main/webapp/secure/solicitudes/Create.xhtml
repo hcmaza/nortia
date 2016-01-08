@@ -415,21 +415,21 @@
                                     <p:column headerText="Proveedor">  
                                         <h:outputText value="#{arc.proveedor}" />  
                                     </p:column> 
-                                    <p:column headerText="Archivo">  
-
+                                    
+<!--                                    <p:column headerText="Archivo">  
                                         <p:lightBox id="lighbox">
                                             <h:outputLink value="#">
-                                                <h:outputText value="#{arc.nombrearchivo}" />
+                                                <h:outputText value="# {arc.nombrearchivo}" />
                                             </h:outputLink>
 
                                             <f:facet name="inline">
-                                                <p:graphicImage value="#{archivorendicionController.obtenerImagenComprobante()}" width="400px" style="width: 300px; height: auto; display: block;" >
-                                                    <f:param name="archivo" value="#{arc.nombrearchivo}" />
+                                                <p:graphicImage value="# {archivorendicionController.obtenerImagenComprobante()}" width="400px" style="width: 300px; height: auto; display: block;" >
+                                                    <f:param name="archivo" value="# {arc.nombrearchivo}" />
                                                 </p:graphicImage>
                                             </f:facet>
                                         </p:lightBox>
-
-                                    </p:column> 
+                                    </p:column> -->
+                                    
                                     <p:column headerText="Monto">  
                                         <h:outputText value="#{arc.montofactura}" />  
                                     </p:column> 
