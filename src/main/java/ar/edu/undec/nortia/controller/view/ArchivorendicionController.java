@@ -4,6 +4,8 @@ import ar.edu.undec.nortia.model.Archivorendicion;
 import ar.edu.undec.nortia.controller.view.util.JsfUtil;
 import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
 import ar.edu.undec.nortia.controller.ArchivorendicionFacade;
+import ar.edu.undec.nortia.controller.RendicionFacade;
+import ar.edu.undec.nortia.model.Rendicion;
 import ar.edu.undec.nortia.model.Solicitud;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -25,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.event.PhaseId;
+import javax.faces.model.ArrayDataModel;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -42,6 +45,8 @@ public class ArchivorendicionController implements Serializable {
     private DataModel items = null;
     @EJB
     private ar.edu.undec.nortia.controller.ArchivorendicionFacade ejbFacade;
+    @EJB
+    private ar.edu.undec.nortia.controller.RendicionFacade ejbFacadeRendicion;
     @EJB
     private ar.edu.undec.nortia.controller.ConfiguracionFacade ejbFacadec;
     private PaginationHelper pagination;
@@ -67,6 +72,12 @@ public class ArchivorendicionController implements Serializable {
     private ArchivorendicionFacade getFacade() {
         return ejbFacade;
     }
+
+    public RendicionFacade getEjbFacadeRendicion() {
+        return ejbFacadeRendicion;
+    }
+    
+    
 
     public List<Archivorendicion> getListaArchivos() {
         if (listaArchivos == null) {
@@ -100,6 +111,15 @@ public class ArchivorendicionController implements Serializable {
     public String prepareList() {
         recreateModel();
         return "List";
+    }
+    
+    public String prepareListEjecutados(){
+        
+        obtenerArchivosRendicionEjecutados();
+        
+        System.out.println("asdasd");
+        
+        return "ListComprobantesEjecutados";
     }
 
     public String prepareView() {
@@ -431,6 +451,8 @@ public class ArchivorendicionController implements Serializable {
         } else {
             // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
             String nombreArchivo = context.getExternalContext().getRequestParameterMap().get("archivo");
+            
+            System.out.println("Nombre de Archivo >> " + nombreArchivo);
 
             for (Archivorendicion ar : getListaArchivos()) {
                 if (ar.getNombrearchivo().equals(nombreArchivo)) {
@@ -502,5 +524,43 @@ public class ArchivorendicionController implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambio.", "Valor Anterior: " + oldValue + ", Nuevo Valor:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+    }
+    
+    /*
+    * Obtenemos la lista de comprobantes de las rendiciones ejecutadas.
+    */
+    public void obtenerArchivosRendicionEjecutados(){
+        
+        System.out.println("obtenerArchivosRendicionEjecutados");
+        
+        List<Rendicion> rendiciones = new ArrayList<Rendicion>();
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+        
+        rendiciones = this.ejbFacadeRendicion.obtenerPorProyectoAprobadas(proyectocontroller.getSelected().getId());
+        
+        // inicializamos la lista de comprobantes
+        listaArchivos = new ArrayList<Archivorendicion>();
+        
+        for(Rendicion rendicion : rendiciones){
+            
+            try{
+                listaArchivos.addAll(getFacade().buscarPorRendicion(rendicion.getId()));
+            }catch(Exception e){
+                System.out.println("Excepción en obtener los comprobantes de una rendicion");
+                e.printStackTrace();
+            }
+        }
+        
+        for(Archivorendicion ac : listaArchivos){
+            System.out.println("Comprobante >> " + ac.getNrofactura());
+        }
+        
+        // items = a la lista de comprobantes de todas las rendiciones ejecutadas
+        //items = new ArrayDataModel<Archivorendicion>(comprobantes.toArray(new Archivorendicion[comprobantes.size()]));
+        
+        
+        
     }
 }

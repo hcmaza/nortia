@@ -78,6 +78,15 @@ public class Archivorendicion implements Serializable {
     @Column(name = "montoaprobado")
     private BigDecimal montoaprobado;
     
+    @Column(name = "aporteuniversidad")
+    private BigDecimal aporteuniversidad;
+    
+    @Column(name = "aporteorganismo")
+    private BigDecimal aporteorganismo;
+    
+    @Column(name = "aportecomitente")
+    private BigDecimal aportecomitente;
+    
     @Column(name = "estado")
     private Integer estado;
     
@@ -178,6 +187,31 @@ public class Archivorendicion implements Serializable {
     public void setMontoaprobado(BigDecimal montoaprobado) {
         this.montoaprobado = montoaprobado;
     }
+
+    public BigDecimal getAporteuniversidad() {
+        return aporteuniversidad;
+    }
+
+    public void setAporteuniversidad(BigDecimal aporteuniversidad) {
+        this.aporteuniversidad = aporteuniversidad;
+    }
+
+    public BigDecimal getAporteorganismo() {
+        return aporteorganismo;
+    }
+
+    public void setAporteorganismo(BigDecimal aporteorganismo) {
+        this.aporteorganismo = aporteorganismo;
+    }
+
+    public BigDecimal getAportecomitente() {
+        return aportecomitente;
+    }
+
+    public void setAportecomitente(BigDecimal aportecomitente) {
+        this.aportecomitente = aportecomitente;
+    }
+ 
 
     public Integer getEstado() {
         return estado;
