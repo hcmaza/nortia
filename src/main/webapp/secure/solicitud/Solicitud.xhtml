@@ -19,14 +19,6 @@
                     <div class="Card ">
                         <div class="ui-fluid">
                             <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
-                            
-                            <!--<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();"/>-->  
-
-<!--                            <p:dialog modal="true" widgetVar="statusDialog" header="Espere Por Favor" draggable="false" closable="false" responsive="true"> 
-                                <div align="center">
-                                    <p:graphicImage value="/resources/img/ajaxloadingbar.gif" /> 
-                                </div>
-                            </p:dialog>  -->
 
 <!--                            :formprincipal:tabviewTodo:pagente-->
                             
@@ -140,26 +132,60 @@
                                                 </p:panelGrid>
                                             </p:fieldset>
 
-
                                             <p:fieldset legend="Responsable Técnico" style="margin-bottom:5px">
                                                 <!-- RESPONSABLE TECNICO -->
-                                                <p:panelGrid id="pagente" columns="7" columnClasses="BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack, BoldGrayBack" styleClass="sinBordes sinFondo" style="width: 100%;" >  
-
-                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Apellido"/>
-                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Nombres"/>
-                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Documento"/>
-                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Profesion"/>
-                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Especialidad"/>                            
-                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Email"/>
-                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Dependencia"/>
-                                                    <p:outputLabel value="#{agenteController.selected.apellido}" title="Apellido" />
-                                                    <p:outputLabel value="#{agenteController.selected.nombres}" title="Nombres" />
-                                                    <p:outputLabel value="#{agenteController.selected.tipodocumentoid.tipodocumento} - #{agenteController.selected.numerodocumento}" title="Tipo de Documento" rendered="#{not empty agenteController.selected.tipodocumentoid.tipodocumento}"/>
-                                                    <p:outputLabel value="#{agenteController.selected.profesion}" title="Profesion" />
-                                                    <p:outputLabel value="#{agenteController.selected.especialidad}" title="Especialidad" />                            
-                                                    <p:outputLabel value="#{agenteController.selected.email}" title="Email" />
-                                                    <p:outputLabel value="#{agenteController.selected.dependenciaid.dependencia}" title="Dependencia" />
+                                                
+                                                <p:panelGrid id="pagente" style="width: 100%;" >  
+                                                    <p:row styleClass="BoldGrayBack">
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Apellido"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Nombres"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Documento"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Profesion"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Especialidad"/>                            
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Email"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Dependencia"/>
+                                                        </p:column>
+                                                    </p:row>
+                                                    
+                                                    <p:row>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.apellido}" title="Apellido" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.nombres}" title="Nombres" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.tipodocumentoid.tipodocumento} - #{agenteController.selected.numerodocumento}" title="Tipo de Documento" rendered="#{not empty agenteController.selected.tipodocumentoid.tipodocumento}"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.profesion}" title="Profesion" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.especialidad}" title="Especialidad" />                            
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.email}" title="Email" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.dependenciaid.dependencia}" title="Dependencia" />
+                                                        </p:column>
+                                                       
+                                                    </p:row>
                                                 </p:panelGrid>       
+                                                
                                                 <p:separator />
 
                                                 <!--<p:commandButton onclick="dagenteeditar.show()" type="button" value="Editar Responsable Técnico" />-->                                 
@@ -339,8 +365,9 @@
                                                              rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
                                                              styleClass="tabla"
                                                              >
-                                                    <!-- <p:ajax process="@this" partialSubmit="true" update="@this, :formprincipal:caportes" event="cellEdit"  listener="{presupuestoRubroController.sumarGastos}" /> -->
+                                                    <!-- Edicion de los valores del presupuesto -->
                                                     <p:ajax event="cellEdit" listener="#{presupuestoRubroController.sumarGastos}" update=":formprincipal:tabviewTodo:caportes,:formprincipal:tabviewTodo:crubros,:formprincipal:growlprincipal, :formprincipal:tabviewTodo:tpresupuestototales" />  
+
                                                     <f:facet name="header">
                                                         Armar el Presupuesto de la Idea-Proyecto
                                                     </f:facet>
@@ -629,7 +656,7 @@
                                             <f:selectItems value="#{dependenciaController.itemsAvailableSelectOne}"/>
                                         </p:selectOneMenu>
 
-                                        <p:commandButton ajax="true" action="#{agenteController.solograbar()}" value="Editar" oncomplete="dagenteeditar.hide()" update=":formprincipal:tabviewTodo:pagente" />
+                                        <p:commandButton ajax="true" action="#{agenteController.solograbar()}" value="Editar" oncomplete="PF('dagenteeditar').hide();" update=":formprincipal:tabviewTodo:pagente" />
 
 
                                     </p:panelGrid>
@@ -836,10 +863,6 @@
 
                                     </h:panelGrid>
 
-                                </p:dialog>
-                                
-                                <p:dialog modal="true" widgetVar="statusDialog" header="Descargando Archivo" draggable="false" closable="false" resizable="false">
-                                    <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
                                 </p:dialog>
 
                             </h:form>
