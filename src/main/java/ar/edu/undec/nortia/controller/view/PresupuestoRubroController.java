@@ -301,13 +301,6 @@ public class PresupuestoRubroController implements Serializable {
 
     public void sumarGastos(CellEditEvent event) {
 
-//        Object oldValue = event.getOldValue();  
-//        Object newValue = event.getNewValue();  
-//           DataTable s = (DataTable) event.getSource();
-        // MyEntity d = (MyEntity) s.getRowData();
-        
-        System.out.println("PresupuestoRubroController - sumarGastos ajsdjkaskdjka");
-        
         System.out.println("PresupuestoRubroController - sumarGastos - presupuestosrubros: " + presupuestosrubros.size());
         
         if (presupuestosrubros == null) {
@@ -377,13 +370,28 @@ public class PresupuestoRubroController implements Serializable {
         pieModelRubro.setSliceMargin(5);
         pieModelRubro.setShowDataLabels(true);
         pieModelRubro.setExtender("tortaPresupuesto");
-                // RequestContext.getCurrentInstance().update(s.getClientId(FacesContext.getCurrentInstance()) +  ":" + event.getRowIndex() +  ":isAutomatic");
+        
+        // RequestContext.getCurrentInstance().update(s.getClientId(FacesContext.getCurrentInstance()) +  ":" + event.getRowIndex() +  ":isAutomatic");
         //  RequestContext.getCurrentInstance().update(":tpresupuesto:" + event.getRowIndex() +  ":total");
         //               System.out.println("gggggggggggggggggggggggggggggg");
-//                  UIData table = (UIData) event.getComponent();
-//                    String updateClientId = table.getClientId() + ":" + table.getRowIndex() + ":total";
-//                    FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(updateClientId);
+        //                  UIData table = (UIData) event.getComponent();
+        //                    String updateClientId = table.getClientId() + ":" + table.getRowIndex() + ":total";
+        //                    FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(updateClientId);
         
+        
+        // actualizacion de la tabla
+        System.out.println("Actualizamos la Tabla [INICIO]");
+        //RequestContext.getCurrentInstance().update(":formprincipal:tabviewTodo:tpresupuesto");
+        
+        DataTable s = (DataTable) event.getSource();
+        
+        RequestContext.getCurrentInstance().update(
+            s.getClientId(FacesContext.getCurrentInstance()) +
+            ":" + event.getRowIndex() +
+            ":totalRubro"
+        );
+        
+        System.out.println("Actualizamos la Tabla [FIN]");
 
     }
 

@@ -358,88 +358,101 @@
                                         <p:tab id="tabpresupuesto" title="Presupuesto">
 
                                             <p:fieldset legend="Presupuesto" style="margin-bottom:5px">
+                                                
+                                                <p:outputPanel id="totalRubro">
 
-                                                <p:dataTable id="tpresupuesto" value="#{presupuestoRubroController.presupuestosrubros}"  
-                                                             var="item" editable="true" editMode="cell" style="width:100%;" 
-                                                             rowIndexVar="indice" 
-                                                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             styleClass="tabla"
-                                                             >
-                                                    <!-- Edicion de los valores del presupuesto -->
-                                                    <p:ajax event="cellEdit" listener="#{presupuestoRubroController.sumarGastos}" update=":formprincipal:tabviewTodo:caportes,:formprincipal:tabviewTodo:crubros,:formprincipal:growlprincipal, :formprincipal:tabviewTodo:tpresupuestototales" />  
+                                                    <p:dataTable id="tpresupuesto" value="#{presupuestoRubroController.presupuestosrubros}"  
+                                                                 var="item" editable="true" editMode="cell" style="width:100%;" 
+                                                                 rowIndexVar="indice" 
+                                                                 rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                                 styleClass="tabla"
+                                                                 >
+                                                        <!-- Edicion de los valores del presupuesto -->
+                                                        <p:ajax event="cellEdit" listener="#{presupuestoRubroController.sumarGastos}" 
+                                                                update="totalRubro, 
+                                                                :formprincipal:tabviewTodo:caportes, 
+                                                                :formprincipal:tabviewTodo:crubros,
+                                                                :formprincipal:growlprincipal, 
+                                                                :formprincipal:tabviewTodo:tpresupuestototales" />  
 
-                                                    <f:facet name="header">
-                                                        Armar el Presupuesto de la Idea-Proyecto
-                                                    </f:facet>
-                                                    <p:column style="width:20%" styleClass="center">
                                                         <f:facet name="header">
-                                                            <h:outputText value="Rubro"/>
+                                                            Armar el Presupuesto de la Idea-Proyecto
                                                         </f:facet>
-                                                        <h:outputText style="width:96%;" value="#{item.rubro.abreviado}" />
-                                                    </p:column>
+                                                        <p:column style="width:20%" styleClass="center">
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Rubro"/>
+                                                            </f:facet>
+                                                            <h:outputText style="width:96%;" value="#{item.rubro.abreviado}" />
+                                                        </p:column>
 
-                                                    <p:column style="width:20%; " >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
-                                                        </f:facet>
-                                                        <p:cellEditor>  
-                                                            <f:facet name="output">
-                                                                <h:outputText value="$ #{item.gastoorganismo}" style="float: right;">
+                                                        <p:column style="width:20%; " >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                            </f:facet>
+                                                            <p:cellEditor>  
+                                                                <f:facet name="output">
+                                                                    <h:outputText value="$ #{item.gastoorganismo}" style="float: right;">
+                                                                        <f:convertNumber pattern="#0.00" />
+                                                                    </h:outputText>
+                                                                </f:facet>  
+                                                                <f:facet name="input">
+                                                                    <p:inputText style="width:96%; " id="gastoorganismo" value="#{item.gastoorganismo}" >
+                                                                        <p:ajax event="change" update="tpresupuesto, totalRubro " />
+                                                                        <p:ajax event="blur" update="tpresupuesto, totalRubro"  />
+                                                                    </p:inputText>
+                                                                </f:facet> 
+                                                            </p:cellEditor> 
+                                                        </p:column>
+
+                                                        <p:column style="width:20%;" >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                            </f:facet>
+                                                            <p:cellEditor >  
+                                                                <f:facet name="output">
+                                                                    <h:outputText value="$ #{item.gastocomitente}" style="float: right;" >
+                                                                        <f:convertNumber pattern="#0.00" />
+                                                                    </h:outputText>
+                                                                </f:facet>  
+                                                                <f:facet name="input">
+                                                                    <p:inputText style="width:96%; " id="gastocomitente" value="#{item.gastocomitente}">
+                                                                        <p:ajax event="change" update="tpresupuesto, totalRubro " />
+                                                                        <p:ajax event="blur" update="tpresupuesto, totalRubro"  />
+                                                                    </p:inputText>
+                                                                </f:facet> 
+                                                            </p:cellEditor>  
+
+                                                        </p:column>
+
+                                                        <p:column style="width:20%;" >
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Aporte Universidad" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                            </f:facet>
+                                                            <p:cellEditor>  
+                                                                <f:facet name="output">
+                                                                    <h:outputText value="$ #{item.gastouniversidad}" style="float: right;" >
+                                                                        <f:convertNumber pattern="#0.00" />
+                                                                    </h:outputText>
+                                                                </f:facet>  
+                                                                <f:facet name="input">
+                                                                    <p:inputText style="width:96%; " id="gastouniversidad" value="#{item.gastouniversidad}" >
+                                                                        <p:ajax event="change" update="tpresupuesto, totalRubro " />
+                                                                        <p:ajax event="blur" update="tpresupuesto, totalRubro"  />
+                                                                    </p:inputText>
+                                                                </f:facet>  
+                                                            </p:cellEditor> 
+                                                        </p:column>
+
+                                                        <p:column headerText="Totales Rubros" style="width:20%;"  >
+                                                                <h:outputText value="$ #{item.total}" style="float: right;" >
                                                                     <f:convertNumber pattern="#0.00" />
                                                                 </h:outputText>
-                                                            </f:facet>  
-                                                            <f:facet name="input">
-                                                                <p:inputText style="width:96%; " id="gastoorganismo" value="#{item.gastoorganismo}" >
-                                                                    <p:ajax event="change" update="totalRubro" />
-                                                                </p:inputText>
-                                                            </f:facet> 
-                                                        </p:cellEditor> 
-                                                    </p:column>
+                                                        </p:column>
 
-                                                    <p:column style="width:20%;" >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
-                                                        </f:facet>
-                                                        <p:cellEditor >  
-                                                            <f:facet name="output">
-                                                                <h:outputText value="$ #{item.gastocomitente}" style="float: right;" >
-                                                                    <f:convertNumber pattern="#0.00" />
-                                                                </h:outputText>
-                                                            </f:facet>  
-                                                            <f:facet name="input">
-                                                                <p:inputText style="width:96%; " id="gastocomitente" value="#{item.gastocomitente}">
-                                                                    <p:ajax event="change" update="totalRubro" />
-                                                                </p:inputText>
-                                                            </f:facet> 
-                                                        </p:cellEditor>  
-
-                                                    </p:column>
-
-                                                    <p:column style="width:20%;" >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Aporte Universidad" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
-                                                        </f:facet>
-                                                        <p:cellEditor>  
-                                                            <f:facet name="output">
-                                                                <h:outputText value="$ #{item.gastouniversidad}" style="float: right;" >
-                                                                    <f:convertNumber pattern="#0.00" />
-                                                                </h:outputText>
-                                                            </f:facet>  
-                                                            <f:facet name="input">
-                                                                <p:inputText style="width:96%; " id="gastouniversidad" value="#{item.gastouniversidad}" >
-                                                                    <p:ajax event="change" update="totalRubro" />
-                                                                </p:inputText>
-                                                            </f:facet>  
-                                                        </p:cellEditor> 
-                                                    </p:column>
-
-                                                    <p:column headerText="Totales Rubros" style="width:20%;"  >
-                                                        <p:outputLabel id="totalRubro" value="$ #{item.total}" style="float: right;" >
-                                                            <f:convertNumber pattern="#0.00" />
-                                                        </p:outputLabel>
-                                                    </p:column>
-
-                                                </p:dataTable> 
+                                                    </p:dataTable> 
+                                                
+                                                </p:outputPanel> 
+                                                
 
                                                 <p:dataTable id="tpresupuestototales" value="#{presupuestoRubroController.presupuestosrubros}"  
                                                              var="item" rows="1" 
