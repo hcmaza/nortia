@@ -380,7 +380,7 @@ public class PresupuestoRubroController implements Serializable {
         
         
         // actualizacion de la tabla
-        System.out.println("Actualizamos la Tabla [INICIO]");
+    
         //RequestContext.getCurrentInstance().update(":formprincipal:tabviewTodo:tpresupuesto");
         
         DataTable s = (DataTable) event.getSource();
@@ -389,10 +389,18 @@ public class PresupuestoRubroController implements Serializable {
             s.getClientId(FacesContext.getCurrentInstance()) +
             ":" + event.getRowIndex() +
             ":totalRubro"
+            //":tabviewTodo:formTabPresupuesto:tpresupuesto"
         );
-        
-        System.out.println("Actualizamos la Tabla [FIN]");
 
+
+    }
+    
+    public void actualizarTabla(){
+        
+        System.out.println("actualizarTabla [inicio]");
+        RequestContext.getCurrentInstance().update(":tabviewTodo:formTabPresupuesto:tpresupuesto");
+        System.out.println("actualizarTabla [fin]");
+        
     }
 
     public void onCellEdit(CellEditEvent event) {
