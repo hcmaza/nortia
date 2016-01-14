@@ -300,7 +300,7 @@ public class PresupuestoRubroController implements Serializable {
     }
 
     public void sumarGastos(CellEditEvent event) {
-
+    
         System.out.println("PresupuestoRubroController - sumarGastos - presupuestosrubros: " + presupuestosrubros.size());
         
         if (presupuestosrubros == null) {
@@ -383,14 +383,16 @@ public class PresupuestoRubroController implements Serializable {
     
         //RequestContext.getCurrentInstance().update(":formprincipal:tabviewTodo:tpresupuesto");
         
-        DataTable s = (DataTable) event.getSource();
+//        DataTable s = (DataTable) event.getSource();
+//        
+//        RequestContext.getCurrentInstance().update(
+//            s.getClientId(FacesContext.getCurrentInstance()) +
+//            ":" + event.getRowIndex() +
+//            ":totalRubro"
+//            //":tabviewTodo:formTabPresupuesto:tpresupuesto"
+//        );
         
-        RequestContext.getCurrentInstance().update(
-            s.getClientId(FacesContext.getCurrentInstance()) +
-            ":" + event.getRowIndex() +
-            ":totalRubro"
-            //":tabviewTodo:formTabPresupuesto:tpresupuesto"
-        );
+        //actualizarTabla();
 
 
     }
