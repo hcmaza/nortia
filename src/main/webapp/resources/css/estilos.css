@@ -1,0 +1,27 @@
+/*
+
+Estilo para PanelGrid Sin Bordes
+.ui-panelgrid-sinbordes>*>tr,
+.ui-panelgrid-sinbordes .ui-panelgrid-cell {
+    border: none;
+}
+
+.panelgrid tbody td {
+  border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 1px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.panelgrid thead td {
+  border-color: #4B4B4B;
+  border-color: #878787 !important;
+  border-width: 1px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.sinBordes tr, .sinBordes td {
+    border: none !important;
+}*/
