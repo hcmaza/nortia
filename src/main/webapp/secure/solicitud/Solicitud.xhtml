@@ -31,8 +31,8 @@
 
                                 <div class="SeparatorFull"></div>
 
-                                <p:tabView id="tabviewTodo" styleClass="Fs12"> 
-                                    <!--<p:wizard id="tabviewTodo" flowListener="# {proyectoController.onFlowProcess}">-->
+                                <p:tabView id="tabviewTodo" styleClass="Container100 Responsive100 Fs12" > 
+                                    <!--<p:tabView id="tabviewTodo" flowListener="# {proyectoController.onFlowProcess}">-->
 
                                     <p:tab id="tabideaproyecto" title="Idea-Proyecto">
 
@@ -69,7 +69,8 @@
                                         <h:form id="formTabComitente">
 
                                             <p:fieldset legend="Comitente" style="margin-bottom:5px">
-                                                <p:panelGrid id="pcomitente" columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9"  > 
+                                                
+                                                <p:panelGrid id="pcomitente" columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9" style="border: none; "  > 
 
                                                     <p:selectOneRadio id="options" value="#{proyectoController.habilitarcomitente}"   >  
                                                         <f:selectItem itemLabel="No" itemValue="0"  />  
@@ -77,7 +78,7 @@
                                                         <p:ajax update="pcomitente" event="valueChange" />
                                                     </p:selectOneRadio>                                    
 
-                                                    <p:panel id="phabilitarcomitente" rendered="#{proyectoController.habilitarcomitente eq 1}" styleClass="Container100" >
+                                                    <p:panel id="phabilitarcomitente" rendered="#{proyectoController.habilitarcomitente eq 1}" styleClass="Container100" style="border: none; " >
                                                         <p:panelGrid columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9"  >
                                                             <p:outputLabel style="font-weight:bold;"  value="Ingrese el N° de CUIT/CUIL"  />                 
 
@@ -89,8 +90,8 @@
 
                                                         <p:separator rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
 
-                                                        <p:panelGrid id="pgcomitente" style="width: 100%; margin-top: 10px;" styleClass="ui-noborder" >
-                                                            <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}" styleClass="GreenBack White">
+                                                        <p:panelGrid id="pgcomitente" style="width: 100%; margin-top: 10px;"  styleClass="ui-noborder" >
+                                                            <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}" styleClass="SoftBlueBack White">
                                                                 <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Tipo"/></p:column>
                                                                 <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Contacto"/></p:column>
                                                                 <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Cargo del Contacto"/></p:column>
@@ -111,8 +112,7 @@
                                                                     <p:outputLabel value="#{proyectoController.selected.comitenteid.sectorid.sector}" title="Sector" rendered="#{not empty proyectoController.selected.comitenteid.sectorid.sector}"/>
                                                                 </p:column> 
                                                                 <p:column>
-
-                                                                    <p:commandButton rendered="#{proyectoController.selected.comitenteid ne null}" id="detalleComitenteBtn" value="Detalles" icon="ui-icon-search"  
+                                                                    <p:commandButton rendered="#{proyectoController.selected.comitenteid ne null}" id="detalleComitenteBtn" value="Detalles" icon="fa fa-search" styleClass="GreenButton White" style="width: auto; "  
                                                                                      onclick="PF('detallesComitente').show()" immediate="true" />  
                                                                 </p:column> 
                                                             </p:row>
@@ -123,7 +123,7 @@
 
                                                         <!--<p:commandButton value="Agregar Persona" onclick="PF('dregistrar').show();" ></p:commandButton>-->
                                                         <!--<p:commandButton value="Crear Comitente" onclick="dcomitentecrear.show()" immediate="true"  />-->
-                                                        <p:commandButton value="Crear Comitente" onclick="PF('dcomitentecrear').show();" immediate="true"  />
+                                                        <p:commandButton value="Crear Comitente" onclick="PF('dcomitentecrear').show();" immediate="true" styleClass="GreenButton" style="width: auto; "  />
 
                                                     </p:panel>
                                                 </p:panelGrid>
@@ -132,8 +132,8 @@
                                             <p:fieldset legend="Responsable Técnico" style="margin-bottom:5px">
                                                 <!-- RESPONSABLE TECNICO -->
 
-                                                <p:panelGrid id="pagente" styleClass="ui-panelgrid-sinbordes Container100" style="margin-bottom: 10px;" >  
-                                                    <p:row styleClass="GreenBack">
+                                                <p:panelGrid id="pagente" styleClass="ui-noborder Container100" style="margin-bottom: 10px;" >  
+                                                    <p:row styleClass="SoftBlueBack">
                                                         <p:column>
                                                             <p:outputLabel style="font-weight:bold; color: white; " value="Apellido"/>
                                                         </p:column>
@@ -186,7 +186,7 @@
                                                 <p:separator />
 
                                                 <!--<p:commandButton onclick="dagenteeditar.show()" type="button" value="Editar Responsable Técnico" />-->                                 
-                                                <p:commandButton value="Editar Responsable Técnico" onclick="PF('dagenteeditar').show();" immediate="true"  />
+                                                <p:commandButton value="Editar Responsable Técnico" onclick="PF('dagenteeditar').show();" immediate="true"  styleClass="GreenButton" style="width: auto; "  />
                                             </p:fieldset>
 
                                         </h:form>
@@ -352,8 +352,8 @@
                                                         <a target="_blank" href="#{conv.link}" >Link</a>
                                                     </p:column> 
                                                     <p:column headerText=" " style="width: 30px;"> 
-                                                        <p:commandButton rendered="#{convocatoriaController.selected ne null}" id="viewButton" icon="ui-icon-search"  title="Ver Detalle de Convocatoria"
-                                                                         update="@widgetVar(dconvocatoria)" oncomplete="PF('dconvocatoria').show()" styleClass="RedBack" />  
+                                                        <p:commandButton rendered="#{convocatoriaController.selected ne null}" id="viewButton" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
+                                                                         update="@widgetVar(dconvocatoria)" oncomplete="PF('dconvocatoria').show()"  />  
                                                     </p:column>                    
                                                 </p:dataTable>               
                                             </p:fieldset>
@@ -537,8 +537,8 @@
                                                 </p:selectOneMenu> 
 
                                                 <h:panelGrid columns="6" id="agenteselecciona" >
-                                                    <p:commandButton title="Agregar al Equipo de Trabajo de la Idea-Proyecto" icon="ui-icon-plus" id="agregaraequipo" immediate="true" update="agentesa" action="#{proyectoAgenteController.agregarEquipo}" disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}" />
-                                                    <p:commandButton title="Nueva Persona" icon="ui-icon-person" onclick="PF('dregistrar').show();" />
+                                                    <p:commandButton title="Agregar al Equipo de Trabajo de la Idea-Proyecto" icon="fa fa-plus" id="agregaraequipo" immediate="true" update="agentesa" action="#{proyectoAgenteController.agregarEquipo}" disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}" styleClass="GreenButton White" style="width: auto; " />
+                                                    <p:commandButton title="Nueva Persona" icon="fa fa-user-plus" onclick="PF('dregistrar').show();" styleClass="CyanButton White" style="width: auto; " />
                                                 </h:panelGrid>
                                             </p:panelGrid>
 
@@ -622,7 +622,7 @@
                                                         <f:facet name="header">
                                                             <h:outputText value="&nbsp;"/>
                                                         </f:facet>
-                                                        <p:commandButton immediate="true" id="cborrara" icon="ui-icon-trash" title="Quitar del Equipo de Trabajo" update="agentesa"  >
+                                                        <p:commandButton immediate="true" id="cborrara" icon="fa fa-trash" title="Quitar del Equipo de Trabajo" update="agentesa" styleClass="RedButton White" style="width: auto; "  >
                                                             <p:collector value="#{agentea}" removeFrom="#{proyectoAgenteController.equipotrabajo}" unique="true"/>
                                                         </p:commandButton>
                                                     </p:column>
@@ -634,12 +634,12 @@
 
                                     </p:tab>
                                 </p:tabView>
-                                <!--</p:wizard>-->
+                                <!--</p:tabView>-->
 
                                 <p:separator />
                                 <br />
                                 <div align="center">
-                                    <p:commandButton icon="ui-icon-disk" actionListener="#{proyectoController.soloCrear}"  value="Enviar Para Evaluación" update="growlprincipal"/>
+                                    <p:commandButton icon="fa fa-save" actionListener="#{proyectoController.soloCrear}"  value="Enviar Para Evaluación" update="growlprincipal" styleClass="GreenButton White" style="width: auto; "/>
                                 </div>
                             </div>
 
@@ -651,7 +651,7 @@
 
             <h:form> 
                 <p:growl globalOnly="true" for="growla" id="growla" showDetail="true" sticky="true" />
-                <p:dialog id="dagenteeditar" widgetVar="dagenteeditar" modal="true"  header="Editar Responsable Técnico" >
+                <p:dialog id="dagenteeditar" widgetVar="dagenteeditar" modal="true"  header="Editar Responsable Técnico" responsive="true" resizable="false" >
 
                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 
@@ -738,7 +738,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <br />
-                    <p:commandButton action="#{comitenteController.soloCrear()}" value="Crear" oncomplete="PF('dcomitentecrear').hide()" update=":tabviewTodo:formTabComitente:pcomitente" />
+                    <p:commandButton action="#{comitenteController.soloCrear()}" value="Crear" oncomplete="PF('dcomitentecrear').hide()" update=":tabviewTodo:formTabComitente:pcomitente" styleClass="GreenButton" style="width: auto; " />
                 </p:dialog>
             </h:form>
 
@@ -800,8 +800,8 @@
                     Idea-Proyecto fue creada Satisfactoriamente!!!
                     <div align="center" >
                         <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfIdeaProyecto()}" ajax="false"  />
-                            <p:commandButton value="OK" ajax="false" action="List" oncomplete="#{proyectoController.reiniciarValoresSolicitud}" onclick="PF('dfinal').hide();" />
+                            <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfIdeaProyecto()}" ajax="false" styleClass="CyanButton" style="width: auto; "  />
+                            <p:commandButton value="OK" ajax="false" action="List" oncomplete="#{proyectoController.reiniciarValoresSolicitud}" onclick="PF('dfinal').hide();" styleClass="GreenButton" style="width: auto; " />
                         </p:panelGrid>
                     </div>
                 </p:dialog>
@@ -902,7 +902,7 @@
                         <p:inputText maxlength="70" id="especialidad" value="#{agenteViewController.agente1.especialidad}" title="Especialidad" required="true" />
                         <p:message for="especialidad" /> 
 
-                        <p:commandButton onclick="rcRegistrar()" oncomplete="PF('dregistrar').hide()" update=":tabviewTodo:formTabEquipoTrabajo:agentesa,  :tabviewTodo:formTabEquipoTrabajo:advancedfiltroa" value="Crear" />
+                        <p:commandButton onclick="rcRegistrar()" oncomplete="PF('dregistrar').hide()" update=":tabviewTodo:formTabEquipoTrabajo:agentesa,  :tabviewTodo:formTabEquipoTrabajo:advancedfiltroa" value="Crear" styleClass="GreenButton" style="width: auto; " />
                         <br />
                     </p:panelGrid>
 

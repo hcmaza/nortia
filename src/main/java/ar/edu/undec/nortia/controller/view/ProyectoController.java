@@ -2453,7 +2453,7 @@ public class ProyectoController implements Serializable {
     public String onFlowProcess(FlowEvent event) {
         if(skip) {
             skip = false;   //reset in case user goes back
-            return "confirm";
+            return "tabequipotrabajo";
         }
         else {
             return event.getNewStep();
@@ -2470,5 +2470,6 @@ public class ProyectoController implements Serializable {
             throw new RuntimeException(e);
         }
     }
+
      
 }
