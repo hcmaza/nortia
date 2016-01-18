@@ -2470,6 +2470,18 @@ public class ProyectoController implements Serializable {
             throw new RuntimeException(e);
         }
     }
+    
+    
+    public void resetearIPValorHorasDedicadas(ProyectoAgente agente){
+        
+        System.out.println("resetearIPValorHorasDedicadas >> Consultor = " + agente.getConsultorexterno().toString() + " >> horas dedicadas = " + agente.getHorasdisponibles() );
+        
+        if(!agente.getConsultorexterno()){
+            agente.setHorasdisponibles(agente.getHorasdedicadas());
+        }
+        
+        System.out.println("resetearIPValorHorasDedicadas >> horas dedicadas = " + agente.getHorasdisponibles());
+    }
 
      
 }

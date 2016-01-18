@@ -587,17 +587,21 @@
                                                         </f:facet>
                                                         <p:cellEditor>
                                                             <f:facet name="output">
-                                                                <p:selectBooleanCheckbox  id="ssconsultorexterno" value="#{agentea.consultorexterno}" style="width:20px; " />
-                                                                <h:outputLabel  id="labelConsultorexterno" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  /> 
+                                                                <!--<p:selectBooleanCheckbox  id="ssconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " />-->
+                                                                <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="oconsultorexterno" value="#{agentea.consultorexterno}" styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"   >
+                                                                        <!--<p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />-->
+                                                                </p:selectBooleanButton>
+                                                                <!--<h:outputLabel  id="labelConsultorexterno" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  />--> 
                                                             </f:facet>
                                                             <f:facet name="input">
-                                                                <!--                                                            <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="# {agentea.consultorexterno}"  >
-                                                                                                                                    <p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />
-                                                                                                                                </p:selectBooleanButton>-->
-                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="#{agentea.consultorexterno}" style="width:20px; " >
+                                                                <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="#{agentea.consultorexterno}" 
+                                                                                       styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"  >
+                                                                    <p:ajax update="@this oconsultorexterno ihorasdisponibles horasdedicacion" listener="#{proyectoController.resetearIPValorHorasDedicadas(agentea)}"  />
+                                                                </p:selectBooleanButton>
+<!--                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " >
                                                                     <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion" oncomplete="$(function(){PrimeFaces.focus(':tabviewTodo:formTabEquipoTrabajo:horasdedicacion');});"  />
-                                                                </p:selectBooleanCheckbox>
-                                                                <h:outputLabel  id="labelConsultorexterno2" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"  style="font-size: 18px; " /> 
+                                                                </p:selectBooleanCheckbox>-->
+                                                                <!--<h:outputLabel  id="labelConsultorexterno2" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"  style="font-size: 18px; " />--> 
                                                             </f:facet>    
                                                         </p:cellEditor>
                                                     </p:column>   
