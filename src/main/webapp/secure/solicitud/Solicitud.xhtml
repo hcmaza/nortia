@@ -567,6 +567,11 @@
                                                     <p:column styleClass="TexAlCenter" >
                                                         <f:facet name="header">
                                                             <h:outputText value="Función en el Proyecto" style="font-weight: bold;" title="Ingrese la función del agente en el proyecto." />
+                                                            <br />
+                                                            <p:commandButton id="ayudaFuncion" icon="fa fa-question" styleClass="CyanButton White"  action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColFuncion')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                            <p:overlayPanel for="ayudaFuncion" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                                <h:outputText value="Ingrese la función del agente en el proyecto." />
+                                                            </p:overlayPanel>
                                                         </f:facet>
                                                         <p:cellEditor>
                                                             <f:facet name="output">
@@ -584,6 +589,11 @@
                                                     <p:column styleClass="TexAlCenter" style="vertical-align: middle;" >
                                                         <f:facet name="header">
                                                             <h:outputText value="Participación" style="font-weight: bold;" title="Click e indique si el agente es consultor externo." />
+                                                            <br />
+                                                            <p:commandButton id="ayudaParticipacion" icon="fa fa-question" styleClass="CyanButton White" action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColParticipacion')}" oncomplete="PF('wdialogoAyuda').show();"  update="dialogoAyuda" style="height: 15px; " />
+                                                            <p:overlayPanel for="ayudaParticipacion" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                                <h:outputText value="Indique si el agente es docente o consultor externo haciendo click en el botón." />
+                                                            </p:overlayPanel>
                                                         </f:facet>
                                                         <p:cellEditor>
                                                             <f:facet name="output">
@@ -608,6 +618,11 @@
                                                     <p:column styleClass="TexAlCenter">
                                                         <f:facet name="header">
                                                             <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="Ingrese las horas dedicadas al proyecto por semana." />
+                                                            <br />
+                                                            <p:commandButton id="ayudaDedicacion" icon="fa fa-question" styleClass="CyanButton White" action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColHsDedicacion')}" oncomplete="PF('wdialogoAyuda').show();"  update="dialogoAyuda" style="height: 15px; "  />
+                                                            <p:overlayPanel for="ayudaDedicacion" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                                <h:outputText value="Ingrese las horas dedicadas al proyecto por semana." />
+                                                            </p:overlayPanel>
                                                         </f:facet>
                                                         <p:cellEditor>
                                                             <f:facet name="output">
@@ -913,6 +928,12 @@
                 </p:dialog>
 
             </h:form>
+            
+            
+            <p:dialog id="dialogoAyuda" widgetVar="wdialogoAyuda" maximizable="false" minimizable="false"  
+                      header="Ayuda" closable="true" resizable="false" responsive="true"  >
+                    <h:outputText value="#{ayudaController.textoAyuda}" />
+            </p:dialog>
 
 
         </ui:define>
