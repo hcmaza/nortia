@@ -24,7 +24,7 @@
 
                         <p:dataTable 
                             id="tbl" 
-                            value="#{proyectoController.items}"  
+                            value="#{proyectoController.listaProyectos}"  
                             var="item" 
                             widgetVar="tblW"
                             rowKey="#{item.id}" 
@@ -35,7 +35,9 @@
                             rowsPerPageTemplate="10,15,30" 
                             rowIndexVar="indice"
                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                            styleClass="tabla" >
+                            styleClass="tabla"  >
+                            
+                            <!--<p:ajax event="filter" listener="# {proyectoController.onFilterIdeasProyecto}" update = "@this"/>-->
 
                             <p:column id="columnaId" sortBy="#{item.id}" width="10px" style="width: 10px;">
                                 <f:facet name="header">
@@ -58,17 +60,28 @@
                                 <h:outputText value="#{item.nombre}"/>
                             </p:column>
 
-                            <p:column id="columnaTipo" filterBy="#{item.tipoproyectoid}" filterMatchMode="exact" filterOptions="#{tipoproyectoController.itemsAvailableSelectOne}" sortBy="#{item.tipoproyectoid.tipo}">
+                            <p:column id="columnaTipo" filterBy="#{item.tipoproyectoid}" filterMatchMode="exact" sortBy="#{item.tipoproyectoid.tipo}">
                                 <f:facet name="header">
                                     <h:outputText value="Tipo" />
                                 </f:facet>                                                
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('tblW').filter()" >
+                                        <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
+                                
                                 <h:outputText value="#{item.tipoproyectoid.tipo}"/>
                             </p:column>
 
-                            <p:column id="columnaFinanciamiento" filterBy="#{item.fuentefinanciamientoid}" filterMatchMode="exact" filterOptions="#{fuentefinanciamientoController.itemsAvailableSelectOne}" sortBy="#{item.fuentefinanciamientoid.fuentefinanciamiento}">
+                            <p:column id="columnaFinanciamiento" filterBy="#{item.fuentefinanciamientoid}" filterMatchMode="exact" sortBy="#{item.fuentefinanciamientoid.fuentefinanciamiento}">
                                 <f:facet name="header">
                                     <h:outputText value="Financiamiento" />
                                 </f:facet>                                                
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('tblW').filter()" >
+                                        <f:selectItems value="#{fuentefinanciamientoController.itemsAvailableSelectOne}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
                                 <h:outputText value="#{item.fuentefinanciamientoid.fuentefinanciamiento}"/>
                             </p:column>    
                             
@@ -79,18 +92,25 @@
                                 <h:outputText id="presupuesto" value="#{proyectoController.obtenerPresupuestoTotalProyecto(item.id)}"/>
                             </p:column>
 
-                            <p:column id="columnaEstadoProyecto" filterMatchMode="exact" filterOptions="#{estadoProyectoController.itemsAvailableSelectOne}" sortBy="#{item.estadoproyectoid.estado}">
+                            <p:column id="columnaEstadoProyecto" filterMatchMode="exact" sortBy="#{item.estadoproyectoid.estado}">
                                 <f:facet name="header">
                                     <h:outputText value="Estado" />
                                 </f:facet>                        
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('tblW').filter()" >
+                                        <f:selectItems value="#{estadoProyectoController.itemsAvailableSelectOne}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
                                 <h:outputText value="#{item.estadoproyectoid.estado}"/>
                             </p:column>
 
                             <p:column style="width:4%" exportable="false">
-                                <p:commandButton icon="ui-icon-search" action="#{proyectoController.prepareView}" ajax="false">
+                                <p:commandButton icon="ui-icon-search" action="#{proyectoController.prepareView}" >
                                     <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
                                 </p:commandButton>
-                                <p:commandButton icon="ui-icon-pencil" action="#{proyectoController.prepareEdit}" ajax="false" />
+                                <p:commandButton icon="ui-icon-pencil" action="#{proyectoController.prepareEdit}"  >
+                                    <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                </p:commandButton>
                             </p:column>    
 
                         </p:dataTable>

@@ -68,6 +68,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -88,6 +89,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
@@ -165,8 +167,18 @@ public class ProyectoController implements Serializable {
     private List<TareaAgente> tareaagentesproyecto = new ArrayList<TareaAgente>();
     private List<Proyecto> tablafiltrada=null; 
     private float porcentajeConvocatoria=0.0f;
+    
+    private List<Proyecto> listaProyectos = new ArrayList<Proyecto>();
             
     public ProyectoController() {
+    }
+
+    public List<Proyecto> getListaProyectos() {
+        return listaProyectos;
+    }
+
+    public void setListaProyectos(List<Proyecto> listaProyectos) {
+        this.listaProyectos = listaProyectos;
     }
 
     public Proyecto getSelected() {
@@ -1486,6 +1498,8 @@ public class ProyectoController implements Serializable {
         recreateModel();
 
         items = new ListDataModel(getFacade().buscarProyectosAgente(false, agenteid));
+        
+        listaProyectos = getFacade().buscarProyectosAgente(false, agenteid);
     }
 
     public String enviarEditarEvaluarProyecto() {
@@ -2483,5 +2497,16 @@ public class ProyectoController implements Serializable {
         System.out.println("resetearIPValorHorasDedicadas >> horas dedicadas = " + agente.getHorasdisponibles());
     }
 
+    /*
+    * Lista de Ideas-Proyecto
+    */
+    
+    public Map<String, Object> onFilterIdeasProyecto(AjaxBehaviorEvent event) {
+       DataTable table = (DataTable) event.getSource();
+       List<Proyecto> obj =   table.getFilteredValue();
+
+       Map<String, Object>  filters = table.getFilters();
+       return filters;
+   }
      
 }

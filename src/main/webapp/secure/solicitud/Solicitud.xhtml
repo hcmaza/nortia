@@ -228,7 +228,7 @@
                                                             <p:outputLabel style="font-weight:bold;font-size:larger" value="Duración (Meses)" for="duracion" />
                                                         </p:column>
                                                         <p:column style="width: 75%;">
-                                                            <p:spinner maxlength="3" id="duracion" value="#{proyectoController.selected.duracion}" title="duracion" min="1"  />
+                                                            <p:spinner maxlength="3" id="duracion" value="#{proyectoController.selected.duracion}" title="duracion" min="1" style="width: 100px;"  />
                                                         </p:column>                                
                                                     </p:row>
                                                 </p:panelGrid>                                
@@ -351,9 +351,11 @@
                                                     <p:column headerText="Link"> 
                                                         <a target="_blank" href="#{conv.link}" >Link</a>
                                                     </p:column> 
-                                                    <p:column headerText=" " style="width: 30px;"> 
-                                                        <p:commandButton rendered="#{convocatoriaController.selected ne null}" id="viewButton" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
-                                                                         update="@widgetVar(dconvocatoria)" oncomplete="PF('dconvocatoria').show()"  />  
+                                                    <p:column headerText=" " style="width: auto;"> 
+                                                        <p:commandButton id="viewButton"  rendered="#{convocatoriaController.selected ne null}" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
+                                                                         update="@widgetVar(dconvocatoria)" oncomplete="PF('dconvocatoria').show()" >
+                                                            <f:setPropertyActionListener value="#{conv}" target="#{convocatoriaController.selected}" />
+                                                        </p:commandButton>  
                                                     </p:column>                    
                                                 </p:dataTable>               
                                             </p:fieldset>
@@ -648,6 +650,12 @@
                                                 </p:dataTable>
 
                                             </div>
+                                            
+                                            <p:separator />
+                                            <br />
+                                            <div align="center">
+                                                <p:commandButton icon="fa fa-save" actionListener="#{proyectoController.soloCrear}"  value="Enviar Para Evaluación" update="growlprincipal" styleClass="GreenButton White" style="width: auto; "/>
+                                            </div>
 
                                         </h:form>
 
@@ -655,11 +663,6 @@
                                 </p:tabView>
                                 <!--</p:tabView>-->
 
-                                <p:separator />
-                                <br />
-                                <div align="center">
-                                    <p:commandButton icon="fa fa-save" actionListener="#{proyectoController.soloCrear}"  value="Enviar Para Evaluación" update="growlprincipal" styleClass="GreenButton White" style="width: auto; "/>
-                                </div>
                             </div>
 
 
