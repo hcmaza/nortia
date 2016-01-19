@@ -311,7 +311,7 @@
                                                              paginatorPosition="bottom" paginatorAlwaysVisible="false" 
                                                              rowIndexVar="indice" 
                                                              rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             reflow="true">  
+                                                             reflow="true" styleClass="tabla tablaAjustada">  
                                                     <f:facet name="header">
                                                         Seleccionar la Convocatoria
                                                     </f:facet>
@@ -398,25 +398,25 @@
                                                     <f:facet name="header">
                                                         Armar el Presupuesto de la Idea-Proyecto
                                                     </f:facet>
-                                                    <p:column style="width:20%" styleClass="center">
+                                                    <p:column style="width:20%" >
                                                         <f:facet name="header">
                                                             <h:outputText value="Rubro"/>
                                                         </f:facet>
                                                         <h:outputText style="width:96%;" value="#{item.rubro.abreviado}" />
                                                     </p:column>
 
-                                                    <p:column style="width:20%; " >
+                                                    <p:column style="width:20%; "  >
                                                         <f:facet name="header">
                                                             <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
                                                         </f:facet>
                                                         <p:cellEditor>  
                                                             <f:facet name="output">
-                                                                <p:inputText value="#{item.gastoorganismo}" >
+                                                                <p:inputText value="$ #{item.gastoorganismo}" styleClass="TexAlRight">
                                                                     <f:convertNumber pattern="#0.00" />
                                                                 </p:inputText>
                                                             </f:facet>  
                                                             <f:facet name="input">
-                                                                <p:inputText id="gastoorganismo" value="#{item.gastoorganismo}" validatorMessage="Valor Incorrecto" >
+                                                                <p:inputText id="gastoorganismo" value="#{item.gastoorganismo}" validatorMessage="Valor Incorrecto" styleClass="TexAlRight" >
                                                                     <p:ajax event="blur" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro"   />
                                                                     <p:ajax event="change" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro "  />
                                                                 </p:inputText>
@@ -424,18 +424,18 @@
                                                         </p:cellEditor> 
                                                     </p:column>
 
-                                                    <p:column style="width:20%;" >
+                                                    <p:column style="width:20%;"  >
                                                         <f:facet name="header">
                                                             <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
                                                         </f:facet>
                                                         <p:cellEditor >  
                                                             <f:facet name="output">
-                                                                <p:inputText value="#{item.gastocomitente}">
+                                                                <p:inputText value="$ #{item.gastocomitente}" styleClass="TexAlRight">
                                                                     <f:convertNumber pattern="#0.00" />
                                                                 </p:inputText>
                                                             </f:facet>  
                                                             <f:facet name="input">
-                                                                <p:inputText id="gastocomitente" value="#{item.gastocomitente}" validatorMessage="Valor Incorrecto"  >
+                                                                <p:inputText id="gastocomitente" value="#{item.gastocomitente}" validatorMessage="Valor Incorrecto" styleClass="TexAlRight" >
                                                                     <p:ajax event="blur" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro "   />
                                                                     <p:ajax event="change" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro  "   />
                                                                 </p:inputText>
@@ -444,18 +444,18 @@
 
                                                     </p:column>
 
-                                                    <p:column style="width:20%;" >
+                                                    <p:column style="width:20%;"  >
                                                         <f:facet name="header">
-                                                            <h:outputText value="Aporte Universidad" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                            <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
                                                         </f:facet>
                                                         <p:cellEditor>  
                                                             <f:facet name="output">
-                                                                <p:inputText value="#{item.gastouniversidad}" >
+                                                                <p:inputText value="$ #{item.gastouniversidad}" styleClass="TexAlRight" >
                                                                     <f:convertNumber pattern="#0.00" />
                                                                 </p:inputText>
                                                             </f:facet>  
                                                             <f:facet name="input">
-                                                                <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" validatorMessage="Valor Incorrecto" >
+                                                                <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" validatorMessage="Valor Incorrecto" styleClass="TexAlRight" >
                                                                     <p:ajax event="blur" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro "   />
                                                                     <p:ajax event="change" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro  "   />
                                                                 </p:inputText>
@@ -463,7 +463,7 @@
                                                         </p:cellEditor> 
                                                     </p:column>
 
-                                                    <p:column headerText="Totales Rubros" style="width:20%;"  >
+                                                    <p:column headerText="Totales Rubros" style="width:20%;"   >
                                                         <h:outputText id="totalRubro" value="$ #{item.total}" style="float: right;"  >
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
@@ -475,32 +475,32 @@
                                                              var="item" rows="1" 
                                                              rowIndexVar="indice" 
                                                              rowStyleClass="#{(fn:length(presupuestoRubroController.presupuestosrubros) mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2' }"
-                                                             styleClass="tabla esconder-cabecera-columnas">
+                                                             styleClass="tabla esconder-cabecera-columnas" >
 
-                                                    <p:column style="width:20%" styleClass="center">
-                                                        <h:outputText style="width:96%; font-weight: bold;" value="Totales"/>
+                                                    <p:column style="width:20%" styleClass="TexAlCenter SoftBlueBack ">
+                                                        <h:outputText style="width:96%; font-weight: bold; color: white; " value="Totales"/>
                                                     </p:column>
 
-                                                    <p:column style="width:20%; ">
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosOrganismo()}" style="float: right; font-weight: bold;">
+                                                    <p:column style="width:20%; " styleClass="TexAlRight SoftBlueBack">
+                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosOrganismo()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </p:column>
 
-                                                    <p:column style="width:20%;">
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosComitente()}" style="float: right; font-weight: bold;">
+                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
+                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosComitente()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </p:column>
 
-                                                    <p:column style="width:20%;">
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosUniversidad()}" style="float: right; font-weight: bold;">
+                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
+                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosUniversidad()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </p:column>
 
-                                                    <p:column id="totalesRubro" style="width:20%;" >
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGeneral()}" style="float: right; font-weight: bold;">
+                                                    <p:column id="totalesRubro" style="width:20%;" styleClass="TexAlRight BlueBack" >
+                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGeneral()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </p:column>
@@ -549,7 +549,7 @@
                                                              var="agentea" editable="true" editMode="cell" 
                                                              rowIndexVar="indice" 
                                                              rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             styleClass="tabla">
+                                                             styleClass="tabla tablaAjustada">
                                                     <f:facet name="header">
                                                         Equipo de Trabajo de la Idea-Proyecto
                                                     </f:facet>

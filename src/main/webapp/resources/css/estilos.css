@@ -1,27 +1,59 @@
+
 /*
+ * datatable: se eliminan los bordes verticales
+ */
 
-Estilo para PanelGrid Sin Bordes
-.ui-panelgrid-sinbordes>*>tr,
-.ui-panelgrid-sinbordes .ui-panelgrid-cell {
-    border: none;
-}
-
-.panelgrid tbody td {
-  border-color: #4B4B4B;
+.tabla tbody td {
+  /*border-color: #4B4B4B;*/
   border-color: #878787 !important;
-  border-width: 1px !important;
+  border-width: 2px !important;
   border-left: none !important;
   border-right: none !important;
 }
 
-.panelgrid thead td {
-  border-color: #4B4B4B;
+.tabla thead td {
+  /*border-color: #4B4B4B;*/
   border-color: #878787 !important;
-  border-width: 1px !important;
+  border-width: 2px !important;
   border-left: none !important;
   border-right: none !important;
 }
 
-.sinBordes tr, .sinBordes td {
-    border: none !important;
-}*/
+/*
+ * treetable: se eliminan los bordes verticales
+ */
+
+.tablaArbol tbody td {
+  /*border-color: #4B4B4B;*/
+  border-color: #878787 !important;
+  border-width: 2px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.tablaArbol thead td {
+  /*border-color: #4B4B4B;*/
+  border-color: #878787 !important;
+  border-width: 2px !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/*
+ * datatable: columnas se ajustan al contenido
+ */
+
+.tablaAjustada.ui-datatable table, .tablaAjustada.ui-datatable-resizable table {
+    table-layout: auto !important;
+}
+
+.tablaAjustada.ui-datatable-scrollable table {
+    table-layout: fixed !important;
+}
+
+/*
+ * datatable: no muestra la cabecera de la tabla
+ */
+.esconder-cabecera-columnas table thead tr {
+    display: none;
+}
