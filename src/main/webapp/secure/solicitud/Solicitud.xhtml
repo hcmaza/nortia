@@ -654,7 +654,19 @@
                                             <p:separator />
                                             <br />
                                             <div align="center">
-                                                <p:commandButton icon="fa fa-save" actionListener="#{proyectoController.soloCrear}"  value="Enviar Para Evaluación" update="growlprincipal" styleClass="GreenButton White" style="width: auto; "/>
+                                                <!--Antes tenia actionListener-->
+                                                <p:commandButton action="#{proyectoController.soloCrear}"  
+                                                                 value="Enviar Para Evaluación" 
+                                                                 update="growlprincipal" 
+                                                                 partialSubmit="true"
+                                                                 ajax="true"
+                                                                 process=":tabviewTodo:formTabIdeaProyecto, 
+                                                                          :tabviewTodo:formTabComitente, 
+                                                                          :tabviewTodo:formTabDocumentacion, 
+                                                                          :tabviewTodo:formTabConvocatoria, 
+                                                                          :tabviewTodo:formTabPresupuesto, 
+                                                                          @this"
+                                                                 styleClass="GreenButton White" style="width: auto; " icon="fa fa-save"/>
                                             </div>
 
                                         </h:form>
