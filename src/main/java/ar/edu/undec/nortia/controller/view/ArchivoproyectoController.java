@@ -283,6 +283,10 @@ public class ArchivoproyectoController implements Serializable {
         this.collectorArchivoProyecto = collectorArchivoProyecto;
     }
     
+    public void resetearCollectorArchivoProyecto(){
+        this.collectorArchivoProyecto = null;
+    }
+    
     public void setSelected(Archivoproyecto archivoproyecto){
         current=archivoproyecto;
     }

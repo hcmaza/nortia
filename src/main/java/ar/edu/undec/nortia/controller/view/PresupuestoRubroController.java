@@ -263,6 +263,15 @@ public class PresupuestoRubroController implements Serializable {
         this.presupuestosrubros = new ArrayList<PresupuestoRubro>();
         this.init();
     }
+    
+    /*
+    *  presupuesto rubro se inicializa en el getter (!)
+    */
+    public void resetearPresupuestoRubros(){
+        this.presupuestosrubros = null;
+        resetearTotales();
+        resetearPieModels();
+   }
 
     public float getSumagastoorganismo() {
         System.out.println("getSumagastoorganismo: " +  sumagastoorganismo.toString());
@@ -297,6 +306,13 @@ public class PresupuestoRubroController implements Serializable {
 
     public void setSumatotal(BigDecimal sumatotal) {
         this.sumatotal = sumatotal;
+    }
+    
+    public void resetearTotales(){
+        sumagastoorganismo = BigDecimal.ZERO;
+        sumagastocomitente = BigDecimal.ZERO;
+        sumagastouniversidad = BigDecimal.ZERO;
+        sumatotal = BigDecimal.ZERO;
     }
 
     public void sumarGastos(CellEditEvent event) {
@@ -502,14 +518,19 @@ public class PresupuestoRubroController implements Serializable {
             pieModelRubro.setSeriesColors("21B2CE,9C4DAD,FF964A,5ACB73,CE4131,DED7A5");
             pieModelRubro.setSliceMargin(5);
             pieModelRubro.setShowDataLabels(true);
-            pieModel.setDiameter(30);
+            pieModelRubro.setDiameter(30);
 
         }
         return pieModelRubro;
     }
 
     public void setPieModelRubro(PieChartModel pieModelRubro) {
-        this.pieModelRubro = pieModel;
+        this.pieModelRubro = pieModelRubro;
+    }
+    
+    public void resetearPieModels(){
+        pieModel = null;
+        pieModelRubro = null;
     }
 
     public void soloEditar(PresupuestoRubro pr) {

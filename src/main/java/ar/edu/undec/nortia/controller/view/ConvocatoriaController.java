@@ -54,6 +54,10 @@ public class ConvocatoriaController implements Serializable {
     public void setSelected(Convocatoria convocatoria){
         current=convocatoria;
     }
+    
+    public void resetearSelected(){
+        current = null;
+    }
 
     private ConvocatoriaFacade getFacade() {
         return ejbFacade;

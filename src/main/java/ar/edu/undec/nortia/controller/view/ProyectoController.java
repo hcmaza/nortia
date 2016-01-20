@@ -174,6 +174,9 @@ public class ProyectoController implements Serializable {
     }
 
     public List<Proyecto> getListaProyectos() {
+        if(listaProyectos == null){
+            listaProyectos = new ArrayList<Proyecto>();
+        }
         return listaProyectos;
     }
 
@@ -473,6 +476,7 @@ public class ProyectoController implements Serializable {
 
     private void recreateModel() {
         items = null;
+        listaProyectos = null;
     }
 
     private void recreatePagination() {
@@ -2287,11 +2291,28 @@ public class ProyectoController implements Serializable {
         //current = null;
         current = new Proyecto();
         
+        // CONVOCATORIAS
         // filtramos la lista de convocatorias con las que se encuentran abiertas actualmente
+        // inicializamos el current de convocatoria
         FacesContext context = FacesContext.getCurrentInstance();
         ConvocatoriaController convocatoriacontroller = (ConvocatoriaController) context.getApplication().evaluateExpressionGet(context, "#{convocatoriaController}", ConvocatoriaController.class);        
         convocatoriacontroller.findConvocatoriasEnFecha(new Date());
+        convocatoriacontroller.resetearSelected();
         
+        // ARCHIVOS PROYECTO
+        // inicializar la documentacion
+        ArchivoproyectoController apController = (ArchivoproyectoController) context.getApplication().evaluateExpressionGet(context, "#{archivoproyectoController}", ArchivoproyectoController.class);        
+        apController.resetearCollectorArchivoProyecto();
+        
+        // PRESUPUESTO RUBRO
+        // inicializamos presupuesto rubro, items, totales y graficos
+        PresupuestoRubroController presupuestoRubroController = (PresupuestoRubroController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoRubroController}", PresupuestoRubroController.class);        
+        presupuestoRubroController.resetearPresupuestoRubros();
+        
+        // PROYECTO AGENTE
+        // inicializamos  el equipo de trabajo
+        ProyectoAgenteController paController = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
+        paController.resetearPresupuestoRubros();
         
         this.recreateModel();
         
