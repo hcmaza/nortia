@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <f:facet name="first">
@@ -17,41 +17,42 @@
     </h:head>
 
     <h:body>
-        
+
         <div class="Container100 BordBottom BlueBack loginback">
             <div class="EmptyBox50"></div>
-            
+
             <div class="Wid90 MarAuto">
                 <div class="Wid30 DispBlock MarAuto WidAutoOnMobile">
                     <div class="Card TexAlCenter" style="margin-bottom:-650px;">
-                        <h:graphicImage name="images/logo.svg" library="adamantium-layout" style="max-width:180px;"/>
+                        <!--<h:graphicImage name="images/logo.svg" library="adamantium-layout" style="max-width:180px;"/>-->
+                        <h:graphicImage name="logo-nortia2.png" library="img" style="max-width:180px;"/>
                         <div class="SeparatorFull"></div>
-                        <div class="Wid100 OvHidden BigTopic"><i class="icon-security DispBlock"></i> Login / Sign Up</div>
+                        <div class="Wid100 OvHidden BigTopic"><i class="icon-security DispBlock"></i> Ingreso / Registro</div>
                         <div class="EmptyBox20"></div>
                         <div class="Card SoftGrayBack">
-                            <h:form id="login" onsubmit="action='j_security_check';" prependId="false">
-                            <p:inputText id="j_username" placeholder="Email" styleClass="Wid90 TexAlCenter" />
-                            <div class="EmptyBox10"></div>
-                            <p:inputText id="j_password" type="password" placeholder="Password" styleClass="Wid90 TexAlCenter" />
-                            <div class="EmptyBox30"></div>
-                            <p:selectBooleanCheckbox value="accept" itemLabel="I Accept Terms And Policies"/>
-                            <div class="EmptyBox30"></div>
-                            <p:commandButton value="Sign In" icon="fa fa-sign-in" styleClass="CyanButton" ajax="false"/>
-                            <div class="EmptyBox30"></div>
-                            <div class="EmptyBox10 ShowOnMobile"></div>
-                            <p:commandButton  value="Recuperar Password ?" icon="fa fa-lock" styleClass="RedButton" action="recuperarpassword"/>
-                           
-                           <p:commandButton  value="Registrarse" icon="fa  fa-unlock-alt" styleClass="BlueButton" action="registrar"/>
+                            <h:form id="login" onsubmit="action = 'j_security_check';" prependId="false">
+                                <p:inputText id="j_username" placeholder="Email" styleClass="Wid90 TexAlCenter" />
+                                <div class="EmptyBox10"></div>
+                                <p:inputText id="j_password" type="password" placeholder="Password" styleClass="Wid90 TexAlCenter" />
+                                <div class="EmptyBox30"></div>
+                                <p:commandButton value="Ingresar" icon="fa fa-sign-in" styleClass="CyanButton" ajax="false"/>
+                                <div class="EmptyBox30"></div>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                <p:commandButton  value="Recuperar Password ?" icon="fa fa-lock" styleClass="RedButton" action="recuperarpassword"/>
+                                <div class="EmptyBox30"></div>
+                                <p:commandButton  value="Registrarse" icon="fa  fa-unlock-alt" styleClass="BlueButton" action="registrar"/>
+                                <div class="EmptyBox30"></div>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
                             </h:form>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-            
+
             <div class="EmptyBox10"></div>
         </div>
-        
+
         <h:outputStylesheet name="css/core-layout.css" library="adamantium-layout" />
         <h:outputStylesheet name="css/animate.css" library="adamantium-layout" />
         <h:outputStylesheet name="css/adamantium-font.css" library="adamantium-layout" />
