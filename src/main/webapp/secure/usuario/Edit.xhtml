@@ -11,142 +11,146 @@
             <h:outputText value="Editar Usuario"></h:outputText>
         </ui:define>
 
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
+        <ui:define name="content">     
+            <div class="Container100">   
+                <div class="ContainerIndent">
 
-            <f:event type="preRenderView" listener="#{agenteViewController.findAgente(usuarioController.selected.usuarionombre)}" />
+                    <f:event type="preRenderView" listener="#{agenteViewController.findAgente(usuarioController.selected.usuarionombre)}" />
 
-            <h:form id="form">
-                <p:panel id="pprincipal" header="Editar Usuario" >
+                    <h:form id="form">
+                        <p:panel id="pprincipal" header="Editar Usuario" >
 
-                    <p:fieldset legend="Información del Usuario" style="width: 46%; display: inline-block; float: left;" >
-                        <p:panelGrid styleClass="sinBordes sinFondo">
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Usuario" for="usuarionombre" style="font-weight: bold;"  />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <p:inputText id="usuarionombre" value="#{usuarioController.selected.usuarionombre}" title="* Este campo es requerido"  required="true" requiredMessage="El campo nombre de usuario es requerido" />
-                                    <p:message for="usuarionombre" display="icon" /> 
-                                    <p:tooltip id="ttRol" for="usuarionombre" showEvent="focus" hideEvent="blur" />
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <p:outputLabel value="Password" for="usuarioclave"  style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <p:password id="usuarioclave" value="#{usuarioController.selected.usuarioclave}" title="Password" feedback="true" required="true"  
-                                                promptLabel="Nivel de seguridad de la Contraseña" weakLabel="Debil"  
-                                                goodLabel="Buena" strongLabel="Muy Buena" match="usuarioclave2" />
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <p:outputLabel value="Repita el password" for="usuarioclave2"  style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <p:password id="usuarioclave2" feedback="true" required="true"   
-                                                promptLabel="Nivel de seguridad de la Contraseña" weakLabel="Debil"  
-                                                goodLabel="Buena" strongLabel="Muy Buena" />
-                                </p:column>
-                            </p:row>
-                            <!--                            <p:row>
-                                                            <p:column style="width: 40%;">
-                                                                <p:outputLabel value="Fecha de Alta" for="usuariofechaalta" style="font-weight: bold;"  />
-                                                            </p:column>
-                                                            <p:column style="width: 60%;">
-                                                                <p:calendar id="usuariofechaalta" value="#{usuarioController.selected.usuariofechaalta}" showOn="button" pattern="dd/MM/yyyy HH:mm" title="Fecha de Alta" >
-                                                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-                                                                </p:calendar>
-                                                            </p:column>
-                                                        </p:row>      -->
-                            <!--                            <p:row>
-                                                            <p:column style="width: 40%;">
-                                                                <p:outputLabel value="Fecha de Baja" for="usuariofechabaja" style="font-weight: bold;"  />
-                                                            </p:column>
-                                                            <p:column style="width: 60%;">
-                                                                <p:calendar id="usuariofechabaja" value="#{usuarioController.selected.usuariofechabaja}" showOn="button" pattern="dd/MM/yyyy HH:mm" title="Fecha de Baja" >
-                                                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-                                                                </p:calendar>
-                                                            </p:column>
-                                                        </p:row>       -->
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <p:outputLabel value="Estado" for="usuarioestado"  style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <p:inputText id="usuarioestado" value="#{usuarioController.selected.usuarioestado}" title="Estado" required="true" requiredMessage="Por favor Ingrese el Estado"/>
-                                </p:column>
-                            </p:row>   
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <p:outputLabel value="Rol" for="ususariorol"  style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <p:selectOneMenu id="ususariorol" value="#{usuarioController.selected.usuariorol}" label="Rol" required="true" requiredMessage="Por favor ingrese el Rol">
-                                        <f:selectItems value="#{perfilController.itemsAvailableSelectOne}"/>
-                                    </p:selectOneMenu>
-                                </p:column>
-                            </p:row>                                  
-                        </p:panelGrid>
-                    </p:fieldset>
+                            <p:fieldset legend="Información del Usuario" style="width: 46%; display: inline-block; float: left;" >
+                                <p:panelGrid styleClass="sinBordes sinFondo">
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Usuario" for="usuarionombre" style="font-weight: bold;"  />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <p:inputText id="usuarionombre" value="#{usuarioController.selected.usuarionombre}" title="* Este campo es requerido"  required="true" requiredMessage="El campo nombre de usuario es requerido" />
+                                            <p:message for="usuarionombre" display="icon" /> 
+                                            <p:tooltip id="ttRol" for="usuarionombre" showEvent="focus" hideEvent="blur" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <p:outputLabel value="Password" for="usuarioclave"  style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <p:password id="usuarioclave" value="#{usuarioController.selected.usuarioclave}" title="Password" feedback="true" required="true"  
+                                                        promptLabel="Nivel de seguridad de la Contraseña" weakLabel="Debil"  
+                                                        goodLabel="Buena" strongLabel="Muy Buena" match="usuarioclave2" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <p:outputLabel value="Repita el password" for="usuarioclave2"  style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <p:password id="usuarioclave2" feedback="true" required="true"   
+                                                        promptLabel="Nivel de seguridad de la Contraseña" weakLabel="Debil"  
+                                                        goodLabel="Buena" strongLabel="Muy Buena" />
+                                        </p:column>
+                                    </p:row>
+                                    <!--                            <p:row>
+                                                                    <p:column style="width: 40%;">
+                                                                        <p:outputLabel value="Fecha de Alta" for="usuariofechaalta" style="font-weight: bold;"  />
+                                                                    </p:column>
+                                                                    <p:column style="width: 60%;">
+                                                                        <p:calendar id="usuariofechaalta" value="#{usuarioController.selected.usuariofechaalta}" showOn="button" pattern="dd/MM/yyyy HH:mm" title="Fecha de Alta" >
+                                                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                                                        </p:calendar>
+                                                                    </p:column>
+                                                                </p:row>      -->
+                                    <!--                            <p:row>
+                                                                    <p:column style="width: 40%;">
+                                                                        <p:outputLabel value="Fecha de Baja" for="usuariofechabaja" style="font-weight: bold;"  />
+                                                                    </p:column>
+                                                                    <p:column style="width: 60%;">
+                                                                        <p:calendar id="usuariofechabaja" value="#{usuarioController.selected.usuariofechabaja}" showOn="button" pattern="dd/MM/yyyy HH:mm" title="Fecha de Baja" >
+                                                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                                                        </p:calendar>
+                                                                    </p:column>
+                                                                </p:row>       -->
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <p:outputLabel value="Estado" for="usuarioestado"  style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <p:inputText id="usuarioestado" value="#{usuarioController.selected.usuarioestado}" title="Estado" required="true" requiredMessage="Por favor Ingrese el Estado"/>
+                                        </p:column>
+                                    </p:row>   
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <p:outputLabel value="Rol" for="ususariorol"  style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <p:selectOneMenu id="ususariorol" value="#{usuarioController.selected.usuariorol}" label="Rol" required="true" requiredMessage="Por favor ingrese el Rol">
+                                                <f:selectItems value="#{perfilController.itemsAvailableSelectOne}"/>
+                                            </p:selectOneMenu>
+                                        </p:column>
+                                    </p:row>                                  
+                                </p:panelGrid>
+                            </p:fieldset>
 
-                    <p:fieldset legend="Agente" style="width: 46%; display: inline-block; float: right;" >
+                            <p:fieldset legend="Agente" style="width: 46%; display: inline-block; float: right;" >
 
-                        <p:outputPanel id="agenteSeleccionado">
-                            <p:panelGrid style="width: 100%;" styleClass="sinBordes">
-                                <p:row>
-                                    <p:column >
-                                        <p:outputLabel style="font-weight:bold;" value="Nombre"/>
-                                    </p:column>
-                                    <p:column >
-                                        <p:outputLabel style="font-weight:bold;" value="Documento"/>
-                                    </p:column>
-                                    <p:column >
-                                        <p:outputLabel style="font-weight:bold;" value="Email"/>
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column >
-                                        <p:outputLabel value="#{agenteViewController.agente1.apellido}, #{agenteViewController.agente1.nombres}" title="Nombre" />
-                                    </p:column>
-                                    <p:column >
-                                        <p:outputLabel value="#{agenteViewController.agente1.tipodocumentoid.tipodocumento} - #{agenteViewController.agente1.numerodocumento}" title="Documento" />
-                                    </p:column>
-                                    <p:column >
-                                        <p:outputLabel value="#{agenteViewController.agente1.email}" title="Email" />
-                                    </p:column>
-                                </p:row>
-                            </p:panelGrid>
-                        </p:outputPanel>
+                                <p:outputPanel id="agenteSeleccionado">
+                                    <p:panelGrid style="width: 100%;" styleClass="sinBordes">
+                                        <p:row>
+                                            <p:column >
+                                                <p:outputLabel style="font-weight:bold;" value="Nombre"/>
+                                            </p:column>
+                                            <p:column >
+                                                <p:outputLabel style="font-weight:bold;" value="Documento"/>
+                                            </p:column>
+                                            <p:column >
+                                                <p:outputLabel style="font-weight:bold;" value="Email"/>
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column >
+                                                <p:outputLabel value="#{agenteViewController.agente1.apellido}, #{agenteViewController.agente1.nombres}" title="Nombre" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:outputLabel value="#{agenteViewController.agente1.tipodocumentoid.tipodocumento} - #{agenteViewController.agente1.numerodocumento}" title="Documento" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:outputLabel value="#{agenteViewController.agente1.email}" title="Email" />
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:outputPanel>
 
-                    </p:fieldset>
+                            </p:fieldset>
 
-                    <br style="clear: both;"/>
+                            <br style="clear: both;"/>
 
-                    <p:separator/>
-                    <p:commandButton action="#{usuarioController.update}" value="Guardar Usuario" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update="pprincipal" oncomplete="PF('dfinal').show();" />
-                    <p:commandButton action="#{usuarioController.prepareList}" value="Lista de Usuarios" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document"/>
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
-                    <p:separator/>
+                            <p:separator/>
+                            <p:commandButton action="#{usuarioController.update}" value="Guardar Usuario" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update="pprincipal" oncomplete="PF('dfinal').show();" />
+                            <p:commandButton action="#{usuarioController.prepareList}" value="Lista de Usuarios" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document"/>
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
+                            <p:separator/>
 
-                </p:panel>
+                        </p:panel>
 
-            </h:form>
+                    </h:form>
 
-            <h:form>
-                <p:dialog id="dfinal" widgetVar="dfinal" modal="true" header="Edición de Usuario" >
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <p:messages autoUpdate="true" />
-                    </h:panelGroup>
-                    <p:separator />
-                    <div align="center" >
-                        <p:commandButton value="Volver a la Lista" action="#{usuarioController.prepareList()}" ajax="false" />
-                    </div>
-                </p:dialog>
-            </h:form>
+                    <h:form>
+                        <p:dialog id="dfinal" widgetVar="dfinal" modal="true" header="Edición de Usuario" >
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <p:messages autoUpdate="true" />
+                            </h:panelGroup>
+                            <p:separator />
+                            <div align="center" >
+                                <p:commandButton value="Volver a la Lista" action="#{usuarioController.prepareList()}" ajax="false" />
+                            </div>
+                        </p:dialog>
+                    </h:form>
 
-        </div>         </div>         </ui:define>
+                </div>      
+            </div>    
+        </ui:define>
     </ui:composition>
 
 </html>

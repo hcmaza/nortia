@@ -10,175 +10,179 @@
         <ui:define name="title">
             <h:outputText value="Ver Agente"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:form>
-                <p:panel id="pprincipal" header="Ver Agente" >
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <p:messages autoUpdate="true"/>
-                    </h:panelGroup>
+        <ui:define name="content">         
+            <div class="Container100">             
+                <div class="ContainerIndent">
+                    <h:form>
+                        <p:panel id="pprincipal" header="Ver Agente" >
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <p:messages autoUpdate="true"/>
+                            </h:panelGroup>
 
-                    <p:fieldset legend="Información Personal" style="display: inline-block; width: 46%; float: left;">
-                        <p:panelGrid styleClass="sinBordes sinFondo">
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Nro" for="id" style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText id="id" value="#{agenteController.selected.id}" />
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Apellido" for="apellido" style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText id="apellido" value="#{agenteController.selected.apellido}" />
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Nombres" for="nombres" style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText id="nombres" value="#{agenteController.selected.nombres}" title="Nombres" />
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Tipo de Documento" for="tipodocumentoid" style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText value="#{agenteController.selected.tipodocumentoid.tipodocumento}" title="Tipo de Documento" />
-                                </p:column>
-                            </p:row>
-                            <p:row >
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Número de Documento" for="numerodocumento" style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText id="numerodocumento" value="#{agenteController.selected.numerodocumento}" title="Número de Documento}" />
-                                </p:column>
-                            </p:row>
-                            <p:row >
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="¿Tiene usuario?" for="usuario" style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText id="usuario" value="#{not empty agenteController.selected.usuarioid.usuarionombre ? 'Si' : 'No'}" title="Usuario" />
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </p:fieldset>
+                            <p:fieldset legend="Información Personal" style="display: inline-block; width: 46%; float: left;">
+                                <p:panelGrid styleClass="sinBordes sinFondo">
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Nro" for="id" style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText id="id" value="#{agenteController.selected.id}" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Apellido" for="apellido" style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText id="apellido" value="#{agenteController.selected.apellido}" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Nombres" for="nombres" style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText id="nombres" value="#{agenteController.selected.nombres}" title="Nombres" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Tipo de Documento" for="tipodocumentoid" style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText value="#{agenteController.selected.tipodocumentoid.tipodocumento}" title="Tipo de Documento" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row >
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Número de Documento" for="numerodocumento" style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText id="numerodocumento" value="#{agenteController.selected.numerodocumento}" title="Número de Documento}" />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row >
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="¿Tiene usuario?" for="usuario" style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText id="usuario" value="#{not empty agenteController.selected.usuarioid.usuarionombre ? 'Si' : 'No'}" title="Usuario" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:fieldset>
 
-                    <p:accordionPanel  activeIndex="null" style="display: inline-block; width: 50%; float: right; margin-top: 15px; margin-bottom: 5px;">
-                        <p:tab title="Información de Contacto">
-                            <p:panelGrid styleClass="sinBordes sinFondo">
-                                <p:row>
-                                    <p:column style="width: 40%;">
-                                        <h:outputLabel value="Domicilio" for="domicilio" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 60%;">
-                                        <h:outputText id="domicilio" value="#{agenteController.selected.domicilio}" title="Domicilio" />
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column style="width: 40%;">
-                                        <h:outputLabel value="Teléfono" for="telefono" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 60%;">
-                                        <h:outputText id="telefono" value="#{agenteController.selected.telefono}" title="Teléfono" />
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column style="width: 40%;">
-                                        <h:outputLabel value="Celular" for="celular" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 60%;">
-                                        <h:outputText id="celular" value="#{agenteController.selected.celular}" title="Celular" />
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column style="width: 40%;">
-                                        <h:outputLabel value="Email" for="email" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 60%;">
-                                        <h:outputText id="email" value="#{agenteController.selected.email}" title="Email" />
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column style="width: 40%;">
-                                        <h:outputLabel value="Email Secundario" for="otroemail" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 60%;">
-                                        <h:outputText id="otroemail" value="#{agenteController.selected.otroemail}" title="Email Alternativo" />
-                                    </p:column>
-                                </p:row>                            
-                            </p:panelGrid>
-                        </p:tab>
-                        <p:tab title="Informacion Profesional">
-                            <p:panelGrid styleClass="sinBordes sinFondo" >
-                                <p:row>
-                                    <p:column style="width: 20%;">
-                                        <h:outputLabel value="Profesión" for="profesion" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 80%;">
-                                        <h:outputText id="profesion" value="#{agenteController.selected.profesion}" title="Profesión" />
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column style="width: 20%;">
-                                        <h:outputLabel value="Especialidad" for="especialidad" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 80%;">
-                                        <h:outputText id="especialidad" value="#{agenteController.selected.especialidad}" title="Especialidad" />
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column style="width: 20%;">
-                                        <h:outputLabel value="Dependencia" for="dependenciaid" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 80%;">
-                                        <h:outputText value="#{agenteController.selected.dependenciaid.dependencia}" />
-                                    </p:column>
-                                </p:row>                            
-                            </p:panelGrid>
-                        </p:tab>
-                        <p:tab title="Usuario" rendered="#{not empty agenteController.selected.usuarioid.usuarionombre}">
-                            <p:panelGrid styleClass="sinBordes sinFondo" >
-                                <p:row>
-                                    <p:column style="width: 20%;">
-                                        <h:outputLabel value="Nombre de Usuario" for="nombreusuario" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 80%;">
-                                        <h:outputText id="nombreusuario" value="#{agenteController.selected.usuarioid.usuarionombre}" title="Nombre de Usuario" />
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column style="width: 20%;">
-                                        <h:outputLabel value="Rol" for="rol" style="font-weight: bold;" />
-                                    </p:column>
-                                    <p:column style="width: 80%;">
-                                        <h:outputText id="rol" value="#{agenteController.selected.usuarioid.usuariorol.rol}" title="Rol" />
-                                    </p:column>
-                                </p:row>
-                            </p:panelGrid>
-                        </p:tab>
-                    </p:accordionPanel>
+                            <p:accordionPanel  activeIndex="null" style="display: inline-block; width: 50%; float: right; margin-top: 15px; margin-bottom: 5px;">
+                                <p:tab title="Información de Contacto">
+                                    <p:panelGrid styleClass="sinBordes sinFondo">
+                                        <p:row>
+                                            <p:column style="width: 40%;">
+                                                <h:outputLabel value="Domicilio" for="domicilio" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 60%;">
+                                                <h:outputText id="domicilio" value="#{agenteController.selected.domicilio}" title="Domicilio" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 40%;">
+                                                <h:outputLabel value="Teléfono" for="telefono" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 60%;">
+                                                <h:outputText id="telefono" value="#{agenteController.selected.telefono}" title="Teléfono" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 40%;">
+                                                <h:outputLabel value="Celular" for="celular" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 60%;">
+                                                <h:outputText id="celular" value="#{agenteController.selected.celular}" title="Celular" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 40%;">
+                                                <h:outputLabel value="Email" for="email" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 60%;">
+                                                <h:outputText id="email" value="#{agenteController.selected.email}" title="Email" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 40%;">
+                                                <h:outputLabel value="Email Secundario" for="otroemail" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 60%;">
+                                                <h:outputText id="otroemail" value="#{agenteController.selected.otroemail}" title="Email Alternativo" />
+                                            </p:column>
+                                        </p:row>                            
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="Informacion Profesional">
+                                    <p:panelGrid styleClass="sinBordes sinFondo" >
+                                        <p:row>
+                                            <p:column style="width: 20%;">
+                                                <h:outputLabel value="Profesión" for="profesion" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 80%;">
+                                                <h:outputText id="profesion" value="#{agenteController.selected.profesion}" title="Profesión" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 20%;">
+                                                <h:outputLabel value="Especialidad" for="especialidad" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 80%;">
+                                                <h:outputText id="especialidad" value="#{agenteController.selected.especialidad}" title="Especialidad" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 20%;">
+                                                <h:outputLabel value="Dependencia" for="dependenciaid" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 80%;">
+                                                <h:outputText value="#{agenteController.selected.dependenciaid.dependencia}" />
+                                            </p:column>
+                                        </p:row>                            
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="Usuario" rendered="#{not empty agenteController.selected.usuarioid.usuarionombre}">
+                                    <p:panelGrid styleClass="sinBordes sinFondo" >
+                                        <p:row>
+                                            <p:column style="width: 20%;">
+                                                <h:outputLabel value="Nombre de Usuario" for="nombreusuario" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 80%;">
+                                                <h:outputText id="nombreusuario" value="#{agenteController.selected.usuarioid.usuarionombre}" title="Nombre de Usuario" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column style="width: 20%;">
+                                                <h:outputLabel value="Rol" for="rol" style="font-weight: bold;" />
+                                            </p:column>
+                                            <p:column style="width: 80%;">
+                                                <h:outputText id="rol" value="#{agenteController.selected.usuarioid.usuariorol.rol}" title="Rol" />
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:tab>
+                            </p:accordionPanel>
 
-                    <br style="clear:both;"/>
+                            <br style="clear:both;"/>
 
-                    <p:separator />
+                            <p:separator />
 
-                    <p:commandButton action="#{agenteController.prepareCreate}" value="Nuevo Agente" style="display: inline-block;" icon="ui-icon-plus"  ajax="false" />
-                    <p:commandButton action="#{agenteController.prepareList}" value="Lista de Agentes" style="display: inline-block;float:right;" icon="ui-icon-document"  ajax="false" />
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
+                            <p:commandButton action="#{agenteController.prepareCreate}" value="Nuevo Agente" style="display: inline-block;" icon="ui-icon-plus"  ajax="false" />
+                            <p:commandButton action="#{agenteController.prepareList}" value="Lista de Agentes" style="display: inline-block;float:right;" icon="ui-icon-document"  ajax="false" />
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
 
-                    <p:separator />
+                            <p:separator />
 
-                </p:panel>
+                        </p:panel>
 
-            </h:form>
-        </div>         </div>         </ui:define>
+                    </h:form>
+                </div>        
+            </div>        
+        </ui:define>
     </ui:composition>
 
 </html>

@@ -9,48 +9,52 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.EditPresupuestoTareaTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_descripcion}" for="descripcion" />
-                    <h:inputText id="descripcion" value="#{presupuestoTareaController.selected.descripcion}" title="#{bundle.EditPresupuestoTareaTitle_descripcion}" />
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_costounitario}" for="costounitario" />
-                    <h:inputText id="costounitario" value="#{presupuestoTareaController.selected.costounitario}" title="#{bundle.EditPresupuestoTareaTitle_costounitario}" />
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_cantidad}" for="cantidad" />
-                    <h:inputText id="cantidad" value="#{presupuestoTareaController.selected.cantidad}" title="#{bundle.EditPresupuestoTareaTitle_cantidad}" />
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_total}" for="total" />
-                    <h:inputText id="total" value="#{presupuestoTareaController.selected.total}" title="#{bundle.EditPresupuestoTareaTitle_total}" />
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_aportecomitente}" for="aportecomitente" />
-                    <h:inputText id="aportecomitente" value="#{presupuestoTareaController.selected.aportecomitente}" title="#{bundle.EditPresupuestoTareaTitle_aportecomitente}" />
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_aporteuniversidad}" for="aporteuniversidad" />
-                    <h:inputText id="aporteuniversidad" value="#{presupuestoTareaController.selected.aporteuniversidad}" title="#{bundle.EditPresupuestoTareaTitle_aporteuniversidad}" />
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_aporteorganismo}" for="aporteorganismo" />
-                    <h:inputText id="aporteorganismo" value="#{presupuestoTareaController.selected.aporteorganismo}" title="#{bundle.EditPresupuestoTareaTitle_aporteorganismo}" />
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{presupuestoTareaController.selected.id}" title="#{bundle.EditPresupuestoTareaTitle_id}" required="true" requiredMessage="#{bundle.EditPresupuestoTareaRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_rubro}" for="rubro" />
-                    <h:selectOneMenu id="rubro" value="#{presupuestoTareaController.selected.rubro}" title="#{bundle.EditPresupuestoTareaTitle_rubro}" >
-                        <f:selectItems value="#{rubroController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_tarea}" for="tarea" />
-                    <h:selectOneMenu id="tarea" value="#{presupuestoTareaController.selected.tarea}" title="#{bundle.EditPresupuestoTareaTitle_tarea}" >
-                        <f:selectItems value="#{tareaController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandLink action="#{presupuestoTareaController.update}" value="#{bundle.EditPresupuestoTareaSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditPresupuestoTareaViewLink}"/>
-                <br />
-                <h:commandLink action="#{presupuestoTareaController.prepareList}" value="#{bundle.EditPresupuestoTareaShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditPresupuestoTareaIndexLink}" />
-            </h:form>
-        </div>         </div>         </ui:define>
+        <ui:define name="content">       
+            <div class="Container100">  
+                <div class="ContainerIndent">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_descripcion}" for="descripcion" />
+                            <h:inputText id="descripcion" value="#{presupuestoTareaController.selected.descripcion}" title="#{bundle.EditPresupuestoTareaTitle_descripcion}" />
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_costounitario}" for="costounitario" />
+                            <h:inputText id="costounitario" value="#{presupuestoTareaController.selected.costounitario}" title="#{bundle.EditPresupuestoTareaTitle_costounitario}" />
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_cantidad}" for="cantidad" />
+                            <h:inputText id="cantidad" value="#{presupuestoTareaController.selected.cantidad}" title="#{bundle.EditPresupuestoTareaTitle_cantidad}" />
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_total}" for="total" />
+                            <h:inputText id="total" value="#{presupuestoTareaController.selected.total}" title="#{bundle.EditPresupuestoTareaTitle_total}" />
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_aportecomitente}" for="aportecomitente" />
+                            <h:inputText id="aportecomitente" value="#{presupuestoTareaController.selected.aportecomitente}" title="#{bundle.EditPresupuestoTareaTitle_aportecomitente}" />
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_aporteuniversidad}" for="aporteuniversidad" />
+                            <h:inputText id="aporteuniversidad" value="#{presupuestoTareaController.selected.aporteuniversidad}" title="#{bundle.EditPresupuestoTareaTitle_aporteuniversidad}" />
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_aporteorganismo}" for="aporteorganismo" />
+                            <h:inputText id="aporteorganismo" value="#{presupuestoTareaController.selected.aporteorganismo}" title="#{bundle.EditPresupuestoTareaTitle_aporteorganismo}" />
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_id}" for="id" />
+                            <h:inputText id="id" value="#{presupuestoTareaController.selected.id}" title="#{bundle.EditPresupuestoTareaTitle_id}" required="true" requiredMessage="#{bundle.EditPresupuestoTareaRequiredMessage_id}"/>
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_rubro}" for="rubro" />
+                            <h:selectOneMenu id="rubro" value="#{presupuestoTareaController.selected.rubro}" title="#{bundle.EditPresupuestoTareaTitle_rubro}" >
+                                <f:selectItems value="#{rubroController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="#{bundle.EditPresupuestoTareaLabel_tarea}" for="tarea" />
+                            <h:selectOneMenu id="tarea" value="#{presupuestoTareaController.selected.tarea}" title="#{bundle.EditPresupuestoTareaTitle_tarea}" >
+                                <f:selectItems value="#{tareaController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:commandLink action="#{presupuestoTareaController.update}" value="#{bundle.EditPresupuestoTareaSaveLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="View" value="#{bundle.EditPresupuestoTareaViewLink}"/>
+                        <br />
+                        <h:commandLink action="#{presupuestoTareaController.prepareList}" value="#{bundle.EditPresupuestoTareaShowAllLink}" immediate="true"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.EditPresupuestoTareaIndexLink}" />
+                    </h:form>
+                </div>       
+            </div>   
+        </ui:define>
     </ui:composition>
 
 </html>

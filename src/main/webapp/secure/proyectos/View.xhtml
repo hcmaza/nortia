@@ -9,48 +9,52 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.ViewTareaTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewTareaLabel_id}"/>
-                    <h:outputText value="#{tareaController.selected.id}" title="#{bundle.ViewTareaTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewTareaLabel_tarea}"/>
-                    <h:outputText value="#{tareaController.selected.tarea}" title="#{bundle.ViewTareaTitle_tarea}"/>
-                    <h:outputText value="#{bundle.ViewTareaLabel_prioridad}"/>
-                    <h:outputText value="#{tareaController.selected.prioridad}" title="#{bundle.ViewTareaTitle_prioridad}"/>
-                    <h:outputText value="#{bundle.ViewTareaLabel_estado}"/>
-                    <h:outputText value="#{tareaController.selected.estado}" title="#{bundle.ViewTareaTitle_estado}"/>
-                    <h:outputText value="#{bundle.ViewTareaLabel_fechacreacion}"/>
-                    <h:outputText value="#{tareaController.selected.fechacreacion}" title="#{bundle.ViewTareaTitle_fechacreacion}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewTareaLabel_dias}"/>
-                    <h:outputText value="#{tareaController.selected.dias}" title="#{bundle.ViewTareaTitle_dias}"/>
-                    <h:outputText value="#{bundle.ViewTareaLabel_descripcion}"/>
-                    <h:outputText value="#{tareaController.selected.descripcion}" title="#{bundle.ViewTareaTitle_descripcion}"/>
-                    <h:outputText value="#{bundle.ViewTareaLabel_fechamodificacion}"/>
-                    <h:outputText value="#{tareaController.selected.fechamodificacion}" title="#{bundle.ViewTareaTitle_fechamodificacion}">
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:outputText>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{tareaController.destroyAndView}" value="#{bundle.ViewTareaDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewTareaEditLink}"/>
-                <br />
-                <h:commandLink action="#{tareaController.prepareCreate}" value="#{bundle.ViewTareaCreateLink}" />
-                <br />
-                <h:commandLink action="#{tareaController.prepareList}" value="#{bundle.ViewTareaShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewTareaIndexLink}"/>
+        <ui:define name="content">    
+            <div class="Container100">     
+                <div class="ContainerIndent">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="#{bundle.ViewTareaLabel_id}"/>
+                            <h:outputText value="#{tareaController.selected.id}" title="#{bundle.ViewTareaTitle_id}"/>
+                            <h:outputText value="#{bundle.ViewTareaLabel_tarea}"/>
+                            <h:outputText value="#{tareaController.selected.tarea}" title="#{bundle.ViewTareaTitle_tarea}"/>
+                            <h:outputText value="#{bundle.ViewTareaLabel_prioridad}"/>
+                            <h:outputText value="#{tareaController.selected.prioridad}" title="#{bundle.ViewTareaTitle_prioridad}"/>
+                            <h:outputText value="#{bundle.ViewTareaLabel_estado}"/>
+                            <h:outputText value="#{tareaController.selected.estado}" title="#{bundle.ViewTareaTitle_estado}"/>
+                            <h:outputText value="#{bundle.ViewTareaLabel_fechacreacion}"/>
+                            <h:outputText value="#{tareaController.selected.fechacreacion}" title="#{bundle.ViewTareaTitle_fechacreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputText value="#{bundle.ViewTareaLabel_dias}"/>
+                            <h:outputText value="#{tareaController.selected.dias}" title="#{bundle.ViewTareaTitle_dias}"/>
+                            <h:outputText value="#{bundle.ViewTareaLabel_descripcion}"/>
+                            <h:outputText value="#{tareaController.selected.descripcion}" title="#{bundle.ViewTareaTitle_descripcion}"/>
+                            <h:outputText value="#{bundle.ViewTareaLabel_fechamodificacion}"/>
+                            <h:outputText value="#{tareaController.selected.fechamodificacion}" title="#{bundle.ViewTareaTitle_fechamodificacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:panelGrid>
+                        <br />
+                        <h:commandLink action="#{tareaController.destroyAndView}" value="#{bundle.ViewTareaDestroyLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="Edit" value="#{bundle.ViewTareaEditLink}"/>
+                        <br />
+                        <h:commandLink action="#{tareaController.prepareCreate}" value="#{bundle.ViewTareaCreateLink}" />
+                        <br />
+                        <h:commandLink action="#{tareaController.prepareList}" value="#{bundle.ViewTareaShowAllLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.ViewTareaIndexLink}"/>
 
-            </h:form>
-        </div>         </div>         </ui:define>
+                    </h:form>
+                </div>      
+            </div>    
+        </ui:define>
     </ui:composition>
 
 </html>

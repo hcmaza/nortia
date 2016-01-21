@@ -11,48 +11,52 @@
             <h:outputText value="Editar Tipo de Entidad"></h:outputText>
         </ui:define>
 
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:form>
-                <p:panel id="pprincipal" header="Editar Tipo de Entidad" >
+        <ui:define name="content">      
+            <div class="Container100">      
+                <div class="ContainerIndent">
+                    <h:form>
+                        <p:panel id="pprincipal" header="Editar Tipo de Entidad" >
 
-                    <p:fieldset legend="Información del Tipo de Entidad">
-                        <p:panelGrid styleClass="sinBordes sinFondo">
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Tipo de Entidad" for="tipoentidad"  style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <p:inputText id="tipoentidad" value="#{tipocomitenteController.selected.tipocomitente}"  title="* Este campo es requerido"  required="true" requiredMessage="El campo tipo de entidad es requerido"  />
-                                    <p:message for="tipoentidad" display="icon"  /> 
-                                    <p:tooltip id="ttTipoEntidad" for="tipoentidad" showEvent="focus" hideEvent="blur" />                                    
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </p:fieldset>
+                            <p:fieldset legend="Información del Tipo de Entidad">
+                                <p:panelGrid styleClass="sinBordes sinFondo">
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Tipo de Entidad" for="tipoentidad"  style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <p:inputText id="tipoentidad" value="#{tipocomitenteController.selected.tipocomitente}"  title="* Este campo es requerido"  required="true" requiredMessage="El campo tipo de entidad es requerido"  />
+                                            <p:message for="tipoentidad" display="icon"  /> 
+                                            <p:tooltip id="ttTipoEntidad" for="tipoentidad" showEvent="focus" hideEvent="blur" />                                    
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:fieldset>
 
-                    <p:separator/>
-                    <p:commandButton action="#{tipocomitenteController.update}" value="Guardar Tipo de Entidad" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update="pprincipal" oncomplete="PF('dfinal').show();" />
-                    <p:commandButton action="#{tipocomitenteController.prepareList}" value="Lista de Tipos de Entidad" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document" ajax="false" />
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
-                    <p:separator/>
+                            <p:separator/>
+                            <p:commandButton action="#{tipocomitenteController.update}" value="Guardar Tipo de Entidad" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update="pprincipal" oncomplete="PF('dfinal').show();" />
+                            <p:commandButton action="#{tipocomitenteController.prepareList}" value="Lista de Tipos de Entidad" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document" ajax="false" />
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
+                            <p:separator/>
 
-                </p:panel>
+                        </p:panel>
 
-            </h:form>
+                    </h:form>
 
-            <h:form>
-                <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" header="Edición de Tipo de Entidad" >
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <p:messages autoUpdate="true" />
-                    </h:panelGroup>
-                    <p:separator />
-                    <div align="center" >
-                        <p:commandButton value="Volver a la Lista" action="#{tipocomitenteController.prepareList()}" ajax="false" />
-                    </div>
+                    <h:form>
+                        <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" header="Edición de Tipo de Entidad" >
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <p:messages autoUpdate="true" />
+                            </h:panelGroup>
+                            <p:separator />
+                            <div align="center" >
+                                <p:commandButton value="Volver a la Lista" action="#{tipocomitenteController.prepareList()}" ajax="false" />
+                            </div>
 
-                </p:dialog>
-            </h:form>            
-        </div>         </div>         </ui:define>
+                        </p:dialog>
+                    </h:form>            
+                </div>     
+            </div>   
+        </ui:define>
     </ui:composition>
 
 </html>

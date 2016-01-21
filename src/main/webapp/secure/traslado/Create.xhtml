@@ -10,40 +10,44 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.CreateTrasladoTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Fecha y hora salida" for="fechahoraviaje" />
-                    <p:calendar id="fechahoraviaje" value="#{trasladoController.selected.fechahoraviaje}" pattern="MM/dd/yyyy HH:mm:ss" />
-                    
-                    <h:outputLabel value="#{bundle.CreateTrasladoLabel_fechahoraregreso}" for="fechahoraregreso" />
-                    <p:calendar id="fechahoraregreso" value="#{trasladoController.selected.fechahoraregreso}" pattern="MM/dd/yyyy HH:mm:ss" />
-                    
-                    <h:outputLabel value="#{bundle.CreateTrasladoLabel_destino}" for="destino" />
-                    <h:inputText id="destino" value="#{trasladoController.selected.destino}" title="#{bundle.CreateTrasladoTitle_destino}" />
-                    
-                <h:outputLabel value="#{bundle.CreateTrasladoLabel_proyectoid}" for="proyectoid" />
-                    <h:selectOneMenu id="proyectoid" value="#{trasladoController.selected.proyectoid}" title="#{bundle.CreateTrasladoTitle_proyectoid}" >
-                        <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateTrasladoLabel_responsableid}" for="responsableid" />
-                    <h:selectOneMenu id="responsableid" value="#{trasladoController.selected.responsableid}" title="#{bundle.CreateTrasladoTitle_responsableid}" >
-                        <f:selectItems value="#{agenteController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{trasladoController.create}" value="#{bundle.CreateTrasladoSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{trasladoController.prepareList}" value="#{bundle.CreateTrasladoShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateTrasladoIndexLink}"/>
-            </h:form>
-        </div>         </div>         </ui:define>
+        <ui:define name="content">      
+            <div class="Container100">        
+                <div class="ContainerIndent">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Fecha y hora salida" for="fechahoraviaje" />
+                            <p:calendar id="fechahoraviaje" value="#{trasladoController.selected.fechahoraviaje}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+                            <h:outputLabel value="#{bundle.CreateTrasladoLabel_fechahoraregreso}" for="fechahoraregreso" />
+                            <p:calendar id="fechahoraregreso" value="#{trasladoController.selected.fechahoraregreso}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+                            <h:outputLabel value="#{bundle.CreateTrasladoLabel_destino}" for="destino" />
+                            <h:inputText id="destino" value="#{trasladoController.selected.destino}" title="#{bundle.CreateTrasladoTitle_destino}" />
+
+                            <h:outputLabel value="#{bundle.CreateTrasladoLabel_proyectoid}" for="proyectoid" />
+                            <h:selectOneMenu id="proyectoid" value="#{trasladoController.selected.proyectoid}" title="#{bundle.CreateTrasladoTitle_proyectoid}" >
+                                <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="#{bundle.CreateTrasladoLabel_responsableid}" for="responsableid" />
+                            <h:selectOneMenu id="responsableid" value="#{trasladoController.selected.responsableid}" title="#{bundle.CreateTrasladoTitle_responsableid}" >
+                                <f:selectItems value="#{agenteController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <br />
+                        <h:commandLink action="#{trasladoController.create}" value="#{bundle.CreateTrasladoSaveLink}" />
+                        <br />
+                        <br />
+                        <h:commandLink action="#{trasladoController.prepareList}" value="#{bundle.CreateTrasladoShowAllLink}" immediate="true"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.CreateTrasladoIndexLink}"/>
+                    </h:form>
+                </div>       
+            </div>     
+        </ui:define>
     </ui:composition>
 
 </html>

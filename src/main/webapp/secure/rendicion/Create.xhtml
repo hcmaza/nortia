@@ -11,322 +11,326 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.CreateSolicitudTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
+        <ui:define name="content">     
+            <div class="Container100">     
+                <div class="ContainerIndent">
 
-            <!--<f:event type="preRenderView" listener="{presupuestoController.findProyecto(proyectoController.selected.id)}" />-->
-            <!--<f:event type="preRenderView" listener="{presupuestoController.sumarGastosView}" />-->
-            <!--<f:event type="preRenderView" listener="{presupuestoTareaController.armarPresupuestoGeneral}" />-->
-            <f:event type="preRenderView" listener="#{indicadoresController.obtenerCalculosPorRubro()}" />
-            
-            <!--<f:event type="preRenderView" listener="{rendicionController.prepararRendicion()}" />-->
+                    <!--<f:event type="preRenderView" listener="{presupuestoController.findProyecto(proyectoController.selected.id)}" />-->
+                    <!--<f:event type="preRenderView" listener="{presupuestoController.sumarGastosView}" />-->
+                    <!--<f:event type="preRenderView" listener="{presupuestoTareaController.armarPresupuestoGeneral}" />-->
+                    <f:event type="preRenderView" listener="#{indicadoresController.obtenerCalculosPorRubro()}" />
 
-            <h:form id="formprincipal" enctype="multipart/form-data" >
-                <p:growl id="growlprincipal" autoUpdate="true" showDetail="true"  />
+                    <!--<f:event type="preRenderView" listener="{rendicionController.prepararRendicion()}" />-->
 
-                <p:panel id="pprincipal" header="Proyecto N° #{proyectoController.selected.id}  - #{proyectoController.selected.nombre}" >
+                    <h:form id="formprincipal" enctype="multipart/form-data" >
+                        <p:growl id="growlprincipal" autoUpdate="true" showDetail="true"  />
 
-                    <p:panel header="Indicadores de Ejecución" style="margin: 5px auto 10px;">
-                        <p:panelGrid style="width: 100%;" styleClass="sinBordes">
-                            <p:row >
-                                <p:column style="width: 25%;" >
-                                    <p:fieldset legend="Total Ejecutado" style="height: 110px !important; " styleClass="fieldSetCentrado110" >
-                                        <div class="centrarEnFieldSet" >
-                                            <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                <p:outputLabel value="$#{indicadoresController.ejecutadoProyecto}" style="color: #94D352; font-weight: bold; font-size: 21px !important; " />
-                                            </p:panelGrid>
+                        <p:panel id="pprincipal" header="Proyecto N° #{proyectoController.selected.id}  - #{proyectoController.selected.nombre}" >
+
+                            <p:panel header="Indicadores de Ejecución" style="margin: 5px auto 10px;">
+                                <p:panelGrid style="width: 100%;" styleClass="sinBordes">
+                                    <p:row >
+                                        <p:column style="width: 25%;" >
+                                            <p:fieldset legend="Total Ejecutado" style="height: 110px !important; " styleClass="fieldSetCentrado110" >
+                                                <div class="centrarEnFieldSet" >
+                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
+                                                        <p:outputLabel value="$#{indicadoresController.ejecutadoProyecto}" style="color: #94D352; font-weight: bold; font-size: 21px !important; " />
+                                                    </p:panelGrid>
+                                                </div>
+                                            </p:fieldset>
+                                        </p:column>
+                                        <p:column style="width: 25%;">
+                                            <p:fieldset legend="Ejecución #{indicadoresController.porcentajeEjecutadoString}%" style="height: 110px !important; ">
+                                                <p:chart type="metergauge" model="#{indicadoresController.indicadorEjecutado}" style="height: 100px;"  />
+                                            </p:fieldset>
+                                        </p:column>
+                                        <p:column style="width: 25%;">
+                                            <p:fieldset legend="Ejecutado por Rubros" style="height: 110px !important; ">
+                                                <p:chart type="pie" model="#{indicadoresController.chartEjecutadoPorRubro}" style="height:100px" styleClass="sinBordes" />
+                                            </p:fieldset>
+                                        </p:column>
+                                        <p:column style="width: 25%;">
+                                            <p:fieldset legend="Evolución de Ejecución" style="height: 110px !important; ">
+                                                <p:chart type="line" model="#{indicadoresController.chartEjecutadoPorFecha}" style="height:90px;" styleClass="sinBordes"/>
+                                            </p:fieldset>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 25%;">
+                                            <p:fieldset legend="Saldo" style="height: 70px !important; " styleClass="fieldSetCentrado70" >
+                                                <div class="centrarEnFieldSet" >
+                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
+                                                        <p:outputLabel value="$ #{indicadoresController.saldoProyecto}" style="color: #FF964A; font-weight: bold; font-size: 21px !important;  " />
+                                                    </p:panelGrid>
+                                                </div>
+                                            </p:fieldset>
+                                        </p:column>
+                                        <p:column colspan="3" style="width: 75%;">
+                                            <!--<p:fieldset legend="Saldo Rubros" style="height: 70px !important; ">-->
+                                            <p:dataTable  value="#{indicadoresController.valoresListaSaldosRubro}" var="saldo" rows="1" style="font-size: 12px !important; margin-top: 15px; text-align: center;">
+                                                <f:facet name="header">
+                                                    Saldo por Rubros
+                                                </f:facet>
+                                                <p:columns value="#{indicadoresController.columnasListaSaldosRubro}" columnIndexVar="i" var="columna" headerText="#{columna}">
+                                                    <p:outputLabel value="$ #{indicadoresController.valoresListaSaldosRubro.get(i)}" style="font-size: 11px !important; font-weight: bold; color: #555555;"  />
+                                                </p:columns>
+                                            </p:dataTable>
+                                            <!--</p:fieldset>-->
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2"  style="width: 50%;">
+                                            <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30"  >
+                                                <f:facet name="legend" >
+                                                    Total Desembolsado
+                                                </f:facet>
+                                                <div class="centrarEnFieldSet30" >
+                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
+                                                        <p:outputLabel value="$ #{desembolsoController.sumarDesembolsos()}" style="color: #777777; font-weight: bold; font-size: 18px !important;  " />
+                                                    </p:panelGrid>
+                                                </div>
+                                            </p:fieldset>
+                                        </p:column>
+                                        <p:column colspan="2"  style="width: 50%;">
+                                            <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30" >
+                                                <f:facet name="legend" >
+                                                    Solicitudes a Rendir
+                                                </f:facet>
+                                                <div class="centrarEnFieldSet30" >
+                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
+                                                        <p:outputLabel value="#{rendicionController.listaSolicitudes.size()} Solicitud/es por $#{rendicionController.sumarSolicitudesARendir()}" style="color: #00C7F6; font-weight: bold; font-size: 15px !important; " rendered="#{rendicionController.listaSolicitudes.size() > 0}"  />
+                                                        <p:outputLabel value="Sin Solicitudes por Rendir" style="color: #00C7F6; font-weight: bold; font-size: 16px !important; " rendered="#{rendicionController.listaSolicitudes.size() eq 0}" />
+                                                    </p:panelGrid>
+                                                </div>
+                                            </p:fieldset>
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:panel>
+
+                            <p:panel header="Gestión del Proyecto" >
+
+                                <p:tabView id="tabs" dynamic="true" style="margin-bottom: 10px;" >
+
+                                    <!--<p:ajax event="tabChange" listener="{solicitudController.onTabChange}" update=":formprincipal:op, :formprincipal:botonsolicitud, :formprincipal:tabs:tabladisponiblesanticipo :formprincipal:tabs:tabladisponiblesadquisicion :formprincipal:tabs:tabladisponiblescertificacion, :formprincipal:tabs:tabladisponiblesreintegro" immediate="true" />-->
+
+                                    <p:tab id="tabpresupuesto" title="Presupuesto Detallado" >
+
+                                        <p:treeTable id="tablapresupuesto" value="#{presupuestoTareaController.root}" var="item" style="padding: 0px; width: 100%; margin: 0 auto; overflow: hidden;"  >
+                                            <p:column headerText="Etapa">
+                                                <h:outputText value="#{item.descripcion}" />
+                                            </p:column>
+                                            <p:column headerText="Rubro">
+                                                <h:outputText value="#{item.rubro.abreviado}" />
+                                            </p:column>
+                                            <p:column headerText="Cantidad"  style="text-align: right;" >
+                                                <h:outputText value="#{item.cantidad}" />
+                                            </p:column>
+                                            <p:column headerText="Costo Unitario"  style="text-align: right;" >
+                                                <h:outputText value="#{item.costounitario}" />
+                                            </p:column>
+                                            <p:column headerText="Total"  style="text-align: right;" >
+                                                <h:outputText value="#{item.total}" />
+                                            </p:column>
+                                            <p:columnGroup type="footer">
+                                                <p:row>
+                                                    <p:column colspan="4" style="text-align:right" footerText="Totales:" />
+                                                    <p:column footerText="#{presupuestoTareaController.sumatotal}" style="text-align: right;" />
+                                                </p:row>
+                                            </p:columnGroup>
+                                        </p:treeTable>
+                                    </p:tab>
+
+                                    <p:tab id="trendicion" title="Rendición de Gastos" disabled="#{rendicionController.listaSolicitudes.size() eq 0}" >
+
+                                        <p:dataTable id="tabladisponiblesrendicion" 
+                                                     var="item" 
+                                                     value="#{rendicionController.listaSolicitudes}" 
+                                                     rowKey="#{item.id}" 
+                                                     rowIndexVar="indice"
+                                                     rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                     styleClass="tabla" style="margin-bottom: 10px;">
+                                            <!--selection="{rendicionController.solicitudSeleccionada}" >-->
+                                            <!--selection="{rendicionController.listaSolicitudesSeleccionadas}" >-->
+                                            <f:facet name="header">
+                                                Solicitudes abiertas pendientes de Rendición
+                                            </f:facet>
+                                            <!--<p:column selectionMode="multiple" style="width:16px;text-align:center"/>-->
+                                            <!--<p:column selectionMode="single" style="width:16px;text-align:center"/>-->
+                                            <p:column headerText="Descripción">
+                                                <h:outputText value="#{item.presupuestotarea.descripcion}" />
+                                            </p:column>
+                                            <p:column headerText="Fecha">
+                                                <h:outputText value="#{item.fechasolicitud}">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                </h:outputText>
+                                            </p:column>
+                                            <p:column headerText="Tipo">
+                                                <h:outputText value="#{item.tiposolicitudid.tiposolicitud}" />
+                                            </p:column>
+                                            <p:column headerText="Total">
+                                                <h:outputText value="#{item.importe}" />
+                                            </p:column>
+                                            <p:column style="width:32px;text-align: center">
+                                                <p:commandButton update=":formprincipal:growlprincipal, :formarchivorendicion " actionListener="#{archivorendicionController.nuevoArchivoRendicion()}" oncomplete="PF('dialogoItemRendicion').show();" icon="ui-icon-circle-plus" value="Subir Factura" title="Subir Factura" immediate="true" >
+                                                    <f:setPropertyActionListener value="#{item}" target="#{rendicionController.solicitudSeleccionada}" />
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:dataTable>
+
+                                        <!--**********************************************-->
+                                        <!--********* TABLA ARCHIVOS RENDICION ***********-->
+                                        <!--**********************************************-->
+
+                                        <p:dataTable id="tablafacturasrendicion" var="arc" value="#{archivorendicionController.listaArchivos}" 
+                                                     rowIndexVar="indice"
+                                                     rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                     styleClass="tabla" style="top: 5px; margin-bottom: 5px;">  
+                                            <f:facet name="header">
+                                                Facturas incorporadas a la Rendición
+                                            </f:facet>
+                                            <p:column headerText="N° de Factura">  
+                                                <h:outputText value="#{arc.nrofactura}" />  
+                                            </p:column> 
+                                            <p:column headerText="Archivo">  
+                                                <h:outputText value="#{arc.nombrearchivo}" />  
+                                            </p:column> 
+                                            <p:column headerText="Monto">  
+                                                <h:outputText value="#{arc.montofactura}" />  
+                                            </p:column> 
+                                            <p:column headerText="">  
+                                                <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" actionListener="#{archivorendicionController.removerArchivoLista(arc)}" update=":formprincipal:growlprincipal, :formprincipal:tabs:tablafacturasrendicion, :formarchivorendicion, :formprincipal:tabs:difrendicion" immediate="true"  >
+                                                    <f:setPropertyActionListener value="#{arc}" target="#{archivorendicionController.selected}" />  
+                                                </p:commandButton>
+                                            </p:column> 
+                                            <f:facet name="footer">
+                                                El total Solicitado es $ #{archivorendicionController.sumarComprobantes()}
+                                            </f:facet>
+                                        </p:dataTable>
+
+                                        <p:outputPanel id="difrendicion"  >
+                                            <p:fieldset legend="Diferencia de la Rendición de Gastos" style="margin-bottom:20px" rendered="#{archivorendicionController.sumarComprobantes() > rendicionController.solicitudSeleccionada.importe.floatValue()}">
+
+                                                <h:outputText value="Explicación: "/>
+                                                <br />
+
+                                                <h:outputText value="Se creará un Reintegro por la diferencia entre la solicitud y la suma de comprobantes rendidos." rendered="#{rendicionController.solicitudSeleccionada.presupuestotarea.id == rendicionController.solicitudReintegroPorDiferencia.presupuestotarea.id}" />
+
+                                                <h:outputText value="Cuando el item que se solicitó, no tiene más dinero disponible en presupuesto y el comprobante o la suma de ellos (si son varios), supera/n el valor de la solicitud que se está rindiendo, se crea una nueva solicitud de reintegro por la diferencia, la cual debe estar enlazada a un item del presupuesto con dinero disponible." rendered="#{rendicionController.solicitudSeleccionada.presupuestotarea.id != rendicionController.solicitudReintegroPorDiferencia.presupuestotarea.id}" />
+
+                                                <h:panelGrid columns="2" cellpadding="5" rendered="#{rendicionController.solicitudSeleccionada.presupuestotarea.id != rendicionController.solicitudReintegroPorDiferencia.presupuestotarea.id}">
+                                                    <p:outputLabel value="Item del presupuesto al que se acredita la diferencia" for="diferencia" />
+
+                                                    <p:selectOneMenu id="diferencia" value="#{rendicionController.solicitudReintegroPorDiferencia}" var="s" required="true" requiredMessage="Se debe seleccionar un item del presupuesto con dinero disponible.">
+                                                        <f:selectItem itemLabel="Seleccionar un item del presupuesto" itemValue="" />
+                                                        <f:selectItems value="#{solicitudController.itemsDisponiblesNuevo}" var="solicitud" itemLabel="#{solicitud.presupuestotarea.descripcion}" itemValue="#{solicitud}" />
+                                                        <p:column>
+                                                            <h:outputText value="#{s.presupuestotarea.descripcion}" />
+                                                        </p:column>
+
+                                                        <p:column>
+                                                            <h:outputText value="$#{s.disponible.floatValue()}" />
+                                                        </p:column>
+                                                    </p:selectOneMenu>
+                                                </h:panelGrid>
+                                            </p:fieldset>
+                                        </p:outputPanel>
+
+                                        <div align="center">
+                                            <p:commandButton action="#{rendicionController.create}" value="Crear Rendición" style="display: inline-block; margin-top: 5px;" icon="ui-icon-disk" update=":formprincipal:pprincipal" oncomplete="PF('dfinalrendicion').show();" immediate="true" />
                                         </div>
-                                    </p:fieldset>
-                                </p:column>
-                                <p:column style="width: 25%;">
-                                    <p:fieldset legend="Ejecución #{indicadoresController.porcentajeEjecutadoString}%" style="height: 110px !important; ">
-                                        <p:chart type="metergauge" model="#{indicadoresController.indicadorEjecutado}" style="height: 100px;"  />
-                                    </p:fieldset>
-                                </p:column>
-                                <p:column style="width: 25%;">
-                                    <p:fieldset legend="Ejecutado por Rubros" style="height: 110px !important; ">
-                                        <p:chart type="pie" model="#{indicadoresController.chartEjecutadoPorRubro}" style="height:100px" styleClass="sinBordes" />
-                                    </p:fieldset>
-                                </p:column>
-                                <p:column style="width: 25%;">
-                                    <p:fieldset legend="Evolución de Ejecución" style="height: 110px !important; ">
-                                        <p:chart type="line" model="#{indicadoresController.chartEjecutadoPorFecha}" style="height:90px;" styleClass="sinBordes"/>
-                                    </p:fieldset>
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="width: 25%;">
-                                    <p:fieldset legend="Saldo" style="height: 70px !important; " styleClass="fieldSetCentrado70" >
-                                        <div class="centrarEnFieldSet" >
-                                            <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                <p:outputLabel value="$ #{indicadoresController.saldoProyecto}" style="color: #FF964A; font-weight: bold; font-size: 21px !important;  " />
-                                            </p:panelGrid>
-                                        </div>
-                                    </p:fieldset>
-                                </p:column>
-                                <p:column colspan="3" style="width: 75%;">
-                                    <!--<p:fieldset legend="Saldo Rubros" style="height: 70px !important; ">-->
-                                    <p:dataTable  value="#{indicadoresController.valoresListaSaldosRubro}" var="saldo" rows="1" style="font-size: 12px !important; margin-top: 15px; text-align: center;">
-                                        <f:facet name="header">
-                                            Saldo por Rubros
-                                        </f:facet>
-                                        <p:columns value="#{indicadoresController.columnasListaSaldosRubro}" columnIndexVar="i" var="columna" headerText="#{columna}">
-                                            <p:outputLabel value="$ #{indicadoresController.valoresListaSaldosRubro.get(i)}" style="font-size: 11px !important; font-weight: bold; color: #555555;"  />
-                                        </p:columns>
-                                    </p:dataTable>
-                                    <!--</p:fieldset>-->
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column colspan="2"  style="width: 50%;">
-                                    <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30"  >
-                                        <f:facet name="legend" >
-                                            Total Desembolsado
-                                        </f:facet>
-                                        <div class="centrarEnFieldSet30" >
-                                            <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                <p:outputLabel value="$ #{desembolsoController.sumarDesembolsos()}" style="color: #777777; font-weight: bold; font-size: 18px !important;  " />
-                                            </p:panelGrid>
-                                        </div>
-                                    </p:fieldset>
-                                </p:column>
-                                <p:column colspan="2"  style="width: 50%;">
-                                    <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30" >
-                                        <f:facet name="legend" >
-                                            Solicitudes a Rendir
-                                        </f:facet>
-                                        <div class="centrarEnFieldSet30" >
-                                            <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                <p:outputLabel value="#{rendicionController.listaSolicitudes.size()} Solicitud/es por $#{rendicionController.sumarSolicitudesARendir()}" style="color: #00C7F6; font-weight: bold; font-size: 15px !important; " rendered="#{rendicionController.listaSolicitudes.size() > 0}"  />
-                                                <p:outputLabel value="Sin Solicitudes por Rendir" style="color: #00C7F6; font-weight: bold; font-size: 16px !important; " rendered="#{rendicionController.listaSolicitudes.size() eq 0}" />
-                                            </p:panelGrid>
-                                        </div>
-                                    </p:fieldset>
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </p:panel>
 
-                    <p:panel header="Gestión del Proyecto" >
+                                    </p:tab>
 
-                        <p:tabView id="tabs" dynamic="true" style="margin-bottom: 10px;" >
-
-                            <!--<p:ajax event="tabChange" listener="{solicitudController.onTabChange}" update=":formprincipal:op, :formprincipal:botonsolicitud, :formprincipal:tabs:tabladisponiblesanticipo :formprincipal:tabs:tabladisponiblesadquisicion :formprincipal:tabs:tabladisponiblescertificacion, :formprincipal:tabs:tabladisponiblesreintegro" immediate="true" />-->
-
-                            <p:tab id="tabpresupuesto" title="Presupuesto Detallado" >
-
-                                <p:treeTable id="tablapresupuesto" value="#{presupuestoTareaController.root}" var="item" style="padding: 0px; width: 100%; margin: 0 auto; overflow: hidden;"  >
-                                    <p:column headerText="Etapa">
-                                        <h:outputText value="#{item.descripcion}" />
-                                    </p:column>
-                                    <p:column headerText="Rubro">
-                                        <h:outputText value="#{item.rubro.abreviado}" />
-                                    </p:column>
-                                    <p:column headerText="Cantidad"  style="text-align: right;" >
-                                        <h:outputText value="#{item.cantidad}" />
-                                    </p:column>
-                                    <p:column headerText="Costo Unitario"  style="text-align: right;" >
-                                        <h:outputText value="#{item.costounitario}" />
-                                    </p:column>
-                                    <p:column headerText="Total"  style="text-align: right;" >
-                                        <h:outputText value="#{item.total}" />
-                                    </p:column>
-                                    <p:columnGroup type="footer">
-                                        <p:row>
-                                            <p:column colspan="4" style="text-align:right" footerText="Totales:" />
-                                            <p:column footerText="#{presupuestoTareaController.sumatotal}" style="text-align: right;" />
-                                        </p:row>
-                                    </p:columnGroup>
-                                </p:treeTable>
-                            </p:tab>
-
-                            <p:tab id="trendicion" title="Rendición de Gastos" disabled="#{rendicionController.listaSolicitudes.size() eq 0}" >
-
-                                <p:dataTable id="tabladisponiblesrendicion" 
-                                             var="item" 
-                                             value="#{rendicionController.listaSolicitudes}" 
-                                             rowKey="#{item.id}" 
-                                             rowIndexVar="indice"
-                                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                             styleClass="tabla" style="margin-bottom: 10px;">
-                                    <!--selection="{rendicionController.solicitudSeleccionada}" >-->
-                                    <!--selection="{rendicionController.listaSolicitudesSeleccionadas}" >-->
-                                    <f:facet name="header">
-                                        Solicitudes abiertas pendientes de Rendición
-                                    </f:facet>
-                                    <!--<p:column selectionMode="multiple" style="width:16px;text-align:center"/>-->
-                                    <!--<p:column selectionMode="single" style="width:16px;text-align:center"/>-->
-                                    <p:column headerText="Descripción">
-                                        <h:outputText value="#{item.presupuestotarea.descripcion}" />
-                                    </p:column>
-                                    <p:column headerText="Fecha">
-                                        <h:outputText value="#{item.fechasolicitud}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Tipo">
-                                        <h:outputText value="#{item.tiposolicitudid.tiposolicitud}" />
-                                    </p:column>
-                                    <p:column headerText="Total">
-                                        <h:outputText value="#{item.importe}" />
-                                    </p:column>
-                                    <p:column style="width:32px;text-align: center">
-                                        <p:commandButton update=":formprincipal:growlprincipal, :formarchivorendicion " actionListener="#{archivorendicionController.nuevoArchivoRendicion()}" oncomplete="PF('dialogoItemRendicion').show();" icon="ui-icon-circle-plus" value="Subir Factura" title="Subir Factura" immediate="true" >
-                                            <f:setPropertyActionListener value="#{item}" target="#{rendicionController.solicitudSeleccionada}" />
-                                        </p:commandButton>
-                                    </p:column>
-                                </p:dataTable>
-
-                                <!--**********************************************-->
-                                <!--********* TABLA ARCHIVOS RENDICION ***********-->
-                                <!--**********************************************-->
-
-                                <p:dataTable id="tablafacturasrendicion" var="arc" value="#{archivorendicionController.listaArchivos}" 
-                                             rowIndexVar="indice"
-                                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                             styleClass="tabla" style="top: 5px; margin-bottom: 5px;">  
-                                    <f:facet name="header">
-                                        Facturas incorporadas a la Rendición
-                                    </f:facet>
-                                    <p:column headerText="N° de Factura">  
-                                        <h:outputText value="#{arc.nrofactura}" />  
-                                    </p:column> 
-                                    <p:column headerText="Archivo">  
-                                        <h:outputText value="#{arc.nombrearchivo}" />  
-                                    </p:column> 
-                                    <p:column headerText="Monto">  
-                                        <h:outputText value="#{arc.montofactura}" />  
-                                    </p:column> 
-                                    <p:column headerText="">  
-                                        <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" actionListener="#{archivorendicionController.removerArchivoLista(arc)}" update=":formprincipal:growlprincipal, :formprincipal:tabs:tablafacturasrendicion, :formarchivorendicion, :formprincipal:tabs:difrendicion" immediate="true"  >
-                                            <f:setPropertyActionListener value="#{arc}" target="#{archivorendicionController.selected}" />  
-                                        </p:commandButton>
-                                    </p:column> 
-                                    <f:facet name="footer">
-                                        El total Solicitado es $ #{archivorendicionController.sumarComprobantes()}
-                                    </f:facet>
-                                </p:dataTable>
-
-                                <p:outputPanel id="difrendicion"  >
-                                    <p:fieldset legend="Diferencia de la Rendición de Gastos" style="margin-bottom:20px" rendered="#{archivorendicionController.sumarComprobantes() > rendicionController.solicitudSeleccionada.importe.floatValue()}">
-
-                                        <h:outputText value="Explicación: "/>
-                                        <br />
-
-                                        <h:outputText value="Se creará un Reintegro por la diferencia entre la solicitud y la suma de comprobantes rendidos." rendered="#{rendicionController.solicitudSeleccionada.presupuestotarea.id == rendicionController.solicitudReintegroPorDiferencia.presupuestotarea.id}" />
-
-                                        <h:outputText value="Cuando el item que se solicitó, no tiene más dinero disponible en presupuesto y el comprobante o la suma de ellos (si son varios), supera/n el valor de la solicitud que se está rindiendo, se crea una nueva solicitud de reintegro por la diferencia, la cual debe estar enlazada a un item del presupuesto con dinero disponible." rendered="#{rendicionController.solicitudSeleccionada.presupuestotarea.id != rendicionController.solicitudReintegroPorDiferencia.presupuestotarea.id}" />
-
-                                        <h:panelGrid columns="2" cellpadding="5" rendered="#{rendicionController.solicitudSeleccionada.presupuestotarea.id != rendicionController.solicitudReintegroPorDiferencia.presupuestotarea.id}">
-                                            <p:outputLabel value="Item del presupuesto al que se acredita la diferencia" for="diferencia" />
-
-                                            <p:selectOneMenu id="diferencia" value="#{rendicionController.solicitudReintegroPorDiferencia}" var="s" required="true" requiredMessage="Se debe seleccionar un item del presupuesto con dinero disponible.">
-                                                <f:selectItem itemLabel="Seleccionar un item del presupuesto" itemValue="" />
-                                                <f:selectItems value="#{solicitudController.itemsDisponiblesNuevo}" var="solicitud" itemLabel="#{solicitud.presupuestotarea.descripcion}" itemValue="#{solicitud}" />
-                                                <p:column>
-                                                    <h:outputText value="#{s.presupuestotarea.descripcion}" />
-                                                </p:column>
-
-                                                <p:column>
-                                                    <h:outputText value="$#{s.disponible.floatValue()}" />
-                                                </p:column>
-                                            </p:selectOneMenu>
-                                        </h:panelGrid>
-                                    </p:fieldset>
-                                </p:outputPanel>
-
-                                <div align="center">
-                                    <p:commandButton action="#{rendicionController.create}" value="Crear Rendición" style="display: inline-block; margin-top: 5px;" icon="ui-icon-disk" update=":formprincipal:pprincipal" oncomplete="PF('dfinalrendicion').show();" immediate="true" />
-                                </div>
-
-                            </p:tab>
-
-                        </p:tabView>
-
-                        
-                    </p:panel>
-
-                    <p:separator />
-                    <br style="clear: both;"/>
-
-                    <p:commandButton action="#{proyectoController.prepareList}" value="Lista de Proyectos" immediate="true" style="display: inline-block; float: right;  margin-bottom: 10px;" icon="ui-icon-document" ajax="false" />
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block; float:right;   margin-bottom: 10px;" icon="ui-icon-home"  ajax="false" />
-
-                    <br style="clear: both;"/>
-                    <!--<p:separator/>-->
-                    <!--<h:link outcome="/index" value="Inicio"/>-->
-
-                </p:panel>
-
-                <p:dialog id="dfinalrendicion" widgetVar="dfinalrendicion" modal="true" header="Alta de Rendición"  >
-                    <h:panelGroup id="panelmensajerendicion" layout="block" >
-                        <p:messages id="mensajeRendicion" autoUpdate="true" showDetail="true" />
-                    </h:panelGroup>
-                    <p:separator />
-                    <div align="center" >
-                        <p:commandButton value="Volver a la Lista" action="#{rendicionController.prepareList()}" ajax="false" rendered=""  />
-                    </div>
-                </p:dialog>
-
-                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
-                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":formprincipal:tabs:tabladisponiblesrendicion, :formprincipal:tabs:tablafacturasrendicion" style="float:left;" /> 
-                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="float: right;" />
-                </p:confirmDialog>
-
-            </h:form>
-
-            <!--**********************************************-->
-            <!--************* DIALAGO RENDICION **************-->
-            <!--**********************************************-->
-
-            <p:dialog header="Factura" id="dialogoItemRendicion" widgetVar="dialogoItemRendicion" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                <h:form id="formarchivorendicion" enctype="multipart/form-data" >
-                    <!--<p:messages id="messages" showDetail="true" autoUpdate="true" />-->
-                    <p:panelGrid columns="2" rendered="#{not empty rendicionController.solicitudSeleccionada}" styleClass="panelgrid" columnClasses="right,right" >
-                        <f:facet name="header">
-                            <h:outputText value="Datos de la Factura" />
-                        </f:facet>
-
-                        <p:outputLabel value="Número de Factura" />
-                        <p:inputText id="dnrofactura" value="#{archivorendicionController.selected.nrofactura}" />
-
-                        <p:outputLabel value="Fecha de Factura" />
-                        <p:calendar id="dfechafactura" value="#{archivorendicionController.selected.fechafactura}" />
-
-                        <p:outputLabel value="Proveedor" />
-                        <p:inputText id="dproveedor" value="#{archivorendicionController.selected.proveedor}" />
-
-                        <p:outputLabel value="Monto de Factura" />
-                        <p:inputText  id="dmontofactura" value="#{archivorendicionController.selected.montofactura}"  >
-                            <!--<f:converter converterId="javax.faces.BigDecimal" />-->
-                            <f:convertNumber type="number" groupingUsed="false" locale="en-US"  /> 
-                            
-                            <!--<f:convertNumber type="number" groupingUsed="false" locale="es_AR"  />-->
-<!--                            <f:validateDoubleRange minimum="0" maximum="{solicitudController.selected.disponible}"/> -->
-                                <!--<f:validateDoubleRange minimum="0" />--> 
-                                <!--<p:ajax event="keyup" update="premontofactura"  />-->
-                        </p:inputText>    
-                        
-                        <p:outputLabel value="Archivo de Factura" />
-                        <p:fileUpload label="Imagen de Factura" id="ffactura" fileUploadListener="#{archivorendicionController.subirArchivoRendicion}" mode="advanced"  
-                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update=":formprincipal:growlprincipal"  >
-                        </p:fileUpload>    
-
-                        <p:outputLabel value="Observación" />
-                        <p:inputTextarea id="dobservacionFactura" value="#{archivorendicionController.selected.obsfactura}" />
-
-                    </p:panelGrid>
-
-                    <p:separator/>
-                    <div align="center" >
-                        <!--<p:commandButton value="Solicitar" actionListener="{solicitudController.agregarItemSolicitado}" update=":formprincipal:tabs:tabladisponiblesanticipo, :formprincipal:tabs:tabladisponiblesadquisicion, :formprincipal:tabs:tabladisponiblescertificacion, :formprincipal:tablasolicitudes, :formprincipal:growlprincipal"  oncomplete="PF('dialogoItemSolicitud').hide();" />--> 
-                        <p:commandButton value="Agregar Factura" actionListener="#{archivorendicionController.agregarArchivoLista()}" update=":formprincipal:tabs:tablafacturasrendicion, :formprincipal:tabs:difrendicion" oncomplete="PF('dialogoItemRendicion').hide();" />
-                    </div>
-                </h:form>
+                                </p:tabView>
 
 
-            </p:dialog>
+                            </p:panel>
 
-        </div>         </div>         </ui:define>
+                            <p:separator />
+                            <br style="clear: both;"/>
+
+                            <p:commandButton action="#{proyectoController.prepareList}" value="Lista de Proyectos" immediate="true" style="display: inline-block; float: right;  margin-bottom: 10px;" icon="ui-icon-document" ajax="false" />
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block; float:right;   margin-bottom: 10px;" icon="ui-icon-home"  ajax="false" />
+
+                            <br style="clear: both;"/>
+                            <!--<p:separator/>-->
+                            <!--<h:link outcome="/index" value="Inicio"/>-->
+
+                        </p:panel>
+
+                        <p:dialog id="dfinalrendicion" widgetVar="dfinalrendicion" modal="true" header="Alta de Rendición"  >
+                            <h:panelGroup id="panelmensajerendicion" layout="block" >
+                                <p:messages id="mensajeRendicion" autoUpdate="true" showDetail="true" />
+                            </h:panelGroup>
+                            <p:separator />
+                            <div align="center" >
+                                <p:commandButton value="Volver a la Lista" action="#{rendicionController.prepareList()}" ajax="false" rendered=""  />
+                            </div>
+                        </p:dialog>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":formprincipal:tabs:tabladisponiblesrendicion, :formprincipal:tabs:tablafacturasrendicion" style="float:left;" /> 
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="float: right;" />
+                        </p:confirmDialog>
+
+                    </h:form>
+
+                    <!--**********************************************-->
+                    <!--************* DIALAGO RENDICION **************-->
+                    <!--**********************************************-->
+
+                    <p:dialog header="Factura" id="dialogoItemRendicion" widgetVar="dialogoItemRendicion" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <h:form id="formarchivorendicion" enctype="multipart/form-data" >
+                            <!--<p:messages id="messages" showDetail="true" autoUpdate="true" />-->
+                            <p:panelGrid columns="2" rendered="#{not empty rendicionController.solicitudSeleccionada}" styleClass="panelgrid" columnClasses="right,right" >
+                                <f:facet name="header">
+                                    <h:outputText value="Datos de la Factura" />
+                                </f:facet>
+
+                                <p:outputLabel value="Número de Factura" />
+                                <p:inputText id="dnrofactura" value="#{archivorendicionController.selected.nrofactura}" />
+
+                                <p:outputLabel value="Fecha de Factura" />
+                                <p:calendar id="dfechafactura" value="#{archivorendicionController.selected.fechafactura}" />
+
+                                <p:outputLabel value="Proveedor" />
+                                <p:inputText id="dproveedor" value="#{archivorendicionController.selected.proveedor}" />
+
+                                <p:outputLabel value="Monto de Factura" />
+                                <p:inputText  id="dmontofactura" value="#{archivorendicionController.selected.montofactura}"  >
+                                    <!--<f:converter converterId="javax.faces.BigDecimal" />-->
+                                    <f:convertNumber type="number" groupingUsed="false" locale="en-US"  /> 
+
+                                    <!--<f:convertNumber type="number" groupingUsed="false" locale="es_AR"  />-->
+                                    <!--                            <f:validateDoubleRange minimum="0" maximum="{solicitudController.selected.disponible}"/> -->
+                                    <!--<f:validateDoubleRange minimum="0" />--> 
+                                    <!--<p:ajax event="keyup" update="premontofactura"  />-->
+                                </p:inputText>    
+
+                                <p:outputLabel value="Archivo de Factura" />
+                                <p:fileUpload label="Imagen de Factura" id="ffactura" fileUploadListener="#{archivorendicionController.subirArchivoRendicion}" mode="advanced"  
+                                              sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update=":formprincipal:growlprincipal"  >
+                                </p:fileUpload>    
+
+                                <p:outputLabel value="Observación" />
+                                <p:inputTextarea id="dobservacionFactura" value="#{archivorendicionController.selected.obsfactura}" />
+
+                            </p:panelGrid>
+
+                            <p:separator/>
+                            <div align="center" >
+                                <!--<p:commandButton value="Solicitar" actionListener="{solicitudController.agregarItemSolicitado}" update=":formprincipal:tabs:tabladisponiblesanticipo, :formprincipal:tabs:tabladisponiblesadquisicion, :formprincipal:tabs:tabladisponiblescertificacion, :formprincipal:tablasolicitudes, :formprincipal:growlprincipal"  oncomplete="PF('dialogoItemSolicitud').hide();" />--> 
+                                <p:commandButton value="Agregar Factura" actionListener="#{archivorendicionController.agregarArchivoLista()}" update=":formprincipal:tabs:tablafacturasrendicion, :formprincipal:tabs:difrendicion" oncomplete="PF('dialogoItemRendicion').hide();" />
+                            </div>
+                        </h:form>
+
+
+                    </p:dialog>
+
+                </div>    
+            </div>    
+        </ui:define>
     </ui:composition>
 
 </html>

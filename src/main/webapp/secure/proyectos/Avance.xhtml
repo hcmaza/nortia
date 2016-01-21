@@ -9,26 +9,28 @@
 
     <ui:composition template="/WEB-INF/template.xhtml">
 
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
-            <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
-            <script src="#{request.contextPath}/resources/js/exporting.js"></script>
-            <f:event type="preRenderView" listener="#{presupuestoController.findProyecto(proyectoController.selected.id)}" />
-            <f:event type="preRenderView" listener="#{presupuestoController.sumarGastosView()}" />
+        <ui:define name="content">   
+            <div class="Container100">       
+                <div class="ContainerIndent">
+                    <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
+                    <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
+                    <script src="#{request.contextPath}/resources/js/exporting.js"></script>
+                    <f:event type="preRenderView" listener="#{presupuestoController.findProyecto(proyectoController.selected.id)}" />
+                    <f:event type="preRenderView" listener="#{presupuestoController.sumarGastosView()}" />
 
-          
-            <h:form id="form" >
 
-                <p:tooltip/>
-                <p:commandButton value="Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogProyecto()}">
-        
-    </p:commandButton>
-                <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
-                    <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
+                    <h:form id="form" >
 
-        
+                        <p:tooltip/>
+                        <p:commandButton value="Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogProyecto()}">
+
+                        </p:commandButton>
+                        <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
+                            <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
+
+
                             <p:treeTable id="treetableetapas" value="#{etapaController.root}" var="document">
-                                
+
                                 <p:column headerText="Etapa/Tarea">
                                     <h:outputText value="#{document.tarea}" />
                                 </p:column>
@@ -60,13 +62,13 @@
 
                                     </p:outputLabel>
                                 </p:column>
-                                
+
                                 <p:column >
                                     <p:commandButton rendered="#{document.estado eq 0 }" id="ceditar" immediate="true" value="Editar" onclick="PF('dtarea').show()" update=":formd:pavance" action="#{tareaController.editarAvanceTarea(document)}"  >
-                                <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}" />  
-                            </p:commandButton>
-                                   
-                                    
+                                        <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}" />  
+                                    </p:commandButton>
+
+
                                 </p:column>
 
                             </p:treeTable>
@@ -100,227 +102,228 @@
                                 </div>
                             </p:panel>
 
-                       
-                </p:panel>
 
-                
+                        </p:panel>
 
-                <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"  />
 
-            </h:form>
-           
-            
-             <h:form id="formd">
 
-                     <p:dialog id="dtarea" header="Tarea" widgetVar="dtarea" resizable="false" showEffect="clip" hideEffect="fold" modal="true">  
+                        <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"  />
 
-                         <p:panel id="pavance" header="#{tareaController.selected.tarea} " >   
-                             
-                             <h:panelGrid >
-                                 <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                             <p:outputLabel id="descripcion" value="#{tareaController.selected.descripcion}" styleClass="Fright" title="Descripcion" />
-                            <div class="EmptyBox10 ShowOnMobile"></div>
-                            Descripción <br/>
-                            </div>
-                        <div class="SeparatorFull"></div>
-                             </h:panelGrid>
-                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                <p:outputLabel id="fechainicio" value="#{tareaController.selected.fechainicio}" styleClass="Fright" title="Fechainicio" >
-                                            <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </p:outputLabel>
-                            <div class="EmptyBox10 ShowOnMobile"></div>
-                            Fecha de inicio <br/>
-                            </div>
-                        <div class="SeparatorFull"></div>
-                            
-                            <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                <p:outputLabel id="dias" value="#{tareaController.selected.dias}" styleClass="Fright" title="Dias" />
-                             <div class="EmptyBox10 ShowOnMobile"></div>
-                            Días <br/>
-                            </div>
-                        <div class="SeparatorFull"></div>
-                           
-                                
-                            <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                <p:outputLabel id="dfechafin" value="#{tareaController.selected.fechafin}" styleClass="Fright" title="Fechafin" >
-                                           <f:convertDateTime pattern="dd/MM/yyyy" />
-                                 </p:outputLabel> 
-                            <div class="EmptyBox10 ShowOnMobile"></div>
-                            Fecha fin <br/>
-                            </div>
-                        <div class="SeparatorFull"></div>
-                        
-                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                 <p:outputLabel id="prioridad" value="#{tareaController.selected.prioridad}" styleClass="Fright" />
-                           <div class="EmptyBox10 ShowOnMobile"></div>
-                            Prioridad <br/>
-                            </div>
-                        <div class="SeparatorFull"></div>
-                             
-                            
-                           <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                <h:panelGrid styleClass="Fright" columns="2">
-                                    <h:panelGrid columns="1">     
-                                        <p:slider  minValue="0" maxValue="100" for="iavance2" animate="enable" style="width: 330px" />
-                                    </h:panelGrid>
-                                    <h:panelGrid columns="2">
-                                        <p:inputText required="true" requiredMessage="Ingrese el porcentaje de avance!" size="8" id="iavance2" value="#{tareaavanceController.selected.avance}" title="Avance"   />
-                                        <p:outputLabel value="%" />
-                                    </h:panelGrid>
+                    </h:form>
+
+
+                    <h:form id="formd">
+
+                        <p:dialog id="dtarea" header="Tarea" widgetVar="dtarea" resizable="false" showEffect="clip" hideEffect="fold" modal="true">  
+
+                            <p:panel id="pavance" header="#{tareaController.selected.tarea} " >   
+
+                                <h:panelGrid >
+                                    <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                        <p:outputLabel id="descripcion" value="#{tareaController.selected.descripcion}" styleClass="Fright" title="Descripcion" />
+                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                        Descripción <br/>
+                                    </div>
+                                    <div class="SeparatorFull"></div>
                                 </h:panelGrid>
-                                
-                            <div class="EmptyBox10 ShowOnMobile"></div>
-                            Avance <br/>
+                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                    <p:outputLabel id="fechainicio" value="#{tareaController.selected.fechainicio}" styleClass="Fright" title="Fechainicio" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:outputLabel>
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    Fecha de inicio <br/>
+                                </div>
+                                <div class="SeparatorFull"></div>
+
+                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                    <p:outputLabel id="dias" value="#{tareaController.selected.dias}" styleClass="Fright" title="Dias" />
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    Días <br/>
+                                </div>
+                                <div class="SeparatorFull"></div>
+
+
+                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                    <p:outputLabel id="dfechafin" value="#{tareaController.selected.fechafin}" styleClass="Fright" title="Fechafin" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:outputLabel> 
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    Fecha fin <br/>
+                                </div>
+                                <div class="SeparatorFull"></div>
+
+                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                    <p:outputLabel id="prioridad" value="#{tareaController.selected.prioridad}" styleClass="Fright" />
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    Prioridad <br/>
+                                </div>
+                                <div class="SeparatorFull"></div>
+
+
+                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                    <h:panelGrid styleClass="Fright" columns="2">
+                                        <h:panelGrid columns="1">     
+                                            <p:slider  minValue="0" maxValue="100" for="iavance2" animate="enable" style="width: 330px" />
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="2">
+                                            <p:inputText required="true" requiredMessage="Ingrese el porcentaje de avance!" size="8" id="iavance2" value="#{tareaavanceController.selected.avance}" title="Avance"   />
+                                            <p:outputLabel value="%" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    Avance <br/>
+                                </div>
+                                <div class="SeparatorFull"></div>
+
+
+
+
+
+
+                                <f:facet name="footer">
+                                    <div align="center" >
+
+                                        <p:commandButton id="botontareaok" value="OK" onclick="PF('dtarea').hide();
+                                                crearGrafico()" actionListener="#{tareaController.armarTareasAvancesProyecto()}" update=":form:contenedor :form:treetableetapas :form:beanvalue :forma:pinformeavanceavance "   ></p:commandButton>
+                                        <p:commandButton id="botontareacancelar" value="Cancelar" onclick="PF('dtarea').hide();" action="#{tareaController.editarAvanceTarea(null)}" ></p:commandButton>
+                                    </div>
+                                </f:facet>
+                            </p:panel>
+                        </p:dialog>
+
+
+
+
+                    </h:form>
+
+                    <h:form id="forme" >
+
+                        <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="false"  header="" >
+                            Felicitaciones Se envió el informe de avance!!!
+                            <div align="center" >
+
+                                <h:panelGrid columns="2">
+                                    <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfEtapas()}" ajax="false"  />
+                                    <p:commandButton value="OK" ajax="false" actionListener="#{proyectoController.reiniciarValoresProyecto}" action="List" onclick="PF('dfinal').hide();" />
+                                </h:panelGrid>
+
                             </div>
-                        <div class="SeparatorFull"></div>
-                        
-                       
-                           
 
-                    
+                        </p:dialog>
 
-                    <f:facet name="footer">
-                        <div align="center" >
-                           
-                            <p:commandButton id="botontareaok" value="OK" onclick="PF('dtarea').hide();crearGrafico()" actionListener="#{tareaController.armarTareasAvancesProyecto()}" update=":form:contenedor :form:treetableetapas :form:beanvalue :forma:pinformeavanceavance "   ></p:commandButton>
-                            <p:commandButton id="botontareacancelar" value="Cancelar" onclick="PF('dtarea').hide();" action="#{tareaController.editarAvanceTarea(null)}" ></p:commandButton>
-                        </div>
-                    </f:facet>
-                         </p:panel>
-                </p:dialog>
-                
-
-                 
-                 
-            </h:form>
-
-            <h:form id="forme" >
-                
-                <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="false"  header="" >
-                    Felicitaciones Se envió el informe de avance!!!
-                    <div align="center" >
-
-                        <h:panelGrid columns="2">
-                            <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfEtapas()}" ajax="false"  />
-                            <p:commandButton value="OK" ajax="false" actionListener="#{proyectoController.reiniciarValoresProyecto}" action="List" onclick="PF('dfinal').hide();" />
-                        </h:panelGrid>
-
-                    </div>
-
-                </p:dialog>
-
-            </h:form>
-            
-            
-            <h:form id="forma">
-
-                     <p:dialog id="dinformeavance" header="Informe de Avance de la Etapa" widgetVar="dinformeavance" resizable="false" showEffect="clip" hideEffect="fold" modal="true">  
-
-                         <p:panel id="pinformeavanceavance" header="#{tareaController.selected.etapaid.etapa} " >  
-                             
-                             <p:inputTextarea placeholder="Ingrese el o los resultados obtenidos de la etapa " value="#{tareaController.selected.etapaid.resultadoobtenido}" >
-                             </p:inputTextarea>
-                             <p:commandButton id="botontareaok" value="OK" onclick="PF('dinformeavance').hide();" actionListener="#{tareaavanceController.enviarInformeAvance()}" >
-                             </p:commandButton>
-                         </p:panel>
-                     </p:dialog>
-            </h:form>
-            
-            
-            
+                    </h:form>
 
 
-            <script type="text/javascript" >
-                $(function crearGrafico() {
-                    var chart;
+                    <h:form id="forma">
 
-                    chart = new Highcharts.Chart({
-                        chart: {
-                            renderTo: "containergrafico",
-                            type: 'columnrange',
-                            inverted: true
-                        },
-                        exporting: {
-                            enabled: true
-                        },
-                        title: {
-                            text: 'Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}'
-                        },
-                        xAxis: {
-                            categories: []
+                        <p:dialog id="dinformeavance" header="Informe de Avance de la Etapa" widgetVar="dinformeavance" resizable="false" showEffect="clip" hideEffect="fold" modal="true">  
 
-                        },
-                        yAxis: {
-                            tickInterval: 7 * 24 * 3600 * 1000,
-                            title: 'Date',
-                            type: 'datetime',
-                            dateTimeLabelFormats: {
-                                week: '%e. %b'
-                            },
-                            stackLabels: {
-                                style: {
-                                    color: 'white'
+                            <p:panel id="pinformeavanceavance" header="#{tareaController.selected.etapaid.etapa} " >  
+
+                                <p:inputTextarea placeholder="Ingrese el o los resultados obtenidos de la etapa " value="#{tareaController.selected.etapaid.resultadoobtenido}" >
+                                </p:inputTextarea>
+                                <p:commandButton id="botontareaok" value="OK" onclick="PF('dinformeavance').hide();" actionListener="#{tareaavanceController.enviarInformeAvance()}" >
+                                </p:commandButton>
+                            </p:panel>
+                        </p:dialog>
+                    </h:form>
+
+
+
+
+
+                    <script type="text/javascript" >
+                        $(function crearGrafico() {
+                            var chart;
+
+                            chart = new Highcharts.Chart({
+                                chart: {
+                                    renderTo: "containergrafico",
+                                    type: 'columnrange',
+                                    inverted: true
                                 },
-                                enabled: true,
-                                verticalAlign: 'middle',
-                                align: 'left'
-                            }
-                        },
-                        tooltip: {
-                            formatter: function () {
+                                exporting: {
+                                    enabled: true
+                                },
+                                title: {
+                                    text: 'Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}'
+                                },
+                                xAxis: {
+                                    categories: []
 
-                                return '<b>' + this.series.name + ':</b> ' + Highcharts.dateFormat('%e %b, %Y', this.point.low) + ' - ' + Highcharts.dateFormat('%e %b, %Y', this.point.high) + '<br/>';
+                                },
+                                yAxis: {
+                                    tickInterval: 7 * 24 * 3600 * 1000,
+                                    title: 'Date',
+                                    type: 'datetime',
+                                    dateTimeLabelFormats: {
+                                        week: '%e. %b'
+                                    },
+                                    stackLabels: {
+                                        style: {
+                                            color: 'white'
+                                        },
+                                        enabled: true,
+                                        verticalAlign: 'middle',
+                                        align: 'left'
+                                    }
+                                },
+                                tooltip: {
+                                    formatter: function () {
+
+                                        return '<b>' + this.series.name + ':</b> ' + Highcharts.dateFormat('%e %b, %Y', this.point.low) + ' - ' + Highcharts.dateFormat('%e %b, %Y', this.point.high) + '<br/>';
+                                    }
+                                },
+                                legend: {
+                                    enabled: true
+                                },
+                                series: [{
+                                        name: 'Inicio - Fin',
+                                        data: #{etapaController.data}
+                                    }, {
+                                        name: 'Actual',
+                                        data: #{etapaController.dataactual},
+                                        color: 'yellow'
+                                    }]
+                            });
+                            Highcharts.setOptions({
+                                lang: {
+                                    loading: 'Cargando...',
+                                    months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                    weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'],
+                                    shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                    exportButtonTitle: 'Exportar',
+                                    printButtonTitle: 'Importar',
+                                    rangeSelectorFrom: 'De',
+                                    rangeSelectorTo: 'A',
+                                    rangeSelectorZoom: 'Periodo',
+                                    downloadPNG: 'Descargar gráfico PNG',
+                                    downloadJPEG: 'Descargar gráfico JPEG',
+                                    downloadPDF: 'Descargar gráfico PDF',
+                                    downloadSVG: 'Descargar gráfico SVG',
+                                    printChart: 'Imprimir Gráfico',
+                                    thousandsSep: ',',
+                                    decimalPoint: '.'
+                                }
+                            });
+                            //chart.series[1].setData(eval(oneArray), false, true);
+                            // chart.series[0].setData(, false, true);
+                            chart.xAxis[0].setCategories(#{etapaController.gsoncategoria}, true, true);
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        function handleTareaAgentePresupuestoRequest(xhr, status, args) {
+                            if (!args.validation) {
+                                PF('dialogotareaagentepresupuesto').jq.effect("shake", {times: 5}, 100);
                             }
-                        },
-                        legend: {
-                            enabled: true
-                        },
-                        series: [{
-                                name: 'Inicio - Fin',
-                                data: #{etapaController.data}
-                            }, {
-                                name: 'Actual',
-                                data: #{etapaController.dataactual},
-                                color: 'yellow'
-                            }]
-                    });
-                    Highcharts.setOptions({
-                        lang: {
-                            loading: 'Cargando...',
-                            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'],
-                            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                            exportButtonTitle: 'Exportar',
-                            printButtonTitle: 'Importar',
-                            rangeSelectorFrom: 'De',
-                            rangeSelectorTo: 'A',
-                            rangeSelectorZoom: 'Periodo',
-                            downloadPNG: 'Descargar gráfico PNG',
-                            downloadJPEG: 'Descargar gráfico JPEG',
-                            downloadPDF: 'Descargar gráfico PDF',
-                            downloadSVG: 'Descargar gráfico SVG',
-                            printChart: 'Imprimir Gráfico',
-                            thousandsSep: ',',
-                            decimalPoint: '.'
+                            else {
+                                PF('dialogotareaagentepresupuesto').hide();
+
+                            }
                         }
-                    });
-                    //chart.series[1].setData(eval(oneArray), false, true);
-                    // chart.series[0].setData(, false, true);
-                    chart.xAxis[0].setCategories(#{etapaController.gsoncategoria}, true, true);
-                });
-            </script>
-            <script type="text/javascript">
-                function handleTareaAgentePresupuestoRequest(xhr, status, args) {
-                    if (!args.validation) {
-                        PF('dialogotareaagentepresupuesto').jq.effect("shake", {times: 5}, 100);
-                    }
-                    else {
-                        PF('dialogotareaagentepresupuesto').hide();
-
-                    }
-                }
-            </script>
-        </div>         
+                    </script>
+                </div>         
             </div>         
         </ui:define>
     </ui:composition>

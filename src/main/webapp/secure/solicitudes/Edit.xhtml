@@ -9,48 +9,52 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.EditSolicitudTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditSolicitudLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{solicitudController.selected.id}" title="#{bundle.EditSolicitudTitle_id}" required="true" requiredMessage="#{bundle.EditSolicitudRequiredMessage_id}"/>
-                    <h:outputLabel value="#{bundle.EditSolicitudLabel_fechasolicitud}" for="fechasolicitud" />
-                    <h:inputText id="fechasolicitud" value="#{solicitudController.selected.fechasolicitud}" title="#{bundle.EditSolicitudTitle_fechasolicitud}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.EditSolicitudLabel_fechaaprobacion}" for="fechaaprobacion" />
-                    <h:inputText id="fechaaprobacion" value="#{solicitudController.selected.fechaaprobacion}" title="#{bundle.EditSolicitudTitle_fechaaprobacion}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.EditSolicitudLabel_fechaejecucion}" for="fechaejecucion" />
-                    <h:inputText id="fechaejecucion" value="#{solicitudController.selected.fechaejecucion}" title="#{bundle.EditSolicitudTitle_fechaejecucion}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.EditSolicitudLabel_observacion}" for="observacion" />
-                    <h:inputText id="observacion" value="#{solicitudController.selected.observacion}" title="#{bundle.EditSolicitudTitle_observacion}" />
-                    <h:outputLabel value="#{bundle.EditSolicitudLabel_tiposolicitudid}" for="tiposolicitudid" />
-                    <h:selectOneMenu id="tiposolicitudid" value="#{solicitudController.selected.tiposolicitudid}" title="#{bundle.EditSolicitudTitle_tiposolicitudid}" >
-                        <f:selectItems value="#{tiposolicitudController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditSolicitudLabel_estadosolicitudid}" for="estadosolicitudid" />
-                    <h:selectOneMenu id="estadosolicitudid" value="#{solicitudController.selected.estadosolicitudid}" title="#{bundle.EditSolicitudTitle_estadosolicitudid}" >
-                        <f:selectItems value="#{estadosolicitudController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandLink action="#{solicitudController.update}" value="#{bundle.EditSolicitudSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditSolicitudViewLink}"/>
-                <br />
-                <h:commandLink action="#{solicitudController.prepareList}" value="#{bundle.EditSolicitudShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditSolicitudIndexLink}" />
-            </h:form>
-        </div>         </div>         </ui:define>
+        <ui:define name="content">     
+            <div class="Container100">        
+                <div class="ContainerIndent">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.EditSolicitudLabel_id}" for="id" />
+                            <h:inputText id="id" value="#{solicitudController.selected.id}" title="#{bundle.EditSolicitudTitle_id}" required="true" requiredMessage="#{bundle.EditSolicitudRequiredMessage_id}"/>
+                            <h:outputLabel value="#{bundle.EditSolicitudLabel_fechasolicitud}" for="fechasolicitud" />
+                            <h:inputText id="fechasolicitud" value="#{solicitudController.selected.fechasolicitud}" title="#{bundle.EditSolicitudTitle_fechasolicitud}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:inputText>
+                            <h:outputLabel value="#{bundle.EditSolicitudLabel_fechaaprobacion}" for="fechaaprobacion" />
+                            <h:inputText id="fechaaprobacion" value="#{solicitudController.selected.fechaaprobacion}" title="#{bundle.EditSolicitudTitle_fechaaprobacion}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:inputText>
+                            <h:outputLabel value="#{bundle.EditSolicitudLabel_fechaejecucion}" for="fechaejecucion" />
+                            <h:inputText id="fechaejecucion" value="#{solicitudController.selected.fechaejecucion}" title="#{bundle.EditSolicitudTitle_fechaejecucion}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:inputText>
+                            <h:outputLabel value="#{bundle.EditSolicitudLabel_observacion}" for="observacion" />
+                            <h:inputText id="observacion" value="#{solicitudController.selected.observacion}" title="#{bundle.EditSolicitudTitle_observacion}" />
+                            <h:outputLabel value="#{bundle.EditSolicitudLabel_tiposolicitudid}" for="tiposolicitudid" />
+                            <h:selectOneMenu id="tiposolicitudid" value="#{solicitudController.selected.tiposolicitudid}" title="#{bundle.EditSolicitudTitle_tiposolicitudid}" >
+                                <f:selectItems value="#{tiposolicitudController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="#{bundle.EditSolicitudLabel_estadosolicitudid}" for="estadosolicitudid" />
+                            <h:selectOneMenu id="estadosolicitudid" value="#{solicitudController.selected.estadosolicitudid}" title="#{bundle.EditSolicitudTitle_estadosolicitudid}" >
+                                <f:selectItems value="#{estadosolicitudController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:commandLink action="#{solicitudController.update}" value="#{bundle.EditSolicitudSaveLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="View" value="#{bundle.EditSolicitudViewLink}"/>
+                        <br />
+                        <h:commandLink action="#{solicitudController.prepareList}" value="#{bundle.EditSolicitudShowAllLink}" immediate="true"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.EditSolicitudIndexLink}" />
+                    </h:form>
+                </div>      
+            </div>   
+        </ui:define>
     </ui:composition>
 
 </html>

@@ -9,72 +9,76 @@
 
     <ui:composition template="/WEB-INF/template.xhtml">
 
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-           <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
-           <f:event type="preRenderView" listener="#{proyectoController.buscarProyectosAgenteTrue(agenteController.selected)}"></f:event>      
-            <h:form >
-                <p:panel id="pprincipal" header="Lista de Proyectos" >
+        <ui:define name="content">     
+            <div class="Container100">     
+                <div class="ContainerIndent">
+                    <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
+                    <f:event type="preRenderView" listener="#{proyectoController.buscarProyectosAgenteTrue(agenteController.selected)}"></f:event>      
+                    <h:form >
+                        <p:panel id="pprincipal" header="Lista de Proyectos" >
 
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                    </h:panelGroup>
-                    
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                            </h:panelGroup>
+
                             <p:dataTable widgetVar="wproyectos" paginator="true" id="proyectos" var="item" 
                                          value="#{proyectoController.items}" rowKey="#{item.id}"
                                          paginatorPosition="bottom" rows="10"
                                          rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
                                          styleClass="tabla" style="margin-bottom: 10px;"
                                          emptyMessage="No se encontraron resultados para el criterio de busqueda"> 
-                            <f:facet name="header">
-                                Proyectos
-                            </f:facet>
-                            <p:column id="columnaNombre">
                                 <f:facet name="header">
-                                    <h:outputText value="Titulo del proyecto"/>
+                                    Proyectos
                                 </f:facet>
-                                <h:outputText value="#{item.nombre}"/>
-                            </p:column>
-                            <p:column id="columnaAgente">
-                                <f:facet name="header">
-                                    <h:outputText value="Responsable"/>
-                                </f:facet>
-                                <h:outputText value="#{item.agenteid.apellido}, #{item.agenteid.nombres}"/>
-                            </p:column>
-                            <p:column id="columnaTipoProyecto">
-                                <f:facet name="header">
-                                    <h:outputText value="Tipo de Proyecto"/>
-                                </f:facet>
-                                <h:outputText value="#{item.tipoproyectoid.tipo}"/>
-                            </p:column>
-                            <p:column id="columnaConvocatoria">
-                                <f:facet name="header">
-                                    <h:outputText value="Convocatoria"/>
-                                </f:facet>
-                                <h:outputText value="#{item.convocatoriaid.convocatoria}"/> 
-                            </p:column>
-                            <p:column id="columnaEstado">
-                                <f:facet name="header">
-                                    <h:outputText value="Estado" />
-                                </f:facet>                        
-                                <h:outputText value="#{item.estadoproyectoid.estado}"/>
-                            </p:column>
-                             <p:column id="columnaAccion">    
-                                 <h:commandLink action="#{proyectoController.pdfEstadoProyecto()}" >  
-                                    <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
-                                    <p:graphicImage value="/resources/img/pdf.png" />  
-                                </h:commandLink>   
-                            </p:column>
-                        </p:dataTable>
+                                <p:column id="columnaNombre">
+                                    <f:facet name="header">
+                                        <h:outputText value="Titulo del proyecto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </p:column>
+                                <p:column id="columnaAgente">
+                                    <f:facet name="header">
+                                        <h:outputText value="Responsable"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.agenteid.apellido}, #{item.agenteid.nombres}"/>
+                                </p:column>
+                                <p:column id="columnaTipoProyecto">
+                                    <f:facet name="header">
+                                        <h:outputText value="Tipo de Proyecto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.tipoproyectoid.tipo}"/>
+                                </p:column>
+                                <p:column id="columnaConvocatoria">
+                                    <f:facet name="header">
+                                        <h:outputText value="Convocatoria"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.convocatoriaid.convocatoria}"/> 
+                                </p:column>
+                                <p:column id="columnaEstado">
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado" />
+                                    </f:facet>                        
+                                    <h:outputText value="#{item.estadoproyectoid.estado}"/>
+                                </p:column>
+                                <p:column id="columnaAccion">    
+                                    <h:commandLink action="#{proyectoController.pdfEstadoProyecto()}" >  
+                                        <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                        <p:graphicImage value="/resources/img/pdf.png" />  
+                                    </h:commandLink>   
+                                </p:column>
+                            </p:dataTable>
 
-                    <br />
-                    <p:dialog id="dfinal" widgetVar="dfinal" resizable="false"  modal="true" closable="true"  header="Error">
-                        No existen registros a exportar.
-                    </p:dialog> 
-                    <br />
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" icon="ui-icon-home" ajax="false"/>
-                </p:panel>
-            </h:form>
-        </div>         </div>         </ui:define>
+                            <br />
+                            <p:dialog id="dfinal" widgetVar="dfinal" resizable="false"  modal="true" closable="true"  header="Error">
+                                No existen registros a exportar.
+                            </p:dialog> 
+                            <br />
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" icon="ui-icon-home" ajax="false"/>
+                        </p:panel>
+                    </h:form>
+                </div>     
+            </div>      
+        </ui:define>
     </ui:composition>
 
 </html>

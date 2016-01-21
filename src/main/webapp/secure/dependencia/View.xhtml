@@ -10,47 +10,51 @@
         <ui:define name="title">
             <h:outputText value="Ver Dependencia"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:form>
-                <p:panel id="pprincipal" header="Ver Dependencia" >
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                    </h:panelGroup>
+        <ui:define name="content">   
+            <div class="Container100"> 
+                <div class="ContainerIndent">
+                    <h:form>
+                        <p:panel id="pprincipal" header="Ver Dependencia" >
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                            </h:panelGroup>
 
-                    <p:fieldset legend="Información de la Dependencia">
-                        <p:panelGrid styleClass="sinBordes sinFondo" style="width: 100%;">
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Nro" for="dependenciaid" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText id="dependenciaid" value="#{dependenciaController.selected.id}" title="Nro" style="font-weight: bold;"  />
-                                </p:column>
-                            </p:row>
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Dependencia" for="dependencia" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <h:outputText id="dependencia" value="#{dependenciaController.selected.dependencia}" title="Beneficiario" />
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </p:fieldset>
+                            <p:fieldset legend="Información de la Dependencia">
+                                <p:panelGrid styleClass="sinBordes sinFondo" style="width: 100%;">
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Nro" for="dependenciaid" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText id="dependenciaid" value="#{dependenciaController.selected.id}" title="Nro" style="font-weight: bold;"  />
+                                        </p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Dependencia" for="dependencia" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <h:outputText id="dependencia" value="#{dependenciaController.selected.dependencia}" title="Beneficiario" />
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:fieldset>
 
-                    
-                    
-                    <p:separator />
 
-                    <p:commandButton action="#{dependenciaController.prepareCreate}" value="Nueva Dependencia" style="display: inline-block;" icon="ui-icon-plus"  ajax="false" />
-                    <p:commandButton action="#{dependenciaController.prepareList}" value="Lista de Dependencias" style="display: inline-block; float:right;" icon="ui-icon-document" ajax="false" />
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block; float:right;" icon="ui-icon-home" ajax="false" />                    
-                    <br/>
-                    <p:separator />
 
-                </p:panel>
-            </h:form>
-        </div>         </div>         </ui:define>
+                            <p:separator />
+
+                            <p:commandButton action="#{dependenciaController.prepareCreate}" value="Nueva Dependencia" style="display: inline-block;" icon="ui-icon-plus"  ajax="false" />
+                            <p:commandButton action="#{dependenciaController.prepareList}" value="Lista de Dependencias" style="display: inline-block; float:right;" icon="ui-icon-document" ajax="false" />
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block; float:right;" icon="ui-icon-home" ajax="false" />                    
+                            <br/>
+                            <p:separator />
+
+                        </p:panel>
+                    </h:form>
+                </div>    
+            </div> 
+        </ui:define>
     </ui:composition>
 
 </html>

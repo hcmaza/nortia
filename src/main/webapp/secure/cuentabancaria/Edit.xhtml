@@ -9,32 +9,36 @@
         <ui:define name="title">
             <h:outputText value="#{bundle.EditCuentabancariaTitle}"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditCuentabancariaLabel_numerocuenta}" for="numerocuenta" />
-                    <h:inputText id="numerocuenta" value="#{cuentabancariaController.selected.numerocuenta}" title="#{bundle.EditCuentabancariaTitle_numerocuenta}" required="true" requiredMessage="#{bundle.EditCuentabancariaRequiredMessage_numerocuenta}"/>
-                    <h:outputLabel value="#{bundle.EditCuentabancariaLabel_cbu}" for="cbu" />
-                    <h:inputText id="cbu" value="#{cuentabancariaController.selected.cbu}" title="#{bundle.EditCuentabancariaTitle_cbu}" />
-                    <h:outputLabel value="#{bundle.EditCuentabancariaLabel_bancoid}" for="bancoid" />
-                    <h:selectOneMenu id="bancoid" value="#{cuentabancariaController.selected.bancoid}" title="#{bundle.EditCuentabancariaTitle_bancoid}" >
-                        <f:selectItems value="#{bancoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandLink action="#{cuentabancariaController.update}" value="#{bundle.EditCuentabancariaSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditCuentabancariaViewLink}"/>
-                <br />
-                <h:commandLink action="#{cuentabancariaController.prepareList}" value="#{bundle.EditCuentabancariaShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditCuentabancariaIndexLink}" />
-            </h:form>
-        </div>         </div>         </ui:define>
+        <ui:define name="content">    
+            <div class="Container100">  
+                <div class="ContainerIndent">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.EditCuentabancariaLabel_numerocuenta}" for="numerocuenta" />
+                            <h:inputText id="numerocuenta" value="#{cuentabancariaController.selected.numerocuenta}" title="#{bundle.EditCuentabancariaTitle_numerocuenta}" required="true" requiredMessage="#{bundle.EditCuentabancariaRequiredMessage_numerocuenta}"/>
+                            <h:outputLabel value="#{bundle.EditCuentabancariaLabel_cbu}" for="cbu" />
+                            <h:inputText id="cbu" value="#{cuentabancariaController.selected.cbu}" title="#{bundle.EditCuentabancariaTitle_cbu}" />
+                            <h:outputLabel value="#{bundle.EditCuentabancariaLabel_bancoid}" for="bancoid" />
+                            <h:selectOneMenu id="bancoid" value="#{cuentabancariaController.selected.bancoid}" title="#{bundle.EditCuentabancariaTitle_bancoid}" >
+                                <f:selectItems value="#{bancoController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:commandLink action="#{cuentabancariaController.update}" value="#{bundle.EditCuentabancariaSaveLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="View" value="#{bundle.EditCuentabancariaViewLink}"/>
+                        <br />
+                        <h:commandLink action="#{cuentabancariaController.prepareList}" value="#{bundle.EditCuentabancariaShowAllLink}" immediate="true"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.EditCuentabancariaIndexLink}" />
+                    </h:form>
+                </div>     
+            </div>  
+        </ui:define>
     </ui:composition>
 
 </html>

@@ -8,671 +8,675 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition template="/WEB-INF/template.xhtml">
-       
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-            <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
-<script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
-<script src="#{request.contextPath}/resources/js/exporting.js"></script>
-            <f:event type="preRenderView" listener="#{presupuestoController.findProyecto(proyectoController.selected.id)}" />
-            <f:event type="preRenderView" listener="#{presupuestoController.sumarGastosEdit}" />
-           
-            
- <h:form id="form" >
 
-              
-                <p:tooltip/>
-
-                <p:commandButton value="Idea Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogIdeaProyecto()}">
-        
-    </p:commandButton>
-                <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
-
-                    <p:tabView id="tabview1" >
-
-                        <p:tab id="panelequipo" title="Equipo de Trabajo" >
-                                                          
-
-                                            <div align="center">
-                                                <p:dataTable id="agentesa" value="#{proyectoAgenteController.equipotrabajo}" 
-                                                             var="agentea" editable="true" editMode="cell" 
-                                                             rowIndexVar="indice" 
-                                                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             styleClass="tabla">
-                                                    <f:facet name="header">
-                                                        Equipo de Trabajo de la Idea-Proyecto
-                                                    </f:facet>
-                                                    <p:column styleClass="TexAlCenter">
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Cuil"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{agentea.agente.cuil}"/>
-                                                    </p:column>
-                                                    <p:column styleClass="TexAlCenter">
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Nombre y Apellido"/>
-                                                        </f:facet>
-                                                        <h:outputText value="#{agentea.agente.apellido}, #{agentea.agente.nombres}"/>
-                                                    </p:column>
-                                                    
-                                                    <p:column styleClass="TexAlCenter" >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Función en el Proyecto" style="font-weight: bold;" title="Ingrese la función del agente en el proyecto." />
-                                                        </f:facet>
-                                                        
-                                                                <h:outputText id="outputfuncion" value="#{agentea.funcionproyecto}" title="Función que va cumplir el agente en el proyecto." />
-                                                                <p:tooltip id="toolTipOutputFuncion" for="outputfuncion" showEvent="focus" hideEvent="blur" />
-                                                          
-                                                    </p:column>   
-                                                   
-                                                    
-                                                    <p:column styleClass="TexAlCenter" style="vertical-align: middle;" >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Participación" style="font-weight: bold;" title="Click e indique si el agente es consultor externo." />
-                                                        </f:facet>
-                                                        <h:outputLabel  id="labelConsultorexterno" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  /> 
-                                                          
-                                                               
-                                                    </p:column>   
-                                                    <p:column styleClass="TexAlCenter">
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="horas dedicadas al proyecto por semana." />
-                                                        </f:facet>
-                                                       
-                                                                <h:outputText id="horasdedicacion" value="#{agentea.horasdisponibles}" title="Horas que va a dedicar el agente al proyecto por semana." />
-                                                                <p:tooltip id="toolTipHorasDedicacion" for="horasdedicacion" showEvent="focus" hideEvent="blur" />
-                                                            
-                                                    </p:column>
-                                                    <p:column styleClass="TexAlCenter">
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Honorario * mes" style="font-weight: bold;" title="Honorarios." />
-                                                        </f:facet>
-                                                              
-                                                                <h:outputText id="honorario" value="#{agentea.honorario}" title="Honorario que el Consultor Externo cobra" />
-                                                                <p:tooltip id="toolTipHonorario" for="honorario" showEvent="focus" hideEvent="blur" />
-                                                           
-                                                    </p:column>
-
-                                                    
-                                                    
-                                                    
-                                                </p:dataTable>
-
-                                            </div>
-
-                            
-                            
-                        </p:tab>
-
-                        <p:tab id="paneletapas" title="Plan de Trabajo">
-
-                            
-
-                            <p:treeTable id="treetableetapas" value="#{etapaController.root}" var="document">
-                                
-                                <p:column headerText="Etapa/Tarea">
-                                    <h:outputText value="#{document.tarea}" />
-                                </p:column>
-                                <p:column headerText="Fecha Inicio">
-                                    <h:outputText value="#{document.fechainicio}" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:outputText>
-                                </p:column>
-                                <p:column headerText="Fecha Fin">
-                                    <h:outputText value="#{document.fechafin}" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:outputText>
-                                </p:column>
-                                <p:column headerText="Dias">
-                                    <h:outputText value="#{document.dias}" >
-
-                                    </h:outputText>
-                                </p:column>
-                                <p:column headerText="Equipo">
-
-                                    <ui:repeat value="#{document.tareaAgenteList}" var="ta"  >
-                                        <p:outputLabel value="#{ta.agenteid.apellido},#{ta.agenteid.nombres} (#{ta.funcion})"  />
-                                        <br />      
-
-                                    </ui:repeat>
-                                </p:column>
-                                <p:column >
-                                    <p:commandButton title="Ver" rendered="#{document.estado eq null}" onclick="PF('dialogoetapa').show()" update=":forme:etapa :forme:tareasdeproyecto :forme:cetapa " action="#{etapaController.prepararEditarEtapaTreeTable(document)}" icon="ui-icon-search" immediate="true" style="margin: 3px;" />
-
-                                </p:column>  
-                            </p:treeTable>
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/excel.png" />  
-                                <p:dataExporter type="xls" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/pdf.png" />  
-                                <p:dataExporter type="pdf" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/csv.png" />  
-                                <p:dataExporter type="csv" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/xml.png" />  
-                                <p:dataExporter type="xml" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-                            <br />
-                            <br />
-                            <p:panel id="contenedor" header="Gantt" toggleable="true" toggleTitle="Ver Gantt"  >
-
-                                <div id="containergrafico"   >
+        <ui:define name="content">     
+            <div class="Container100">      
+                <div class="ContainerIndent">
+                    <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
+                    <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
+                    <script src="#{request.contextPath}/resources/js/exporting.js"></script>
+                    <f:event type="preRenderView" listener="#{presupuestoController.findProyecto(proyectoController.selected.id)}" />
+                    <f:event type="preRenderView" listener="#{presupuestoController.sumarGastosEdit}" />
 
 
-                                </div>
-                            </p:panel>
+                    <h:form id="form" >
 
-                        </p:tab>
 
-                        <p:tab title="Presupuesto" >
+                        <p:tooltip/>
 
-                            <p:treeTable id="tablepresupuesto" value="#{presupuestoTareaController.root}" var="item" 
-                                         style="padding: 0px; width: 100%; margin: 0 auto; overflow: hidden;" >
-                                
-                                <p:column headerText="Etapa">
-                                    <h:outputText value="#{item.descripcion}" />
-                                </p:column>
-                                <p:column headerText="Rubro">
-                                    <h:outputText value="#{item.rubro.rubro}" />
-                                </p:column>
-                                <p:column headerText="Costo Unitario">
-                                    <h:outputText value="#{item.costounitario}" />
-                                </p:column>
-                                <p:column headerText="Cantidad">
-                                    <h:outputText value="#{item.cantidad}" />
-                                </p:column>
-                                <p:column headerText="Aporte Comitente">
-                                    <h:outputText value="#{item.aportecomitente}" />
-                                </p:column>
-                                <p:column headerText="Aporte Univeridad">
-                                    <h:outputText value="#{item.aporteuniversidad}" />
-                                </p:column>
-                                <p:column headerText="Aporte Organismo">
-                                    <h:outputText value="#{item.aporteorganismo}" />
-                                </p:column>
-                                <p:column headerText="Total">
-                                    <h:outputText value="#{item.total}" />
-                                </p:column>
-                                <p:columnGroup type="footer">
-                                    <p:row>
-                                        <p:column colspan="4" style="text-align:right" footerText="Totales:" />
+                        <p:commandButton value="Idea Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogIdeaProyecto()}">
 
-                                        <p:column footerText="#{presupuestoTareaController.sumagastocomitente}" />
+                        </p:commandButton>
+                        <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
 
-                                        <p:column footerText="#{presupuestoTareaController.sumagastouniversidad}" />
+                            <p:tabView id="tabview1" >
 
-                                        <p:column footerText="#{presupuestoTareaController.sumagastoorganismo}" />
+                                <p:tab id="panelequipo" title="Equipo de Trabajo" >
 
-                                        <p:column footerText="#{presupuestoTareaController.sumatotal}" />
 
-                                    </p:row>
-                                </p:columnGroup>
-                            </p:treeTable>
-                            <div align="center" >
-                                <h:panelGrid id="pchartpresupuesto" columns="2" styleClass="left,right" >
-                                    <p:chart type="pie" id="chartaportes" model="#{presupuestoTareaController.pieModelAportes}" 
-                                             style="width:15%;height:300px" /> 
-                                    <p:chart type="pie" id="chartrubros" model="#{presupuestoTareaController.pieModelRubros}" 
-                                             style="width:15%;height:300px"  /> 
+                                    <div align="center">
+                                        <p:dataTable id="agentesa" value="#{proyectoAgenteController.equipotrabajo}" 
+                                                     var="agentea" editable="true" editMode="cell" 
+                                                     rowIndexVar="indice" 
+                                                     rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                     styleClass="tabla">
+                                            <f:facet name="header">
+                                                Equipo de Trabajo de la Idea-Proyecto
+                                            </f:facet>
+                                            <p:column styleClass="TexAlCenter">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Cuil"/>
+                                                </f:facet>
+                                                <h:outputText value="#{agentea.agente.cuil}"/>
+                                            </p:column>
+                                            <p:column styleClass="TexAlCenter">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombre y Apellido"/>
+                                                </f:facet>
+                                                <h:outputText value="#{agentea.agente.apellido}, #{agentea.agente.nombres}"/>
+                                            </p:column>
 
-                                </h:panelGrid>
-                            </div>
-                        </p:tab> 
+                                            <p:column styleClass="TexAlCenter" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Función en el Proyecto" style="font-weight: bold;" title="Ingrese la función del agente en el proyecto." />
+                                                </f:facet>
 
-                        <p:tab title="Documentación" >
+                                                <h:outputText id="outputfuncion" value="#{agentea.funcionproyecto}" title="Función que va cumplir el agente en el proyecto." />
+                                                <p:tooltip id="toolTipOutputFuncion" for="outputfuncion" showEvent="focus" hideEvent="blur" />
 
-                            <p:fieldset legend="Archivos" >
-                                <h:panelGrid cellpadding="2" cellspacing="10" columnClasses="right,left" columns="3">    
+                                            </p:column>   
 
-                                   
-                                    <p:dataTable id="tdocumentacionnombre1" var="arc" 
-                                                 value="#{archivoproyectoController.collectorArchivoProyecto}" 
-                                                 rowIndexVar="indice"
-                                                 rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                 styleClass="tabla">  
 
-                                        <p:column headerText="Archivos">  
-                                            <h:outputText value="#{arc.nombre}" />  
-                                        </p:column> 
-                                        <p:column headerText="">  
-                                            <p:commandLink rendered="#{arc.proyectoid.id ==null}" immediate="true" value="Eliminar" action="#{archivoproyectoController.removerArchivoCollection}" update=":form:tabview1:tdocumentacionnombre1"  >
-                                                <f:setPropertyActionListener value="#{arc}" target="#{archivoproyectoController.selected}" />  
-                                            </p:commandLink>
-                                        </p:column> 
-                                    </p:dataTable>
+                                            <p:column styleClass="TexAlCenter" style="vertical-align: middle;" >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Participación" style="font-weight: bold;" title="Click e indique si el agente es consultor externo." />
+                                                </f:facet>
+                                                <h:outputLabel  id="labelConsultorexterno" value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  /> 
 
-                                </h:panelGrid>
-                            </p:fieldset>
 
-                        </p:tab>
-                    </p:tabView>
-                </p:panel>
- 
-                        <br />
+                                            </p:column>   
+                                            <p:column styleClass="TexAlCenter">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="horas dedicadas al proyecto por semana." />
+                                                </f:facet>
 
-                        <div align="center" >
-                            <p:commandButton value="Imprimir" actionListener="List" />
-                        </div>
-                       <br />
+                                                <h:outputText id="horasdedicacion" value="#{agentea.horasdisponibles}" title="Horas que va a dedicar el agente al proyecto por semana." />
+                                                <p:tooltip id="toolTipHorasDedicacion" for="horasdedicacion" showEvent="focus" hideEvent="blur" />
 
-               <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"  />
+                                            </p:column>
+                                            <p:column styleClass="TexAlCenter">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Honorario * mes" style="font-weight: bold;" title="Honorarios." />
+                                                </f:facet>
 
-            </h:form>
-            <h:form id="formd">
+                                                <h:outputText id="honorario" value="#{agentea.honorario}" title="Honorario que el Consultor Externo cobra" />
+                                                <p:tooltip id="toolTipHonorario" for="honorario" showEvent="focus" hideEvent="blur" />
 
-                <p:dialog id="dtarea" header="Tarea en Etapa #{etapaController.selected.etapa}" widgetVar="dtarea" resizable="false" onShow="PF('wizardtarea').select(0);" width="835px" responsive="true" 
-                          showEffect="clip" hideEffect="fold" modal="true">  
+                                            </p:column>
 
-                    <p:tabView id="wizardtarea" activeIndex="0" widgetVar="wizardtarea" >
 
-                        <p:tab id="tab1" title="Tarea" >
 
-                            <h:panelGrid >
 
-                               
-                                        <p:outputLabel style="font-weight: bold" value="Tarea:" for="tarea" />
-                                   
-                                        <p:inputText  size="100" required="true" id="tarea" value="#{tareaController.selected.tarea}" title="Tarea" />
-                                  
-                                
-                                        <p:outputLabel style="font-weight: bold" value="Descripcion:" for="descripcion" />
-                                    
-                                        <p:inputTextarea cols="100" rows="3" id="descripcion" value="#{tareaController.selected.descripcion}" title="Descripcion" />
-                             </h:panelGrid>
-                             <p:panelGrid>
-                                <p:row>
-                                    <p:column>
-                                        <p:outputLabel style="font-weight: bold" value="Fecha de Inicio:" for="fechainicio" />
-                                    </p:column>
-                                    <p:column styleClass="center">
-                                        <p:calendar size="11" required="true" id="fechainicio" showOn="button" value="#{tareaController.selected.fechainicio}" title="Fechainicio" >
-                                            <p:ajax event="dateSelect" update=":formd:wizardtarea:dfechafin" /> 
-                                        </p:calendar>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel style="font-weight: bold" value="Dias:" for="dias" />
-                                    </p:column>
-                                    <p:column styleClass="center">
-                                        <p:spinner size="5" min="1" required="true" id="dias" value="#{tareaController.selected.dias}" title="Dias" >
-                                            <p:ajax event="change" listener="#{tareaController.sumarDias}" update=":formd:wizardtarea:dfechafin" process="@this" />
-                                            <p:ajax event="keyup" listener="#{tareaController.sumarDias}" update=":formd:wizardtarea:dfechafin" process="@this" />
-                                        </p:spinner>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel style="font-weight: bold" value="Fecha Fin:" for="dfechafin" />
-                                    </p:column>
-                                    <p:column styleClass="center">
-                                        <p:calendar size="11" id="dfechafin" required="true" showOn="button" value="#{tareaController.selected.fechafin}"  title="Fechafin" >
-                                            <p:ajax event="dateSelect" listener="#{tareaController.calcularDiferenciaDias}" update=":formd:wizardtarea:dias" /> 
-                                        </p:calendar> 
-                                    </p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column>
-                                        <p:outputLabel style="font-weight: bold" value="Prioridad:" for="prioridad" />
-                                    </p:column>
-                                    <p:column styleClass="center">
-                                        <p:selectOneMenu id="prioridad" value="#{tareaController.selected.prioridad}">
-                                            <p:ajax update="@this" />
-                                            <f:selectItem itemLabel="Alta" itemValue="Alta" />
-                                            <f:selectItem itemLabel="Media" itemValue="Media" />
-                                            <f:selectItem itemLabel="Baja" itemValue="Baja" />
-                                        </p:selectOneMenu>
-                                    </p:column>
-                                    <p:column>
-                                        <p:outputLabel style="font-weight: bold" value="Avance:"   />
-                                    </p:column>
-                                    <p:column colspan="2">
-                                        <p:slider minValue="0" maxValue="100" for="iavance"   />
-                                    </p:column>
-                                    <p:column styleClass="center" >
-                                        <p:inputText size="8" id="iavance" value="#{tareaController.selected.avance}" title="Avance"  />
-                                        <p:outputLabel style="font-weight: bold" value="%" />
-                                    </p:column>
-                                </p:row>
-                            </p:panelGrid>
-                        </p:tab>
-                        <p:tab id="tab2" title="Equipo de trabajo">
-                            <!--      <div align="right" >
-                                      <p:commandButton value="Agregar Persona" onclick="PF('dregistrar').show();" ></p:commandButton>
-                                  </div> -->
-                            <p:dataTable id="tagentes" value="#{tareaAgenteController.tareasagentes}" var="tareaagente" 
-                                         editable="true" editMode="cell" 
-                                         rowIndexVar="indice"
-                                         rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                         styleClass="tabla"
-                                         >
+                                        </p:dataTable>
 
-                               
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="N° Documento"/>
-                                    </f:facet>
-                                    <h:outputText value="#{tareaagente.agenteid.numerodocumento}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Apellido"/>
-                                    </f:facet>
-                                    <h:outputText value="#{tareaagente.agenteid.apellido}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombres"/>
-                                    </f:facet>
-                                    <h:outputText value="#{tareaagente.agenteid.nombres}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Email"/>
-                                    </f:facet>
-                                    <h:outputText value="#{tareaagente.agenteid.email}"/>
-                                </p:column>
+                                    </div>
 
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Profesion"/>
-                                    </f:facet>
-                                    <h:outputText value="#{tareaagente.agenteid.profesion}"/>
-                                </p:column>
 
-                                <p:column headerText="Función en la Tarea">
-                                    <h:outputText value="#{tareaagente.funcion}"  />
 
-                                </p:column>
-                                <p:column headerText="Horas Dedicadas" >
+                                </p:tab>
 
-                                    <h:outputText value="#{tareaagente.horasdedicadas eq null ? 'No aplicable':tareaagente.horasdedicadas}" />
+                                <p:tab id="paneletapas" title="Plan de Trabajo">
 
-                                </p:column>
 
-                                
-                            </p:dataTable>
 
-                        </p:tab>
+                                    <p:treeTable id="treetableetapas" value="#{etapaController.root}" var="document">
 
-                        <p:tab id="tab3"  title="Presupuesto/Tarea">
-
-                            <p:tabView id="tabrubros" value="#{rubroController.rubroslist}" var="rub" orientation="left"  >
-                                <p:tab title="#{rub.abreviado}" >
-
-                                    
-
-                                    <p:dataTable id="tablepresupuestotarea" value="#{presupuestoTareaController.buscarRubroenlistaPresupuestoTarea(rub)}"  
-                                                 var="item" 
-                                                 rowIndexVar="indice"
-                                                 rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                 styleClass="tabla">
-                                        <f:facet name="header">
-                                            Rubro #{rub.rubro}
-                                        </f:facet>
-
-                                        <!--                                    <p:column headerText="Rubro">
-                                                                                    <h:outputText value="{item.rubro.rubro}" />
-                                                                                </p:column>    -->
-
-                                        <p:column headerText="Descripcion">
-                                            <h:outputText value="#{item.descripcion}"/>
+                                        <p:column headerText="Etapa/Tarea">
+                                            <h:outputText value="#{document.tarea}" />
                                         </p:column>
-                                        <!--                                        <p:column headerText="Costo Unitario">
-                                                                                    <h:outputText value="{item.costounitario}"/>
-                                                                                </p:column>
-                                                                                <p:column headerText="Cantidad">
-                                                                                    <h:outputText value="{item.cantidad}"/>
-                                                                                </p:column>-->
+                                        <p:column headerText="Fecha Inicio">
+                                            <h:outputText value="#{document.fechainicio}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Fecha Fin">
+                                            <h:outputText value="#{document.fechafin}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Dias">
+                                            <h:outputText value="#{document.dias}" >
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Equipo">
+
+                                            <ui:repeat value="#{document.tareaAgenteList}" var="ta"  >
+                                                <p:outputLabel value="#{ta.agenteid.apellido},#{ta.agenteid.nombres} (#{ta.funcion})"  />
+                                                <br />      
+
+                                            </ui:repeat>
+                                        </p:column>
+                                        <p:column >
+                                            <p:commandButton title="Ver" rendered="#{document.estado eq null}" onclick="PF('dialogoetapa').show()" update=":forme:etapa :forme:tareasdeproyecto :forme:cetapa " action="#{etapaController.prepararEditarEtapaTreeTable(document)}" icon="ui-icon-search" immediate="true" style="margin: 3px;" />
+
+                                        </p:column>  
+                                    </p:treeTable>
+
+                                    <h:commandLink>  
+                                        <p:graphicImage value="/resources/img/excel.png" />  
+                                        <p:dataExporter type="xls" target="tareasdeproyecto" fileName="tareas" />  
+                                    </h:commandLink>  
+
+                                    <h:commandLink>  
+                                        <p:graphicImage value="/resources/img/pdf.png" />  
+                                        <p:dataExporter type="pdf" target="tareasdeproyecto" fileName="tareas" />  
+                                    </h:commandLink>  
+
+                                    <h:commandLink>  
+                                        <p:graphicImage value="/resources/img/csv.png" />  
+                                        <p:dataExporter type="csv" target="tareasdeproyecto" fileName="tareas" />  
+                                    </h:commandLink>  
+
+                                    <h:commandLink>  
+                                        <p:graphicImage value="/resources/img/xml.png" />  
+                                        <p:dataExporter type="xml" target="tareasdeproyecto" fileName="tareas" />  
+                                    </h:commandLink>  
+                                    <br />
+                                    <br />
+                                    <p:panel id="contenedor" header="Gantt" toggleable="true" toggleTitle="Ver Gantt"  >
+
+                                        <div id="containergrafico"   >
+
+
+                                        </div>
+                                    </p:panel>
+
+                                </p:tab>
+
+                                <p:tab title="Presupuesto" >
+
+                                    <p:treeTable id="tablepresupuesto" value="#{presupuestoTareaController.root}" var="item" 
+                                                 style="padding: 0px; width: 100%; margin: 0 auto; overflow: hidden;" >
+
+                                        <p:column headerText="Etapa">
+                                            <h:outputText value="#{item.descripcion}" />
+                                        </p:column>
+                                        <p:column headerText="Rubro">
+                                            <h:outputText value="#{item.rubro.rubro}" />
+                                        </p:column>
+                                        <p:column headerText="Costo Unitario">
+                                            <h:outputText value="#{item.costounitario}" />
+                                        </p:column>
+                                        <p:column headerText="Cantidad">
+                                            <h:outputText value="#{item.cantidad}" />
+                                        </p:column>
                                         <p:column headerText="Aporte Comitente">
                                             <h:outputText value="#{item.aportecomitente}" />
                                         </p:column>
-                                        <p:column headerText="Aporte Universidad">
+                                        <p:column headerText="Aporte Univeridad">
                                             <h:outputText value="#{item.aporteuniversidad}" />
                                         </p:column>
                                         <p:column headerText="Aporte Organismo">
                                             <h:outputText value="#{item.aporteorganismo}" />
                                         </p:column>
                                         <p:column headerText="Total">
-                                            <h:outputText value="#{item.total}"/>
+                                            <h:outputText value="#{item.total}" />
                                         </p:column>
-                                        
                                         <p:columnGroup type="footer">
                                             <p:row>
-                                                <p:column footerText="Totales" />
+                                                <p:column colspan="4" style="text-align:right" footerText="Totales:" />
 
-                                                <p:column footerText="$#{presupuestoTareaController.sumaraportesComitenteRubroenlistaPresupuestoTarea(rub)}" />
+                                                <p:column footerText="#{presupuestoTareaController.sumagastocomitente}" />
 
-                                                <p:column footerText="$#{presupuestoTareaController.sumaraportesUniversidadRubroenlistaPresupuestoTarea(rub)}" />
+                                                <p:column footerText="#{presupuestoTareaController.sumagastouniversidad}" />
 
-                                                <p:column footerText="$#{presupuestoTareaController.sumaraportesOrganismoRubroenlistaPresupuestoTarea(rub)}" />
+                                                <p:column footerText="#{presupuestoTareaController.sumagastoorganismo}" />
 
-                                                <p:column footerText="$#{presupuestoTareaController.sumaraportesTotalesRubroenlistaPresupuestoTarea(rub)}" />
+                                                <p:column footerText="#{presupuestoTareaController.sumatotal}" />
 
-                                                <p:column footerText="" />
                                             </p:row>
                                         </p:columnGroup>
+                                    </p:treeTable>
+                                    <div align="center" >
+                                        <h:panelGrid id="pchartpresupuesto" columns="2" styleClass="left,right" >
+                                            <p:chart type="pie" id="chartaportes" model="#{presupuestoTareaController.pieModelAportes}" 
+                                                     style="width:15%;height:300px" /> 
+                                            <p:chart type="pie" id="chartrubros" model="#{presupuestoTareaController.pieModelRubros}" 
+                                                     style="width:15%;height:300px"  /> 
 
-                                    </p:dataTable>
+                                        </h:panelGrid>
+                                    </div>
+                                </p:tab> 
 
+                                <p:tab title="Documentación" >
+
+                                    <p:fieldset legend="Archivos" >
+                                        <h:panelGrid cellpadding="2" cellspacing="10" columnClasses="right,left" columns="3">    
+
+
+                                            <p:dataTable id="tdocumentacionnombre1" var="arc" 
+                                                         value="#{archivoproyectoController.collectorArchivoProyecto}" 
+                                                         rowIndexVar="indice"
+                                                         rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                         styleClass="tabla">  
+
+                                                <p:column headerText="Archivos">  
+                                                    <h:outputText value="#{arc.nombre}" />  
+                                                </p:column> 
+                                                <p:column headerText="">  
+                                                    <p:commandLink rendered="#{arc.proyectoid.id ==null}" immediate="true" value="Eliminar" action="#{archivoproyectoController.removerArchivoCollection}" update=":form:tabview1:tdocumentacionnombre1"  >
+                                                        <f:setPropertyActionListener value="#{arc}" target="#{archivoproyectoController.selected}" />  
+                                                    </p:commandLink>
+                                                </p:column> 
+                                            </p:dataTable>
+
+                                        </h:panelGrid>
+                                    </p:fieldset>
 
                                 </p:tab>
                             </p:tabView>
+                        </p:panel>
 
-                        </p:tab>
+                        <br />
 
-                    </p:tabView>
-
-                    <f:facet name="footer">
                         <div align="center" >
-
-                            <p:commandButton id="botontareaok" value="OK" onclick="PF('dtarea').hide();" ></p:commandButton>
-
+                            <p:commandButton value="Imprimir" actionListener="List" />
                         </div>
-                    </f:facet>
+                        <br />
 
-                </p:dialog>
-                
+                        <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"  />
 
-            </h:form>
+                    </h:form>
+                    <h:form id="formd">
 
-            <h:form id="forme" >
-                <p:dialog id="dialogoetapa" maximizable="false" minimizable="false" header="Agregar Etapa" resizable="false" widgetVar="dialogoetapa" modal="true" width="900px"  responsive="true" >
-                    <p:growl id="msgs" showDetail="true" />
-                    <h:panelGrid columns="2" styleClass="sinBordes">
-                        <p:outputLabel style="font-weight: bold" value="Nombre de Etapa:" for="etapa" />
-                        <p:inputText id="etapa" size="100" value="#{etapaController.selected.etapa}" title="Etapa" />
+                        <p:dialog id="dtarea" header="Tarea en Etapa #{etapaController.selected.etapa}" widgetVar="dtarea" resizable="false" onShow="PF('wizardtarea').select(0);" width="835px" responsive="true" 
+                                  showEffect="clip" hideEffect="fold" modal="true">  
 
-                        <p:outputLabel style="font-weight: bold" value="Resultado Esperado:" for="etapa" />
-                        <p:inputTextarea id="resultadoesperado" rows="3" cols="100" value="#{etapaController.selected.resultadoesperado}" title="Etapa" />
-                    </h:panelGrid>
-                    
-                    <p:separator />
-                    
-                    <br />
-                    
-                    <p:fieldset legend="Tareas de la Etapa" >
-                        
-                        <p:dataTable id="tareasdeproyecto" value="#{tareaController.tareasdeproyecto}" var="item" 
-                                     widgetVar="wtareasdeproyecto" >
+                            <p:tabView id="wizardtarea" activeIndex="0" widgetVar="wizardtarea" >
 
-                            <p:column >
-                                <f:facet name="header">
-                                    <h:outputText value="Tarea"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.tarea}" />
-                            </p:column>
-                            <p:column >
-                                <f:facet name="header">
-                                    <h:outputText value="Fecha Inicio"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.fechainicio}" >
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </p:outputLabel>
+                                <p:tab id="tab1" title="Tarea" >
 
-                            </p:column>
-                            <p:column >
-                                <f:facet name="header">
-                                    <h:outputText value="Fecha Fin"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.fechafin}" >
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </p:outputLabel>
-
-                            </p:column>
-                            <p:column >
-                                <f:facet name="header">
-                                    <h:outputText value="Días"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.dias}" />
-
-                            </p:column>
-                            <p:column >
-                                <f:facet name="header">
-                                    <h:outputText value="Prioridad"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.prioridad}"/>
-                            </p:column>
-                            <p:column >
-                                <f:facet name="header">
-                                    <h:outputText value="Estado"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.estado}%" />
-                            </p:column>
-
-                            <p:column exportable="false">  
-
-                                <p:commandButton id="ceditar" immediate="true" value="Ver" onclick="PF('dtarea').show()" update=":formd:wizardtarea" action="#{tareaController.editarTarea(item)}"  >
-                                    <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}" />  
-                                </p:commandButton>
-                            </p:column>  
-
-                        </p:dataTable>
-
-                    </p:fieldset>
-                    
-                    <p:separator />
-                    
-                    <div align="center">
-
-                        <p:commandButton id ="cetapa" onclick="PF('dialogoetapa').hide();" value="Ok" />
-                    </div>
-
-                </p:dialog>
-                <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="true"  header="Plan y equipo de trabajo de Proyecto" >
-                   Plan y Equipo de trabajo del Proyecto 
-                    <div align="center" >
-
-                        <h:panelGrid columns="2">
-                            <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfEtapas()}" ajax="false"  />
-                            <p:commandButton value="OK" ajax="false" actionListener="#{proyectoController.reiniciarValoresProyecto}" action="List" onclick="PF('dfinal').hide();" />
-                        </h:panelGrid>
-
-                    </div>
-
-                </p:dialog>
-
-            </h:form>
-
-            
+                                    <h:panelGrid >
 
 
+                                        <p:outputLabel style="font-weight: bold" value="Tarea:" for="tarea" />
 
-            <script type="text/javascript" >
-                $(function crearGrafico() {
-                    var chart;
+                                        <p:inputText  size="100" required="true" id="tarea" value="#{tareaController.selected.tarea}" title="Tarea" />
 
-                    chart = new Highcharts.Chart({
-                        chart: {
-                            renderTo: "containergrafico",
-                            type: 'columnrange',
-                            inverted: true
-                        },
-                        exporting: {
-                            enabled: true
-                        },
-                        title: {
-                            text: 'Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}'
-                        },
-                        xAxis: {
-                            categories: []
 
-                        },
-                        yAxis: {
-                            tickInterval: 7 * 24 * 3600 * 1000,
-                            title: 'Date',
-                            type: 'datetime',
-                            dateTimeLabelFormats: {
-                                week: '%e. %b'
-                            },
-                            stackLabels: {
-                                style: {
-                                    color: 'white'
+                                        <p:outputLabel style="font-weight: bold" value="Descripcion:" for="descripcion" />
+
+                                        <p:inputTextarea cols="100" rows="3" id="descripcion" value="#{tareaController.selected.descripcion}" title="Descripcion" />
+                                    </h:panelGrid>
+                                    <p:panelGrid>
+                                        <p:row>
+                                            <p:column>
+                                                <p:outputLabel style="font-weight: bold" value="Fecha de Inicio:" for="fechainicio" />
+                                            </p:column>
+                                            <p:column styleClass="center">
+                                                <p:calendar size="11" required="true" id="fechainicio" showOn="button" value="#{tareaController.selected.fechainicio}" title="Fechainicio" >
+                                                    <p:ajax event="dateSelect" update=":formd:wizardtarea:dfechafin" /> 
+                                                </p:calendar>
+                                            </p:column>
+                                            <p:column>
+                                                <p:outputLabel style="font-weight: bold" value="Dias:" for="dias" />
+                                            </p:column>
+                                            <p:column styleClass="center">
+                                                <p:spinner size="5" min="1" required="true" id="dias" value="#{tareaController.selected.dias}" title="Dias" >
+                                                    <p:ajax event="change" listener="#{tareaController.sumarDias}" update=":formd:wizardtarea:dfechafin" process="@this" />
+                                                    <p:ajax event="keyup" listener="#{tareaController.sumarDias}" update=":formd:wizardtarea:dfechafin" process="@this" />
+                                                </p:spinner>
+                                            </p:column>
+                                            <p:column>
+                                                <p:outputLabel style="font-weight: bold" value="Fecha Fin:" for="dfechafin" />
+                                            </p:column>
+                                            <p:column styleClass="center">
+                                                <p:calendar size="11" id="dfechafin" required="true" showOn="button" value="#{tareaController.selected.fechafin}"  title="Fechafin" >
+                                                    <p:ajax event="dateSelect" listener="#{tareaController.calcularDiferenciaDias}" update=":formd:wizardtarea:dias" /> 
+                                                </p:calendar> 
+                                            </p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column>
+                                                <p:outputLabel style="font-weight: bold" value="Prioridad:" for="prioridad" />
+                                            </p:column>
+                                            <p:column styleClass="center">
+                                                <p:selectOneMenu id="prioridad" value="#{tareaController.selected.prioridad}">
+                                                    <p:ajax update="@this" />
+                                                    <f:selectItem itemLabel="Alta" itemValue="Alta" />
+                                                    <f:selectItem itemLabel="Media" itemValue="Media" />
+                                                    <f:selectItem itemLabel="Baja" itemValue="Baja" />
+                                                </p:selectOneMenu>
+                                            </p:column>
+                                            <p:column>
+                                                <p:outputLabel style="font-weight: bold" value="Avance:"   />
+                                            </p:column>
+                                            <p:column colspan="2">
+                                                <p:slider minValue="0" maxValue="100" for="iavance"   />
+                                            </p:column>
+                                            <p:column styleClass="center" >
+                                                <p:inputText size="8" id="iavance" value="#{tareaController.selected.avance}" title="Avance"  />
+                                                <p:outputLabel style="font-weight: bold" value="%" />
+                                            </p:column>
+                                        </p:row>
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab id="tab2" title="Equipo de trabajo">
+                                    <!--      <div align="right" >
+                                              <p:commandButton value="Agregar Persona" onclick="PF('dregistrar').show();" ></p:commandButton>
+                                          </div> -->
+                                    <p:dataTable id="tagentes" value="#{tareaAgenteController.tareasagentes}" var="tareaagente" 
+                                                 editable="true" editMode="cell" 
+                                                 rowIndexVar="indice"
+                                                 rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                 styleClass="tabla"
+                                                 >
+
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="N° Documento"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tareaagente.agenteid.numerodocumento}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Apellido"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tareaagente.agenteid.apellido}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Nombres"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tareaagente.agenteid.nombres}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Email"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tareaagente.agenteid.email}"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Profesion"/>
+                                            </f:facet>
+                                            <h:outputText value="#{tareaagente.agenteid.profesion}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Función en la Tarea">
+                                            <h:outputText value="#{tareaagente.funcion}"  />
+
+                                        </p:column>
+                                        <p:column headerText="Horas Dedicadas" >
+
+                                            <h:outputText value="#{tareaagente.horasdedicadas eq null ? 'No aplicable':tareaagente.horasdedicadas}" />
+
+                                        </p:column>
+
+
+                                    </p:dataTable>
+
+                                </p:tab>
+
+                                <p:tab id="tab3"  title="Presupuesto/Tarea">
+
+                                    <p:tabView id="tabrubros" value="#{rubroController.rubroslist}" var="rub" orientation="left"  >
+                                        <p:tab title="#{rub.abreviado}" >
+
+
+
+                                            <p:dataTable id="tablepresupuestotarea" value="#{presupuestoTareaController.buscarRubroenlistaPresupuestoTarea(rub)}"  
+                                                         var="item" 
+                                                         rowIndexVar="indice"
+                                                         rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                         styleClass="tabla">
+                                                <f:facet name="header">
+                                                    Rubro #{rub.rubro}
+                                                </f:facet>
+
+                                                <!--                                    <p:column headerText="Rubro">
+                                                                                            <h:outputText value="{item.rubro.rubro}" />
+                                                                                        </p:column>    -->
+
+                                                <p:column headerText="Descripcion">
+                                                    <h:outputText value="#{item.descripcion}"/>
+                                                </p:column>
+                                                <!--                                        <p:column headerText="Costo Unitario">
+                                                                                            <h:outputText value="{item.costounitario}"/>
+                                                                                        </p:column>
+                                                                                        <p:column headerText="Cantidad">
+                                                                                            <h:outputText value="{item.cantidad}"/>
+                                                                                        </p:column>-->
+                                                <p:column headerText="Aporte Comitente">
+                                                    <h:outputText value="#{item.aportecomitente}" />
+                                                </p:column>
+                                                <p:column headerText="Aporte Universidad">
+                                                    <h:outputText value="#{item.aporteuniversidad}" />
+                                                </p:column>
+                                                <p:column headerText="Aporte Organismo">
+                                                    <h:outputText value="#{item.aporteorganismo}" />
+                                                </p:column>
+                                                <p:column headerText="Total">
+                                                    <h:outputText value="#{item.total}"/>
+                                                </p:column>
+
+                                                <p:columnGroup type="footer">
+                                                    <p:row>
+                                                        <p:column footerText="Totales" />
+
+                                                        <p:column footerText="$#{presupuestoTareaController.sumaraportesComitenteRubroenlistaPresupuestoTarea(rub)}" />
+
+                                                        <p:column footerText="$#{presupuestoTareaController.sumaraportesUniversidadRubroenlistaPresupuestoTarea(rub)}" />
+
+                                                        <p:column footerText="$#{presupuestoTareaController.sumaraportesOrganismoRubroenlistaPresupuestoTarea(rub)}" />
+
+                                                        <p:column footerText="$#{presupuestoTareaController.sumaraportesTotalesRubroenlistaPresupuestoTarea(rub)}" />
+
+                                                        <p:column footerText="" />
+                                                    </p:row>
+                                                </p:columnGroup>
+
+                                            </p:dataTable>
+
+
+                                        </p:tab>
+                                    </p:tabView>
+
+                                </p:tab>
+
+                            </p:tabView>
+
+                            <f:facet name="footer">
+                                <div align="center" >
+
+                                    <p:commandButton id="botontareaok" value="OK" onclick="PF('dtarea').hide();" ></p:commandButton>
+
+                                </div>
+                            </f:facet>
+
+                        </p:dialog>
+
+
+                    </h:form>
+
+                    <h:form id="forme" >
+                        <p:dialog id="dialogoetapa" maximizable="false" minimizable="false" header="Agregar Etapa" resizable="false" widgetVar="dialogoetapa" modal="true" width="900px"  responsive="true" >
+                            <p:growl id="msgs" showDetail="true" />
+                            <h:panelGrid columns="2" styleClass="sinBordes">
+                                <p:outputLabel style="font-weight: bold" value="Nombre de Etapa:" for="etapa" />
+                                <p:inputText id="etapa" size="100" value="#{etapaController.selected.etapa}" title="Etapa" />
+
+                                <p:outputLabel style="font-weight: bold" value="Resultado Esperado:" for="etapa" />
+                                <p:inputTextarea id="resultadoesperado" rows="3" cols="100" value="#{etapaController.selected.resultadoesperado}" title="Etapa" />
+                            </h:panelGrid>
+
+                            <p:separator />
+
+                            <br />
+
+                            <p:fieldset legend="Tareas de la Etapa" >
+
+                                <p:dataTable id="tareasdeproyecto" value="#{tareaController.tareasdeproyecto}" var="item" 
+                                             widgetVar="wtareasdeproyecto" >
+
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Tarea"/>
+                                        </f:facet>
+                                        <p:outputLabel value="#{item.tarea}" />
+                                    </p:column>
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha Inicio"/>
+                                        </f:facet>
+                                        <p:outputLabel value="#{item.fechainicio}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </p:outputLabel>
+
+                                    </p:column>
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha Fin"/>
+                                        </f:facet>
+                                        <p:outputLabel value="#{item.fechafin}" >
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </p:outputLabel>
+
+                                    </p:column>
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Días"/>
+                                        </f:facet>
+                                        <p:outputLabel value="#{item.dias}" />
+
+                                    </p:column>
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Prioridad"/>
+                                        </f:facet>
+                                        <p:outputLabel value="#{item.prioridad}"/>
+                                    </p:column>
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado"/>
+                                        </f:facet>
+                                        <p:outputLabel value="#{item.estado}%" />
+                                    </p:column>
+
+                                    <p:column exportable="false">  
+
+                                        <p:commandButton id="ceditar" immediate="true" value="Ver" onclick="PF('dtarea').show()" update=":formd:wizardtarea" action="#{tareaController.editarTarea(item)}"  >
+                                            <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}" />  
+                                        </p:commandButton>
+                                    </p:column>  
+
+                                </p:dataTable>
+
+                            </p:fieldset>
+
+                            <p:separator />
+
+                            <div align="center">
+
+                                <p:commandButton id ="cetapa" onclick="PF('dialogoetapa').hide();" value="Ok" />
+                            </div>
+
+                        </p:dialog>
+                        <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="true"  header="Plan y equipo de trabajo de Proyecto" >
+                            Plan y Equipo de trabajo del Proyecto 
+                            <div align="center" >
+
+                                <h:panelGrid columns="2">
+                                    <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfEtapas()}" ajax="false"  />
+                                    <p:commandButton value="OK" ajax="false" actionListener="#{proyectoController.reiniciarValoresProyecto}" action="List" onclick="PF('dfinal').hide();" />
+                                </h:panelGrid>
+
+                            </div>
+
+                        </p:dialog>
+
+                    </h:form>
+
+
+
+
+
+                    <script type="text/javascript" >
+                        $(function crearGrafico() {
+                            var chart;
+
+                            chart = new Highcharts.Chart({
+                                chart: {
+                                    renderTo: "containergrafico",
+                                    type: 'columnrange',
+                                    inverted: true
                                 },
-                                enabled: true,
-                                verticalAlign: 'middle',
-                                align: 'left'
-                            }
-                        },
-                        tooltip: {
-                            formatter: function () {
+                                exporting: {
+                                    enabled: true
+                                },
+                                title: {
+                                    text: 'Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}'
+                                },
+                                xAxis: {
+                                    categories: []
 
-                                return '<b>' + this.series.name + ':</b> ' + Highcharts.dateFormat('%e %b, %Y', this.point.low) + ' - ' + Highcharts.dateFormat('%e %b, %Y', this.point.high) + '<br/>';
+                                },
+                                yAxis: {
+                                    tickInterval: 7 * 24 * 3600 * 1000,
+                                    title: 'Date',
+                                    type: 'datetime',
+                                    dateTimeLabelFormats: {
+                                        week: '%e. %b'
+                                    },
+                                    stackLabels: {
+                                        style: {
+                                            color: 'white'
+                                        },
+                                        enabled: true,
+                                        verticalAlign: 'middle',
+                                        align: 'left'
+                                    }
+                                },
+                                tooltip: {
+                                    formatter: function () {
+
+                                        return '<b>' + this.series.name + ':</b> ' + Highcharts.dateFormat('%e %b, %Y', this.point.low) + ' - ' + Highcharts.dateFormat('%e %b, %Y', this.point.high) + '<br/>';
+                                    }
+                                },
+                                legend: {
+                                    enabled: true
+                                },
+                                series: [{
+                                        name: 'Inicio - Fin',
+                                        data: #{etapaController.data}
+                                    }, {
+                                        name: 'Actual',
+                                        data: #{etapaController.dataactual},
+                                        color: 'yellow'
+                                    }]
+                            });
+                            Highcharts.setOptions({
+                                lang: {
+                                    loading: 'Cargando...',
+                                    months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                                    weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'],
+                                    shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                    exportButtonTitle: 'Exportar',
+                                    printButtonTitle: 'Importar',
+                                    rangeSelectorFrom: 'De',
+                                    rangeSelectorTo: 'A',
+                                    rangeSelectorZoom: 'Periodo',
+                                    downloadPNG: 'Descargar gráfico PNG',
+                                    downloadJPEG: 'Descargar gráfico JPEG',
+                                    downloadPDF: 'Descargar gráfico PDF',
+                                    downloadSVG: 'Descargar gráfico SVG',
+                                    printChart: 'Imprimir Gráfico',
+                                    thousandsSep: ',',
+                                    decimalPoint: '.'
+                                }
+                            });
+                            //chart.series[1].setData(eval(oneArray), false, true);
+                            // chart.series[0].setData(, false, true);
+                            chart.xAxis[0].setCategories(#{etapaController.gsoncategoria}, true, true);
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        function handleTareaAgentePresupuestoRequest(xhr, status, args) {
+                            if (!args.validation) {
+                                PF('dialogotareaagentepresupuesto').jq.effect("shake", {times: 5}, 100);
                             }
-                        },
-                        legend: {
-                            enabled: true
-                        },
-                        series: [{
-                                name: 'Inicio - Fin',
-                                data: #{etapaController.data}
-                            }, {
-                                name: 'Actual',
-                                data: #{etapaController.dataactual},
-                                color: 'yellow'
-                            }]
-                    });
-                    Highcharts.setOptions({
-                        lang: {
-                            loading: 'Cargando...',
-                            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado'],
-                            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                            exportButtonTitle: 'Exportar',
-                            printButtonTitle: 'Importar',
-                            rangeSelectorFrom: 'De',
-                            rangeSelectorTo: 'A',
-                            rangeSelectorZoom: 'Periodo',
-                            downloadPNG: 'Descargar gráfico PNG',
-                            downloadJPEG: 'Descargar gráfico JPEG',
-                            downloadPDF: 'Descargar gráfico PDF',
-                            downloadSVG: 'Descargar gráfico SVG',
-                            printChart: 'Imprimir Gráfico',
-                            thousandsSep: ',',
-                            decimalPoint: '.'
+                            else {
+                                PF('dialogotareaagentepresupuesto').hide();
+
+                            }
                         }
-                    });
-                    //chart.series[1].setData(eval(oneArray), false, true);
-                    // chart.series[0].setData(, false, true);
-                    chart.xAxis[0].setCategories(#{etapaController.gsoncategoria}, true, true);
-                });
-            </script>
-            <script type="text/javascript">
-                function handleTareaAgentePresupuestoRequest(xhr, status, args) {
-                    if (!args.validation) {
-                        PF('dialogotareaagentepresupuesto').jq.effect("shake", {times: 5}, 100);
-                    }
-                    else {
-                        PF('dialogotareaagentepresupuesto').hide();
-
-                    }
-                }
-            </script>
-        </div>         </div>         </ui:define>
+                    </script>
+                </div>       
+            </div>      
+        </ui:define>
     </ui:composition>
 
 </html>

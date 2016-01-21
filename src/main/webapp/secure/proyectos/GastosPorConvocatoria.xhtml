@@ -9,118 +9,122 @@
 
     <ui:composition template="/WEB-INF/template.xhtml">
 
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
-           <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
-           <!-- <f:event type="preRenderView" listener="{indicadoresController.obtenerCalculosPorRubro()}" />-->
-           <f:event type="preRenderView" listener="#{proyectoController.findProyectoPorConvocatoria(proyectoController.selected.convocatoriaid.id)}"></f:event>
-           
+        <ui:define name="content">   
+            <div class="Container100">    
+                <div class="ContainerIndent">
+                    <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
+                    <!-- <f:event type="preRenderView" listener="{indicadoresController.obtenerCalculosPorRubro()}" />-->
+                    <f:event type="preRenderView" listener="#{proyectoController.findProyectoPorConvocatoria(proyectoController.selected.convocatoriaid.id)}"></f:event>
 
-            <h:form >
-                <p:panel id="pprincipal" header="Lista de Proyectos" >
 
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                    </h:panelGroup>
-                    <!--<h:outputText escape="false" value="No hay registros" rendered="{proyectoController.items.rowCount == 0}"/>-->
-                    <!--<p:panelGrid columnClasses="right,left" styleClass="sinBordes sinFondo" style="width: 100%;">-->
-                    <p:panelGrid style="width: 100%;">
-                    <br></br>
-                    <h:panelGrid columns="2" cellpadding="5">
-                        <p:outputLabel value="Seleccionar convocatoria:" for="convocatoriaid" />
-                        <p:selectOneMenu widgetVar="convocatoriaid" id="convocatoriaid" value="#{proyectoController.selected.convocatoriaid}" label="Convocatoria" requiredMessage="Seleccione la Convocatoria" style="width: 730px;" >
-                            <p:ajax update="proyectos" listener="#{proyectoController.findProyectoPorConvocatoria(proyectoController.selected.convocatoriaid.id)}" /> 
-                            <f:selectItems value="#{convocatoriaController.itemsAvailableSelectOne}" noSelectionValue="false"/>                            
-                        </p:selectOneMenu>
-                    </h:panelGrid>
-                    </p:panelGrid>
-                     <br></br>
-                    <!--<h:panelGroup rendered="{proyectoController.items.rowCount > 0}">-->
-                       
-                        <!--<p:dataTable 
-                            id="proyectos" 
-                            value="{proyectoController.items}"  
-                            var="item" 
-                            widgetVar="wproyectos"
-                            rowKey="{item.id}" 
-                            emptyMessage="No se encontraron resultados para el criterio de busqueda"
-                            paginator="true" rows="10" paginatorPosition="bottom"
-                            draggableColumns="true"
-                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                            rowsPerPageTemplate="10,15,30" 
-                            rowIndexVar="indice"
-                            rowStyleClass="{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                            styleClass="tabla"
-                            >
-                            <p:dataTable selection="{convocatoriaController.selected}"  -->
+                    <h:form >
+                        <p:panel id="pprincipal" header="Lista de Proyectos" >
+
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                            </h:panelGroup>
+                            <!--<h:outputText escape="false" value="No hay registros" rendered="{proyectoController.items.rowCount == 0}"/>-->
+                            <!--<p:panelGrid columnClasses="right,left" styleClass="sinBordes sinFondo" style="width: 100%;">-->
+                            <p:panelGrid style="width: 100%;">
+                                <br></br>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <p:outputLabel value="Seleccionar convocatoria:" for="convocatoriaid" />
+                                    <p:selectOneMenu widgetVar="convocatoriaid" id="convocatoriaid" value="#{proyectoController.selected.convocatoriaid}" label="Convocatoria" requiredMessage="Seleccione la Convocatoria" style="width: 730px;" >
+                                        <p:ajax update="proyectos" listener="#{proyectoController.findProyectoPorConvocatoria(proyectoController.selected.convocatoriaid.id)}" /> 
+                                        <f:selectItems value="#{convocatoriaController.itemsAvailableSelectOne}" noSelectionValue="false"/>                            
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                            </p:panelGrid>
+                            <br></br>
+                            <!--<h:panelGroup rendered="{proyectoController.items.rowCount > 0}">-->
+
+                            <!--<p:dataTable 
+                                id="proyectos" 
+                                value="{proyectoController.items}"  
+                                var="item" 
+                                widgetVar="wproyectos"
+                                rowKey="{item.id}" 
+                                emptyMessage="No se encontraron resultados para el criterio de busqueda"
+                                paginator="true" rows="10" paginatorPosition="bottom"
+                                draggableColumns="true"
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="10,15,30" 
+                                rowIndexVar="indice"
+                                rowStyleClass="{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                styleClass="tabla"
+                                >
+                                <p:dataTable selection="{convocatoriaController.selected}"  -->
                             <p:dataTable widgetVar="wproyectos" paginator="true" id="proyectos" var="item" 
                                          value="#{proyectoController.items}" rowKey="#{item.id}"
                                          paginatorPosition="bottom" rows="10"
                                          rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
                                          styleClass="tabla" style="margin-bottom: 10px;"
                                          emptyMessage="No se encontraron resultados para el criterio de busqueda"> 
-                            <f:facet name="header">
-                                Proyectos
-                            </f:facet>
-                            <p:column id="columnaNombre">
                                 <f:facet name="header">
-                                    <h:outputText value="Titulo del proyecto"/>
+                                    Proyectos
                                 </f:facet>
-                                <h:outputText value="#{item.nombre}"/>
-                            </p:column>
-                            <p:column id="columnaAgente">
-                                <f:facet name="header">
-                                    <h:outputText value="Responsable"/>
-                                </f:facet>
-                                <h:outputText value="#{item.agenteid.apellido}, #{item.agenteid.nombres}"/>
-                            </p:column>
-                            <p:column id="columnaTipoProyecto">
-                                <f:facet name="header">
-                                    <h:outputText value="Tipo de Proyecto"/>
-                                </f:facet>
-                                <h:outputText value="#{item.tipoproyectoid.tipo}"/>
-                            </p:column>
-                            <p:column id="columnaConvocatoria">
-                                <f:facet name="header">
-                                    <h:outputText value="Convocatoria"/>
-                                </f:facet>
-                                <h:outputText value="#{item.convocatoriaid.convocatoria}"/> 
-                            </p:column>
-                            <p:column id="columnaMontoProyecto">
-                                <f:facet name="header">
-                                    <h:outputText value="Total Ejecutado" />
-                                </f:facet>                        
-                                <h:outputText value="$#{indicadoresController.calcularEjecutadoPorProyecto(item.id)}"/>
-                            </p:column>
-                            <p:column id="columnaEjecucionProyecto">
-                                <f:facet name="header">
-                                    <h:outputText value="Porcentaje Ejecutado" />
-                                </f:facet>                        
-                                <h:outputText value="#{indicadoresController.calcularPorcenjateEjecutadoPorProyecto(item.id)}%"/>
-                            </p:column>
-                                
-                            <f:facet name="footer">
-                                <h:outputText value="Porcentaje general ejecutado de la convocatoria: #{proyectoController.getporcentajeConvocatoria()}%."/>
-                            </f:facet>
-                        </p:dataTable>
-                    <!--</h:panelGroup>-->
+                                <p:column id="columnaNombre">
+                                    <f:facet name="header">
+                                        <h:outputText value="Titulo del proyecto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </p:column>
+                                <p:column id="columnaAgente">
+                                    <f:facet name="header">
+                                        <h:outputText value="Responsable"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.agenteid.apellido}, #{item.agenteid.nombres}"/>
+                                </p:column>
+                                <p:column id="columnaTipoProyecto">
+                                    <f:facet name="header">
+                                        <h:outputText value="Tipo de Proyecto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.tipoproyectoid.tipo}"/>
+                                </p:column>
+                                <p:column id="columnaConvocatoria">
+                                    <f:facet name="header">
+                                        <h:outputText value="Convocatoria"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.convocatoriaid.convocatoria}"/> 
+                                </p:column>
+                                <p:column id="columnaMontoProyecto">
+                                    <f:facet name="header">
+                                        <h:outputText value="Total Ejecutado" />
+                                    </f:facet>                        
+                                    <h:outputText value="$#{indicadoresController.calcularEjecutadoPorProyecto(item.id)}"/>
+                                </p:column>
+                                <p:column id="columnaEjecucionProyecto">
+                                    <f:facet name="header">
+                                        <h:outputText value="Porcentaje Ejecutado" />
+                                    </f:facet>                        
+                                    <h:outputText value="#{indicadoresController.calcularPorcenjateEjecutadoPorProyecto(item.id)}%"/>
+                                </p:column>
 
-                    <br />
-                    <p:dialog id="dfinal" widgetVar="dfinal" resizable="false"  modal="true" closable="true"  header="Error">
-                        No existen registros a exportar.
-                    </p:dialog>
-                    <p:panel header="Exportar">  
-                        <!--<h:commandLink action="{proyectoController.imprimirListaIdeasProyecto()}">  
-                            <p:graphicImage value="/resources/img/print_printer.png" />  
-                        </h:commandLink>                          -->
-                        <h:commandLink action="#{proyectoController.pdfGastosPorConvocatorias()}">  
-                            <p:graphicImage value="/resources/img/pdf.png" />  
-                        </h:commandLink>    
-                    </p:panel>  
-                    <br />
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" icon="ui-icon-home" ajax="false"/>
-                </p:panel>
-            </h:form>
-        </div>         </div>         </ui:define>
+                                <f:facet name="footer">
+                                    <h:outputText value="Porcentaje general ejecutado de la convocatoria: #{proyectoController.getporcentajeConvocatoria()}%."/>
+                                </f:facet>
+                            </p:dataTable>
+                            <!--</h:panelGroup>-->
+
+                            <br />
+                            <p:dialog id="dfinal" widgetVar="dfinal" resizable="false"  modal="true" closable="true"  header="Error">
+                                No existen registros a exportar.
+                            </p:dialog>
+                            <p:panel header="Exportar">  
+                                <!--<h:commandLink action="{proyectoController.imprimirListaIdeasProyecto()}">  
+                                    <p:graphicImage value="/resources/img/print_printer.png" />  
+                                </h:commandLink>                          -->
+                                <h:commandLink action="#{proyectoController.pdfGastosPorConvocatorias()}">  
+                                    <p:graphicImage value="/resources/img/pdf.png" />  
+                                </h:commandLink>    
+                            </p:panel>  
+                            <br />
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" icon="ui-icon-home" ajax="false"/>
+                        </p:panel>
+                    </h:form>
+                </div>       
+            </div>     
+        </ui:define>
     </ui:composition>
 
 </html>

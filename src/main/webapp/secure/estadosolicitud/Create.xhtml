@@ -10,49 +10,53 @@
         <ui:define name="title">
             <h:outputText value="Nuevo Estado de Solicitud"></h:outputText>
         </ui:define>
-        <ui:define name="content">         <div class="Container100">             <div class="ContainerIndent">
+        <ui:define name="content"> 
+            <div class="Container100"> 
+                <div class="ContainerIndent">
 
-            <h:form>
-                <p:panel id="pprincipal" header="Nuevo Estado de Solicitud" >
-                    
-                    <p:fieldset legend="Información del Estado de Solicitud">
-                        <p:panelGrid styleClass="sinBordes sinFondo" style="width: 100%">
-                            <p:row>
-                                <p:column style="width: 40%;">
-                                    <h:outputLabel value="Estado de Solicitud" for="estadosolicitud"  style="font-weight: bold;" />
-                                </p:column>
-                                <p:column style="width: 60%;">
-                                    <p:inputText id="estadosolicitud" value="#{estadosolicitudController.selected.estadosolicitud}" style="width: 100%;"  title="* Este campo es requerido"  required="true" requiredMessage="El campo estado de solicitud es obligatorio" />
-                                    <p:message for="estadosolicitud" display="icon"  /> 
-                                    <p:tooltip id="ttEstadoSolcitud" for="estadosolicitud" showEvent="focus" hideEvent="blur" />                                    
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
-                    </p:fieldset>
+                    <h:form>
+                        <p:panel id="pprincipal" header="Nuevo Estado de Solicitud" >
 
-                    <p:separator/>
-                    <p:commandButton action="#{estadosolicitudController.create}" value="Crear Estado de Solicitud" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update="pprincipal" oncomplete="PF('dfinal').show();" />
-                    <p:commandButton action="#{estadosolicitudController.prepareList}" value="Lista de Estado de Solicitud" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document" ajax="false" />
-                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
-                    <p:separator/>
+                            <p:fieldset legend="Información del Estado de Solicitud">
+                                <p:panelGrid styleClass="sinBordes sinFondo" style="width: 100%">
+                                    <p:row>
+                                        <p:column style="width: 40%;">
+                                            <h:outputLabel value="Estado de Solicitud" for="estadosolicitud"  style="font-weight: bold;" />
+                                        </p:column>
+                                        <p:column style="width: 60%;">
+                                            <p:inputText id="estadosolicitud" value="#{estadosolicitudController.selected.estadosolicitud}" style="width: 100%;"  title="* Este campo es requerido"  required="true" requiredMessage="El campo estado de solicitud es obligatorio" />
+                                            <p:message for="estadosolicitud" display="icon"  /> 
+                                            <p:tooltip id="ttEstadoSolcitud" for="estadosolicitud" showEvent="focus" hideEvent="blur" />                                    
+                                        </p:column>
+                                    </p:row>
+                                </p:panelGrid>
+                            </p:fieldset>
 
-                </p:panel>
+                            <p:separator/>
+                            <p:commandButton action="#{estadosolicitudController.create}" value="Crear Estado de Solicitud" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update="pprincipal" oncomplete="PF('dfinal').show();" />
+                            <p:commandButton action="#{estadosolicitudController.prepareList}" value="Lista de Estado de Solicitud" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document" ajax="false" />
+                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home" ajax="false" />
+                            <p:separator/>
 
-            </h:form>
-            
-            <h:form>
-                 <p:dialog id="dfinal" widgetVar="dfinal" modal="true" header="Alta de Estado de Solicitud" >
-                    <h:panelGroup id="messagePanel" layout="block">
-                        <p:messages autoUpdate="true"/>
-                    </h:panelGroup>
-                    <p:separator />
-                    <div align="center" >
-                        <p:commandButton value="Volver a la Lista" action="#{estadosolicitudController.prepareList()}" ajax="false" />
-                    </div>
+                        </p:panel>
 
-                </p:dialog>
-            </h:form>            
-        </div>         </div>         </ui:define>
+                    </h:form>
+
+                    <h:form>
+                        <p:dialog id="dfinal" widgetVar="dfinal" modal="true" header="Alta de Estado de Solicitud" >
+                            <h:panelGroup id="messagePanel" layout="block">
+                                <p:messages autoUpdate="true"/>
+                            </h:panelGroup>
+                            <p:separator />
+                            <div align="center" >
+                                <p:commandButton value="Volver a la Lista" action="#{estadosolicitudController.prepareList()}" ajax="false" />
+                            </div>
+
+                        </p:dialog>
+                    </h:form>            
+                </div>      
+            </div>    
+        </ui:define>
     </ui:composition>
 
 </html>
