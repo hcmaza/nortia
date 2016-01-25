@@ -159,6 +159,12 @@ public class UsuarioController implements Serializable {
 
     public String update() {
         try {
+            try {
+                current.setUsuarioclave(new EncriptarSHA256().hash256(current.getUsuarioclave().trim()) );
+            } catch (NoSuchAlgorithmException ex) {
+                current.setUsuarioclave("");
+                Logger.getLogger(UsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
             //return "View";
