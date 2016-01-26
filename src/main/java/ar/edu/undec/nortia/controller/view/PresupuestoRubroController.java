@@ -416,7 +416,8 @@ public class PresupuestoRubroController implements Serializable {
     public void actualizarTabla(){
         
         System.out.println("actualizarTabla [inicio]");
-        RequestContext.getCurrentInstance().update(":tabviewTodo:formTabPresupuesto:tpresupuesto");
+        //RequestContext.getCurrentInstance().update(":tabviewTodo:formTabPresupuesto:tpresupuesto");
+        RequestContext.getCurrentInstance().update(":formPrincipal:tpresupuesto");
         System.out.println("actualizarTabla [fin]");
         
     }

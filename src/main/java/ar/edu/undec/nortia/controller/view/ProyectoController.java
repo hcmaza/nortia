@@ -90,10 +90,12 @@ import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.primefaces.component.datatable.DataTable;
+import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.data.FilterEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.DefaultTreeNode;
@@ -2472,7 +2474,7 @@ public class ProyectoController implements Serializable {
      * WIZARD de ALTA DE IDEA-PROYECTO
      */
      
-    private boolean skip;
+    private boolean skip = false;
 
     public boolean isSkip() {
         return skip;
@@ -2485,14 +2487,15 @@ public class ProyectoController implements Serializable {
      /*
      *   Metodo que maneja el flujo en el wizard de alta de idea-proyecto
      */
-    public String onFlowProcess(FlowEvent event) {
-        if(skip) {
-            skip = false;   //reset in case user goes back
-            return "tabequipotrabajo";
-        }
-        else {
-            return event.getNewStep();
-        }
+    public String onSolicitudWizardFlowProcess(FlowEvent event) {
+//        if(skip) {
+//            skip = false;   //reset in case user goes back
+//            return "tabequipotrabajo";
+//        }
+//        else {
+//            return event.getNewStep();
+//        }
+        return event.getNewStep();
     }
 
     public void persist(Object object) {
@@ -2521,7 +2524,6 @@ public class ProyectoController implements Serializable {
     /*
     * Lista de Ideas-Proyecto
     */
-    
     public Map<String, Object> onFilterIdeasProyecto(AjaxBehaviorEvent event) {
        DataTable table = (DataTable) event.getSource();
        List<Proyecto> obj =   table.getFilteredValue();

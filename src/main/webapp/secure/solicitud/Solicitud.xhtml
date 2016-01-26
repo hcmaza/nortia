@@ -31,12 +31,14 @@
 
                                 <div class="SeparatorFull"></div>
 
-                                <p:tabView id="tabviewTodo" styleClass="Container100 Responsive100 Fs12" > 
-                                    <!--<p:tabView id="tabviewTodo" flowListener="# {proyectoController.onFlowProcess}">-->
+                                <h:form id="formPrincipal">
 
-                                    <p:tab id="tabideaproyecto" title="Idea-Proyecto">
+                                    <p:wizard id="tabviewTodo" widgetVar="wtabviewTodo" styleClass="Container100 Responsive100 Fs12" 
+                                              flowListener="#{proyectoController.onSolicitudWizardFlowProcess}"
+                                              backLabel="Atrás" nextLabel="Siguiente"
+                                              > 
 
-                                        <h:form id="formTabIdeaProyecto">
+                                        <p:tab id="tabideaproyecto" title="Idea-Proyecto"  >
 
                                             <p:panelGrid columns="2" columnClasses="ui-grid-col-1,ui-grid-col-11" layout="grid" styleClass="ui-panelgrid-blank" >
                                                 <h:outputText value="Nombre" styleClass="ContainerIndent Fs18 FontAdamantiumBold" />
@@ -49,7 +51,7 @@
                                                 <p:fieldset legend="Tipo de Proyecto" style="margin: 0px 0px 10px 0px; width: 100%;"  >  
                                                     <p:selectOneMenu id="tipoproyectoid" value="#{proyectoController.selected.tipoproyectoid}" required="true" requiredMessage="Seleccione Tipo de Proyecto" >
                                                         <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}"/>
-                                                        <p:ajax update=":tabviewTodo:formTabConvocatoria:tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />  
+                                                        <p:ajax update=":formPrincipal:tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />  
                                                     </p:selectOneMenu>    
                                                 </p:fieldset>                            
 
@@ -60,16 +62,12 @@
                                                 </p:fieldset>                                                 
                                             </p:panelGrid>
 
-                                        </h:form>
+                                        </p:tab>
 
-                                    </p:tab>
-
-                                    <p:tab id="tabcomitente" title="Responsables">
-
-                                        <h:form id="formTabComitente">
+                                        <p:tab id="tabcomitente" title="Responsables">
 
                                             <p:fieldset legend="Comitente" style="margin-bottom:5px">
-                                                
+
                                                 <p:panelGrid id="pcomitente" columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9" style="border: none; "  > 
 
                                                     <p:selectOneRadio id="options" value="#{proyectoController.habilitarcomitente}"   >  
@@ -189,13 +187,9 @@
                                                 <p:commandButton value="Editar Responsable Técnico" onclick="PF('dagenteeditar').show();" immediate="true"  styleClass="GreenButton" style="width: auto; "  />
                                             </p:fieldset>
 
-                                        </h:form>
+                                        </p:tab>
 
-                                    </p:tab>
-
-                                    <p:tab id="tabdocumentacion" title="Documentación">
-
-                                        <h:form id="formTabDocumentacion" enctype="multipart/form-data" >
+                                        <p:tab id="tabdocumentacion" title="Documentación">
 
                                             <p:fieldset legend="Descripción de la Idea-Proyecto" style="margin-bottom:5px">
                                                 <!-- DESCRIPCIÓN -->
@@ -228,7 +222,7 @@
                                                             <p:outputLabel style="font-weight:bold;font-size:larger" value="Duración (Meses)" for="duracion" />
                                                         </p:column>
                                                         <p:column style="width: 75%;">
-                                                            <p:spinner maxlength="3" id="duracion" value="#{proyectoController.selected.duracion}" title="duracion" min="1" style="width: 100px;"  />
+                                                            <p:spinner id="duracion" value="#{proyectoController.selected.duracion}" title="duracion" min="1" maxlength="3" required="true" requiredMessage="Ingrese por favor, la cantidad en meses, de duración del proyecto." style="width: 100px;"  />
                                                         </p:column>                                
                                                     </p:row>
                                                 </p:panelGrid>                                
@@ -240,17 +234,16 @@
 
                                                     <h:form id="fupload" enctype="multipart/form-data">
                                                         <p:fileUpload label="Documentación para subir" id="documentacion" fileUploadListener="#{archivoproyectoController.handleFileUpload}" mode="advanced"  
-                                                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"   >
-
+                                                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update=":formPrincipal:tdocumentacionnombre1"   >
                                                         </p:fileUpload>    
                                                     </h:form>
+                                                    
                                                     <p:dataTable id="tdocumentacionnombre1" var="arc" value="#{archivoproyectoController.collectorArchivoProyecto}" >  
-
                                                         <p:column headerText="Archivos">  
                                                             <h:outputText value="#{arc.nombre}" />  
                                                         </p:column> 
                                                         <p:column headerText="">  
-                                                            <p:commandLink immediate="true" value="Eliminar" action="#{archivoproyectoController.removerArchivoCollection}" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"  >
+                                                            <p:commandLink immediate="true" value="Eliminar" action="#{archivoproyectoController.removerArchivoCollection}" update=":formPrincipal:tdocumentacionnombre1"  >
                                                                 <f:setPropertyActionListener value="#{arc}" target="#{archivoproyectoController.selected}" />  
                                                             </p:commandLink>
                                                         </p:column> 
@@ -259,13 +252,9 @@
                                                 </p:panelGrid>         
                                             </p:fieldset>
 
-                                        </h:form>
+                                        </p:tab>
 
-                                    </p:tab>
-
-                                    <p:tab id="tabconvocatoria" title="Financiamiento">
-
-                                        <h:form id="formTabConvocatoria">
+                                        <p:tab id="tabconvocatoria" title="Financiamiento">
 
                                             <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank" >
                                                 <p:row>
@@ -294,7 +283,7 @@
                                                     <p:column colspan="3">
                                                         <p:selectOneMenu widgetVar="tipofinanciamientoid" id="tipofinanciamientoid" value="#{proyectoController.selected.tipofinanciamientoid}" label="Tipo de Financiamiento" required="true" requiredMessage="Seleccione el Tipo de Financiamiento" style="width: 100%;" >
                                                             <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}"/>
-                                                            <p:ajax update=":tabviewTodo:formTabConvocatoria:tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />  
+                                                            <p:ajax update="tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />  
                                                         </p:selectOneMenu>
                                                     </p:column>                                
                                                 </p:row>
@@ -359,20 +348,15 @@
                                                     </p:column>                    
                                                 </p:dataTable>               
                                             </p:fieldset>
+                                        </p:tab>
 
-                                        </h:form>
-
-                                    </p:tab>
-
-                                    <p:tab id="tabpresupuesto" title="Presupuesto">
-
-                                        <h:form id="formTabPresupuesto">
+                                        <p:tab id="tabpresupuesto" title="Presupuesto">
 
                                             <p:remoteCommand name="rcPresupuesto" actionListener="#{presupuestoRubroController.sumarGastos(null)}"
                                                              update=" 
-                                                             contenedorTablaPresupuesto,
-                                                             caportes,
-                                                             crubros,
+                                                             :formPrincipal:contenedorTablaPresupuesto,
+                                                             :formPrincipal:caportes,
+                                                             :formPrincipal:crubros,
                                                              growlprincipal "/>
 
                                             <p:outputPanel id="contenedorTablaPresupuesto">
@@ -386,9 +370,9 @@
 
                                                     <p:ajax event="cellEdit" oncomplete="rcPresupuesto()" 
                                                             update="
-                                                            :tabviewTodo:formTabPresupuesto:contenedorTablaPresupuesto, 
-                                                            :tabviewTodo:formTabPresupuesto:caportes,
-                                                            :tabviewTodo:formTabPresupuesto:crubros
+                                                            :formPrincipal:contenedorTablaPresupuesto, 
+                                                            :formPrincipal:caportes,
+                                                            :formPrincipal:crubros
                                                             "  />
 
                                                     <!--                                                        caportes, 
@@ -521,13 +505,9 @@
 
                                             </p:panelGrid>
 
-                                        </h:form>
+                                        </p:tab>
 
-                                    </p:tab>
-
-                                    <p:tab id="tabequipotrabajo" title="Equipo de Trabajo">
-
-                                        <h:form id="formTabEquipoTrabajo">
+                                        <p:tab id="tabequipotrabajo" title="Equipo de Trabajo">
 
                                             <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank" style="margin-bottom: 10px;">
                                                 <p:outputLabel style="font-weight: bold" value="Ingrese N° de Documento / Cuil " ></p:outputLabel>
@@ -601,7 +581,7 @@
                                                             <f:facet name="output">
                                                                 <!--<p:selectBooleanCheckbox  id="ssconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " />-->
                                                                 <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="oconsultorexterno" value="#{agentea.consultorexterno}" styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"   >
-                                                                        <!--<p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />-->
+                                                                    <!--<p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />-->
                                                                 </p:selectBooleanButton>
                                                                 <!--<h:outputLabel  id="labelConsultorexterno" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  />--> 
                                                             </f:facet>
@@ -610,9 +590,9 @@
                                                                                        styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"  >
                                                                     <p:ajax update="@this oconsultorexterno ihorasdisponibles horasdedicacion" listener="#{proyectoController.resetearIPValorHorasDedicadas(agentea)}"  />
                                                                 </p:selectBooleanButton>
-<!--                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " >
-                                                                    <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion" oncomplete="$(function(){PrimeFaces.focus(':tabviewTodo:formTabEquipoTrabajo:horasdedicacion');});"  />
-                                                                </p:selectBooleanCheckbox>-->
+                                                                <!--                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " >
+                                                                                                                                    <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion" oncomplete="$(function(){PrimeFaces.focus(':tabviewTodo:formTabEquipoTrabajo:horasdedicacion');});"  />
+                                                                                                                                </p:selectBooleanCheckbox>-->
                                                                 <!--<h:outputLabel  id="labelConsultorexterno2" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"  style="font-size: 18px; " />--> 
                                                             </f:facet>    
                                                         </p:cellEditor>
@@ -650,7 +630,7 @@
                                                 </p:dataTable>
 
                                             </div>
-                                            
+
                                             <p:separator />
                                             <br />
                                             <div align="center">
@@ -658,22 +638,15 @@
                                                 <p:commandButton action="#{proyectoController.soloCrear}"  
                                                                  value="Enviar Para Evaluación" 
                                                                  update="growlprincipal" 
-                                                                 partialSubmit="true"
-                                                                 ajax="true"
-                                                                 process=":tabviewTodo:formTabIdeaProyecto, 
-                                                                          :tabviewTodo:formTabComitente, 
-                                                                          :tabviewTodo:formTabDocumentacion, 
-                                                                          :tabviewTodo:formTabConvocatoria, 
-                                                                          :tabviewTodo:formTabPresupuesto, 
-                                                                          @this"
+                                                                 process="@this"
                                                                  styleClass="GreenButton White" style="width: auto; " icon="fa fa-save"/>
                                             </div>
 
-                                        </h:form>
+                                        </p:tab>
+                                    </p:wizard>
+                                    <!--</p:tabView>-->
 
-                                    </p:tab>
-                                </p:tabView>
-                                <!--</p:tabView>-->
+                                </h:form>
 
                             </div>
 
@@ -729,7 +702,7 @@
                             <f:selectItems value="#{dependenciaController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu>
 
-                        <p:commandButton ajax="true" action="#{agenteController.solograbar()}" value="Editar" oncomplete="PF('dagenteeditar').hide();" update=":tabviewTodo:formTabComitente:pagente" />
+                        <p:commandButton ajax="true" action="#{agenteController.solograbar()}" value="Editar" oncomplete="PF('dagenteeditar').hide();" update=":formPrincipal:pagente" />
 
 
                     </p:panelGrid>
@@ -772,7 +745,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <br />
-                    <p:commandButton action="#{comitenteController.soloCrear()}" value="Crear" oncomplete="PF('dcomitentecrear').hide()" update=":tabviewTodo:formTabComitente:pcomitente" styleClass="GreenButton" style="width: auto; " />
+                    <p:commandButton action="#{comitenteController.soloCrear()}" value="Crear" oncomplete="PF('dcomitentecrear').hide()" update=":formPrincipal:pcomitente" styleClass="GreenButton" style="width: auto; " />
                 </p:dialog>
             </h:form>
 
@@ -879,7 +852,7 @@
                     <p:remoteCommand name="rcRegistrar" update="msgs" actionListener="#{agenteViewController.registrar}" />
 
                     <p:growl id="msgs" showDetail="true" />
-                    
+
                     <p:panelGrid id="panel" columns="3" styleClass="ui-panelgrid-blank">
 
                         <h:outputLabel value="Apellido" for="apellido" />
@@ -936,18 +909,18 @@
                         <p:inputText maxlength="70" id="especialidad" value="#{agenteViewController.agente1.especialidad}" title="Especialidad" required="true" />
                         <p:message for="especialidad" /> 
 
-                        <p:commandButton onclick="rcRegistrar()" oncomplete="PF('dregistrar').hide()" update=":tabviewTodo:formTabEquipoTrabajo:agentesa,  :tabviewTodo:formTabEquipoTrabajo:advancedfiltroa" value="Crear" styleClass="GreenButton" style="width: auto; " />
+                        <p:commandButton onclick="rcRegistrar()" oncomplete="PF('dregistrar').hide()" update=":formPrincipal:agentesa,  :formPrincipal:advancedfiltroa" value="Crear" styleClass="GreenButton" style="width: auto; " />
                         <br />
                     </p:panelGrid>
 
                 </p:dialog>
 
             </h:form>
-            
-            
+
+
             <p:dialog id="dialogoAyuda" widgetVar="wdialogoAyuda" maximizable="false" minimizable="false"  
                       header="Ayuda" closable="true" resizable="false" responsive="true"  >
-                    <h:outputText value="#{ayudaController.textoAyuda}" />
+                <h:outputText value="#{ayudaController.textoAyuda}" />
             </p:dialog>
 
 
