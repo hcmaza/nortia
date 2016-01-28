@@ -354,9 +354,9 @@
 
                                             <p:remoteCommand name="rcPresupuesto" actionListener="#{presupuestoRubroController.sumarGastos(null)}"
                                                              update=" 
-                                                             :formPrincipal:contenedorTablaPresupuesto,
-                                                             :formPrincipal:caportes,
-                                                             :formPrincipal:crubros,
+                                                             contenedorTablaPresupuesto,
+                                                             caportes,
+                                                             crubros,
                                                              growlprincipal "/>
 
                                             <p:outputPanel id="contenedorTablaPresupuesto">
@@ -370,18 +370,11 @@
 
                                                     <p:ajax event="cellEdit" oncomplete="rcPresupuesto()" 
                                                             update="
-                                                            :formPrincipal:contenedorTablaPresupuesto, 
-                                                            :formPrincipal:caportes,
-                                                            :formPrincipal:crubros
+                                                            :#{p:component('contenedorTablaPresupuesto')}, 
+                                                            :#{p:component('caportes')},
+                                                            :#{p:component('crubros')}
                                                             "  />
 
-                                                    <!--                                                        caportes, 
-                                                                                                            crubros, 
-                                                                                                            tpresupuestototales -->
-
-                                                    <f:facet name="header">
-                                                        Armar el Presupuesto de la Idea-Proyecto
-                                                    </f:facet>
                                                     <p:column style="width:20%" >
                                                         <f:facet name="header">
                                                             <h:outputText value="Rubro"/>
@@ -461,29 +454,29 @@
                                                              rowStyleClass="#{(fn:length(presupuestoRubroController.presupuestosrubros) mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2' }"
                                                              styleClass="tabla esconder-cabecera-columnas" >
 
-                                                    <p:column style="width:20%" styleClass="TexAlCenter SoftBlueBack ">
+                                                    <p:column style="width:20%" styleClass="TexAlCenter BoldGrayBack ">
                                                         <h:outputText style="width:96%; font-weight: bold; color: white; " value="Totales"/>
                                                     </p:column>
 
-                                                    <p:column style="width:20%; " styleClass="TexAlRight SoftBlueBack">
+                                                    <p:column style="width:20%; " styleClass="TexAlRight SoftGreenBack">
                                                         <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosOrganismo()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </p:column>
 
-                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
+                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftGreenBack">
                                                         <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosComitente()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </p:column>
 
-                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
+                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftGreenBack">
                                                         <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosUniversidad()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
                                                     </p:column>
 
-                                                    <p:column id="totalesRubro" style="width:20%;" styleClass="TexAlRight BlueBack" >
+                                                    <p:column id="totalesRubro" style="width:20%;" styleClass="TexAlRight GreenBack" >
                                                         <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGeneral()}" style="float: right; font-weight: bold; color: white; ">
                                                             <f:convertNumber pattern="#0.00" />
                                                         </h:outputText>
