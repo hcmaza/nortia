@@ -228,7 +228,9 @@
                                                             <p:outputLabel style="font-weight:bold;font-size:larger" value="Duración (Meses)" for="duracion" />
                                                         </p:column>
                                                         <p:column style="width: 75%;">
-                                                            <p:spinner maxlength="3" id="duracion" value="#{proyectoController.selected.duracion}" title="duracion" min="1" style="width: 100px;"  />
+                                                            <p:spinner id="duracion" value="#{proyectoController.selected.duracion}" 
+                                                                       title="duracion" min="1" maxlength="3" 
+                                                                       required="true" requiredMessage="Por favor, ingrese la duración (meses) del proyecto." style="width: 100px;"  />
                                                         </p:column>                                
                                                     </p:row>
                                                 </p:panelGrid>                                
