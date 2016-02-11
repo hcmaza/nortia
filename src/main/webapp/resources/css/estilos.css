@@ -72,7 +72,31 @@
     background-color: #4CD5FF !important;
 }
 
+.AzulVerdosoOscuroBack{
+    background-color: #2898C5 !important;
+}
+
+.Gris1Back{
+    background-color: #394249 !important;
+}
+
+.Gris2Back{
+    background-color: #667382 !important;
+}
+
+.Gris3Back{
+    background-color: #84888B !important;
+}
+
+.Gris4Back{
+    background-color: #BCC3C8 !important;
+}
+
 /*ESTILOS DE PADDING*/
+
+.Padding0px{
+    padding: 0px !important;
+}
 
 .Padding5px{
     padding: 5px !important;

@@ -208,7 +208,7 @@ public class SolicitudController implements Serializable {
         // preparar indicadores TEMPORALES para ejemplo
         IndicadoresController indicadorescontroller = (IndicadoresController) context.getApplication().evaluateExpressionGet(context, "#{indicadoresController}", IndicadoresController.class);
         indicadorescontroller.crearModeloLineal();
-        
+        indicadorescontroller.crearModeloDona();
 
         return "CreateSolicitud";
     }

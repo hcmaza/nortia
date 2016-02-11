@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -34,6 +35,8 @@ import javax.faces.model.ListDataModel;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
+import org.primefaces.model.chart.DonutChartModel;
+import org.primefaces.model.chart.LegendPlacement;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.MeterGaugeChartModel;
@@ -677,7 +680,7 @@ public class IndicadoresController implements Serializable {
      
     public LineChartModel iniciarModeloLineal() {
         LineChartModel model = new LineChartModel();
-        model.setExtender("customExtender");
+        model.setExtender("extensorLineal");
         model.setSeriesColors("BBE7E7, 6EE0F9");
  
         LineChartSeries series1 = new LineChartSeries();
@@ -700,6 +703,42 @@ public class IndicadoresController implements Serializable {
  
         model.addSeries(series1);
         model.addSeries(series2);
+         
+        return model;
+    }
+    
+//    CHART DE DONA
+      
+    private DonutChartModel donutModel1;
+
+    public DonutChartModel getDonutModel1() {
+        return donutModel1;
+    }
+
+    public void setDonutModel1(DonutChartModel donutModel1) {
+        this.donutModel1 = donutModel1;
+    }
+    public void crearModeloDona(){
+        donutModel1 = iniciarModeloDona();
+        donutModel1.setLegendPosition("e");
+        donutModel1.setSliceMargin(5);
+        donutModel1.setShowDataLabels(true);
+        donutModel1.setDataFormat("value");
+        donutModel1.setShadow(false);
+        donutModel1.setSeriesColors("2898C5, 394249, 667382, 84888B, BCC3C8");
+    }
+    
+    private DonutChartModel iniciarModeloDona() {
+        DonutChartModel model = new DonutChartModel();
+        model.setExtender("extensorDona");
+         
+        Map<String, Number> circle1 = new LinkedHashMap<String, Number>();
+        circle1.put("Personal", 150);
+        circle1.put("Bienes de Consumo", 400);
+        circle1.put("Bienes de Consumo", 200);
+        circle1.put("Pasajes y Viáticos", 60);
+        circle1.put("Transferencias", 10);
+        model.addCircle(circle1);
          
         return model;
     }
