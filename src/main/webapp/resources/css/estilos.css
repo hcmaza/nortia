@@ -57,3 +57,31 @@
 .esconder-cabecera-columnas table thead tr {
     display: none;
 }
+
+/*ESTILOS DE COLORES*/
+
+.VerdeClaroBack{
+    background-color: #00D05E !important;
+}
+
+/*ESTILOS DE PADDING*/
+
+.Padding5px{
+    padding: 5px !important;
+}
+
+.Padding10px{
+    padding: 10px !important;
+}
+
+.Padding15px{
+    padding: 15px !important;
+}
+
+.Padding20px{
+    padding: 20px !important;
+}
+
+.Padding25px{
+    padding: 25px !important;
+}
