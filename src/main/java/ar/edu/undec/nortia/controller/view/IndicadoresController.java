@@ -31,6 +31,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
+import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
@@ -649,6 +650,58 @@ public class IndicadoresController implements Serializable {
             this.monto = monto;
         }
 
+    }
+    
+    
+//    INDICADOR LINEAL
+    
+    private LineChartModel lineModel1;
+
+    public LineChartModel getLineModel1() {
+        return lineModel1;
+    }
+
+    public void setLineModel1(LineChartModel lineModel1) {
+        this.lineModel1 = lineModel1;
+    }
+    
+    public void crearModeloLineal() {
+        lineModel1 = iniciarModeloLineal();
+        lineModel1.setLegendPosition("s");
+        Axis yAxis = lineModel1.getAxis(AxisType.Y);
+        yAxis.setMin(0);
+        yAxis.setMax(100);
+        yAxis.setLabel("Porcentaje");
+        
+    }
+     
+    public LineChartModel iniciarModeloLineal() {
+        LineChartModel model = new LineChartModel();
+        model.setExtender("customExtender");
+        model.setSeriesColors("BBE7E7, 6EE0F9");
+ 
+        LineChartSeries series1 = new LineChartSeries();
+        series1.setLabel("Serie 1");
+ 
+        series1.set(1, 12);
+        series1.set(2, 24);
+        series1.set(3, 33);
+        series1.set(4, 48);
+        series1.set(5, 68);
+ 
+        LineChartSeries series2 = new LineChartSeries();
+        series2.setLabel("Serie 2");
+ 
+        series2.set(1, 37);
+        series2.set(2, 42);
+        series2.set(3, 62);
+        series2.set(4, 81);
+        series2.set(5, 95);
+ 
+        model.addSeries(series1);
+        model.addSeries(series2);
+         
+        return model;
     }
 
 }

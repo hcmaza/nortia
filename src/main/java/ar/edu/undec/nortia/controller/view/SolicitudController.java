@@ -204,6 +204,11 @@ public class SolicitudController implements Serializable {
         // preparar el equipo de trabajo
         ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
         proyectoagentecontroller.buscarEquipoTrabajoPorProyecto(proyectocontroller.getSelected().getId());
+        
+        // preparar indicadores TEMPORALES para ejemplo
+        IndicadoresController indicadorescontroller = (IndicadoresController) context.getApplication().evaluateExpressionGet(context, "#{indicadoresController}", IndicadoresController.class);
+        indicadorescontroller.crearModeloLineal();
+        
 
         return "CreateSolicitud";
     }

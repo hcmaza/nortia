@@ -38,31 +38,22 @@
                                                 </div>
                                             </div>
                                             <div class="Container100 Responsive100">
-                                                <div class="Card BlueBack White Padding10px TexAlCenter HoverEffect">
+                                                <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
                                                     <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 6.584,43</div>
                                                     <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">= 43% del último desembolso</div>
                                                 </div>
                                             </div>
                                             <div class="Container100 Responsive100">
-                                                <div class="Card SoftBlueBack Padding10px White TexAlCenter HoverEffect">
+                                                <div class="Card CelesteClaroBack Padding10px White TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
                                                     <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
-                                                        Fila 2 Graficos <br />
+                                                        <p:chart type="line" model="#{indicadoresController.lineModel1}" responsive="true"/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="Container100 Responsive100">
-                                                <div class="Card BlueBack White Padding10px TexAlCenter HoverEffect">
+                                                <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
                                                     <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">Fila 3</div>
                                                 </div>
@@ -996,9 +987,26 @@
 
                 </div>   
             </div>      
+
+            <script>
+                function customExtender() {
+                    this.cfg.grid = {
+                        drawGridLines: false, // seteamos para que la lineas del grid no se vean
+                        borderWidth: 0, // ancho en pixeles del borde alrededor del grid
+                        borderColor: '#4CD5FF', // color CSS del borde alrededor del grid
+                        background: '#4CD5FF', // seteamos el color de fondo
+                        shadow: false, // sin sombra
+                        gridLineColor: '#4CD5FF', // color de las lineas del grid
+                    };
+
+                    this.cfg.seriesDefaults = {
+                                    shadow: false // no mostrar sombra debajo de la linea de las series
+                    };
+                }
+            </script>
+
         </ui:define>
     </ui:composition>
-
 </html>
 
 <!-- <p:summaryRow>
