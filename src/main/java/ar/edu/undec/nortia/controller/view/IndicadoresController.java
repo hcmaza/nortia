@@ -34,8 +34,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.ListDataModel;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.DonutChartModel;
+import org.primefaces.model.chart.HorizontalBarChartModel;
 import org.primefaces.model.chart.LegendPlacement;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
@@ -742,5 +744,51 @@ public class IndicadoresController implements Serializable {
          
         return model;
     }
+    
+//    BARRA HORIZONTAL
+    
+    private HorizontalBarChartModel horizontalBarModel;
+
+    public HorizontalBarChartModel getHorizontalBarModel() {
+        return horizontalBarModel;
+    }
+
+    public void setHorizontalBarModel(HorizontalBarChartModel horizontalBarModel) {
+        this.horizontalBarModel = horizontalBarModel;
+    }
+    
+    public void crearModeloBarraHorizontal() {
+        horizontalBarModel = new HorizontalBarChartModel();
+        horizontalBarModel.setSeriesColors("EEB337, D74149, 58B14D, 2898C5, 394249");
+        horizontalBarModel.setExtender("extensorBarraRubros");
+ 
+        ChartSeries bienesUso = new ChartSeries();
+        bienesUso.setLabel("Bienes de Uso");
+        bienesUso.set("2004", 13045);
+ 
+        ChartSeries pasajesViaticos = new ChartSeries();
+        pasajesViaticos.setLabel("Pasajes y Viáticos");
+        pasajesViaticos.set("2004", 34565);
+        
+        ChartSeries bienesConsumo = new ChartSeries();
+        bienesConsumo.setLabel("Bienes de Consumo");
+        bienesConsumo.set("2004", 67543);
+ 
+        horizontalBarModel.addSeries(bienesUso);
+        horizontalBarModel.addSeries(pasajesViaticos);
+        horizontalBarModel.addSeries(bienesConsumo);
+         
+//        horizontalBarModel.setTitle("Ejecutado por Rubros");
+        horizontalBarModel.setLegendPosition("e");
+        horizontalBarModel.setStacked(true);
+         
+        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+        xAxis.setMin(0);
+        //xAxis.setMax(125);
+         
+        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+
+    }
+    
 
 }
