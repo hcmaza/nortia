@@ -54,8 +54,15 @@
                                             </div>
                                             <div class="Container100 Responsive100">
                                                 <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
-                                                    <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">Fila 3</div>
+                                                    <p:panelGrid id="gridEvolucionEstado" columns="3" layout="grid" styleClass="Fs10 ui-panelgrid-blank" >
+                                                        <h:outputText value="Estado Junio" styleClass="Fs14 White" />
+                                                        <h:outputText value="Estado Julio" styleClass="Fs14 White" />
+                                                        <h:outputText value="Estado Agosto" styleClass="Fs14 White" />
+
+                                                        <h:outputText value="$ 1345,45" styleClass="Fs12 White FontBold" />
+                                                        <h:outputText value="$ 34.565,3" styleClass="Fs12 White FontBold" />
+                                                        <h:outputText value="$ 67.543,18" styleClass="Fs12 White FontBold" />
+                                                    </p:panelGrid>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,10 +202,41 @@
                                                 </div>
                                             </div>
                                             <div class="Container100 Responsive100">
-                                                <div class="Card WhiteBack Black Padding5px TexAlCenter HoverEffect">
+                                                <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
                                                     <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
                                                         <p:chart type="bar" model="#{indicadoresController.horizontalBarModel}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
+                                                        <p:panelGrid id="gridEjecutadosRubro" columns="3" layout="grid" styleClass="ui-panelgrid-blank" style="background-color: #F9F9F9;" >
+                                                            <h:outputText value="$ 1345,45" styleClass="Fs16 Black FontBold" />
+                                                            <h:outputText value="$ 34.565,3" styleClass="Fs16 Black FontBold" />
+                                                            <h:outputText value="$ 67.543,18" styleClass="Fs16 Black FontBold" />
+
+                                                            <h:outputText value="BIENES DE USO" styleClass="Fs10 Gray" />
+                                                            <h:outputText value="PASAJES Y VIATICOS" styleClass="Fs10 Gray" />
+                                                            <h:outputText value="BIENES DE CONSUMO" styleClass="Fs10 Gray" />
+                                                        </p:panelGrid>
+                                                    </div>
+                                                </div>
+                                                <div class="Card Padding20px">
+                                                    <div class="CardTopic"> 
+                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Pendientes de Rendición<br />
+                                                        <span class="CardSubTopic">Solicitudes acreditadas no rendidas.</span> 
+                                                    </div>
+                                                </div>
+                                                <div class="Container30">
+                                                    <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
+                                                        <div class="EmptyBox5"></div>
+                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">1</div>
+                                                        <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a"/></div>
+                                                    </div>
+                                                </div>
+                                                <div class="Container70">
+                                                    <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
+                                                        <div class="EmptyBox5"></div>
+                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 20.636</div>
+                                                        <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Anticipo N° 25-3415</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1010,7 +1048,7 @@
 
             <script>
                 function extensorLineal() {
-                    
+
                     this.cfg.grid = {
                         drawGridLines: false, // seteamos para que la lineas del grid no se vean
                         borderWidth: 0, // ancho en pixeles del borde alrededor del grid
@@ -1023,7 +1061,7 @@
                     this.cfg.seriesDefaults = {
                         shadow: false // no mostrar sombra debajo de la linea de las series
                     };
-                    
+
                     //this.plot.replot({});
                 }
             </script>
@@ -1061,27 +1099,26 @@
                     this.cfg.legend = {
                         show: false
                     };
-                    
+
                     this.cfg.axes = {
-                        yaxis : {
-                            tickOptions : {
-                                showMark: false,     // whether or not to show the mark on the axis
+                        yaxis: {
+                            tickOptions: {
+                                showMark: false, // whether or not to show the mark on the axis
                                 showGridline: false, // whether to draw a gridline (across the whole grid) at this tick
-                                show: false,         // whether to show the tick (mark and label)
-                                showLabel: false,    // whether to show the text label at the tick
+                                show: false, // whether to show the tick (mark and label)
+                                showLabel: false, // whether to show the text label at the tick
                             }
                         },
-                        
-                        xaxis : {
-                            tickOptions : {
-                                showMark: false,     // whether or not to show the mark on the axis
+                        xaxis: {
+                            tickOptions: {
+                                showMark: false, // whether or not to show the mark on the axis
                                 showGridline: false, // whether to draw a gridline (across the whole grid) at this tick
-                                show: false,         // whether to show the tick (mark and label)
-                                showLabel: false,    // whether to show the text label at the tick
+                                show: false, // whether to show the tick (mark and label)
+                                showLabel: false, // whether to show the text label at the tick
                             }
                         }
                     };
-                    
+
 //                    this.plot.replot({});
 
 //                    this.cfg.seriesDefaults = {
@@ -1090,9 +1127,9 @@
 
 //                    chart = PF('wvBarra').plot;
 //                    chart.replot();
-                    
+
                     PrimeFaces.widgets.wvDona.plot.replot();
-                    
+
                 }
 
             </script>

@@ -58,7 +58,7 @@
     display: none;
 }
 
-/*ESTILOS DE COLORES*/
+/*ESTILOS DE COLORES PARA FONDO*/
 
 .VerdeClaroBack{
     background-color: #00D05E !important;
@@ -74,6 +74,10 @@
 
 .AzulVerdosoOscuroBack{
     background-color: #2898C5 !important;
+}
+
+.VerdeAzuladoBack{
+    background-color: #4BACC6 !important;
 }
 
 .Gris1Back{
