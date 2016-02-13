@@ -676,7 +676,6 @@ public class IndicadoresController implements Serializable {
         Axis yAxis = lineModel1.getAxis(AxisType.Y);
         yAxis.setMin(0);
         yAxis.setMax(100);
-        yAxis.setLabel("Porcentaje");
         
     }
      

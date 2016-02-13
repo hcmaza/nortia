@@ -58,6 +58,28 @@
     display: none;
 }
 
+/*ESTILOS DE COLORES PARA LETRA*/
+
+.VerdeAzuladoOscuro{
+    color: #2898C5 !important;
+}
+
+.Gris1{
+    color: #394249 !important;
+}
+
+.Gris2{
+    color: #667382 !important;
+}
+
+.Gris3{
+    color: #84888B !important;
+}
+
+.Gris4{
+    color: #BCC3C8 !important;
+}
+
 /*ESTILOS DE COLORES PARA FONDO*/
 
 .VerdeClaroBack{
@@ -96,6 +118,10 @@
     background-color: #BCC3C8 !important;
 }
 
+.BordoBack{
+    background-color: #953735 !important;
+}
+
 /*ESTILOS DE PADDING*/
 
 .Padding0px{
@@ -120,4 +146,20 @@
 
 .Padding25px{
     padding: 25px !important;
+}
+
+.PaddingArribaAbajo5px {
+    padding: 5px 0px 5px 0px !important;
+}
+
+.PaddingArribaAbajo10px {
+    padding: 10px 0px 10px 0px !important;
+}
+
+.PaddingArribaAbajo15px {
+    padding: 15px 0px 15px 0px !important;
+}
+
+.PaddingArribaAbajo20px {
+    padding: 20px 0px 20px 0px !important;
 }
