@@ -113,6 +113,10 @@
                                                 <p:menuitem value="Evaluar Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionController.prepareEvaluacion()}" ajax="false" icon="ui-icon-tag" styleClass="menuAncho" >
                                                     <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
                                                 </p:menuitem>
+                                                
+                                                <p:menuitem value="Crear Rendición Externa" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionexternaController.prepareCreate()}" ajax="false" icon="ui-icon-suitcase" styleClass="menuAncho" >
+                                                    <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
+                                                </p:menuitem>
 
                                                 <p:separator rendered="#{item.estadoproyectoid.id eq 12}" />
 
@@ -127,8 +131,7 @@
                                                 <p:menuitem value="Lista: Rendiciones" rendered="#{item.estadoproyectoid.id eq 12}" action="#{rendicionController.prepareList}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
                                                     <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
                                                 </p:menuitem>
-                                                <p:menuitem value="Lista: Comprobantes Ejecutados" rendered="#{item.estadoproyectoid.id eq 12}" action="#{archivorendicionController.prepareListEjecutados}" ajax="false" icon="ui-icon-clipboard" styleClass="menuAncho" >
-                                                </p:menuitem>
+                                                
                                             </c:if>
 
                                             <c:if test="#{request.isUserInRole('Docente')}" > 

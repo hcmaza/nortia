@@ -7,6 +7,7 @@ package ar.edu.undec.nortia.controller;
 
 import ar.edu.undec.nortia.model.Archivorendicion;
 import ar.edu.undec.nortia.model.Solicitud;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -52,7 +53,13 @@ public class ArchivorendicionFacade extends AbstractFacade<Archivorendicion> {
         Query consulta = em.createQuery("SELECT ar FROM Archivorendicion ar WHERE ar.rendicionid.id = :rendicionId)", Archivorendicion.class);
         consulta.setParameter("rendicionId", rendicionId);
         return (Archivorendicion)consulta.getSingleResult();
-        
+    }
+    
+    public List<Archivorendicion> buscarPorFechaDesdeHasta(Date desde, Date hasta){
+        Query consulta = em.createQuery("SELECT ar FROM Archivorendicion ar WHERE ar.fechafactura BETWEEN :desde AND :hasta)", Archivorendicion.class);
+        consulta.setParameter("desde", desde);
+        consulta.setParameter("hasta", hasta);
+        return consulta.getResultList();
     }
     
 }

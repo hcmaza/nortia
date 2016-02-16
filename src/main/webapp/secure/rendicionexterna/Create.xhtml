@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Nueva Rendicion Externa"></h:outputText>
+        </ui:define>
+        <ui:define name="content">     
+
+            <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
+
+            <div class="Container100">       
+                <div class="ContainerIndent">
+
+                    <h:form id="formprincipal">
+
+                        <p:growl globalOnly="true" for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
+
+                        <div class="Card ">
+                            <div class="ui-fluid">
+                                <div class="CardTopic"> 
+                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
+
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    Mis Rendiciones de Cuenta <br />
+                                    <span class="CardSubTopic"> Rendición Externa </span> 
+
+                                    <div class="SeparatorFull"></div>
+                                    
+                                    <div class="Container100 Responsive">
+                                        <h:outputText value="Búsqueda de Comprobantes de Gasto" />
+                                        <p:outputLabel for="desde" value="Desde:" />
+                                        <p:calendar id="desde" value="#{rendicionexternaController.desde}" />
+                                        
+                                        <p:outputLabel for="hasta" value="Hasta:" />
+                                        <p:calendar id="hasta" value="#{rendicionexternaController.hasta}"  />
+                                    </div>
+                                    
+                                    <div class="SeparatorFull"></div>
+
+                                    <p:dataTable id="tabladisponiblesrendicion" 
+                                                 var="item" 
+                                                 value="#{rendicionexternaController.listaComprobantes}" 
+                                                 rowKey="#{item.id}" 
+                                                 rowIndexVar="indice"
+                                                 rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                 styleClass="tabla" style="margin-bottom: 10px;">
+                                        <f:facet name="header">
+                                            Comprobantes de Gasto
+                                        </f:facet>
+
+                                        <p:column headerText="Nº">
+                                            <h:outputText value="#{item.id}" />
+                                        </p:column>
+                                        <p:column headerText="Tipo">
+                                            <h:outputText value="#{item.nrofactura}" />
+                                        </p:column>
+                                        <p:column headerText="Fecha">
+                                            <h:outputText value="#{item.fechafactura}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Total">
+                                            <h:outputText value="#{item.montofactura}" />
+                                        </p:column>
+                                        <p:column style="width:32px;text-align: center">
+                                            <p:commandButton id="botonAgregarComprobante" update=":formprincipal:growlprincipal" action="#{rendicionexternaController.agregarComprobanteARendicionExterna()}" icon="ui-icon-circle-plus" title="Agregar Comprobante a Rendición" immediate="true" >
+                                                <f:setPropertyActionListener value="#{item}" target="#{rendicionexternaController.comprobanteSeleccionado}" />
+                                            </p:commandButton>
+                                            <p:tooltip for="botonAgregarComprobante" value="Agregar Comprobante a la Rendición Externa" />
+                                        </p:column>
+                                    </p:dataTable>
+
+                                    <!--**********************************************-->
+                                    <!--*** TABLA ARCHIVOS RENDICION ****-->
+                                    <!--**********************************************-->
+
+                                    <p:dataTable id="tablacomprobantesrendicion" var="arc" value="#{rendicionexternaController.selected.archivorendicionList}" 
+                                                 rowIndexVar="indice"
+                                                 rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
+                                                 styleClass="tabla" style="top: 5px; margin-bottom: 5px;">  
+                                        <f:facet name="header">
+                                            Comprobantes de Gatos incorporados a la Rendición
+                                        </f:facet>
+                                        <p:column headerText="Tipo de Factura">  
+                                            <h:outputText value="#{arc.tipofactura}" />                                        
+                                        </p:column> 
+                                        <p:column headerText="N° de Factura">  
+                                            <h:outputText value="#{arc.nrofactura}" />  
+                                        </p:column> 
+                                        <p:column headerText="Proveedor">  
+                                            <h:outputText value="#{arc.proveedor}" />  
+                                        </p:column> 
+                                        <p:column headerText="Monto">  
+                                            <h:outputText value="#{arc.montofactura}" />  
+                                        </p:column> 
+                                        <p:column headerText="">  
+                                            <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" actionListener="#{rendicionexternaController.removerComprobanteDeRendicionExterna(arc)}" update=":formprincipal:growlprincipal" immediate="true"  >
+                                                <f:setPropertyActionListener value="#{arc}" target="#{archivorendicionController.selected}" />  
+                                            </p:commandButton>
+                                        </p:column> 
+                                        <f:facet name="footer">
+                                            akjdhasdk
+                                        </f:facet>
+                                    </p:dataTable>
+                                    <br />
+                                    <h:commandLink action="#{rendicionexternaController.create}" value="#{bundle.CreateRendicionexternaSaveLink}" />
+                                    <br />
+                                    <br />
+                                    <h:commandLink action="#{rendicionexternaController.prepareList}" value="#{bundle.CreateRendicionexternaShowAllLink}" immediate="true"/>
+                                    <br />
+                                    <br />
+                                    <h:link outcome="/index" value="#{bundle.CreateRendicionexternaIndexLink}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>       
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

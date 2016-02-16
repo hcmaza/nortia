@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Lista de Rendiciones Externas"></h:outputText>
+        </ui:define>
+        <ui:define name="content">      
+            <div class="Container100">   
+                <div class="ContainerIndent">
+                    <h:form styleClass="jsfcrud_list_form">
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <h:outputText escape="false" value="#{bundle.ListRendicionexternaEmpty}" rendered="#{rendicionexternaController.items.rowCount == 0}"/>
+                        <h:panelGroup rendered="#{rendicionexternaController.items.rowCount > 0}">
+                            <h:outputText value="#{rendicionexternaController.pagination.pageFirstItem + 1}..#{rendicionexternaController.pagination.pageLastItem + 1}/#{rendicionexternaController.pagination.itemsCount}"/>&nbsp;
+                            <h:commandLink action="#{rendicionexternaController.previous}" value="#{bundle.Previous} #{rendicionexternaController.pagination.pageSize}" rendered="#{rendicionexternaController.pagination.hasPreviousPage}"/>&nbsp;
+                            <h:commandLink action="#{rendicionexternaController.next}" value="#{bundle.Next} #{rendicionexternaController.pagination.pageSize}" rendered="#{rendicionexternaController.pagination.hasNextPage}"/>&nbsp;
+                            <h:dataTable value="#{rendicionexternaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListRendicionexternaTitle_id}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListRendicionexternaTitle_fecha}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fecha}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>
+                                    <h:commandLink action="#{rendicionexternaController.prepareView}" value="#{bundle.ListRendicionexternaViewLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{rendicionexternaController.prepareEdit}" value="#{bundle.ListRendicionexternaEditLink}"/>
+                                    <h:outputText value=" "/>
+                                    <h:commandLink action="#{rendicionexternaController.destroy}" value="#{bundle.ListRendicionexternaDestroyLink}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:panelGroup>
+                        <br />
+                        <h:commandLink action="#{rendicionexternaController.prepareCreate}" value="#{bundle.ListRendicionexternaCreateLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.ListRendicionexternaIndexLink}"/>
+                    </h:form>
+                </div>     
+            </div>  
+        </ui:define>
+    </ui:composition>
+
+</html>

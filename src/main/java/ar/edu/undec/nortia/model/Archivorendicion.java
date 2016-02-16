@@ -50,9 +50,14 @@ public class Archivorendicion implements Serializable {
     //@Lob
     @Column(name = "archivo")
     private byte[] archivo;
+    
     @JoinColumn(name = "rendicionid", referencedColumnName = "id")
     @ManyToOne
     private Rendicion rendicionid;
+    
+    @JoinColumn(name = "rendicionexternaid", referencedColumnName = "id")
+    @ManyToOne
+    private Rendicionexterna rendicionexternaid;
     
     @Size(max = 25)
     @Column(name = "nrofactura")
@@ -130,6 +135,14 @@ public class Archivorendicion implements Serializable {
 
     public void setRendicionid(Rendicion rendicionid) {
         this.rendicionid = rendicionid;
+    }
+
+    public Rendicionexterna getRendicionexternaid() {
+        return rendicionexternaid;
+    }
+
+    public void setRendicionexternaid(Rendicionexterna rendicionexternaid) {
+        this.rendicionexternaid = rendicionexternaid;
     }
 
     public String getNrofactura() {

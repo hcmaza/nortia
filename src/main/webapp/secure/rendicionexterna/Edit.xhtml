@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Editar Rendición Externa"></h:outputText>
+        </ui:define>
+        <ui:define name="content">    
+            <div class="Container100">     
+                <div class="ContainerIndent">
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="#{bundle.EditRendicionexternaLabel_id}" for="id" />
+                            <h:inputText id="id" value="#{rendicionexternaController.selected.id}" title="#{bundle.EditRendicionexternaTitle_id}" required="true" requiredMessage="#{bundle.EditRendicionexternaRequiredMessage_id}"/>
+                            <h:outputLabel value="#{bundle.EditRendicionexternaLabel_fecha}" for="fecha" />
+                            <h:inputText id="fecha" value="#{rendicionexternaController.selected.fecha}" title="#{bundle.EditRendicionexternaTitle_fecha}" >
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:inputText>
+                        </h:panelGrid>
+                        <h:commandLink action="#{rendicionexternaController.update}" value="#{bundle.EditRendicionexternaSaveLink}"/>
+                        <br />
+                        <br />
+                        <h:link outcome="View" value="#{bundle.EditRendicionexternaViewLink}"/>
+                        <br />
+                        <h:commandLink action="#{rendicionexternaController.prepareList}" value="#{bundle.EditRendicionexternaShowAllLink}" immediate="true"/>
+                        <br />
+                        <br />
+                        <h:link outcome="/index" value="#{bundle.EditRendicionexternaIndexLink}" />
+                    </h:form>
+                </div>  
+            </div> 
+        </ui:define>
+    </ui:composition>
+
+</html>
