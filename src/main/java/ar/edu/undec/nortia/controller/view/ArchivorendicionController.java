@@ -76,8 +76,6 @@ public class ArchivorendicionController implements Serializable {
     public RendicionFacade getEjbFacadeRendicion() {
         return ejbFacadeRendicion;
     }
-    
-    
 
     public List<Archivorendicion> getListaArchivos() {
         if (listaArchivos == null) {
@@ -439,18 +437,17 @@ public class ArchivorendicionController implements Serializable {
         return null;
     }
 
-    public StreamedContent obtenerImagenComprobante() throws IOException {
-
-        StreamedContent imagen = null;
+    public StreamedContent getImagenComprobante(){
 
         FacesContext context = FacesContext.getCurrentInstance();
 
         if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+            // Renderizamos el HTML. Devuelve un stub StreamedContent para generar el URL correcto.
             return new DefaultStreamedContent();
         } else {
-            // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
+            // El browser requiere la imagen. Devuelve el StreamedContent real con los bytes de la imagen.
             String nombreArchivo = context.getExternalContext().getRequestParameterMap().get("archivo");
+
             
             System.out.println("Nombre de Archivo >> " + nombreArchivo);
 
@@ -465,7 +462,31 @@ public class ArchivorendicionController implements Serializable {
             }
         }
 
-        return null;
+        return new DefaultStreamedContent();
+    }
+    
+    public StreamedContent getImagenSelected(){
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // Renderizamos el HTML. Devuelve un stub StreamedContent para generar el URL correcto.
+            return new DefaultStreamedContent();
+        } else {
+            
+            // si el current o el archivo que contiene son nulos.
+            if(null == current){
+                return new DefaultStreamedContent();
+            }
+
+            if(null == current.getArchivo()){
+                return new DefaultStreamedContent();
+            }
+            
+            // El browser requiere la imagen. Devuelve el StreamedContent real con los bytes de la imagen.
+            return new DefaultStreamedContent(new ByteArrayInputStream(current.getArchivo()));
+        }
+
     }
 
     public float sumarComprobantes() {

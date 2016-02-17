@@ -306,5 +306,11 @@ public class RendicionexternaController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Información", "El comprobante del proveedor: " + comprobanteSeleccionado.getProveedor() + " - Nº: " + comprobanteSeleccionado.getNrofactura() + " fue borrado"));
 
     }
+    
+    public void buscarComprobantesEntreFechas(){
+        listaComprobantes = this.getEjbFacadeComprobantes().buscarPorFechaDesdeHasta(desde, hasta);
+        
+        System.out.println("listaComprobantes cantidad >> " + listaComprobantes.size());
+    }
 
 }

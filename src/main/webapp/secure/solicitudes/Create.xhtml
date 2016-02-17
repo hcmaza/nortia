@@ -560,24 +560,26 @@
                                             <p:column headerText="Proveedor">  
                                                 <h:outputText value="#{arc.proveedor}" />  
                                             </p:column> 
-
-                                            <!--                                    <p:column headerText="Archivo">  
-                                                                                    <p:lightBox id="lighbox">
-                                                                                        <h:outputLink value="#">
-                                                                                            <h:outputText value="# {arc.nombrearchivo}" />
-                                                                                        </h:outputLink>
-                                            
-                                                                                        <f:facet name="inline">
-                                                                                            <p:graphicImage value="# {archivorendicionController.obtenerImagenComprobante()}" width="400px" style="width: 300px; height: auto; display: block;" >
-                                                                                                <f:param name="archivo" value="# {arc.nombrearchivo}" />
-                                                                                            </p:graphicImage>
-                                                                                        </f:facet>
-                                                                                    </p:lightBox>
-                                                                                </p:column> -->
-
+                                            <p:column headerText="Archivo">  
+                                                <p:lightBox id="lighbox">
+                                                    <h:outputLink value="#">
+                                                        <h:outputText value="#{arc.nombrearchivo}" />
+                                                    </h:outputLink>
+                                                    <f:facet name="inline">
+                                                        <p:graphicImage cache="false" value="#{archivorendicionController.imagenComprobante}" width="400px" style="width: 300px; height: auto; display: block;" >
+                                                            <f:param name="archivo" value="#{arc.nombrearchivo}" />
+                                                        </p:graphicImage>
+                                                    </f:facet>
+                                                </p:lightBox>
+                                            </p:column> 
                                             <p:column headerText="Monto">  
                                                 <h:outputText value="#{arc.montofactura}" />  
                                             </p:column> 
+<!--                                            <p:column headerText="Comprobante">  
+                                                <p:commandButton value="Ver" icon="fa fa-image" oncomplete="PF('dlgImagenComprobante').show();" update=":formprincipal:growlprincipal, formimagencomprobante" immediate="true"  >
+                                                    <f:setPropertyActionListener value="#{arc}" target="#{archivorendicionController.selected}" />  
+                                                </p:commandButton>
+                                            </p:column> -->
                                             <p:column headerText="">  
                                                 <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" actionListener="#{archivorendicionController.removerArchivoLista(arc)}" update=":formprincipal:growlprincipal, :formprincipal:tabsolicitudes:tablafacturasrendicion, :formarchivorendicion, :formprincipal:tabsolicitudes:difrendicion" immediate="true"  >
                                                     <f:setPropertyActionListener value="#{arc}" target="#{archivorendicionController.selected}" />  
@@ -587,20 +589,6 @@
                                                 El total Solicitado es $ #{archivorendicionController.sumarComprobantes()}
                                             </f:facet>
                                         </p:dataTable>
-
-                                        <!--                                <p:dialog header="Images" widgetVar="dlgImagenComprobante" modal="true" resizable="false">
-                                                                            <p:graphicImage value="{archivorendicionController.obtenerImagenSelected()}" />
-                                                                            
-                                                                            <p:imageSwitch effect="wipe" widgetVar="switcher" id="vercomprobantes"
-                                                                                               slideshowAuto="false" >
-                                                                                    <ui:repeat value="{archivorendicionController.listaArchivos}" var="imagen" id="manuelSwitcherImages">
-                                                                                        <p:graphicImage value="{archivorendicionController.obtenerImagen()}" width="400px" style="width: 300px; height: auto; display: block;" >
-                                                                                            <f:param name="archivo" value="{imagen.nombrearchivo}" />
-                                                                                        </p:graphicImage>
-                                        
-                                                                                    </ui:repeat>
-                                                                                </p:imageSwitch>
-                                                                        </p:dialog>-->
 
                                         <p:outputPanel id="difrendicion"  >
                                             <p:fieldset legend="Diferencia de la Rendición de Gastos" style="margin-bottom:20px" rendered="#{archivorendicionController.sumarComprobantes() > rendicionController.solicitudSeleccionada.importe.floatValue()}">
@@ -947,44 +935,37 @@
                     <!--* DIALAGO ARCHIVO de RENDICION *-->
                     <!--**********************************************-->
 
-                    <p:dialog header="Factura" id="dialogoItemRendicion" widgetVar="dialogoItemRendicion" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:dialog header="Factura" id="dialogoItemRendicion" widgetVar="dialogoItemRendicion" modal="true" showEffect="fade" hideEffect="fade" resizable="false" responsive="true">
                         <h:form id="formarchivorendicion" enctype="multipart/form-data" >
                             <!--<p:messages id="messages" showDetail="true" autoUpdate="true" />-->
-                            <p:panelGrid rendered="#{not empty rendicionController.solicitudSeleccionada}" styleClass="panelgrid" columnClasses="right,right" >
-                                <f:facet name="header">
-                                    <h:outputText value="Datos de la Factura" />
-                                </f:facet>
-
+                            <p:panelGrid rendered="#{not empty rendicionController.solicitudSeleccionada}" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-4, ui-grid-col-8" >
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Tipo de Factura" />
+                                        <p:outputLabel value="Tipo" />
                                     </p:column>
                                     <p:column>
-                                        <p:selectOneMenu id="dtipofactura" value="#{archivorendicionController.selected.tipofactura}" var="tipo" required="true" requiredMessage="Se debe seleccionar un tipo de factura." style="width: 100%;">
+                                        <p:selectOneMenu id="dtipofactura" value="#{archivorendicionController.selected.tipofactura}" var="tipo" required="true" requiredMessage="Se debe seleccionar un tipo de factura." style="width: 100%;" styleClass="ui-grid-col-12">
                                             <f:selectItem itemLabel="Seleccionar un tipo." itemValue="" />
                                             <f:selectItem itemLabel="B" itemValue="B" />
                                             <f:selectItem itemLabel="C" itemValue="C" />
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
-
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Número de Factura" />
+                                        <p:outputLabel value="Número" />
                                     </p:column>
                                     <p:column>
-                                        <p:inputMask id="dnrofactura" value="#{archivorendicionController.selected.nrofactura}" title="Formato: 1234-12345678" mask="9999-99999999" maxlength="13" validatorMessage="Debe seguir el formato de Nº de factura correcto: 0000-00000000" required="true" requiredMessage="Se debe cargar el número de factura." />
+                                        <p:inputMask id="dnrofactura" value="#{archivorendicionController.selected.nrofactura}" title="Formato: 1234-12345678" mask="9999-99999999" maxlength="13" validatorMessage="Debe seguir el formato de Nº de factura correcto: 0000-00000000" required="true" requiredMessage="Se debe cargar el número de factura." styleClass="ui-grid-col-12" />
                                         <p:tooltip id="dttnrofactura" for="dnrofactura" showEvent="focus" hideEvent="blur" />
                                     </p:column>
                                 </p:row>
-
-
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Fecha de Factura" />
+                                        <p:outputLabel value="Fecha" />
                                     </p:column>
                                     <p:column>
-                                        <p:calendar id="dfechafactura" value="#{archivorendicionController.selected.fechafactura}" mindate="#{rendicionController.solicitudSeleccionada.fechasolicitud}" required="true" requiredMessage="Se debe cargar la fecha de factura." >
+                                        <p:calendar id="dfechafactura" value="#{archivorendicionController.selected.fechafactura}" mindate="#{rendicionController.solicitudSeleccionada.fechasolicitud}" required="true" requiredMessage="Se debe cargar la fecha de factura." styleClass="ui-grid-col-12" >
                                             <f:validator validatorId="validadorFechaArchivoRendicion" />
                                             <f:attribute name="fechaSolicitud" value="#{rendicionController.solicitudSeleccionada.fechasolicitud}" />
                                         </p:calendar>
@@ -996,16 +977,16 @@
                                         <p:outputLabel value="Proveedor" />
                                     </p:column>
                                     <p:column>
-                                        <p:inputText id="dproveedor" value="#{archivorendicionController.selected.proveedor}" />
+                                        <p:inputText id="dproveedor" value="#{archivorendicionController.selected.proveedor}" styleClass="ui-grid-col-12" />
                                     </p:column>
                                 </p:row>
 
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Monto de Factura" />
+                                        <p:outputLabel value="Monto" />
                                     </p:column>
                                     <p:column>
-                                        <p:inputText  id="dmontofactura" value="#{archivorendicionController.selected.montofactura}" required="true" requiredMessage="Se debe cargar el monto de la factura."  >
+                                        <p:inputText  id="dmontofactura" value="#{archivorendicionController.selected.montofactura}" required="true" requiredMessage="Se debe cargar el monto de la factura." styleClass="ui-grid-col-12"  >
                                             <f:convertNumber type="number" groupingUsed="false" locale="en-US"  /> 
                                         </p:inputText>    
                                     </p:column>
@@ -1013,11 +994,11 @@
 
                                 <p:row>
                                     <p:column>
-                                        <p:outputLabel value="Archivo de Factura" />
+                                        <p:outputLabel value="Imagen" />
                                     </p:column>
                                     <p:column>
                                         <p:fileUpload label="Imagen de Factura" id="ffactura" fileUploadListener="#{archivorendicionController.subirArchivoRendicion}" mode="advanced"  
-                                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update=":formprincipal:growlprincipal"  >
+                                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update=":formprincipal:growlprincipal" styleClass="ui-grid-col-12"  >
                                         </p:fileUpload>    
                                     </p:column>
                                 </p:row>
@@ -1027,7 +1008,7 @@
                                         <p:outputLabel value="Observación" />
                                     </p:column>
                                     <p:column>
-                                        <p:inputTextarea id="dobservacionFactura" value="#{archivorendicionController.selected.obsfactura}" />
+                                        <p:inputTextarea id="dobservacionFactura" value="#{archivorendicionController.selected.obsfactura}" styleClass="ui-grid-col-12" />
                                     </p:column>
                                 </p:row>
 
@@ -1039,8 +1020,25 @@
                                 <p:commandButton value="Agregar Factura" actionListener="#{archivorendicionController.agregarArchivoLista()}" update=":formprincipal:tabsolicitudes:tablafacturasrendicion, :formprincipal:tabsolicitudes:difrendicion" oncomplete="PF('dialogoItemRendicion').hide();" validateClient="true" />
                             </div>
                         </h:form>
+                    </p:dialog>
 
+                    <!--**********************************************-->
+                    <!--***** DIALAGO VER IMAGEN DE COMPROBANTE ******-->
+                    <!--**********************************************-->
 
+                    <p:dialog id="dlgImagenComprobante" widgetVar="dlgImagenComprobante" modal="true" dynamic="true" responsive="true" closeOnEscape="true" closable="true" resizable="false">
+                        <h:form id="formimagencomprobante" enctype="multipart/form-data"  >
+                            <p:graphicImage value="#{archivorendicionController.imagenSelected}" cache="false" styleClass="ui-grid-col-12" />
+
+                            <!--                    <p:imageSwitch effect="wipe" widgetVar="switcher" id="vercomprobantes"
+                                                            slideshowAuto="false" >
+                                                        <ui:repeat value="# {archivorendicionController.listaArchivos}" var="imagen" id="manuelSwitcherImages">
+                                                            <p:graphicImage value="# {archivorendicionController.obtenerImagen()}" width="400px" style="width: 300px; height: auto; display: block;" >
+                                                                <f:param name="archivo" value="# {imagen.nombrearchivo}" />
+                                                            </p:graphicImage>
+                                                        </ui:repeat>
+                                                    </p:imageSwitch>-->
+                        </h:form>
                     </p:dialog>
 
                 </div>   
@@ -1080,17 +1078,17 @@
                     this.cfg.legend = {
                         show: false
                     };
-                    
+
                     this.cfg.seriesDefaults = {
-                        renderer:$.jqplot.DonutRenderer,
-                        rendererOptions:{
+                        renderer: $.jqplot.DonutRenderer,
+                        rendererOptions: {
                             sliceMargin: 5,
                             padding: 1,
                             innerDiameter: 100,
                             startAngle: -90,
                             dataLabels: 'percent',
                             showDataLabels: true
-                         }
+                        }
                     };
                 }
 

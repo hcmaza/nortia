@@ -32,16 +32,20 @@
                                     <span class="CardSubTopic"> Rendición Externa </span> 
 
                                     <div class="SeparatorFull"></div>
-                                    
+
                                     <div class="Container100 Responsive">
-                                        <h:outputText value="Búsqueda de Comprobantes de Gasto" />
-                                        <p:outputLabel for="desde" value="Desde:" />
-                                        <p:calendar id="desde" value="#{rendicionexternaController.desde}" />
-                                        
-                                        <p:outputLabel for="hasta" value="Hasta:" />
-                                        <p:calendar id="hasta" value="#{rendicionexternaController.hasta}"  />
+                                        <p:panelGrid columns="6" layout="grid" columnClasses="ui-grid-col-3 LightBlue Fs16, ui-grid-col-1, ui-grid-col-3, ui-grid-col-1 ,ui-grid-col-3, ui-grid-col-1 " styleClass="ui-panelgrid-blank">
+                                            <h:outputText value="Búsqueda de Comprobantes de Gasto"  />
+                                            <p:outputLabel for="desde" value="Desde:" />
+                                            <p:calendar id="desde" value="#{rendicionexternaController.desde}" />
+                                            <p:outputLabel for="hasta" value="Hasta:" />
+                                            <p:calendar id="hasta" value="#{rendicionexternaController.hasta}"  />
+                                            <p:commandButton id="buscarEntreFechas" icon="fa fa-search White" styleClass="White"
+                                                             actionListener="#{rendicionexternaController.buscarComprobantesEntreFechas()}"
+                                                             update="tabladisponiblesrendicion" />
+                                        </p:panelGrid>
                                     </div>
-                                    
+
                                     <div class="SeparatorFull"></div>
 
                                     <p:dataTable id="tabladisponiblesrendicion" 
