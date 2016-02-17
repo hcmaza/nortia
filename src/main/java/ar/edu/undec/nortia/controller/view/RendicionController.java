@@ -553,7 +553,6 @@ public class RendicionController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Rendicion.class.getName());
             }
         }
-
     }
 
     public void obtenerPorProyecto(int proyectoid) {

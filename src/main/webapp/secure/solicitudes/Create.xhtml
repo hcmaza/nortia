@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
     <ui:composition template="/WEB-INF/template.xhtml">
         <ui:define name="title">
@@ -228,15 +229,28 @@
                                                 <div class="Container30">
                                                     <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
                                                         <div class="EmptyBox5"></div>
-                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">1</div>
-                                                        <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a"/></div>
+                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="#{fn:length(rendicionController.listaSolicitudes)}"/></div>
+                                                        <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a" /></div>
                                                     </div>
                                                 </div>
                                                 <div class="Container70">
                                                     <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
                                                         <div class="EmptyBox5"></div>
-                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 20.636</div>
-                                                        <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Anticipo N° 25-3415</div>
+                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="$ #{rendicionController.sumarSolicitudesARendir()}" /></div>
+                                                        <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                            <c:choose>
+                                                                <c:when test="#{empty rendicionController.listaSolicitudes}">
+                                                                    <h:outputText value="sin solicitudes a rendir" />
+                                                                </c:when>
+                                                                <c:when test="#{rendicionController.listaSolicitudes.size() eq 1}">
+                                                                    <h:outputText value="#{rendicionController.listaSolicitudes[0].observacion}" />
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <h:outputText value="más de una solicitud a rendir" />
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
