@@ -1,6 +1,7 @@
 package ar.edu.undec.nortia.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -71,6 +72,9 @@ public class Rendicionexterna implements Serializable {
     }
 
     public List<Archivorendicion> getArchivorendicionList() {
+        if(null == archivorendicionList){
+            archivorendicionList = new ArrayList<Archivorendicion>();
+        }
         return archivorendicionList;
     }
 

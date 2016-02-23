@@ -62,7 +62,10 @@
                                         <p:column headerText="Nº">
                                             <h:outputText value="#{item.id}" />
                                         </p:column>
-                                        <p:column headerText="Tipo">
+                                        <p:column headerText="Proveedor">
+                                            <h:outputText value="#{item.proveedor}" />
+                                        </p:column>
+                                        <p:column headerText="Nº Factura">
                                             <h:outputText value="#{item.nrofactura}" />
                                         </p:column>
                                         <p:column headerText="Fecha">
@@ -70,20 +73,41 @@
                                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                                             </h:outputText>
                                         </p:column>
+                                        <p:column headerText="Descripción">
+                                            <h:outputText value="#{item.rendicionid.observacion}" />
+                                        </p:column>
+                                        <p:column headerText="Archivo">
+                                            <p:lightBox id="lighbox">
+                                                <h:outputLink value="#">
+                                                    <h:outputText value="#{item.nombrearchivo}" />
+                                                </h:outputLink>
+                                                <f:facet name="inline">
+                                                    <p:graphicImage cache="false" value="#{rendicionexternaController.imagenComprobante}" width="400px" style="width: 300px; height: auto; display: block;" >
+                                                        <f:param name="archivo" value="#{item.nombrearchivo}" />
+                                                    </p:graphicImage>
+                                                </f:facet>
+                                            </p:lightBox>
+                                        </p:column>
                                         <p:column headerText="Total">
                                             <h:outputText value="#{item.montofactura}" />
                                         </p:column>
+                                        <p:column headerText="Estado">
+                                            <h:outputText value="#{item.estado}" />
+                                        </p:column>
+                                        <p:column headerText="Observaciones">
+                                            <h:outputText value="#{item.obsfactura}" />
+                                        </p:column>
                                         <p:column style="width:32px;text-align: center">
-                                            <p:commandButton id="botonRendicionSubirFactura" update=":formprincipal:growlprincipal, :formarchivorendicion " action="#{archivorendicionController.nuevoArchivoRendicion()}" oncomplete="PF('dialogoItemRendicion').show();" icon="ui-icon-circle-plus" title="Subir Factura" immediate="true" >
-                                                <f:setPropertyActionListener value="#{item}" target="#{rendicionController.solicitudSeleccionada}" />
+                                            <p:commandButton id="botonAgregarComprobanteGasto" action="#{rendicionexternaController.limpiarAportesDeComprobante()}" update=":formprincipal:growlprincipal, :formarchivorendicion " oncomplete="PF('dialogoItemRendicion').show();" icon="fa fa-plus" title="Agregar Comprobante de Gasto" immediate="true" >
+                                                <f:setPropertyActionListener value="#{item}" target="#{rendicionexternaController.comprobanteSeleccionado}" />
                                             </p:commandButton>
-                                            <p:tooltip for="botonRendicionSubirFactura" value="Agregar Comprobante de Rendición" />
+                                            <p:tooltip for="botonAgregarComprobanteGasto" value="Agregar Comprobante de Gasto" />
                                         </p:column>
                                     </p:dataTable>
 
-                                    <!--**********************************************-->
-                                    <!--*** TABLA ARCHIVOS RENDICION ****-->
-                                    <!--**********************************************-->
+                                    <!--**********************************************************-->
+                                    <!--** TABLA COMPROBANTES DE GASTO DE LA RENDICION EXTERNA ***-->
+                                    <!--**********************************************************-->
 
                                     <p:dataTable id="tablacomprobantesrendicion" var="arc" value="#{rendicionexternaController.selected.archivorendicionList}" 
                                                  rowIndexVar="indice"
@@ -100,17 +124,26 @@
                                         </p:column> 
                                         <p:column headerText="Proveedor">  
                                             <h:outputText value="#{arc.proveedor}" />  
-                                        </p:column> 
-                                        <p:column headerText="Monto">  
+                                        </p:column>
+                                        <p:column headerText="Aporte Universidad">
+                                            <h:outputText value="#{arc.aporteuniversidad}" />
+                                        </p:column>
+                                        <p:column headerText="Aporte Organismo">
+                                            <h:outputText value="#{arc.aporteorganismo}" />
+                                        </p:column>
+                                        <p:column headerText="Aporte Comitente">
+                                            <h:outputText value="#{arc.aportecomitente}" />
+                                        </p:column>
+                                        <p:column headerText="Total">
                                             <h:outputText value="#{arc.montofactura}" />  
                                         </p:column> 
                                         <p:column headerText="">  
-                                            <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" actionListener="#{rendicionexternaController.removerComprobanteDeRendicionExterna(arc)}" update=":formprincipal:growlprincipal" immediate="true"  >
+                                            <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" action="#{rendicionexternaController.removerComprobanteDeRendicionExterna(arc)}" update=":formprincipal:growlprincipal, :formprincipal:tabladisponiblesrendicion, :formprincipal:tablacomprobantesrendicion" immediate="true"  >
                                                 <f:setPropertyActionListener value="#{arc}" target="#{archivorendicionController.selected}" />  
                                             </p:commandButton>
                                         </p:column> 
                                         <f:facet name="footer">
-                                            akjdhasdk
+                                            Totales
                                         </f:facet>
                                     </p:dataTable>
                                     <br />
@@ -135,55 +168,13 @@
             <p:dialog header="Comprobante de Gasto" id="dialogoItemRendicion" widgetVar="dialogoItemRendicion" modal="true" showEffect="fade" hideEffect="fade" resizable="false" responsive="true">
                 <h:form id="formarchivorendicion" enctype="multipart/form-data" >
                     <!--<p:messages id="messages" showDetail="true" autoUpdate="true" />-->
-                    <p:panelGrid rendered="#{not empty rendicionController.solicitudSeleccionada}" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-4, ui-grid-col-8" >
+                    <p:panelGrid rendered="#{not empty rendicionexternaController.comprobanteSeleccionado}" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-4, ui-grid-col-8" >
                         <p:row>
                             <p:column>
-                                <p:outputLabel value="Tipo" />
+                                <p:outputLabel value="Aporte Universidad" />
                             </p:column>
                             <p:column>
-                                <p:selectOneMenu id="dtipofactura" value="#{archivorendicionController.selected.tipofactura}" var="tipo" required="true" requiredMessage="Se debe seleccionar un tipo de factura." style="width: 100%;" styleClass="ui-grid-col-12">
-                                    <f:selectItem itemLabel="Seleccionar un tipo." itemValue="" />
-                                    <f:selectItem itemLabel="B" itemValue="B" />
-                                    <f:selectItem itemLabel="C" itemValue="C" />
-                                </p:selectOneMenu>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <p:outputLabel value="Número" />
-                            </p:column>
-                            <p:column>
-                                <p:inputMask id="dnrofactura" value="#{archivorendicionController.selected.nrofactura}" title="Formato: 1234-12345678" mask="9999-99999999" maxlength="13" validatorMessage="Debe seguir el formato de Nº de factura correcto: 0000-00000000" required="true" requiredMessage="Se debe cargar el número de factura." styleClass="ui-grid-col-12" />
-                                <p:tooltip id="dttnrofactura" for="dnrofactura" showEvent="focus" hideEvent="blur" />
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <p:outputLabel value="Fecha" />
-                            </p:column>
-                            <p:column>
-                                <p:calendar id="dfechafactura" value="#{archivorendicionController.selected.fechafactura}" mindate="#{rendicionController.solicitudSeleccionada.fechasolicitud}" required="true" requiredMessage="Se debe cargar la fecha de factura." styleClass="ui-grid-col-12" >
-                                    <f:validator validatorId="validadorFechaArchivoRendicion" />
-                                    <f:attribute name="fechaSolicitud" value="#{rendicionController.solicitudSeleccionada.fechasolicitud}" />
-                                </p:calendar>
-                            </p:column>
-                        </p:row>
-
-                        <p:row>
-                            <p:column>
-                                <p:outputLabel value="Proveedor" />
-                            </p:column>
-                            <p:column>
-                                <p:inputText id="dproveedor" value="#{archivorendicionController.selected.proveedor}" styleClass="ui-grid-col-12" />
-                            </p:column>
-                        </p:row>
-
-                        <p:row>
-                            <p:column>
-                                <p:outputLabel value="Monto" />
-                            </p:column>
-                            <p:column>
-                                <p:inputText  id="dmontofactura" value="#{archivorendicionController.selected.montofactura}" required="true" requiredMessage="Se debe cargar el monto de la factura." styleClass="ui-grid-col-12"  >
+                                <p:inputText  id="daporteuniversidad" value="#{rendicionexternaController.comprobanteSeleccionado.aporteuniversidad}" required="true" requiredMessage="Se debe cargar el aporte de la universidad del gasto." styleClass="ui-grid-col-12"  >
                                     <f:convertNumber type="number" groupingUsed="false" locale="en-US"  /> 
                                 </p:inputText>    
                             </p:column>
@@ -191,30 +182,31 @@
 
                         <p:row>
                             <p:column>
-                                <p:outputLabel value="Imagen" />
+                                <p:outputLabel value="Aporte Organismo" />
                             </p:column>
                             <p:column>
-                                <p:fileUpload label="Imagen de Factura" id="ffactura" fileUploadListener="#{archivorendicionController.subirArchivoRendicion}" mode="advanced"  
-                                              sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update=":formprincipal:growlprincipal" styleClass="ui-grid-col-12"  >
-                                </p:fileUpload>    
+                                <p:inputText  id="daporteorganismo" value="#{rendicionexternaController.comprobanteSeleccionado.aporteorganismo}" required="true" requiredMessage="Se debe cargar el aporte del organismo del gasto." styleClass="ui-grid-col-12"  >
+                                    <f:convertNumber type="number" groupingUsed="false" locale="en-US"  />
+                                </p:inputText>
                             </p:column>
                         </p:row>
 
                         <p:row>
                             <p:column>
-                                <p:outputLabel value="Observación" />
+                                <p:outputLabel value="Aporte Comitente" />
                             </p:column>
                             <p:column>
-                                <p:inputTextarea id="dobservacionFactura" value="#{archivorendicionController.selected.obsfactura}" styleClass="ui-grid-col-12" />
+                                <p:inputText  id="daportecomitente" value="#{rendicionexternaController.comprobanteSeleccionado.aportecomitente}" required="true" requiredMessage="Se debe cargar el aporte del comitente del gasto." styleClass="ui-grid-col-12"  >
+                                    <f:convertNumber type="number" groupingUsed="false" locale="en-US"  />
+                                </p:inputText>
                             </p:column>
                         </p:row>
-
                     </p:panelGrid>
 
                     <p:separator/>
+
                     <div align="center" >
-                        <!--<p:commandButton value="Solicitar" actionListener="{solicitudController.agregarItemSolicitado}" update=":formprincipal:tabsolicitudes:tabladisponiblesanticipo, :formprincipal:tabsolicitudes:tabladisponiblesadquisicion, :formprincipal:tabsolicitudes:tabladisponiblescertificacion, :formprincipal:tablasolicitudes, :formprincipal:growlprincipal"  oncomplete="PF('dialogoItemSolicitud').hide();" />--> 
-                        <p:commandButton value="Agregar Factura" actionListener="#{archivorendicionController.agregarArchivoLista()}" update=":formprincipal:tablacomprobantesrendicion, :formprincipal:tablacomprobantesrendicion" oncomplete="PF('dialogoItemRendicion').hide();" validateClient="true" />
+                        <p:commandButton value="Agregar Gasto a la Rendición" actionListener="#{rendicionexternaController.agregarComprobanteARendicionExterna()}" update=":formprincipal:tabladisponiblesrendicion, :formprincipal:tablacomprobantesrendicion" oncomplete="PF('dialogoItemRendicion').hide();" validateClient="true" />
                     </div>
                 </h:form>
             </p:dialog>

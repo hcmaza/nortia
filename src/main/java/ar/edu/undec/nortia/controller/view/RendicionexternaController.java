@@ -6,8 +6,12 @@ import ar.edu.undec.nortia.controller.view.util.JsfUtil;
 import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
 import ar.edu.undec.nortia.controller.RendicionexternaFacade;
 import ar.edu.undec.nortia.model.Archivorendicion;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.PhaseId;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -282,18 +287,37 @@ public class RendicionexternaController implements Serializable {
         }
 
     }
+
+    public void limpiarAportesDeComprobante(){
+        comprobanteSeleccionado.setAporteuniversidad(BigDecimal.ZERO);
+        comprobanteSeleccionado.setAporteorganismo(BigDecimal.ZERO);
+        comprobanteSeleccionado.setAportecomitente(BigDecimal.ZERO);
+    }
     
     public void agregarComprobanteARendicionExterna(){
         
         if(null == comprobanteSeleccionado){
             System.out.println("comprobanteSeleccionado nulo");
         }
-        
-        // agregamos el comprobante seleccionado a la lista de comprobantes en la rendicion externa
-        this.getSelected().getArchivorendicionList().add(comprobanteSeleccionado);
+
+        System.out.println("[1] Tamaño Lista de Comprobantes >> " + this.getListaComprobantes().size());
+
+        // quitamos el comprobante seleccionado de la lista de comprobantes
+        this.getListaComprobantes().remove(comprobanteSeleccionado);
+
+        System.out.println("[2] Tamaño Lista de Comprobantes >> " + this.getListaComprobantes().size());
+
+        System.out.println("[3] Tamaño Lista de Comprobantes de la RENDICION EXTERNA >> " + this.current.getArchivorendicionList().size());
+
+        // agregamos el comprobante seleccionado en la rendicion externa
+        this.current.getArchivorendicionList().add(comprobanteSeleccionado);
+
+        System.out.println("[4] Tamaño Lista de Comprobantes de la RENDICION EXTERNA >> " + this.current.getArchivorendicionList().size());
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Información", "Comprobante agregado a Rendición Externa."));
     }
     
-    public void removerComprobanteDeRendicionExterna(Archivorendicion archivo) {
+    public void removerComprobanteDeRendicionExterna(Archivorendicion comprobanteGasto) {
 
         // se quita de la lista de solicitados
 //        Iterator i = this.itemsSolicitados.iterator();
@@ -302,7 +326,13 @@ public class RendicionexternaController implements Serializable {
 //                i.remove();
 //            }
 //        }
-        this.getSelected().getArchivorendicionList().remove(archivo);
+
+        // agregamos el comprobante a la lista de comprobantes de gasto disponible
+        this.getListaComprobantes().add(comprobanteGasto);
+
+        // quitamos el comprobante de la lista de comprobantes de la rendicion externa actual
+        this.current.getArchivorendicionList().remove(comprobanteGasto);
+
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Información", "El comprobante del proveedor: " + comprobanteSeleccionado.getProveedor() + " - Nº: " + comprobanteSeleccionado.getNrofactura() + " fue borrado"));
 
     }
@@ -311,6 +341,34 @@ public class RendicionexternaController implements Serializable {
         listaComprobantes = this.getEjbFacadeComprobantes().buscarPorFechaDesdeHasta(desde, hasta);
         
         System.out.println("listaComprobantes cantidad >> " + listaComprobantes.size());
+    }
+
+    public StreamedContent getImagenComprobante(){
+
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // Renderizamos el HTML. Devuelve un stub StreamedContent para generar el URL correcto.
+            return new DefaultStreamedContent();
+        } else {
+            // El browser requiere la imagen. Devuelve el StreamedContent real con los bytes de la imagen.
+            String nombreArchivo = context.getExternalContext().getRequestParameterMap().get("archivo");
+
+
+            System.out.println("Nombre de Archivo >> " + nombreArchivo);
+
+            for (Archivorendicion ar : getListaComprobantes()) {
+                if (ar.getNombrearchivo().equals(nombreArchivo)) {
+                    //BufferedImage bufferedImg = new BufferedImage(100, 25, BufferedImage.TYPE_INT_RGB);
+                    //ByteArrayOutputStream os = new ByteArrayOutputStream();
+                    //ImageIO.write(bufferedImg, "png", os);
+                    //imagen = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");
+                    return new DefaultStreamedContent(new ByteArrayInputStream(ar.getArchivo()));
+                }
+            }
+        }
+
+        return new DefaultStreamedContent();
     }
 
 }
