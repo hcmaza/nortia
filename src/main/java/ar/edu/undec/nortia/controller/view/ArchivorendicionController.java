@@ -518,8 +518,12 @@ public class ArchivorendicionController implements Serializable {
         FacesContext context = FacesContext.getCurrentInstance();
         RendicionController rendicioncontroller = (RendicionController) context.getApplication().evaluateExpressionGet(context, "#{rendicionController}", RendicionController.class);
 
+        // vaciamos la lista de comprobantes
+        listaArchivos.clear();
+
+        // si, la solicitud seleccionada no es nula
         if (rendicioncontroller.getSolicitudSeleccionada() != null) {
-            System.out.println("rendicioncontroller.getSolicitudSeleccionada NULLLLLLL");
+            System.out.println("rendicioncontroller.getSolicitudSeleccionada NO null");
             listaArchivos.addAll(getFacade().buscarPorRendicion(rendicioncontroller.getSolicitudSeleccionada().getRendicionid().getId()));
         }
     }

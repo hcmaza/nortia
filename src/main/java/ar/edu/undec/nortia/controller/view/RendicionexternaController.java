@@ -6,6 +6,7 @@ import ar.edu.undec.nortia.controller.view.util.JsfUtil;
 import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
 import ar.edu.undec.nortia.controller.RendicionexternaFacade;
 import ar.edu.undec.nortia.model.Archivorendicion;
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -28,6 +29,7 @@ import javax.faces.event.PhaseId;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.validation.constraints.Null;
 
 @ManagedBean(name = "rendicionexternaController")
 @SessionScoped
@@ -135,6 +137,10 @@ public class RendicionexternaController implements Serializable {
 
     public String prepareCreate() {
         current = new Rendicionexterna();
+        listaComprobantes = new ArrayList<Archivorendicion>();
+        comprobanteSeleccionado = null;
+        desde = null;
+        hasta = null;
         selectedItemIndex = -1;
         return "CrearRendicionExterna";
     }
@@ -336,9 +342,54 @@ public class RendicionexternaController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Información", "El comprobante del proveedor: " + comprobanteSeleccionado.getProveedor() + " - Nº: " + comprobanteSeleccionado.getNrofactura() + " fue borrado"));
 
     }
-    
+
+    public void distribuirAportes1(){
+
+        /*BigDecimal totalAportes = comprobanteSeleccionado.getAporteuniversidad().add(comprobanteSeleccionado.getAporteorganismo().add(comprobanteSeleccionado.getAportecomitente()));
+        System.out.println("Total Aportes Sumados = " + totalAportes.floatValue());*/
+
+        if(null == comprobanteSeleccionado.getAporteuniversidad()){
+            System.out.println("comprobanteSeleccionado.getAporteuniversidad() >> NULO");
+        }
+
+        if(null == comprobanteSeleccionado.getAporteorganismo()){
+            System.out.println("comprobanteSeleccionado.getAporteorganismo() >> NULO");
+        }
+
+        if(null == comprobanteSeleccionado.getMontoaprobado()){
+            System.out.println("comprobanteSeleccionado.getMontoaprobado() >> NULO");
+        }
+
+        try{
+            if(comprobanteSeleccionado.getAporteuniversidad().floatValue() > 0f){
+                comprobanteSeleccionado.setAporteorganismo(comprobanteSeleccionado.getMontoaprobado().subtract(comprobanteSeleccionado.getAporteuniversidad()));
+                comprobanteSeleccionado.setAportecomitente(BigDecimal.ZERO);
+            }
+        } catch(NullPointerException npe){
+            System.out.println("Error de NullPointerException");
+            npe.printStackTrace();
+        }
+
+    }
+
+    public void distribuirAportes2(){
+        /*BigDecimal totalAportes = comprobanteSeleccionado.getAporteuniversidad().add(comprobanteSeleccionado.getAporteorganismo().add(comprobanteSeleccionado.getAportecomitente()));
+        System.out.println("Total Aportes Sumados = " + totalAportes.floatValue());*/
+
+        if(comprobanteSeleccionado.getAporteorganismo().floatValue() > 0f){
+            comprobanteSeleccionado.setAportecomitente(comprobanteSeleccionado.getMontoaprobado().subtract(comprobanteSeleccionado.getAporteuniversidad().add(comprobanteSeleccionado.getAporteorganismo())));
+        }
+    }
+
+    public void distribuirAportes3(){
+
+    }
+
     public void buscarComprobantesEntreFechas(){
-        listaComprobantes = this.getEjbFacadeComprobantes().buscarPorFechaDesdeHasta(desde, hasta);
+        //listaComprobantes = this.getEjbFacadeComprobantes().buscarPorFechaDesdeHasta(desde, hasta);
+
+        // buscamos los comprobantes de gasto, que tengan estado, es decir, fueron evaluados
+        listaComprobantes = this.getEjbFacadeComprobantes().buscarEntreFechasConEstado(desde,hasta);
         
         System.out.println("listaComprobantes cantidad >> " + listaComprobantes.size());
     }

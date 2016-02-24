@@ -181,8 +181,8 @@
                                             <p:column headerText="Total">
                                                 <h:outputText value="#{item.importe}" />
                                             </p:column>
-                                            <p:column style="width:32px;text-align: center">
-                                                <p:commandButton update=":formprincipal:growlprincipal,  :formprincipal:tabs:tablafacturasrendicion" action="#{archivorendicionController.llenarListaArchivosPorSolicitudSeleccionada()}" icon="ui-icon-circle-plus" value="Evaluar Comprobantes" title="Evaluar Comprobantes" immediate="true" >
+                                            <p:column style="width:32px;text-align: center" styleClass="White">
+                                                <p:commandButton update=":formprincipal:growlprincipal,  :formprincipal:tabs:tablafacturasrendicion" action="#{archivorendicionController.llenarListaArchivosPorSolicitudSeleccionada()}" icon="fa fa-plus" title="Evaluar Comprobantes de la Rendición" immediate="true" >
                                                     <f:setPropertyActionListener value="#{item}" target="#{rendicionController.solicitudSeleccionada}" />
                                                 </p:commandButton>
                                             </p:column>
@@ -232,7 +232,7 @@
                                                     <f:facet name="input">
                                                         <h:selectOneMenu value="#{arc.estado}" style="width:100%">
                                                             <f:selectItem itemLabel="Seleccionar un valor" itemValue="" />
-                                                            <f:selectItem itemLabel="Aprobado" itemValue="1" />
+                                                            <f:selectItem itemLabel="Aprobado" itemValue="1"  />
                                                             <f:selectItem itemLabel="Parcial" itemValue="2" />
                                                             <f:selectItem itemLabel="Rechazado" itemValue="3" />
                                                         </h:selectOneMenu>
@@ -241,7 +241,7 @@
                                             </p:column>
                                             <p:column>  
                                                 <f:facet name="header">
-                                                    <h:outputText value="Aprobado" title="Hacer click e ingresar el monto aprobado del comprobante." style="font-weight: bold;"/>
+                                                    <h:outputText value="Monto Aprobado" title="Hacer click e ingresar el monto aprobado del comprobante." style="font-weight: bold;"/>
                                                 </f:facet>
                                                 <p:cellEditor>
                                                     <f:facet name="output">

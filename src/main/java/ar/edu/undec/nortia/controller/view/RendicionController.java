@@ -616,10 +616,6 @@ public class RendicionController implements Serializable {
         SolicitudController solicitudcontroller = (SolicitudController) context.getApplication().evaluateExpressionGet(context, "#{solicitudController}", SolicitudController.class);
         ArchivorendicionController archivorendicioncontroller = (ArchivorendicionController) context.getApplication().evaluateExpressionGet(context, "#{archivorendicionController}", ArchivorendicionController.class);
 
-        //verificamos que la suma de los montos aprobados de los comprobantes sea igual a la rendicion
-        float totalMontoAprobadoComprobantes = archivorendicioncontroller.sumarMontoAprobadoComprobantes();
-        float totalMontoComprobantes = archivorendicioncontroller.sumarComprobantes();
-
         Estadosolicitud estadoRendida = null;
 
         try {
@@ -630,8 +626,20 @@ public class RendicionController implements Serializable {
             e.printStackTrace();
         }
 
-        // si los montos de los comprobantes son iguales, se pone la Solicitud como "Rendida"
-        if (totalMontoComprobantes == totalMontoAprobadoComprobantes) {
+        // bandera, true >> SE EVALUA, false >> NO SE EVALUA
+        boolean bandera = true;
+
+        // verificar que todos los comprobantes, se le asigno un estado y el monto aprobado.
+        for(Archivorendicion ar : archivorendicioncontroller.getListaArchivos()){
+            if(ar.getMontoaprobado() == null || ar.getEstado() == null){
+                bandera = false;
+            }
+        }
+
+        // todos los comprobantes, tienen un estado definido y monto aprobado.
+        if (bandera){
+
+            System.out.println("SE EVALUA");
 
             // damos el estado "Rendida" a la solicitud
             solicitudSeleccionada.setEstadosolicitudid(estadoRendida);
@@ -643,9 +651,16 @@ public class RendicionController implements Serializable {
             for (Archivorendicion ar : archivorendicioncontroller.getListaArchivos()) {
                 this.getFacadear().edit(ar);
             }
+
+            return "/index.xhtml?faces-redirect=true";
+        } else{
+
+            System.out.println("NO se Evalua");
+
+            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return viewId + "?faces-redirect=true";
         }
 
-        return "asd";
     }
     
     /*

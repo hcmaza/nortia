@@ -79,7 +79,7 @@
                                         <p:column headerText="Archivo">
                                             <p:lightBox id="lighbox">
                                                 <h:outputLink value="#">
-                                                    <h:outputText value="#{item.nombrearchivo}" />
+                                                    <h:outputText value="Ver Factura" />
                                                 </h:outputLink>
                                                 <f:facet name="inline">
                                                     <p:graphicImage cache="false" value="#{rendicionexternaController.imagenComprobante}" width="400px" style="width: 300px; height: auto; display: block;" >
@@ -91,8 +91,13 @@
                                         <p:column headerText="Total">
                                             <h:outputText value="#{item.montofactura}" />
                                         </p:column>
+                                        <p:column headerText="Total Aprobado">
+                                            <h:outputText value="#{item.montoaprobado}" />
+                                        </p:column>
                                         <p:column headerText="Estado">
-                                            <h:outputText value="#{item.estado}" />
+                                            <p:graphicImage value="#{resource['img:/iconoAprobado.png']}" alt="Aprobado" rendered="#{item.estado eq 1}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
+                                            <p:graphicImage value="#{resource['img:/iconoParcial.png']}" alt="Parcial" rendered="#{item.estado eq 2}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
+                                            <p:graphicImage value="#{resource['img:/iconoRechazado.png']}" alt="Rechazado" rendered="#{item.estado eq 3}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
                                         </p:column>
                                         <p:column headerText="Observaciones">
                                             <h:outputText value="#{item.obsfactura}" />
@@ -134,8 +139,8 @@
                                         <p:column headerText="Aporte Comitente">
                                             <h:outputText value="#{arc.aportecomitente}" />
                                         </p:column>
-                                        <p:column headerText="Total">
-                                            <h:outputText value="#{arc.montofactura}" />  
+                                        <p:column headerText="Total Aprobado">
+                                            <h:outputText value="#{arc.montoaprobado}" />
                                         </p:column> 
                                         <p:column headerText="">  
                                             <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" action="#{rendicionexternaController.removerComprobanteDeRendicionExterna(arc)}" update=":formprincipal:growlprincipal, :formprincipal:tabladisponiblesrendicion, :formprincipal:tablacomprobantesrendicion" immediate="true"  >
@@ -171,12 +176,21 @@
                     <p:panelGrid rendered="#{not empty rendicionexternaController.comprobanteSeleccionado}" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-4, ui-grid-col-8" >
                         <p:row>
                             <p:column>
+                                <p:outputLabel value="Total Aprobado" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{rendicionexternaController.comprobanteSeleccionado.montoaprobado}" style="font-weight: bold;" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
                                 <p:outputLabel value="Aporte Universidad" />
                             </p:column>
                             <p:column>
-                                <p:inputText  id="daporteuniversidad" value="#{rendicionexternaController.comprobanteSeleccionado.aporteuniversidad}" required="true" requiredMessage="Se debe cargar el aporte de la universidad del gasto." styleClass="ui-grid-col-12"  >
+                                <p:inputText  id="daporteuniversidad" value="#{rendicionexternaController.comprobanteSeleccionado.aporteuniversidad}" required="true" requiredMessage="Se debe cargar el aporte de la universidad del gasto." styleClass="ui-grid-col-12"   >
+                                    <p:ajax event="blur" listener="#{rendicionexternaController.distribuirAportes1()}" update="daporteorganismo daportecomitente" />
                                     <f:convertNumber type="number" groupingUsed="false" locale="en-US"  /> 
-                                </p:inputText>    
+                                </p:inputText>
                             </p:column>
                         </p:row>
 
@@ -186,6 +200,7 @@
                             </p:column>
                             <p:column>
                                 <p:inputText  id="daporteorganismo" value="#{rendicionexternaController.comprobanteSeleccionado.aporteorganismo}" required="true" requiredMessage="Se debe cargar el aporte del organismo del gasto." styleClass="ui-grid-col-12"  >
+                                    <p:ajax event="blur" listener="#{rendicionexternaController.distribuirAportes2()}" update="daportecomitente" />
                                     <f:convertNumber type="number" groupingUsed="false" locale="en-US"  />
                                 </p:inputText>
                             </p:column>
