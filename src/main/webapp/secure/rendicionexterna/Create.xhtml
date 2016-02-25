@@ -58,7 +58,6 @@
                                         <f:facet name="header">
                                             Comprobantes de Gasto
                                         </f:facet>
-
                                         <p:column headerText="Nº">
                                             <h:outputText value="#{item.id}" />
                                         </p:column>
@@ -74,12 +73,12 @@
                                             </h:outputText>
                                         </p:column>
                                         <p:column headerText="Descripción">
-                                            <h:outputText value="#{item.rendicionid.observacion}" />
+                                            <h:outputText value="#{item.obsfactura}" />
                                         </p:column>
                                         <p:column headerText="Archivo">
                                             <p:lightBox id="lighbox">
                                                 <h:outputLink value="#">
-                                                    <h:outputText value="Ver Factura" />
+                                                    <h:outputText value="Ver Factura" styleClass="Blue" style="text-decoration: underline;" />
                                                 </h:outputLink>
                                                 <f:facet name="inline">
                                                     <p:graphicImage cache="false" value="#{rendicionexternaController.imagenComprobante}" width="400px" style="width: 300px; height: auto; display: block;" >
@@ -98,9 +97,6 @@
                                             <p:graphicImage value="#{resource['img:/iconoAprobado.png']}" alt="Aprobado" rendered="#{item.estado eq 1}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
                                             <p:graphicImage value="#{resource['img:/iconoParcial.png']}" alt="Parcial" rendered="#{item.estado eq 2}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
                                             <p:graphicImage value="#{resource['img:/iconoRechazado.png']}" alt="Rechazado" rendered="#{item.estado eq 3}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
-                                        </p:column>
-                                        <p:column headerText="Observaciones">
-                                            <h:outputText value="#{item.obsfactura}" />
                                         </p:column>
                                         <p:column style="width:32px;text-align: center">
                                             <p:commandButton id="botonAgregarComprobanteGasto" action="#{rendicionexternaController.limpiarAportesDeComprobante()}" update=":formprincipal:growlprincipal, :formarchivorendicion " oncomplete="PF('dialogoItemRendicion').show();" icon="fa fa-plus" title="Agregar Comprobante de Gasto" immediate="true" >
@@ -152,10 +148,10 @@
                                         </f:facet>
                                     </p:dataTable>
                                     <br />
-                                    <h:commandLink action="#{rendicionexternaController.create}" value="#{bundle.CreateRendicionexternaSaveLink}" />
+                                    <p:commandButton action="#{rendicionexternaController.create}" value="Crear Rendición Externa"  />
                                     <br />
                                     <br />
-                                    <h:commandLink action="#{rendicionexternaController.prepareList}" value="#{bundle.CreateRendicionexternaShowAllLink}" immediate="true"/>
+                                    <p:commandLink action="#{rendicionexternaController.prepareList}" value="#{bundle.CreateRendicionexternaShowAllLink}" immediate="true"/>
                                     <br />
                                     <br />
                                     <h:link outcome="/index" value="#{bundle.CreateRendicionexternaIndexLink}"/>

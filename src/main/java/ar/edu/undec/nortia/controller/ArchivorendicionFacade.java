@@ -67,5 +67,12 @@ public class ArchivorendicionFacade extends AbstractFacade<Archivorendicion> {
         consulta.setParameter("hasta", hasta);
         return consulta.getResultList();
     }
+
+    public List<Archivorendicion> buscarEntreFechasConEstadoSinRendicionExterna(Date desde, Date hasta){
+        Query consulta = em.createQuery("SELECT ar FROM Archivorendicion ar WHERE ar.estado IS NOT NULL AND ar.rendicionexternaid IS NULL AND ar.fechafactura BETWEEN :desde AND :hasta", Archivorendicion.class);
+        consulta.setParameter("desde", desde);
+        consulta.setParameter("hasta", hasta);
+        return consulta.getResultList();
+    }
     
 }

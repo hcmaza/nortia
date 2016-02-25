@@ -1,6 +1,7 @@
 package ar.edu.undec.nortia.controller.view;
 
 import ar.edu.undec.nortia.controller.ArchivorendicionFacade;
+import ar.edu.undec.nortia.model.Archivoproyecto;
 import ar.edu.undec.nortia.model.Rendicionexterna;
 import ar.edu.undec.nortia.controller.view.util.JsfUtil;
 import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
@@ -146,10 +147,19 @@ public class RendicionexternaController implements Serializable {
     }
 
     public String create() {
+
         try {
+
+            System.out.println("Current > Lista de Comprobantes > " + current.getArchivorendicionList().size());
+
+            for(Archivorendicion ar : current.getArchivorendicionList()){
+                ar.setRendicionexternaid(current);
+            }
+
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("RendicionexternaCreated"));
-            return prepareCreate();
+
+            JsfUtil.addSuccessMessage("Rendición Externa Creada!");
+            return prepareList();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -389,7 +399,7 @@ public class RendicionexternaController implements Serializable {
         //listaComprobantes = this.getEjbFacadeComprobantes().buscarPorFechaDesdeHasta(desde, hasta);
 
         // buscamos los comprobantes de gasto, que tengan estado, es decir, fueron evaluados
-        listaComprobantes = this.getEjbFacadeComprobantes().buscarEntreFechasConEstado(desde,hasta);
+        listaComprobantes = this.getEjbFacadeComprobantes().buscarEntreFechasConEstadoSinRendicionExterna(desde,hasta);
         
         System.out.println("listaComprobantes cantidad >> " + listaComprobantes.size());
     }
