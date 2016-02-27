@@ -2,71 +2,253 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
+                xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="subheader">
-        Page Header
+    <ui:define name="title">
+        <h:outputText value="Dashboard de Proyectos"></h:outputText>
     </ui:define>
-    
+
     <ui:define name="content">
-        
+
         <div class="Container100">
             <div class="ContainerIndent">
-                <div class="Card TexAlCenter">
-           
-        <h:form id="formindex">
-          
-        <!--     <c:if test="# {request.isUserInRole('Administrador')}" > 
-                 <p:notificationBar autoDisplay="true" rendered="# {proyectoController.buscarIdeasProyectosEvaluar()>0}" position="top" effect="slide" styleClass="top" widgetVar="bar">
-                     <div align="center" >
-                        <br />
-                        <h:outputText value="Usted tiene # {proyectoController.buscarIdeasProyectosEvaluar()} Ideas Proyectos a Evaluar" style="font-size:24px; font-weight: bold; color: #0000cc" />
-                        <br /> 
-                        <br />
-                        <p:commandButton value="OK" onclick="PF('bar').hide()" type="button" icon="ui-icon-arrow-1-n"/>
-                     </div>
-                    </p:notificationBar>
-             </c:if> -->
-           
-                <!--<img src="resources/img/Logo_UNDEC _normal.png" style="height: 170px; width: 164px; vertical-align: top; border-radius: 6px; display: inline-block; text-align: right;"/>-->
 
-                <h:panelGrid style="margin: 0 auto; width: 100%;" >
-                    <p:row>
-                        <p:column style="width: 60%; vertical-align: top; ">
-                            <p:fieldset id="uvt" legend="UNdeC - Unidad de Vinculación Tecnológica">
-                                
-                                <p:panelGrid >
+                <h:form id="formindex">
+
+                    <c:if test="#{request.isUserInRole('Administrador')}">
+
+                    </c:if>
+
+                    <c:choose>
+                        <c:when test="#{request.isUserInRole('Administrador')}">
+                            <h:outputText value="Administrador"/>
+                        </c:when>
+                        <c:when test="#{request.isUserInRole('Docente')}">
+
+                            <div class="Card ">
+                                <div class="ui-fluid">
+                                    <div class="CardTopic">
+                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+
+                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                        Mis Proyectos <br/>
+                                        <span class="CardSubTopic"> Indicadores de los proyectos presentados y en ejecución. </span>
+
+                                        <div class="SeparatorFull"></div>
+
+                                        <div class="Container100">
+                                            <div class="Container40 Responsive50">
+                                                <div class="ContainerIndent">
+                                                    <div class="Container25">
+                                                        <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">5</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container75">
+                                                        <div class="Card VerdeAzuladoOscuroBack White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs20 White DispBlock ClearBoth">Proyectos Presentados</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="Container30 Responsive50">
+                                                <div class="ContainerIndent">
+                                                    <div class="Card OrangeBack White TexAlCenter HoverEffect">
+                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 14.579,45</div>
+                                                        <div class="EmptyBox10" />
+                                                        <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Adjudicado</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="Container30 Responsive50">
+                                                <div class="ContainerIndent">
+                                                    <div class="Container75">
+                                                        <div class="Card GreenBack White TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 7.579,45</div>
+                                                            <div class="EmptyBox10" />
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Ejecutados en Proyectos</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container25">
+                                                        <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">56 %</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Container100">
+                                            <div class="Container40 Responsive50">
+                                                <div class="Container100">
+                                                    <div class="Container33 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card SoftGrayBack">
+                                                                <i class="icon-store Fs40 Fleft Orange MarRight10"></i>
+                                                                <div class="EmptyBox20" />
+                                                                <div class="Fleft DispInlBlock">
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN FORMALIZACIÓN</span><br />
+                                                                    <div class="EmptyBox20" />
+                                                                    <span class="Fs30 FontAdamantiumBold">2</span><br />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container33 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card SoftGrayBack">
+                                                                <i class="icon-umbrella Fs40 Fleft Pink MarRight10"></i>
+                                                                <div class="EmptyBox20" />
+                                                                <div class="Fleft DispInlBlock">
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN DESARROLLO</span><br />
+                                                                    <div class="EmptyBox20" />
+                                                                    <span class="Fs30 FontAdamantiumBold">2</span><br />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container33 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card SoftGrayBack">
+                                                                <i class="icon-portfolio Fs40 Fleft LeadenGreen MarRight10"></i>
+                                                                <div class="EmptyBox20" />
+                                                                <div class="Fleft DispInlBlock">
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">IDEAS PROYECTO</span><br />
+                                                                    <div class="EmptyBox20" />
+                                                                    <span class="Fs30 FontAdamantiumBold">1</span><br />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="Container60 Responsive50">
+                                                <div class="Container100">
+                                                    <div class="Container50 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card CelesteClaroBack White TexAlCenter HoverEffect">
+                                                                <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 6.584,43</div>
+                                                                <div class="EmptyBox10" />
+                                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total disponible sin ejecutar</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container50 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Container25">
+                                                                <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">2</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="Container75">
+                                                                <div class="Card VerdeAzuladoOscuroBack White TexAlCenter HoverEffect">
+                                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 20.636</div>
+                                                                    <div class="EmptyBox10" />
+                                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Ejecutados en Proyectos</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="Container100">
+                                                    <div class="ContainerIndent">
+                                                        <div class="Card Padding10px">
+                                                            <div class="EmptyBox10"></div>
+
+                                                            <div class="Container100">
+                                                                <div class="Container40">
+                                                                    <i class="icon-pin-alt SoftBlue Fs50 Fleft MarRight10"></i>
+                                                                    <span class="Fs16 SoftBlue FontAdamantiumBold">Avance de <br /> Proyectos</span>
+                                                                </div>
+                                                                <div class="Container60">
+                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">25<span class="Fs12">%</span></div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 13/16</span>
+                                                                    </div>
+                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                        <div class="PurpleBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">8<span class="Fs12">%</span></div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 670/16</span>
+                                                                    </div>
+                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">23<span class="Fs12">%</span></div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 66/16</span>
+                                                                    </div>
+                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                        <div class="RedBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">12<span class="Fs12">%</span></div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 72/16</span>
+                                                                    </div>
+                                                                    <div class="Fleft DispInlBlock TexAlCenter MarBot10">
+                                                                        <div class="OrangeBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">78<span class="Fs12">%</span></div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 106/16</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:when>
+
+                        /*
+                        * Otro tipo de Rol
+                        */
+
+                        <c:otherwise>
+                            <div class="Card TexAlCenter">
+
+                                <h:panelGrid style="margin: 0 auto; width: 100%;">
                                     <p:row>
-                                        <p:column style="width: 25%">
-                                            <p:graphicImage value="/resources/img/Logo_UNDEC_normal.png" style="width: 100%" />
-                                        </p:column>
-                                        <p:column style="width: 75%">
-                                            <p:graphicImage value="/resources/img/logo-vinculacion-tecnologica.png" style="width: 100%" />
+                                        <p:column style="width: 60%; vertical-align: top; ">
+                                            <p:fieldset id="uvt" legend="UNdeC - Unidad de Vinculación Tecnológica">
+
+                                                <p:panelGrid>
+                                                    <p:row>
+                                                        <p:column style="width: 25%">
+                                                            <p:graphicImage value="/resources/img/Logo_UNDEC_normal.png"
+                                                                            style="width: 100%"/>
+                                                        </p:column>
+                                                        <p:column style="width: 75%">
+                                                            <p:graphicImage
+                                                                    value="/resources/img/logo-vinculacion-tecnologica.png"
+                                                                    style="width: 100%"/>
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column colspan="2" style="width: 100%">
+                                                            <p style="text-align: justify">
+                                                                Esta unidad es la encargada de potenciar, vincular y transferir los conocimientos que se generan en el ámbito universitario, tanto de los grupos de investigación, institutos y laboratorios de la Universidad al sistema socio-productivo de la región, provincial, nacional e internacional. De esta manera actúa como enlace institucional otros centros del Sistema Nacional de Innovación y con todo el sistema socio-productivo, haciendo de unidad de interface entre las necesidades y demandas científico-tecnológicas de la sociedad y los conocimientos que se generan en el ámbito universitario.
+                                                            </p>
+
+                                                        </p:column>
+                                                    </p:row>
+                                                </p:panelGrid>
+                                            </p:fieldset>
                                         </p:column>
                                     </p:row>
-                                    <p:row>
-                                        <p:column colspan="2" style="width: 100%">
-                                            <p style="text-align: justify">
-                                                Esta unidad es la encargada de potenciar, vincular y transferir los conocimientos que se generan en el ámbito universitario, tanto de los grupos de investigación, institutos y laboratorios de la Universidad al sistema socio-productivo de la región, provincial, nacional e internacional. De esta manera actúa como enlace institucional otros centros del Sistema Nacional de Innovación y con todo el sistema socio-productivo, haciendo de unidad de interface entre las necesidades y demandas científico-tecnológicas de la sociedad y los conocimientos que se generan en el ámbito universitario.
-                                            </p>
-                                            
-                                        </p:column>
-                                    </p:row>
-                                </p:panelGrid>
-                            </p:fieldset>
-                        </p:column>
-                        
-                    </p:row>
+                                </h:panelGrid>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
 
-                 </h:panelGrid>
 
-         
-        </h:form>
-    </div>
+                </h:form>
+
             </div>
         </div>
-        
+
     </ui:define>
 
 </ui:composition>

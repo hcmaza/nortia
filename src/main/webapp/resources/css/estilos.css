@@ -102,6 +102,14 @@
     background-color: #4BACC6 !important;
 }
 
+.VerdeAzuladoOscuroBack{
+    background-color: #31859B !important;
+}
+
+.VerdeAzuladoClaroBack{
+    background-color: #4BACC6 !important;
+}
+
 .Gris1Back{
     background-color: #394249 !important;
 }
@@ -162,4 +170,13 @@
 
 .PaddingArribaAbajo20px {
     padding: 20px 0px 20px 0px !important;
+}
+
+/*
+.PaddingIzquierdoDerecho5px{
+    padding: 20px 0px 20px 0px !important;
+}*/
+
+.PaddingCuadroChico {
+    padding: 43px 0px 43px 0px !important;
 }
