@@ -14,17 +14,17 @@
         <div class="Container100">
             <div class="ContainerIndent">
 
+                <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" />
+
                 <h:form id="formindex">
 
-                    <c:if test="#{request.isUserInRole('Administrador')}">
-
-                    </c:if>
-
                     <c:choose>
+
+                        <!-- ******************************* ADMINISTRADOR *******************************-->
+
                         <c:when test="#{request.isUserInRole('Administrador')}">
-                            <h:outputText value="Administrador"/>
-                        </c:when>
-                        <c:when test="#{request.isUserInRole('Docente')}">
+
+                            <f:event type="preRenderView" listener="#{indicadoresController.dashboardGeneralAdministrador()}" />
 
                             <div class="Card ">
                                 <div class="ui-fluid">
@@ -32,7 +32,7 @@
                                         <i class="icon-share Fs30 Fleft MarRight10"></i>
 
                                         <div class="EmptyBox10 ShowOnMobile"></div>
-                                        Mis Proyectos <br/>
+                                        Mis Proyectos - Administrador <br/>
                                         <span class="CardSubTopic"> Indicadores de los proyectos presentados y en ejecución. </span>
 
                                         <div class="SeparatorFull"></div>
@@ -42,7 +42,9 @@
                                                 <div class="ContainerIndent">
                                                     <div class="Container25">
                                                         <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
-                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">5</div>
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <h:outputText value="#{indicadoresController.obtenerCantidadTotalProyectos()}" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="Container75">
@@ -56,8 +58,10 @@
                                             <div class="Container30 Responsive50">
                                                 <div class="ContainerIndent">
                                                     <div class="Card OrangeBack White TexAlCenter HoverEffect">
-                                                        <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">$ 14.579,45</div>
-                                                        <div class="EmptyBox10" />
+                                                        <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                            <h:outputText value="$ #{indicadoresController.totalDesembolsado}" />
+                                                        </div>
+                                                        <div class="EmptyBox10"/>
                                                         <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Adjudicado</div>
                                                     </div>
                                                 </div>
@@ -67,14 +71,18 @@
                                                 <div class="ContainerIndent">
                                                     <div class="Container75">
                                                         <div class="Card GreenBack White TexAlCenter HoverEffect">
-                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">$ 7.579,45</div>
-                                                            <div class="EmptyBox10" />
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <h:outputText value="$ #{indicadoresController.totalEjecutado}" />
+                                                            </div>
+                                                            <div class="EmptyBox10"/>
                                                             <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Ejecutados en Proyectos</div>
                                                         </div>
                                                     </div>
                                                     <div class="Container25">
                                                         <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
-                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">56 %</div>
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <h:outputText value="#{indicadoresController.porcentajeEjecutadoTodosProyectos} %" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -88,11 +96,15 @@
                                                         <div class="ContainerIndent">
                                                             <div class="Card SoftGrayBack">
                                                                 <i class="icon-store Fs50 Fleft Orange MarRight10"></i>
-                                                                <div class="EmptyBox40" />
+
+                                                                <div class="EmptyBox40"/>
                                                                 <div class="Fleft DispInlBlock">
-                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN FORMALIZACIÓN</span><br />
-                                                                    <div class="EmptyBox20" />
-                                                                    <span class="Fs30 FontAdamantiumBold">2</span><br />
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN FORMALIZACIÓN</span><br/>
+
+                                                                    <div class="EmptyBox20"/>
+                                                                    <span class="Fs30 FontAdamantiumBold">
+                                                                        <h:outputText value="#{indicadoresController.cantidadProyectosEnFormalizacion}" />
+                                                                    </span><br/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -101,11 +113,15 @@
                                                         <div class="ContainerIndent">
                                                             <div class="Card SoftGrayBack">
                                                                 <i class="icon-umbrella Fs50 Fleft Pink MarRight10"></i>
-                                                                <div class="EmptyBox40" />
+
+                                                                <div class="EmptyBox40"/>
                                                                 <div class="Fleft DispInlBlock">
-                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN DESARROLLO</span><br />
-                                                                    <div class="EmptyBox20" />
-                                                                    <span class="Fs30 FontAdamantiumBold">2</span><br />
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN DESARROLLO</span><br/>
+
+                                                                    <div class="EmptyBox20"/>
+                                                                    <span class="Fs30 FontAdamantiumBold">
+                                                                        <h:outputText value="#{indicadoresController.cantidadProyectosEnDesarrollo}" />
+                                                                    </span><br/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -114,11 +130,15 @@
                                                         <div class="ContainerIndent">
                                                             <div class="Card SoftGrayBack">
                                                                 <i class="icon-portfolio Fs50 Fleft LeadenGreen MarRight10"></i>
-                                                                <div class="EmptyBox40" />
+
+                                                                <div class="EmptyBox40"/>
                                                                 <div class="Fleft DispInlBlock">
-                                                                    <span class="Fs12 FontAdamantiumBold Gray">IDEAS PROYECTO</span><br />
-                                                                    <div class="EmptyBox20" />
-                                                                    <span class="Fs30 FontAdamantiumBold">1</span><br />
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">IDEAS PROYECTO</span><br/>
+
+                                                                    <div class="EmptyBox20"/>
+                                                                    <span class="Fs30 FontAdamantiumBold">
+                                                                        <h:outputText value="#{indicadoresController.cantidadIdeasProyecto}" />
+                                                                    </span><br/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -131,8 +151,10 @@
                                                     <div class="Container50 Responsive50">
                                                         <div class="ContainerIndent">
                                                             <div class="Card CelesteClaroBack White TexAlCenter HoverEffect">
-                                                                <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">$ 6.584,43</div>
-                                                                <div class="EmptyBox10" />
+                                                                <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                    <h:outputText value="$ #{indicadoresController.totalDisponibleSinEjecutar}" />
+                                                                </div>
+                                                                <div class="EmptyBox10"/>
                                                                 <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total disponible sin ejecutar</div>
                                                             </div>
                                                         </div>
@@ -141,14 +163,18 @@
                                                         <div class="ContainerIndent">
                                                             <div class="Container25">
                                                                 <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
-                                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">2</div>
+                                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                        <h:outputText value="#{indicadoresController.cantidadRendicionesPendientes}" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="Container75">
                                                                 <div class="Card VerdeAzuladoOscuroBack White TexAlCenter HoverEffect">
-                                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">$ 20.636</div>
-                                                                    <div class="EmptyBox10" />
-                                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Ejecutados en Proyectos</div>
+                                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                        <h:outputText value="$ #{indicadoresController.totalRendicionesPendientes}" />
+                                                                    </div>
+                                                                    <div class="EmptyBox10"/>
+                                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Pendientes de Rendición</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -163,27 +189,235 @@
                                                             <div class="Container100">
                                                                 <div class="Container40">
                                                                     <i class="icon-pin-alt SoftBlue Fs50 Fleft MarRight10"></i>
-                                                                    <span class="Fs16 SoftBlue FontAdamantiumBold">Avance de <br /> Proyectos</span>
+                                                                    <span class="Fs16 SoftBlue FontAdamantiumBold">Avance de <br/> Proyectos</span>
                                                                 </div>
                                                                 <div class="Container60">
                                                                     <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">25<span class="Fs12">%</span></div>
+                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
+                                                                             style="width:60px; height:42px; padding-top:18px;">21<span
+                                                                                class="Fs12">%</span></div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">FONTAR</span>
+                                                                    </div>
+                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                        <div class="PurpleBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
+                                                                             style="width:60px; height:42px; padding-top:18px;">16<span
+                                                                                class="Fs12">%</span></div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">SPU</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </c:when>
+
+                        <!-- **************************** DOCENTE ****************************-->
+
+
+                        <c:when test="#{request.isUserInRole('Docente')}">
+
+                            <f:event type="preRenderView" listener="#{indicadoresController.dashboardGeneralDocente()}" />
+
+                            <div class="Card ">
+                                <div class="ui-fluid">
+                                    <div class="CardTopic">
+                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+
+                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                        Mis Proyectos - Docente Investigador<br/>
+                                        <span class="CardSubTopic"> Indicadores de los proyectos presentados y en ejecución. </span>
+
+                                        <div class="SeparatorFull"></div>
+
+                                        <div class="Container100">
+                                            <div class="Container40 Responsive50">
+                                                <div class="ContainerIndent">
+                                                    <div class="Container25">
+                                                        <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <h:outputText value="#{indicadoresController.obtenerCantidadProyectosAgente()}" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container75">
+                                                        <div class="Card VerdeAzuladoOscuroBack White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs25 White DispBlock ClearBoth">Proyectos Presentados</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="Container30 Responsive50">
+                                                <div class="ContainerIndent">
+                                                    <div class="Card OrangeBack White TexAlCenter HoverEffect">
+                                                        <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                            <h:outputText value="$ #{indicadoresController.totalDesembolsado}" />
+                                                        </div>
+                                                        <div class="EmptyBox10"/>
+                                                        <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Adjudicado</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="Container30 Responsive50">
+                                                <div class="ContainerIndent">
+                                                    <div class="Container75">
+                                                        <div class="Card GreenBack White TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <h:outputText value="$ #{indicadoresController.totalEjecutado}" />
+                                                            </div>
+                                                            <div class="EmptyBox10"/>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Ejecutados en Proyectos</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container25">
+                                                        <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <h:outputText value="#{indicadoresController.porcentajeEjecutadoTodosProyectos} %" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Container100">
+                                            <div class="Container40 Responsive50">
+                                                <div class="Container100">
+                                                    <div class="Container33 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card SoftGrayBack">
+                                                                <i class="icon-store Fs50 Fleft Orange MarRight10"></i>
+
+                                                                <div class="EmptyBox40"/>
+                                                                <div class="Fleft DispInlBlock">
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN FORMALIZACIÓN</span><br/>
+
+                                                                    <div class="EmptyBox20"/>
+                                                                    <span class="Fs30 FontAdamantiumBold">
+                                                                        <h:outputText value="#{indicadoresController.cantidadProyectosEnFormalizacion}" />
+                                                                    </span><br/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container33 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card SoftGrayBack">
+                                                                <i class="icon-umbrella Fs50 Fleft Pink MarRight10"></i>
+
+                                                                <div class="EmptyBox40"/>
+                                                                <div class="Fleft DispInlBlock">
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">EN DESARROLLO</span><br/>
+
+                                                                    <div class="EmptyBox20"/>
+                                                                    <span class="Fs30 FontAdamantiumBold">
+                                                                        <h:outputText value="#{indicadoresController.cantidadProyectosEnDesarrollo}" />
+                                                                    </span><br/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container33 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card SoftGrayBack">
+                                                                <i class="icon-portfolio Fs50 Fleft LeadenGreen MarRight10"></i>
+
+                                                                <div class="EmptyBox40"/>
+                                                                <div class="Fleft DispInlBlock">
+                                                                    <span class="Fs12 FontAdamantiumBold Gray">IDEAS PROYECTO</span><br/>
+
+                                                                    <div class="EmptyBox20"/>
+                                                                    <span class="Fs30 FontAdamantiumBold">
+                                                                        <h:outputText value="#{indicadoresController.cantidadIdeasProyecto}" />
+                                                                    </span><br/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="Container60 Responsive50">
+                                                <div class="Container100">
+                                                    <div class="Container50 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card CelesteClaroBack White TexAlCenter HoverEffect">
+                                                                <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                    <h:outputText value="$ #{indicadoresController.totalDisponibleSinEjecutar}" />
+                                                                </div>
+                                                                <div class="EmptyBox10"/>
+                                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total disponible sin ejecutar</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container50 Responsive50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Container25">
+                                                                <div class="Card Gris1Back White PaddingCuadroChico TexAlCenter HoverEffect">
+                                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                        <h:outputText value="#{indicadoresController.cantidadRendicionesPendientes}" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="Container75">
+                                                                <div class="Card VerdeAzuladoOscuroBack White TexAlCenter HoverEffect">
+                                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                        <h:outputText value="$ #{indicadoresController.totalRendicionesPendientes}" />
+                                                                    </div>
+                                                                    <div class="EmptyBox10"/>
+                                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Pendientes de Rendición</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="Container100">
+                                                    <div class="ContainerIndent">
+                                                        <div class="Card Padding10px">
+                                                            <div class="EmptyBox10"></div>
+
+                                                            <div class="Container100">
+                                                                <div class="Container40">
+                                                                    <i class="icon-pin-alt SoftBlue Fs50 Fleft MarRight10"></i>
+                                                                    <span class="Fs16 SoftBlue FontAdamantiumBold">Avance de <br/> Proyectos</span>
+                                                                </div>
+                                                                <div class="Container60">
+                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
+                                                                             style="width:60px; height:42px; padding-top:18px;">25<span
+                                                                                class="Fs12">%</span></div>
                                                                         <span class="FontAdamantiumBold FontItalic Fs12">Exp 13/16</span>
                                                                     </div>
                                                                     <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="PurpleBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">8<span class="Fs12">%</span></div>
+                                                                        <div class="PurpleBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
+                                                                             style="width:60px; height:42px; padding-top:18px;">8<span
+                                                                                class="Fs12">%</span></div>
                                                                         <span class="FontAdamantiumBold FontItalic Fs12">Exp 670/16</span>
                                                                     </div>
                                                                     <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">23<span class="Fs12">%</span></div>
+                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
+                                                                             style="width:60px; height:42px; padding-top:18px;">23<span
+                                                                                class="Fs12">%</span></div>
                                                                         <span class="FontAdamantiumBold FontItalic Fs12">Exp 66/16</span>
                                                                     </div>
                                                                     <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="RedBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">12<span class="Fs12">%</span></div>
+                                                                        <div class="RedBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
+                                                                             style="width:60px; height:42px; padding-top:18px;">12<span
+                                                                                class="Fs12">%</span></div>
                                                                         <span class="FontAdamantiumBold FontItalic Fs12">Exp 72/16</span>
                                                                     </div>
                                                                     <div class="Fleft DispInlBlock TexAlCenter MarBot10">
-                                                                        <div class="OrangeBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">78<span class="Fs12">%</span></div>
+                                                                        <div class="OrangeBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
+                                                                             style="width:60px; height:42px; padding-top:18px;">78<span
+                                                                                class="Fs12">%</span></div>
                                                                         <span class="FontAdamantiumBold FontItalic Fs12">Exp 106/16</span>
                                                                     </div>
                                                                 </div>
@@ -201,10 +435,6 @@
                             </div>
 
                         </c:when>
-
-                        /*
-                        * Otro tipo de Rol
-                        */
 
                         <c:otherwise>
                             <div class="Card TexAlCenter">

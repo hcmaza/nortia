@@ -5,40 +5,30 @@
  */
 package ar.edu.undec.nortia.controller.view;
 
-import ar.edu.undec.nortia.controller.DesembolsoFacade;
-import ar.edu.undec.nortia.controller.PresupuestoTareaFacade;
-import ar.edu.undec.nortia.controller.RubroFacade;
-import ar.edu.undec.nortia.controller.SolicitudFacade;
-import ar.edu.undec.nortia.model.Desembolso;
-import ar.edu.undec.nortia.model.PresupuestoTarea;
-import ar.edu.undec.nortia.model.Rubro;
-import ar.edu.undec.nortia.model.Solicitud;
-import ar.edu.undec.nortia.model.Proyecto;
+import ar.edu.undec.nortia.controller.*;
+import ar.edu.undec.nortia.model.*;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.ListDataModel;
+
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.DonutChartModel;
 import org.primefaces.model.chart.HorizontalBarChartModel;
-import org.primefaces.model.chart.LegendPlacement;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.MeterGaugeChartModel;
@@ -53,11 +43,17 @@ import org.primefaces.model.chart.PieChartModel;
 public class IndicadoresController implements Serializable {
 
     @EJB
+    private ProyectoFacade proyectoFacade;
+
+    @EJB
     private SolicitudFacade solicitudFacade;
+
     @EJB
     private DesembolsoFacade desembolsoFacade;
+
     @EJB
     private PresupuestoTareaFacade presupuestoTareaFacade;
+
     @EJB
     private RubroFacade rubroFacade;
 
@@ -195,11 +191,10 @@ public class IndicadoresController implements Serializable {
     public String getPorcentajeEjecutadoString(){
         return String.format("%.02f", porcentajeEjecutado);
     }
-    
 
-//    public float getTotalDesembolsado() {
-//        return totalDesembolsado;
-//    }
+    public ProyectoFacade getProyectoFacade() {
+        return proyectoFacade;
+    }
 
     /**
      * Creates a new instance of IndicadoresController
@@ -656,8 +651,13 @@ public class IndicadoresController implements Serializable {
         }
 
     }
-    
-    
+
+    /**
+     *
+     * DASHBOARD DE SOLICITUDES
+     *
+     */
+
 //    INDICADOR LINEAL
     
     private LineChartModel lineModel1;
@@ -788,6 +788,259 @@ public class IndicadoresController implements Serializable {
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
 
     }
-    
+
+    /**
+     *
+     * DASHBOARD GENERALES >> INDEX
+     *
+     */
+
+    private Integer cantidadProyectos = 0;
+    public Integer getCantidadProyectos() { return cantidadProyectos;  }
+
+    private Integer cantidadProyectosEnFormalizacion = 0;
+    public Integer getCantidadProyectosEnFormalizacion() {return cantidadProyectosEnFormalizacion;   }
+
+    private Integer cantidadProyectosEnDesarrollo = 0;
+    public Integer getCantidadProyectosEnDesarrollo() {return cantidadProyectosEnDesarrollo;  }
+
+    private Integer cantidadIdeasProyecto = 0;
+    public Integer getCantidadIdeasProyecto() {return cantidadIdeasProyecto;  }
+
+    private List<Proyecto> listaProyectos;
+    public List<Proyecto> getListaProyectos() { if(null==listaProyectos){listaProyectos=new ArrayList<Proyecto>();} return listaProyectos; }
+
+    private float totalDesembolsado = 0f;
+    public float getTotalDesembolsado() {return totalDesembolsado;  }
+
+    private float totalEjecutado = 0f;
+    public float getTotalEjecutado() { return totalEjecutado; }
+
+    private int porcentajeEjecutadoTodosProyectos = 0;
+    public int getPorcentajeEjecutadoTodosProyectos() {return porcentajeEjecutadoTodosProyectos;  }
+
+    private float totalDisponibleSinEjecutar = 0f;
+    public float getTotalDisponibleSinEjecutar() { return totalDisponibleSinEjecutar; }
+
+    private Integer cantidadRendicionesPendientes = 0;
+    public Integer getCantidadRendicionesPendientes() { return cantidadRendicionesPendientes;    }
+
+    private float totalRendicionesPendientes = 0f;
+    public float getTotalRendicionesPendientes() { return totalRendicionesPendientes; }
+
+    // metodo dashboard general DOCENTE
+    public void dashboardGeneralDocente(){
+
+        System.out.println("dashboardGeneralDocente");
+
+        // cantidad de proyectos
+        cantidadProyectos = obtenerCantidadProyectosAgente();
+
+        // clasificar los proyectos por estado
+        clasificarProyectosPorEstado();
+
+        // total desembolsado
+        totalDesembolsado = calcularTotalDesembolsosEnProyectos();
+
+        // total ejecutado
+        totalEjecutado = calcularTotalEjecutadoEnProyectos();
+
+        // porcentaje ejecutado contra lo presupuestado
+        calcularPorcentajeEjecutado();
+
+        // total disponible sin ejecutar
+        calcularTotalDisponibleSinEjecutar();
+
+        // pendientes de rendicion
+        calcularPendientesRendicion();
+
+    }
+
+    // metodo dashboard general ADMINISTRADOR
+    public void dashboardGeneralAdministrador(){
+
+        System.out.println("dashboardGeneralAdministrador");
+
+        // cantidad de proyectos
+        cantidadProyectos = obtenerCantidadTotalProyectos();
+
+        // clasificar los proyectos por estado
+        clasificarProyectosPorEstado();
+
+        // total desembolsado
+        totalDesembolsado = calcularTotalDesembolsosEnProyectos();
+
+        // total ejecutado
+        totalEjecutado = calcularTotalEjecutadoEnProyectos();
+
+        // porcentaje ejecutado contra lo presupuestado
+        calcularPorcentajeEjecutado();
+
+        // total disponible sin ejecutar
+        calcularTotalDisponibleSinEjecutar();
+
+        // pendientes de rendicion
+        calcularPendientesRendicion();
+    }
+
+    /*
+        CANTIDAD DE PROYECTOS
+     */
+
+    public Integer obtenerCantidadProyectosAgente(){
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        AgenteController agenteController = (AgenteController) context.getApplication().evaluateExpressionGet(context, "#{agenteController}", AgenteController.class);
+
+        System.out.println("ID Agente Actual = " + agenteController.getSelected().getId());
+
+        try{
+            this.listaProyectos = this.getProyectoFacade().buscarProyectoAgente(agenteController.getSelected().getId());
+            return listaProyectos.size();
+
+        }catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public void clasificarProyectosPorEstado(){
+
+        cantidadIdeasProyecto = 0;
+        cantidadProyectosEnFormalizacion = 0;
+        cantidadProyectosEnDesarrollo = 0;
+
+        for(Proyecto p : listaProyectos){
+            switch(p.getEstadoproyectoid().getId()){
+                // Ideas Proyecto
+                case 1: case 2: case 3: case 4: case 7:
+                    cantidadIdeasProyecto++;
+                    break;
+                // Proyectos en Formalizacion
+                case 5: case 6: case 8: case 9: case 10: case 11:
+                    cantidadProyectosEnFormalizacion++;
+                    break;
+                // Proyectos en Ejecucion
+                case 12:
+                    cantidadProyectosEnDesarrollo++;
+                    break;
+                default:
+                    cantidadProyectosEnDesarrollo++;
+                    break;
+            }
+        }
+    }
+
+    public Integer obtenerCantidadTotalProyectos(){
+        try{
+            listaProyectos = this.getProyectoFacade().findAll();
+            return listaProyectos.size();
+        } catch(Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /*
+        TOTAL DESEMBOLSADO
+     */
+
+    public float calcularTotalDesembolsosEnProyectos(){
+
+        float total = 0f;
+        List<Desembolso> listaDesembolsos = new ArrayList<Desembolso>();
+
+        try{
+            for(Proyecto p : this.getListaProyectos()){
+                listaDesembolsos = this.getDesembolsoFacade().obtenerPorProyecto(p.getId());
+                for(Desembolso d : listaDesembolsos){
+                    total += d.getMonto().floatValue();
+                }
+            }
+            return total;
+
+        } catch(Exception e){
+            e.printStackTrace();
+            return 0f;
+        }
+    }
+
+    /*
+        TOTAL EJECUTADO
+    */
+
+    public float calcularTotalEjecutadoEnProyectos(){
+        float total = 0f;
+        List<Solicitud> listaSolicitudes = new ArrayList<Solicitud>();
+
+        try{
+            for(Proyecto p : this.getListaProyectos()){
+                listaSolicitudes.addAll(this.getSolicitudFacade().obtenerEjecucionPorProyecto(p.getId()));
+                listaSolicitudes.addAll(this.getSolicitudFacade().obtenerRendidasPorProyecto(p.getId()));
+                listaSolicitudes.addAll(this.getSolicitudFacade().obtenerRendicionAEvaluarPorProyecto(p.getId()));
+            }
+
+            for(Solicitud s : listaSolicitudes){
+                total += s.getImporte().floatValue();
+            }
+
+            return total;
+        } catch(Exception e){
+            e.printStackTrace();
+            return 0f;
+        }
+
+    }
+
+    public void calcularPorcentajeEjecutado(){
+
+        float totalPresupuesto = 0f;
+
+        try{
+            for(Proyecto p : listaProyectos){
+                totalPresupuesto += this.getPresupuestoTareaFacade().obtenerTotalPorProyecto(p.getId());
+            }
+
+            porcentajeEjecutadoTodosProyectos = Math.round((totalEjecutado * 100) / totalPresupuesto) ;
+
+        }catch(Exception e){
+            e.printStackTrace();
+            porcentajeEjecutadoTodosProyectos = 0;
+        }
+    }
+
+    /*
+        TOTAL DISPONIBLE POR EJECUTAR
+     */
+    public void calcularTotalDisponibleSinEjecutar(){
+        totalDisponibleSinEjecutar = this.getTotalDesembolsado() - this.getTotalEjecutado();
+    }
+
+    /*
+        PENDIENTES DE RENDICION
+     */
+
+    public void calcularPendientesRendicion(){
+
+        float total = 0f;
+        List<Solicitud> listaSolicitudes = new ArrayList<Solicitud>();
+
+        try{
+            for(Proyecto p : this.getListaProyectos()){
+                listaSolicitudes.addAll(this.getSolicitudFacade().obtenerEjecucionPorProyecto(p.getId()));
+            }
+
+            for(Solicitud s : listaSolicitudes){
+                total += s.getImporte().floatValue();
+            }
+
+            totalRendicionesPendientes = total;
+            cantidadRendicionesPendientes = listaSolicitudes.size();
+
+        } catch(Exception e){
+            e.printStackTrace();
+
+        }
+    }
 
 }

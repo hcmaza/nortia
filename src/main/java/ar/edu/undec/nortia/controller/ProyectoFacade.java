@@ -41,9 +41,7 @@ public class ProyectoFacade extends AbstractFacade<Proyecto> {
            System.out.println("No se pudo realizar la consulta"+e);
            return null;
        }
-        
-         
-    } 
+    }
     
     public List<Proyecto> buscarProyectoEstado(int estado){
         

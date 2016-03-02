@@ -92,7 +92,7 @@ public class SolicitudFacade extends AbstractFacade<Solicitud> {
     }
     
     /**
-     * Obtiene una lista de solicitudes con estado "Ejecucion" para un proyecto determinado
+     * Obtiene una lista de solicitudes con estado "Rendicion a Evaluar" para un proyecto determinado
      * 
      * @param proyectoid
      * @return 
