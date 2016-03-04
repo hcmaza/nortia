@@ -49,11 +49,16 @@ public class TareaFacade extends AbstractFacade<Tarea> {
     public List<Tarea> buscarTareasProyecto(int proyectoId){
         try{
             List<Tarea> tareas = em.createQuery("SELECT t FROM Tarea t JOIN t.etapaid e JOIN e.proyectoid p WHERE p.id = :proyectoid", Tarea.class).setParameter("proyectoid", proyectoId).getResultList();
-            
-            System.out.println("TareaFacade - buscarTareasProyecto");
-            for(Tarea t : tareas){
-                System.out.println("TAREA: " + t.getTarea());
+
+            if(null == tareas){
+                tareas = new ArrayList<Tarea>();
+            } else{
+                System.out.println("TareaFacade - buscarTareasProyecto");
+                for(Tarea t : tareas){
+                    System.out.println("TAREA: " + t.getTarea());
+                }
             }
+
             return tareas;
         } catch(Exception e){
             System.out.println("No se pudo realizar la consulta TareaFacade buscarTareasProyecto");

@@ -10,14 +10,7 @@ import ar.edu.undec.nortia.model.*;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -56,6 +49,10 @@ public class IndicadoresController implements Serializable {
 
     @EJB
     private RubroFacade rubroFacade;
+
+    @EJB
+    private TareaFacade tareaFacade;
+    public TareaFacade getTareaFacade() { return tareaFacade; }
 
     private List<Solicitud> listaSolicitudes;
     private List<PresupuestoTarea> listaPresupuestosTarea;
@@ -828,6 +825,12 @@ public class IndicadoresController implements Serializable {
     private float totalRendicionesPendientes = 0f;
     public float getTotalRendicionesPendientes() { return totalRendicionesPendientes; }
 
+    private Map<Proyecto,Integer> mapaProyectos = new HashMap<Proyecto, Integer>();
+    public Map<Proyecto, Integer> getMapaProyectos() {return mapaProyectos; }
+
+    private List<String> listaColores;
+    public List<String> getListaColores() { if(null == listaColores){listaColores = new ArrayList<String>();} return listaColores; }
+
     // metodo dashboard general DOCENTE
     public void dashboardGeneralDocente(){
 
@@ -853,6 +856,12 @@ public class IndicadoresController implements Serializable {
 
         // pendientes de rendicion
         calcularPendientesRendicion();
+
+        //armar el mapa de proyectos en desarrollo y su avance promedio
+        armarMapaProyectosFormalizadosConAvance();
+
+        // inicializamos la lista de colores
+        inicializarListaColores();
 
     }
 
@@ -881,6 +890,12 @@ public class IndicadoresController implements Serializable {
 
         // pendientes de rendicion
         calcularPendientesRendicion();
+
+        //armar el mapa de proyectos en desarrollo y su avance promedio
+        armarMapaProyectosFormalizadosConAvance();
+
+        // inicializamos la lista de colores
+        inicializarListaColores();
     }
 
     /*
@@ -1041,6 +1056,67 @@ public class IndicadoresController implements Serializable {
             e.printStackTrace();
 
         }
+    }
+
+    public void armarMapaProyectosFormalizadosConAvance(){
+
+        // ordenamos la lista de proyectos por fecha
+        Collections.sort(listaProyectos, comparadorFechas);
+
+        for(Proyecto p : listaProyectos){
+            // si el proyecto está aprobado (formalizado) o en ejecucion, agregamos a la nueva lista
+            if(p.getEstadoproyectoid().getId() == 8 || p.getEstadoproyectoid().getId() == 12){
+
+                try{
+                    List<Tarea> listaTareasProyecto = this.getTareaFacade().buscarTareasProyecto(p.getId());
+                    Integer acumulador = 0;
+                    Integer contador = 0;
+                    Integer promedio = 0;
+
+                    for(Tarea t : listaTareasProyecto){
+
+                        acumulador += (null == t.getAvance() ? 0 : t.getAvance());
+
+                        contador++;
+                    }
+
+                    promedio = Math.round(acumulador / contador);
+
+                    mapaProyectos.put(p,promedio);
+
+                    System.out.println("Proyecto Formalizado >> " + p.getNombre() + " - Promedio Avance >> " + promedio);
+
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    Comparator<Proyecto> comparadorFechas = new Comparator<Proyecto>() {
+        public int compare(Proyecto p1, Proyecto p2) {
+
+            if(p2.getFecha().after(p1.getFecha())){
+                return 1;
+            } else{
+                return -1;
+            }
+        }
+    };
+
+    public void inicializarListaColores(){
+        this.getListaColores().add("RedBack");
+        this.getListaColores().add("BlueBack");
+        this.getListaColores().add("GreenBack");
+        this.getListaColores().add("OrangeBack");
+        this.getListaColores().add("PinkBack");
+    }
+
+    public String obtenerColorAleatorio(){
+        Random generadorAleatorios = new Random();
+        int index = generadorAleatorios.nextInt(listaColores.size());
+        return listaColores.get(index);
     }
 
 }

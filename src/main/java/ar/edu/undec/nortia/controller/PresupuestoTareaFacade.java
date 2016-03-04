@@ -48,15 +48,16 @@ public class PresupuestoTareaFacade extends AbstractFacade<PresupuestoTarea> {
     
     public float obtenerTotalPorProyecto(int proyectoid){
         
-        BigDecimal asd;
+        BigDecimal bigDecimal;
         Float total = 0.0f;
         
         try{
-            asd = em.createQuery("select SUM(pt.total) from PresupuestoTarea pt where pt.tarea.etapaid.proyectoid.id =" + proyectoid, BigDecimal.class).getSingleResult();
-            total = asd.floatValue();
+            bigDecimal = em.createQuery("select SUM(pt.total) from PresupuestoTarea pt where pt.tarea.etapaid.proyectoid.id =" + proyectoid, BigDecimal.class).getSingleResult();
+            total = bigDecimal.floatValue();
             
         }catch(Exception e){
-            e.printStackTrace();
+            /*e.printStackTrace();*/
+            return 0f;
         }
         
         return total;

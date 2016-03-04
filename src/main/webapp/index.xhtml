@@ -1,8 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="title">
@@ -390,51 +391,35 @@
                                                                     <span class="Fs16 SoftBlue FontAdamantiumBold">Avance de <br/> Proyectos</span>
                                                                 </div>
                                                                 <div class="Container60">
-                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
-                                                                             style="width:60px; height:42px; padding-top:18px;">25<span
-                                                                                class="Fs12">%</span></div>
-                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 13/16</span>
-                                                                    </div>
-                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="PurpleBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
-                                                                             style="width:60px; height:42px; padding-top:18px;">8<span
-                                                                                class="Fs12">%</span></div>
-                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 670/16</span>
-                                                                    </div>
-                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
-                                                                             style="width:60px; height:42px; padding-top:18px;">23<span
-                                                                                class="Fs12">%</span></div>
-                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 66/16</span>
-                                                                    </div>
-                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="RedBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
-                                                                             style="width:60px; height:42px; padding-top:18px;">12<span
-                                                                                class="Fs12">%</span></div>
-                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 72/16</span>
-                                                                    </div>
-                                                                    <div class="Fleft DispInlBlock TexAlCenter MarBot10">
-                                                                        <div class="OrangeBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
-                                                                             style="width:60px; height:42px; padding-top:18px;">78<span
-                                                                                class="Fs12">%</span></div>
-                                                                        <span class="FontAdamantiumBold FontItalic Fs12">Exp 106/16</span>
-                                                                    </div>
+                                                                    <c:when test="#{not empty indicadoresController.mapaProyectos}">
+                                                                        <ui:repeat value="#{indicadoresController.mapaProyectos.keySet().toArray()}" var="proyecto"  >
+                                                                            <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                                <div class="#{indicadoresController.obtenerColorAleatorio()} White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">
+                                                                                    <h:outputText value="#{indicadoresController.mapaProyectos[proyecto]}" />
+                                                                                    <span class="Fs12">
+                                                                                        %
+                                                                                    </span>
+                                                                                </div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">
+                                                                            <h:outputText value="#{proyecto.expediente}" />
+                                                                        </span>
+                                                                            </div>
+                                                                        </ui:repeat>
+                                                                    </c:when>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
 
                         </c:when>
+
+                        <!-- DEFAULT -->
 
                         <c:otherwise>
                             <div class="Card TexAlCenter">
