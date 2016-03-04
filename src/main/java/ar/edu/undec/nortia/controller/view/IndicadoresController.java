@@ -831,6 +831,9 @@ public class IndicadoresController implements Serializable {
     private List<String> listaColores;
     public List<String> getListaColores() { if(null == listaColores){listaColores = new ArrayList<String>();} return listaColores; }
 
+    private Map<Convocatoria,Integer> mapaConvocatorias = new HashMap<Convocatoria, Integer>();
+    public Map<Convocatoria, Integer> getMapaConvocatorias() { return mapaConvocatorias; }
+
     // metodo dashboard general DOCENTE
     public void dashboardGeneralDocente(){
 
@@ -893,6 +896,9 @@ public class IndicadoresController implements Serializable {
 
         //armar el mapa de proyectos en desarrollo y su avance promedio
         armarMapaProyectosFormalizadosConAvance();
+
+        //armar el mapa de convocatorias
+        armarMapaConvocatoriasConAvance();
 
         // inicializamos la lista de colores
         inicializarListaColores();
@@ -1058,6 +1064,7 @@ public class IndicadoresController implements Serializable {
         }
     }
 
+
     public void armarMapaProyectosFormalizadosConAvance(){
 
         // ordenamos la lista de proyectos por fecha
@@ -1092,6 +1099,62 @@ public class IndicadoresController implements Serializable {
             }
         }
 
+    }
+
+    public class PromedioAvanceConvocatoria{
+
+        private Convocatoria convocatoria;
+        private Integer contador;
+        private Integer acumulador;
+        private Float promedio;
+
+        public Convocatoria getConvocatoria() { return convocatoria; }
+        public void setConvocatoria(Convocatoria convocatoria) { this.convocatoria = convocatoria;  }
+
+        public Integer getContador() { return contador; }
+        public void setContador(Integer contador) { this.contador = contador; }
+
+        public Integer getAcumulador() { return acumulador; }
+        public void setAcumulador(Integer acumulador) { this.acumulador = acumulador; }
+
+        public Float getPromedio() { return promedio; }
+        public void setPromedio(Float promedio) { this.promedio = promedio; }
+    }
+
+    public void armarMapaConvocatoriasConAvance(){
+
+        List<PromedioAvanceConvocatoria> listaAvanceConvenios = new ArrayList<PromedioAvanceConvocatoria>();
+
+        for(Map.Entry<Proyecto,Integer> entrada : mapaProyectos.entrySet()){
+
+            boolean encontrado = false;
+
+            for(PromedioAvanceConvocatoria p : listaAvanceConvenios){
+                if(entrada.getKey().getConvocatoriaid().equals(p.getConvocatoria())){
+                    p.setContador(p.getContador() + 1);
+                    p.setAcumulador(p.getAcumulador() + entrada.getValue());
+                    Float promedio = p.getAcumulador().floatValue() / p.getContador().floatValue();
+                    p.setPromedio(promedio);
+                    encontrado = true;
+
+                    System.out.println("Convocatoria: " + p.getConvocatoria().getConvocatoria() + " - Acumulador: " + p.getAcumulador() + " - Contador: " + p.getContador());
+                }
+            }
+
+            if(!encontrado){
+                PromedioAvanceConvocatoria nuevoPromedio = new PromedioAvanceConvocatoria();
+                nuevoPromedio.setConvocatoria(entrada.getKey().getConvocatoriaid());
+                nuevoPromedio.setAcumulador(entrada.getValue());
+                nuevoPromedio.setContador(1);
+                nuevoPromedio.setPromedio(nuevoPromedio.getAcumulador().floatValue() / nuevoPromedio.getContador().floatValue());
+
+                listaAvanceConvenios.add(nuevoPromedio);
+            }
+        }
+
+        for(PromedioAvanceConvocatoria p : listaAvanceConvenios){
+            mapaConvocatorias.put(p.getConvocatoria(),Math.round(p.getPromedio()));
+        }
     }
 
     Comparator<Proyecto> comparadorFechas = new Comparator<Proyecto>() {

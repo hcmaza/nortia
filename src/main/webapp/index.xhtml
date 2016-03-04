@@ -193,18 +193,21 @@
                                                                     <span class="Fs16 SoftBlue FontAdamantiumBold">Avance de <br/> Proyectos</span>
                                                                 </div>
                                                                 <div class="Container60">
-                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="LeadenGreenBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
-                                                                             style="width:60px; height:42px; padding-top:18px;">21<span
-                                                                                class="Fs12">%</span></div>
-                                                                        <span class="FontAdamantiumBold FontItalic Fs12">FONTAR</span>
-                                                                    </div>
-                                                                    <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
-                                                                        <div class="PurpleBack White FontAdamantiumBold Fs20 BordRadHalf MarBot10"
-                                                                             style="width:60px; height:42px; padding-top:18px;">16<span
-                                                                                class="Fs12">%</span></div>
-                                                                        <span class="FontAdamantiumBold FontItalic Fs12">SPU</span>
-                                                                    </div>
+                                                                    <c:when test="#{not empty indicadoresController.mapaConvocatorias}">
+                                                                        <ui:repeat value="#{indicadoresController.mapaConvocatorias.keySet().toArray()}" var="convocatoria"  >
+                                                                            <div class="Fleft DispInlBlock TexAlCenter MarRight20 MarBot10">
+                                                                                <div class="#{indicadoresController.obtenerColorAleatorio()} White FontAdamantiumBold Fs20 BordRadHalf MarBot10" style="width:60px; height:42px; padding-top:18px;">
+                                                                                    <h:outputText value="#{indicadoresController.mapaConvocatorias[convocatoria]}" />
+                                                                                    <span class="Fs12">
+                                                                                        %
+                                                                                    </span>
+                                                                                </div>
+                                                                        <span class="FontAdamantiumBold FontItalic Fs12">
+                                                                            <h:outputText value="#{convocatoria.convocatoria}" />
+                                                                        </span>
+                                                                            </div>
+                                                                        </ui:repeat>
+                                                                    </c:when>
                                                                 </div>
                                                             </div>
                                                         </div>
