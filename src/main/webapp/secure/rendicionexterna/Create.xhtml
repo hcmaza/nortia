@@ -17,9 +17,7 @@
 
             <div class="Container100">       
                 <div class="ContainerIndent">
-
                     <h:form id="formprincipal">
-
                         <p:growl globalOnly="true" for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
 
                         <div class="Card ">
@@ -54,26 +52,29 @@
                                                  rowKey="#{item.id}" 
                                                  rowIndexVar="indice"
                                                  rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                 styleClass="tabla" style="margin-bottom: 10px;">
+                                                 styleClass="tabla tablaAjustada" style="margin-bottom: 10px;">
                                         <f:facet name="header">
                                             Comprobantes de Gasto
                                         </f:facet>
                                         <p:column headerText="Nº">
                                             <h:outputText value="#{item.id}" />
                                         </p:column>
-                                        <p:column headerText="Proveedor">
-                                            <h:outputText value="#{item.proveedor}" />
-                                        </p:column>
-                                        <p:column headerText="Nº Factura">
-                                            <h:outputText value="#{item.nrofactura}" />
-                                        </p:column>
                                         <p:column headerText="Fecha">
                                             <h:outputText value="#{item.fechafactura}">
                                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                                             </h:outputText>
                                         </p:column>
+                                        <p:column headerText="Proveedor">
+                                            <h:outputText value="#{item.proveedor}" />
+                                        </p:column>
+                                        <p:column headerText="Factura">
+                                            <h:outputText value="#{item.tipofactura} #{item.nrofactura}" />
+                                        </p:column>
                                         <p:column headerText="Descripción">
                                             <h:outputText value="#{item.obsfactura}" />
+                                        </p:column>
+                                        <p:column headerText="Rubro">
+                                            <h:outputText value="#{rendicionexternaController.obtenerRubroComprobanteRendicion(item.rendicionid.id)}" />
                                         </p:column>
                                         <p:column headerText="Archivo">
                                             <p:lightBox id="lighbox">
@@ -87,13 +88,13 @@
                                                 </f:facet>
                                             </p:lightBox>
                                         </p:column>
-                                        <p:column headerText="Total">
-                                            <h:outputText value="#{item.montofactura}" />
+                                        <p:column headerText="Total" styleClass="TexAlRight">
+                                            <h:outputText value="$ #{item.montofactura}"  />
                                         </p:column>
-                                        <p:column headerText="Total Aprobado">
-                                            <h:outputText value="#{item.montoaprobado}" />
+                                        <p:column headerText="Total Aprobado" styleClass="TexAlRight">
+                                            <h:outputText value="$ #{item.montoaprobado}"  />
                                         </p:column>
-                                        <p:column headerText="Estado">
+                                        <p:column headerText="Estado Interno">
                                             <p:graphicImage value="#{resource['img:/iconoAprobado.png']}" alt="Aprobado" rendered="#{item.estado eq 1}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
                                             <p:graphicImage value="#{resource['img:/iconoParcial.png']}" alt="Parcial" rendered="#{item.estado eq 2}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
                                             <p:graphicImage value="#{resource['img:/iconoRechazado.png']}" alt="Rechazado" rendered="#{item.estado eq 3}" style="height: 25px; width:25px; display: block; margin-left: auto; margin-right: auto;" />
@@ -113,35 +114,42 @@
                                     <p:dataTable id="tablacomprobantesrendicion" var="arc" value="#{rendicionexternaController.selected.archivorendicionList}" 
                                                  rowIndexVar="indice"
                                                  rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                 styleClass="tabla" style="top: 5px; margin-bottom: 5px;">  
+                                                 styleClass="tabla tablaAjustada" style="top: 5px; margin-bottom: 5px;">
                                         <f:facet name="header">
-                                            Comprobantes de Gatos incorporados a la Rendición
+                                            Comprobantes de Gastos incorporados al lote de Rendición
                                         </f:facet>
-                                        <p:column headerText="Tipo de Factura">  
-                                            <h:outputText value="#{arc.tipofactura}" />                                        
-                                        </p:column> 
-                                        <p:column headerText="N° de Factura">  
-                                            <h:outputText value="#{arc.nrofactura}" />  
-                                        </p:column> 
-                                        <p:column headerText="Proveedor">  
-                                            <h:outputText value="#{arc.proveedor}" />  
+                                        <p:column headerText="Nº">
+                                            <h:outputText value="#{arc.id}" />
                                         </p:column>
-                                        <p:column headerText="Aporte Universidad">
-                                            <h:outputText value="#{arc.aporteuniversidad}" />
+                                        <p:column headerText="Proveedor">
+                                            <h:outputText value="#{arc.proveedor}" />
                                         </p:column>
-                                        <p:column headerText="Aporte Organismo">
-                                            <h:outputText value="#{arc.aporteorganismo}" />
+                                        <p:column headerText="Factura">
+                                            <h:outputText value="#{arc.tipofactura} #{arc.nrofactura}" />
                                         </p:column>
-                                        <p:column headerText="Aporte Comitente">
-                                            <h:outputText value="#{arc.aportecomitente}" />
+                                        <p:column headerText="Descripción">
+                                            <h:outputText value="#{arc.obsfactura}" />
                                         </p:column>
-                                        <p:column headerText="Total Aprobado">
-                                            <h:outputText value="#{arc.montoaprobado}" />
+                                        <p:column headerText="Rubro">
+                                            <h:outputText value="#{rendicionexternaController.obtenerRubroComprobanteRendicion(arc.rendicionid.id)}" />
+                                        </p:column>
+                                        <p:column headerText="Aporte Universidad" styleClass="TexAlRight" >
+                                            <h:outputText value="$ #{arc.aporteuniversidad}"  />
+                                        </p:column>
+                                        <p:column headerText="Aporte Organismo" styleClass="TexAlRight">
+                                            <h:outputText value="$ #{arc.aporteorganismo}" />
+                                        </p:column>
+                                        <p:column headerText="Aporte Comitente" styleClass="TexAlRight">
+                                            <h:outputText value="$ #{arc.aportecomitente}"  />
+                                        </p:column>
+                                        <p:column headerText="Total Aprobado" styleClass="TexAlRight">
+                                            <h:outputText value="$ #{arc.montoaprobado}"  />
                                         </p:column> 
                                         <p:column headerText="">  
-                                            <p:commandButton value="Eliminar" icon="ui-icon-circle-plus" action="#{rendicionexternaController.removerComprobanteDeRendicionExterna(arc)}" update=":formprincipal:growlprincipal, :formprincipal:tabladisponiblesrendicion, :formprincipal:tablacomprobantesrendicion" immediate="true"  >
+                                            <p:commandButton id="botonQuitarComprobanteGasto" title="Quitar Comprobante de Gasto" icon="fa fa-eraser" styleClass="RedButton White" action="#{rendicionexternaController.removerComprobanteDeRendicionExterna(arc)}" update=":formprincipal:growlprincipal, :formprincipal:tabladisponiblesrendicion, :formprincipal:tablacomprobantesrendicion" immediate="true"  >
                                                 <f:setPropertyActionListener value="#{arc}" target="#{archivorendicionController.selected}" />  
                                             </p:commandButton>
+                                            <p:tooltip for="botonQuitarComprobanteGasto" value="Quitar Comprobante de Gasto" />
                                         </p:column> 
                                         <f:facet name="footer">
                                             Totales

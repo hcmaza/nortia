@@ -74,5 +74,5 @@ public class ArchivorendicionFacade extends AbstractFacade<Archivorendicion> {
         consulta.setParameter("hasta", hasta);
         return consulta.getResultList();
     }
-    
+
 }

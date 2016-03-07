@@ -1,12 +1,14 @@
 package ar.edu.undec.nortia.controller.view;
 
 import ar.edu.undec.nortia.controller.ArchivorendicionFacade;
+import ar.edu.undec.nortia.controller.SolicitudFacade;
 import ar.edu.undec.nortia.model.Archivoproyecto;
 import ar.edu.undec.nortia.model.Rendicionexterna;
 import ar.edu.undec.nortia.controller.view.util.JsfUtil;
 import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
 import ar.edu.undec.nortia.controller.RendicionexternaFacade;
 import ar.edu.undec.nortia.model.Archivorendicion;
+import ar.edu.undec.nortia.model.Solicitud;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -43,7 +45,10 @@ public class RendicionexternaController implements Serializable {
     
     @EJB
     private ar.edu.undec.nortia.controller.ArchivorendicionFacade ejbFacadeComprobantes;
-    
+
+    @EJB
+    private SolicitudFacade ejbSolicitudFacade;
+
     private PaginationHelper pagination;
     private int selectedItemIndex;
     
@@ -106,6 +111,8 @@ public class RendicionexternaController implements Serializable {
     public ArchivorendicionFacade getEjbFacadeComprobantes() {
         return ejbFacadeComprobantes;
     }
+
+    public SolicitudFacade getEjbSolicitudFacade() { return ejbSolicitudFacade; }
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -430,6 +437,15 @@ public class RendicionexternaController implements Serializable {
         }
 
         return new DefaultStreamedContent();
+    }
+
+    public String obtenerRubroComprobanteRendicion(Integer rendicionId){
+        try{
+            return this.getEjbSolicitudFacade().obtenerPorRendicion(rendicionId).getPresupuestotarea().getRubro().getRubro();
+        } catch (Exception e){
+            return "";
+        }
+
     }
 
 }
