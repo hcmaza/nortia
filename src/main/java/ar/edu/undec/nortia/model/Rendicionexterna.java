@@ -48,6 +48,12 @@ public class Rendicionexterna implements Serializable {
     @OneToMany(mappedBy = "rendicionexternaid", cascade = CascadeType.ALL)
     private List<Archivorendicion> archivorendicionList;
 
+    @Column(name = "informeavance")
+    private byte[] informeavance;
+
+    @Column(name = "formulariorendicion")
+    private byte[] formulariorendicion;
+
     public Rendicionexterna() {
     }
 
@@ -80,6 +86,22 @@ public class Rendicionexterna implements Serializable {
 
     public void setArchivorendicionList(List<Archivorendicion> archivorendicionList) {
         this.archivorendicionList = archivorendicionList;
+    }
+
+    public byte[] getInformeavance() {
+        return informeavance;
+    }
+
+    public void setInformeavance(byte[] informeavance) {
+        this.informeavance = informeavance;
+    }
+
+    public byte[] getFormulariorendicion() {
+        return formulariorendicion;
+    }
+
+    public void setFormulariorendicion(byte[] formulariorendicion) {
+        this.formulariorendicion = formulariorendicion;
     }
 
     @Override

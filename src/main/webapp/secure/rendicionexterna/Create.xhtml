@@ -17,7 +17,7 @@
 
             <div class="Container100">       
                 <div class="ContainerIndent">
-                    <h:form id="formprincipal">
+                    <h:form id="formprincipal" >
                         <p:growl globalOnly="true" for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
 
                         <div class="Card ">
@@ -156,7 +156,24 @@
                                         </f:facet>
                                     </p:dataTable>
                                     <br />
-                                    <p:commandButton action="#{rendicionexternaController.create}" value="Crear Rendición Externa"  />
+
+                                    <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-6,ui-grid-col-6">
+                                        <p:fileUpload label="Informe de Avance" id="informeAvance" fileUploadListener="#{rendicionexternaController.subirArchivoAvanceProyecto}" mode="advanced"
+                                                      sizeLimit="10000000" multiple="false" auto="false" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
+                                                      cancelLabel="Cancelar"
+                                                      invalidFileMessage="El archivo es inválido."  >
+                                        </p:fileUpload>
+
+                                        <p:fileUpload label="Formulario de Rendición" id="formularioRendicion" fileUploadListener="#{rendicionexternaController.subirArchivoFormularioRendicion}" mode="advanced"
+                                                      sizeLimit="10000000" multiple="false" auto="false" allowTypes="/(\.|\/)(doc|docx|xls|xlsx|pdf)$/"
+                                                      cancelLabel="Cancelar"
+                                                      invalidFileMessage="El archivo es inválido."  >
+                                        </p:fileUpload>
+                                    </p:panelGrid>
+
+                                    <br />
+
+                                    <p:commandButton action="#{rendicionexternaController.create}" value="Crear Rendición Externa" styleClass="GreenButton White"  />
                                     <br />
                                     <br />
                                     <p:commandLink action="#{rendicionexternaController.prepareList}" value="#{bundle.CreateRendicionexternaShowAllLink}" immediate="true"/>

@@ -10,6 +10,7 @@ import ar.edu.undec.nortia.controller.RendicionexternaFacade;
 import ar.edu.undec.nortia.model.Archivorendicion;
 import ar.edu.undec.nortia.model.Solicitud;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -445,7 +446,26 @@ public class RendicionexternaController implements Serializable {
         } catch (Exception e){
             return "";
         }
+    }
 
+    public void subirArchivoAvanceProyecto(FileUploadEvent event) {
+        System.out.println("Subiendo Archivo de Avance de Proyecto");
+
+        try {
+            current.setInformeavance(event.getFile().getContents());
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void subirArchivoFormularioRendicion(FileUploadEvent event) {
+        System.out.println("Subiendo Archivo de Formulario de Rendicion");
+
+        try {
+            current.setFormulariorendicion(event.getFile().getContents());
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

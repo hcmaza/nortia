@@ -257,7 +257,7 @@ public class ArchivoproyectoController implements Serializable {
         	
 		try {
 			current.setArchivo(event.getFile().getContents());
-                         this.collectorArchivoProyecto.add(current);
+             this.collectorArchivoProyecto.add(current);
                          
 		
 		}catch(Exception e) {
