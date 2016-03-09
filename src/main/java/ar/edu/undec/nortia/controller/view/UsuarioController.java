@@ -428,9 +428,9 @@ public class UsuarioController implements Serializable {
     
     public void buscarAgenteCuil(String cuil){
         this.currenta=this.ejbFacadea.filtroDocumentooCuil(cuil);
+
         if(currenta==null){
             JsfUtil.addErrorMessage("No se pudo encontrar el docente");
-            
         }
     }
     
