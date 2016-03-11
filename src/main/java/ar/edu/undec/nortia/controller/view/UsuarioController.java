@@ -415,7 +415,6 @@ public class UsuarioController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Usuario.class.getName());
             }
         }
-
     }
     
     public String onFlowProcess(FlowEvent event) {
