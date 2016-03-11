@@ -1,68 +1,129 @@
-<ui:composition 
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:pm="http://primefaces.org/adamantium"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pm="http://primefaces.org/adamantium"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <div class="layout-menu-cover-top Animated05" id="layout-menu-cover">
         <h:form id="menuform">
             <pm:menu>
-               
-                <p:submenu id="rm_orientation" label=" Menu Options" icon="icon-menu">
-                    <p:menuitem id="rm_top" value=" Top Menu" icon="icon-layout7" url="#" onclick="Adamantium.changeMenuLayout('top');return false;" />
-                    <p:menuitem id="rm_left" value=" Left Menu" icon="icon-layout14" url="#" onclick="Adamantium.changeMenuLayout('left');return false;" />
-                    <p:menuitem id="rm_dark" value=" Dark Menu" icon="icon-pen-alt-fill" url="#" onclick="$('body').addClass('dark');return false;" />
-                    <p:menuitem id="rm_light" value=" Light Menu" icon="icon-pen-alt-stroke" url="#" onclick="$('body').removeClass('dark');return false;" />
-                </p:submenu>
-                <c:if test="#{request.isUserInRole('Administrador')}" > 
-
-                <p:submenu label="Proyectos" icon="ui-icon-pencil">  
-                    <p:menuitem value="Listado de Proyectos" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/List.xhtml' icon="ui-icon-arrowreturnthick-1-w" />                     
-                </p:submenu>
-                <p:submenu label="Reportes" icon="ui-icon-print">                      
-                    <p:menuitem value="Gastos por Convocatoria" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/GastosPorConvocatoria.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
-                    <p:menuitem value="Plan y Equipo de Trabajo" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/PlanTrabajoyEquipo.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
-                    <p:menuitem value="Estado del Proyecto" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/estadoProyecto.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
+                <p:submenu id="rm_orientation" label=" Opciones de Menú" icon="icon-menu">
+                    <p:menuitem id="rm_top" value=" Top Menu" icon="icon-layout7" url="#"
+                                onclick="Adamantium.changeMenuLayout('top');return false;"/>
+                    <p:menuitem id="rm_left" value=" Left Menu" icon="icon-layout14" url="#"
+                                onclick="Adamantium.changeMenuLayout('left');return false;"/>
+                    <p:menuitem id="rm_dark" value=" Dark Menu" icon="icon-pen-alt-fill" url="#"
+                                onclick="$('body').addClass('dark');return false;"/>
+                    <p:menuitem id="rm_light" value=" Light Menu" icon="icon-pen-alt-stroke" url="#"
+                                onclick="$('body').removeClass('dark');return false;"/>
                 </p:submenu>
 
-                
-                <p:submenu label="Datos Externos">  
-                    <p:menuitem value="Importar Datos desde Mapuche" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/DatosMapuche/Migrar.xhtml'  />  
-                </p:submenu> 
+                <c:if test="#{request.isUserInRole('Administrador')}">
 
-                <p:submenu label="Ayuda" icon="ui-icon-help">  
-                    <p:menuitem value="Acerca de ..." onclick="PF('dabout').show()" />  
-                    <p:submenu label="Manual" icon="ui-icon-search">  
+                    <p:submenu label=" Proyectos" icon="fa fa-paper-plane-o">
+                        <p:menuitem value="Lista de Proyectos"
+                                    url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/List.xhtml'
+                                    icon="icon-list"/>
+                    </p:submenu>
 
-                    </p:submenu>  
-                </p:submenu> 
-            </c:if>
+                    <p:submenu label=" Reportes" icon="icon-newspaper">
+                        <p:menuitem value="Gastos por Convocatoria"
+                                    url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/GastosPorConvocatoria.xhtml'
+                                    icon="fa fa-dollar"/>
+                        <p:menuitem value="Plan y Equipo de Trabajo"
+                                    url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/PlanTrabajoyEquipo.xhtml'
+                                    icon="fa fa-calendar-o"/>
+                        <p:menuitem value="Estado del Proyecto"
+                                    url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/estadoProyecto.xhtml'
+                                    icon="fa fa-signal"/>
+                    </p:submenu>
 
-            <c:if test="#{!request.isUserInRole('Administrador')}" > 
+                    <p:submenu label="Configuración" icon="icon-settings">
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/agente/List.xhtml'
+                                value='Agentes'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/avanceproyecto/List.xhtml'
+                                value='Avances de Proyecto'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/beneficiario/List.xhtml'
+                                value='Beneficiarios'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/comitente/List.xhtml'
+                                value='Comitentes'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/convocatoria/List.xhtml'
+                                value='Convocatorias'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/dependencia/List.xhtml'
+                                value='Dependencias'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/fuentefinanciamiento/List.xhtml'
+                                value='Fuentes de Financiamiento'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/pregunta/List.xhtml'
+                                value='Preguntas de Evaluación'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/rubro/List.xhtml'
+                                value='Rubros'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/sector/List.xhtml'
+                                value='Sectores'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipodocumento/List.xhtml'
+                                value='Tipos de Documento'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoentidad/List.xhtml'
+                                value='Tipos de Entidad'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipofinanciamiento/List.xhtml'
+                                value='Tipos de Financiamiento'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/tipoproyecto/List.xhtml'
+                                value='Tipos de Proyecto'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/usuario/List.xhtml'
+                                value='Usuarios'/>
+                        <p:menuitem
+                                url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/vehiculo/List.xhtml'
+                                value='Vehículos'/>
+                    </p:submenu>
 
-                <p:submenu label="Ideas-Proyecto" icon="ui-icon-document">  
-                    <p:menuitem value="Nueva Idea-Proyecto" action="#{proyectoController.prepareSolicitud()}" />  
-                    <p:menuitem value="Listado de Ideas-Proyecto" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/solicitud/List.xhtml' />  
+                    <p:submenu label=" Datos Externos" icon="icon-link">
+                        <p:menuitem value="Importar Datos desde Mapuche"
+                                    url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/DatosMapuche/Migrar.xhtml'/>
+                    </p:submenu>
 
-                </p:submenu>  
+                    <p:submenu label=" Ayuda" icon="icon-question">
+                        <p:menuitem value="Acerca de ..." onclick="PF('dabout').show()" icon="icon-megaphone" />
+                        <p:menuitem value="Manual" icon="icon-book" />
+                    </p:submenu>
+                </c:if>
 
-                <p:submenu label="Proyectos" icon="ui-icon-pencil">  
-                    <p:menuitem value="Lista de Proyectos" url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/List.xhtml' icon="ui-icon-arrowreturnthick-1-w" />  
-                </p:submenu>
+                <c:if test="#{!request.isUserInRole('Administrador')}">
 
-                <p:submenu label="Ayuda" icon="ui-icon-help">  
-                    <p:menuitem value="Acerca de ..." onclick="PF('dabout').show()" />  
-                    <p:submenu label="Manual" icon="ui-icon-search">  
+                    <p:submenu label="Ideas-Proyecto" icon="fa fa-pencil-square-o ">
+                        <p:menuitem value="Nueva Idea-Proyecto" action="#{proyectoController.prepareSolicitud()}" icon="fa fa-pencil-square-o" />
+                        <p:menuitem value="Lista de Ideas-Proyecto"
+                                    url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/solicitud/List.xhtml'
+                                    icon="icon-list" />
+                    </p:submenu>
 
-                    </p:submenu>  
-                </p:submenu> 
+                    <p:submenu label="Proyectos" icon="fa fa-paper-plane-o">
+                        <p:menuitem value="Lista de Proyectos"
+                                    url='#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/proyectos/List.xhtml'
+                                    icon="icon-list" />
+                    </p:submenu>
 
-                
+                    <p:submenu label="Ayuda" icon="icon-question" >
+                        <p:menuitem value="Acerca de ..." onclick="PF('dabout').show()" icon="icon-megaphone" />
+                        <p:menuitem value="Manual" icon="icon-book" />
+                    </p:submenu>
 
-            </c:if>                    
+                </c:if>
 
             </pm:menu>
         </h:form>
