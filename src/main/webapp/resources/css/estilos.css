@@ -52,6 +52,82 @@
 }
 
 /*
+ * datatable: color del encabezado.
+*/
+
+.TablaColorEncabezado thead th{
+    background-color: #439fe0 !important;
+    color: #ffffff !important;
+}
+
+/*
+ * datatable: estilo del paginador
+*/
+
+.ui-paginator {
+    color: #439fe0 !important; ;
+}
+
+.ui-paginator > *{
+    color: #439fe0 !important;
+}
+
+/*.ui-paginator > span{
+    background-color: #ffffff !important;
+}*/
+
+.ui-paginator .ui-paginator-page{
+    color: #439fe0 !important;
+}
+
+.ui-paginator-bottom{
+    background-color: #ffffff !important;
+    color: #439fe0 !important; ;
+    border: 0px !important;
+    border-top: 3px #439fe0 solid !important;
+}
+
+/**********/
+
+.ui-paginator-pages .ui-paginator-page{
+    background-color: White !important;
+    color: #439fe0 !important;
+}
+
+.ui-paginator-pages .ui-state-active{
+    background-color: White !important;
+    color: #439fe0 !important;
+}
+.ui-paginator-pages .ui-state-hover{
+    background-color: gray !important;
+    color: #439fe0 !important;
+}
+
+/****************************/
+
+.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last{
+    background-color: #439fe0 !important;
+}
+
+/****************************/
+
+.ui-paginator-pages span{
+    background-color: White !important;
+    color: #439fe0 !important;
+}
+
+.ui-paginator .ui-state-active,
+.ui-paginator .ui-state-hover,
+.ui-paginator .ui-paginator-pages .ui-state-active,
+.ui-paginator .ui-paginator-pages .ui-state-hover {
+    color: #439fe0 !important;
+    background-repeat: no-repeat;
+    border-bottom: solid 3px #ffffff;
+    font-size: 16px;
+    border-radius: 0px !important;
+}
+
+/*
  * datatable: no muestra la cabecera de la tabla
  */
 .esconder-cabecera-columnas table thead tr {
@@ -59,6 +135,10 @@
 }
 
 /*ESTILOS DE COLORES PARA LETRA*/
+
+.Celeste{
+    color: #439fe0 !important;
+}
 
 .VerdeAzuladoOscuro{
     color: #2898C5 !important;
@@ -185,4 +265,11 @@
 
 .PaddingCuadroChico {
     padding: 43px 0px 43px 0px !important;
+}
+
+/* MENU */
+
+.BotonMenu button{
+    background-color: #00D05E ;
+    color: #ffffff ;
 }

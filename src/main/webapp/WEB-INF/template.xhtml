@@ -17,7 +17,6 @@
         <h:outputScript name="js/ripple-effect.js" library="adamantium-layout" />
         <h:outputScript name="js/perfect-scrollbar.js" library="adamantium-layout" />
         <h:outputScript name="js/layout.js" library="adamantium-layout" />
-        <h:outputStylesheet name="estilos.css" library="css" />
 
         <ui:insert name="head" />
         
@@ -86,7 +85,7 @@
             {
                 this.cfg.seriesDefaults.rendererOptions = {
                     diameter: 160,
-                    showDataLabels: true,
+                    showDataLabels: true
                 };
             }
             
@@ -106,7 +105,7 @@
     </h:head>
 
     <h:body>
-        
+
         <ui:include src="topbar.xhtml" />
         
         <ui:include src="layoutmenu.xhtml" />
@@ -154,6 +153,11 @@
         <h:outputStylesheet name="css/perfect-scrollbar.css" library="adamantium-layout" />
         <h:outputStylesheet name="css/font-awesome.css" library="adamantium-layout" />
         <h:outputStylesheet name="css/adamantium-layout.css" library="adamantium-layout" />
+        <h:outputStylesheet library="css" name="estilos.css"  />
+
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="estilos.css"  />
+        </f:facet>
     </h:body>
 
 </html>
