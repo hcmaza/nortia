@@ -87,20 +87,6 @@
                             class="Fs12">SportX Tools</span></a></li>
                 </ul>
             </li>
-            <li>
-                <span>
-                    <h:form>
-                        <p:splitButton value="Bienvenido, #{request.getUserPrincipal()}" icon="fa fa-slideshare"
-                                       styleClass="Fleft">
-                            <p:menuitem value="Mi Cuenta" icon="fa fa-cogs"
-                                        url="#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/micuenta/Edit.xhtml"/>
-                            <p:menuitem value="Log Out" icon="fa fa-close"
-                                        actionListener="#{usuarioController.logout()}"/>
-
-                        </p:splitButton>
-                    </h:form>
-                </span>
-            </li>
         </ul>
 
     </div>
