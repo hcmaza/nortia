@@ -10,7 +10,7 @@
 
     <div class="Container100">
         <div class="ContainerIndent">
-            <h:form>
+            <h:form id="formusuario">
                 <p:splitButton value="Bienvenido, #{request.getUserPrincipal()}" icon="fa fa-slideshare" styleClass="Fleft">
                     <p:menuitem value="Mi Cuenta" icon="fa fa-cogs" url="#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}/secure/micuenta/Edit.xhtml"/>
                     <p:menuitem value="Log Out" icon="fa fa-close" actionListener="#{usuarioController.logout()}"/>

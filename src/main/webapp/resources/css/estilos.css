@@ -258,10 +258,13 @@
     padding: 20px 0px 20px 0px !important;
 }
 
-/*
 .PaddingIzquierdoDerecho5px{
-    padding: 20px 0px 20px 0px !important;
-}*/
+    padding: 0px 5px 0px 5px !important;
+}
+
+.PaddingIzquierdoDerecho10px{
+    padding: 0px 10px 0px 10px !important;
+}
 
 .PaddingCuadroChico {
     padding: 43px 0px 43px 0px !important;
