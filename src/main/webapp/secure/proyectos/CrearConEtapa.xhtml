@@ -42,7 +42,7 @@
                     <div class="Card ">
                         <div class="ui-fluid">
                             <div class="CardTopic">
-                                <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                <i class="icon-list Fs30 Fleft MarRight10"></i>
 
                                 <div class="EmptyBox10 ShowOnMobile"></div>
                                 Proyecto N° #{proyectoController.selected.id} <br/>
@@ -53,36 +53,40 @@
                                 <p:tabView id="tabview1">
 
                                     <p:tab id="panelequipo" title="Equipo de Trabajo">
-                                        <h:panelGrid columns="4">
-                                            <p:outputLabel style="font-weight: bold"
-                                                           value="Ingrese N° de Documento / Cuil "></p:outputLabel>
+
+                                        <p:panelGrid columns="3" layout="grid" columnClasses="ui-grid-col-4 Padding15px, ui-grid-col-6 Padding15px, ui-grid-col-2 Padding15px">
+                                            <div class="CardTopic">
+                                                <i class="icon-user Fs30 Fleft MarRight10"></i>
+                                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                                Agregar Personas al Equipo  <br/>
+                                                <span class="CardSubTopic"> Seleccionar docentes-investigadores del equipo. </span>
+                                            </div>
+
                                             <p:selectOneMenu id="advancedfiltroa"
                                                              value="#{agenteViewController.selected}" filter="true"
                                                              filterMatchMode="contains">
-                                                <!--<p:ajax update="@this, agregaraequipo" />-->
                                                 <p:ajax update="agregaraequipo"/>
                                                 <f:selectItems value="#{agenteViewController.itemsAvailableSelectOne}"/>
-
                                             </p:selectOneMenu>
 
                                             <h:panelGrid columns="6" id="agenteselecciona">
                                                 <p:commandButton
                                                         title="Agregar al Equipo de Trabajo de la Idea-Proyecto"
-                                                        icon="ui-icon-plus" id="agregaraequipo" immediate="true"
+                                                        icon="fa fa-plus" id="agregaraequipo" immediate="true"
                                                         update="agentesa"
                                                         action="#{proyectoAgenteController.agregarEquipo}"
-                                                        disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}"/>
-                                                <p:commandButton title="Nueva Persona" icon="ui-icon-person"
-                                                                 onclick="PF('dregistrar').show();"/>
+                                                        disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}" styleClass="GreenButton White" />
+
+                                                <p:commandButton title="Nueva Persona" icon="fa fa-user-plus" onclick="PF('dregistrar').show();" styleClass="OrangeButton White"/>
                                             </h:panelGrid>
-                                        </h:panelGrid>
+                                        </p:panelGrid>
 
                                         <div align="center">
                                             <p:dataTable id="agentesa" value="#{proyectoAgenteController.equipotrabajo}"
                                                          var="agentea" editable="true" editMode="cell"
                                                          rowIndexVar="indice"
                                                          rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                         styleClass="tabla">
+                                                         styleClass="tabla tablaAjustada">
                                                 <f:facet name="header">
                                                     Equipo de Trabajo de la Idea-Proyecto
                                                 </f:facet>
@@ -216,9 +220,9 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="&nbsp;"/>
                                                     </f:facet>
-                                                    <p:commandButton immediate="true" id="cborrardeequipo" icon="ui-icon-trash"
+                                                    <p:commandButton immediate="true" id="cborrardeequipo" icon="fa fa-user-times"
                                                                      title="Quitar del Equipo de Trabajo"
-                                                                     update="agentesa">
+                                                                     update="agentesa" styleClass="RedButton White">
                                                         <p:collector value="#{agentea}"
                                                                      removeFrom="#{proyectoAgenteController.equipotrabajo}"
                                                                      unique="true"/>
@@ -235,7 +239,7 @@
 
                                         <p:commandButton id="btn_addetapa" alt="Agregar Etapa"
                                                          update=":forme:etapa :forme:resultadoesperado :forme:tareasdeproyecto"
-                                                         icon="fa fa-plus"
+                                                         icon="fa fa-plus White"
                                                          action="#{etapaController.rearmarEtapasProyecto}"
                                                          onclick="PF('dialogoetapa').show();" immediate="true"
                                                          style="margin-top: 5px; margin-bottom: 5px; "> </p:commandButton>
