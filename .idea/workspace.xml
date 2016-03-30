@@ -34,8 +34,8 @@
       <file leaf-file-name="CrearConEtapa.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7915408" vertical-offset="1322" max-vertical-offset="21978">
-              <caret line="88" column="88" selection-start-line="88" selection-start-column="75" selection-end-line="88" selection-end-column="88" />
+            <state vertical-scroll-proportion="0.5740181" vertical-offset="15110" max-vertical-offset="22356">
+              <caret line="850" column="59" selection-start-line="850" selection-start-column="59" selection-end-line="850" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -44,8 +44,8 @@
       <file leaf-file-name="estilos.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5112">
-              <caret line="45" column="14" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2191" max-vertical-offset="5112">
+              <caret line="58" column="29" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -735,12 +735,12 @@
       <workItem from="1458072552763" duration="14419000" />
       <workItem from="1458376261906" duration="3492000" />
       <workItem from="1458592894829" duration="4216000" />
-      <workItem from="1459197276479" duration="6912000" />
+      <workItem from="1459197276479" duration="22642000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="179243000" />
+    <option name="totallyTimeSpent" value="194973000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -785,7 +785,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4671141" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4671141" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22642857" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1196,16 +1196,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5112">
-          <caret line="45" column="14" selection-start-line="45" selection-start-column="1" selection-end-line="45" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2191" max-vertical-offset="5112">
+          <caret line="58" column="29" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7915408" vertical-offset="1322" max-vertical-offset="21978">
-          <caret line="88" column="88" selection-start-line="88" selection-start-column="75" selection-end-line="88" selection-end-column="88" />
+        <state vertical-scroll-proportion="0.5740181" vertical-offset="15110" max-vertical-offset="22356">
+          <caret line="850" column="59" selection-start-line="850" selection-start-column="59" selection-end-line="850" selection-end-column="59" />
           <folding />
         </state>
       </provider>
