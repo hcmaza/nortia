@@ -285,7 +285,7 @@ public class Agente implements Serializable {
 
     @Override
     public String toString() {
-        return cuil+" | "+numerodocumento+" | "+apellido+", "+nombres;
+        return apellido + ", " + nombres + ("".equals(cuil) ? "" : " | " + cuil ) ;
     }
     
 }
