@@ -406,7 +406,7 @@ public class EtapaController implements Serializable {
             categoria.add(e.getEtapa());
 
             //data+="["+e.getFechainicio().getTime()+","+e.getFechafin().getTime()+"],";
-            data += "{low:" + e.getFechainicio().getTime() + ",high:" + e.getFechafin().getTime() + ",color:'red'},";
+            data += "{low:" + e.getFechainicio().getTime() + ",high:" + e.getFechafin().getTime() + ",color:'#66BB6A'},";
             dataactual += "[" + e.getFechainicio().getTime() + "," + e.getFechainicio().getTime() + "],";
             contaretapas++;
             for (Tarea t : this.etapas.get(contaretapas - 1).getTareaList()) {

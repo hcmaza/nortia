@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1aeabbf7-67e7-416c-982e-bfdfe91a8e51" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/EtapaController.java" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/EtapaController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/exporting.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/exporting.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/highcharts-more.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/highcharts-more.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/highcharts.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/highcharts.js" />
     </list>
     <ignored path="nortia.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,8 +38,18 @@
       <file leaf-file-name="CrearConEtapa.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.46539026" vertical-offset="5138" max-vertical-offset="21528">
-              <caret line="303" column="85" selection-start-line="303" selection-start-column="85" selection-end-line="303" selection-end-column="85" />
+            <state vertical-scroll-proportion="1.1608187" vertical-offset="20141" max-vertical-offset="21618">
+              <caret line="1141" column="45" selection-start-line="1141" selection-start-column="45" selection-end-line="1141" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EtapaController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/EtapaController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="6083" max-vertical-offset="13608">
+              <caret line="417" column="96" selection-start-line="417" selection-start-column="96" selection-end-line="417" selection-end-column="96" />
               <folding />
             </state>
           </provider>
@@ -46,8 +58,8 @@
       <file leaf-file-name="estilos.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="5670">
-              <caret line="53" column="26" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+            <state vertical-scroll-proportion="-2.5185184" vertical-offset="2974" max-vertical-offset="5670">
+              <caret line="169" column="6" selection-start-line="169" selection-start-column="1" selection-end-line="169" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -87,6 +99,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/usuario.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/Agente.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/EtapaController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
       </list>
     </option>
@@ -380,6 +393,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/resources/js" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
     </key>
   </component>
@@ -798,12 +812,12 @@
       <workItem from="1459367838063" duration="2215000" />
       <workItem from="1459377353408" duration="10812000" />
       <workItem from="1459552788152" duration="1230000" />
-      <workItem from="1459809820604" duration="10972000" />
+      <workItem from="1459809820604" duration="12527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220202000" />
+    <option name="totallyTimeSpent" value="221757000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -827,7 +841,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1442" height="874" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -848,7 +862,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4161074" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4161074" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21428572" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -887,20 +901,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/rendicion/Evaluacion.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63650304" vertical-offset="2771" max-vertical-offset="6984">
-          <caret line="177" column="79" selection-start-line="177" selection-start-column="79" selection-end-line="177" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="234" max-vertical-offset="21024">
-          <caret line="13" column="20" selection-start-line="10" selection-start-column="4" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/Estadosolicitud.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.73371106" vertical-offset="824" max-vertical-offset="1530">
@@ -1246,17 +1246,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/js/exporting.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="5670">
-          <caret line="53" column="26" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="706">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/js/highcharts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5598">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6228">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -1264,10 +1264,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/EtapaController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="6083" max-vertical-offset="13608">
+          <caret line="417" column="96" selection-start-line="417" selection-start-column="96" selection-end-line="417" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5185184" vertical-offset="2974" max-vertical-offset="5670">
+          <caret line="169" column="6" selection-start-line="169" selection-start-column="1" selection-end-line="169" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46539026" vertical-offset="5138" max-vertical-offset="21528">
-          <caret line="303" column="85" selection-start-line="303" selection-start-column="85" selection-end-line="303" selection-end-column="85" />
+        <state vertical-scroll-proportion="1.1608187" vertical-offset="20141" max-vertical-offset="21618">
+          <caret line="1141" column="45" selection-start-line="1141" selection-start-column="45" selection-end-line="1141" selection-end-column="45" />
           <folding />
         </state>
       </provider>
