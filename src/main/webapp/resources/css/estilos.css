@@ -20,23 +20,38 @@
 }
 
 /*
- * treetable: se eliminan los bordes verticales
+ * treetable: se eliminan los bordes verticales, tipo de borde solido
  */
 
-.tablaArbol tbody td {
+.tablaArbol table tbody td {
   /*border-color: #4B4B4B;*/
   border-color: #878787 !important;
+  border-style: solid !important;
   border-width: 1px !important;
   border-left: none !important;
   border-right: none !important;
 }
 
-.tablaArbol thead td {
+.tablaArbol table thead td {
   /*border-color: #4B4B4B;*/
   border-color: #878787 !important;
+  border-style: solid !important;
   border-width: 1px !important;
   border-left: none !important;
   border-right: none !important;
+}
+
+.tablaArbol{
+    border: 0px;
+}
+
+.tablaArbol.ui-treetable table thead tr th{
+    border: 1px solid transparent;
+}
+
+/* tamaño de triangulo de apertura de nodo */
+.tablaArbol.ui-treetable .ui-icon-triangle-1-s{
+    background-size: 200% ;
 }
 
 /*
@@ -49,6 +64,18 @@
 
 .tablaAjustada.ui-datatable-scrollable table {
     table-layout: fixed !important;
+}
+
+/*
+ * treetable: columnas se ajustan al contenido
+ */
+
+.tablaAjustada.ui-treetable table, .tablaAjustada.ui-treetable-resizable table {
+    table-layout: auto !important;
+}
+
+.tablaArbol table td{
+    white-space:nowrap;
 }
 
 /*

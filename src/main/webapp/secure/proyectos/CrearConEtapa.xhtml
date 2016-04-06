@@ -44,7 +44,7 @@
 
                                     <p:tab id="panelequipo" title="Equipo de Trabajo">
 
-                                        <p:panelGrid columns="3" layout="grid" columnClasses="ui-grid-col-4 Padding15px, ui-grid-col-6 Padding15px, ui-grid-col-2 Padding15px">
+                                        <p:panelGrid columns="3" layout="grid" columnClasses="ui-grid-col-4 Padding15px, ui-grid-col-6 Padding15px, ui-grid-col-2 Padding15px" styleClass="ui-panelgrid-blank">
                                             <div class="CardTopic">
                                                 <i class="icon-user Fs30 Fleft MarRight10"></i>
                                                 <div class="EmptyBox10 ShowOnMobile"></div>
@@ -223,10 +223,10 @@
                                     </p:tab>
 
                                     <p:tab id="paneletapas" title="Plan de Trabajo">
-                                        <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-10 Padding15px, ui-grid-col-2 Padding15px" >
+                                        <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-10 Padding15px, ui-grid-col-2 Padding15px" styleClass="ui-panelgrid-blank" >
 
                                             <div class="CardTopic">
-                                                <i class="icon-calendar Fs30 Fleft MarRight10"></i>
+                                                <i class="fa fa-tasks Fs30 Fleft MarRight10 Blue"></i>
                                                 <div class="EmptyBox10 ShowOnMobile"></div>
                                                 Agregar Etapas y Tareas al Plan  <br/>
                                                 <span class="CardSubTopic"> Especificar las etapas, tareas y los recursos a utilizar en cada una de ellas. </span>
@@ -244,7 +244,7 @@
                                         <p:tooltip for="btn_addetapa" />
 
                                         <p:treeTable id="treetableetapas" value="#{etapaController.root}" emptyMessage="No hay etapas agregadas al proyecto."
-                                                     var="document" styleClass="tablaArbol tablaAjustada TablaColorEncabezado">
+                                                     var="document" styleClass="tablaArbol tablaAjustada tabla TablaColorEncabezado">
 
                                             <p:column headerText="Etapa/Tarea">
                                                 <h:outputText value="#{document.tarea}"/>
@@ -278,18 +278,35 @@
                                                                  onclick="PF('dialogoetapa').show()"
                                                                  update=":forme:etapa :forme:tareasdeproyecto :forme:cetapa "
                                                                  action="#{etapaController.prepararEditarEtapaTreeTable(document)}"
-                                                                 icon="ui-icon-search" immediate="true"
-                                                                 style="margin: 3px;"/>
+                                                                 icon="fa fa-search" immediate="true" styleClass="OrangeButton White"
+                                                                 />
 
                                                 <p:commandButton title="Eliminar"
                                                                  update=":form:tabview1:treetableetapas :form:tabview1:contenedor :form:beanvalue"
                                                                  rendered="#{document.estado eq null}"
                                                                  onclick="crearGrafico();"
                                                                  actionListener="#{etapaController.eliminarEtapaTreeTable(document)}"
-                                                                 icon="ui-icon-trash" style="margin: 3px;"/>
+                                                                 icon="fa fa-trash" styleClass="RedButton White"/>
                                             </p:column>
 
                                         </p:treeTable>
+
+                                        <div class="Separator" />
+
+                                        <div class="CardTopic">
+                                            <i class="icon-calendar Fs30 Fleft MarRight10"></i>
+                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                            Diagrama de Gantt  <br/>
+                                            <span class="CardSubTopic"> Muestra gráficamente la distribución de tiempos de las etapas y tareas. </span>
+                                        </div>
+
+                                        <p:outputPanel id="contenedor" >
+                                            <div id="containergrafico" style="width: 100%;">
+
+                                            </div>
+                                        </p:outputPanel>
+
+                                        <div class="Separator" />
 
                                         <h:commandLink>
                                             <p:graphicImage value="/resources/img/excel.png"/>
@@ -310,16 +327,6 @@
                                             <p:graphicImage value="/resources/img/xml.png"/>
                                             <p:dataExporter type="xml" target="tareasdeproyecto" fileName="tareas"/>
                                         </h:commandLink>
-                                        <br/>
-                                        <br/>
-                                        <p:panel id="contenedor" header="Gantt" toggleable="true"
-                                                 toggleTitle="Ver Gantt">
-
-                                            <div id="containergrafico">
-
-
-                                            </div>
-                                        </p:panel>
 
                                     </p:tab>
 
@@ -790,15 +797,15 @@
                               closable="true" closeOnEscape="true"
                               resizable="false" modal="true" responsive="true" >
 
+                        <f:facet name="header">
+                            <div class="CardTopic">
+                                <i class="icon-calendar Fs30 Fleft MarRight10"></i>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                <h:outputText value="Etapas y Tareas" styleClass="Fs25 FontBold Blue Fright MarTop5"  />
+                            </div>
+                        </f:facet>
+
                         <p:growl id="msgs" showDetail="true"/>
-
-                        <div class="CardTopic">
-                            <i class="icon-calendar Fs30 Fleft MarRight10"></i>
-                            <div class="EmptyBox10 ShowOnMobile"></div>
-                            Etapas y Tareas
-                        </div>
-
-                        <div class="SeparatorFull" />
 
                         <p:panelGrid columns="2" layout="grid" styleClass="ui-grid-col-12 ui-panelgrid-blank" columnClasses="ui-grid-col-4, ui-grid-col-8" style="margin-bottom: 10px;" >
                             <p:outputLabel value="Nombre de Etapa:" for="etapa" styleClass="FontBold Blue "/>
@@ -877,12 +884,14 @@
                                                  update=":forme:tareasdeproyecto :form:beanvalue :form:tabview1:treetableetapas " icon="fa fa-trash" styleClass="RedButton White">
                                     <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}"/>
                                 </p:commandButton>
+                                <p:tooltip for="cborrar" />
                                 <br/>
-                                <p:commandButton id="ceditar" immediate="true" value="Editar"
+                                <p:commandButton id="ceditar" immediate="true" title="Editar"
                                                  onclick="PF('dtarea').show()" update=":formd:wizardtarea"
                                                  action="#{tareaController.editarTarea(item)}" icon="fa fa-edit" styleClass="OrangeButton White">
                                     <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}"/>
                                 </p:commandButton>
+                                <p:tooltip for="ceditar" />
                             </p:column>
 
                         </p:dataTable>
@@ -1097,7 +1106,7 @@
                                 enabled: true
                             },
                             title: {
-                                text: 'Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}'
+                                text: ''
                             },
                             xAxis: {
                                 categories: []
