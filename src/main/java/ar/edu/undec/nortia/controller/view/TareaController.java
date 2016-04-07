@@ -9,18 +9,13 @@ import ar.edu.undec.nortia.controller.TareaFacade;
 import ar.edu.undec.nortia.controller.TareaavanceFacade;
 import ar.edu.undec.nortia.model.Etapa;
 import ar.edu.undec.nortia.model.PresupuestoTarea;
-import ar.edu.undec.nortia.model.ProyectoAgente;
-import ar.edu.undec.nortia.model.Rubro;
 import ar.edu.undec.nortia.model.TareaAgente;
 import ar.edu.undec.nortia.model.Tareaavance;
-import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -34,7 +29,10 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+
+import org.primefaces.component.tabview.TabView;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.TabChangeEvent;
 
 @ManagedBean(name = "tareaController")
 @SessionScoped
@@ -352,9 +350,8 @@ public class TareaController implements Serializable {
          // calcular la diferencia en dias
         long diffdias = Math.abs( diferenciaMilisegundos / (24 * 60 * 60 * 1000) );
         int entero=(int) diffdias;
-        current.setDias(entero+1);
-       
-        
+
+        getSelected().setDias(entero+1);
 
     }
 
@@ -545,8 +542,28 @@ public class TareaController implements Serializable {
     public void setAvanceold(Tareaavance avanceold) {
         this.avanceold = avanceold;
     }
-    
-    
-    
+
+
+    /**
+     *  TabView en CrearConEtapa >> Dialogo Crear Etapa >> Dialogo Nueva Tarea en Etapa
+     */
+/*    private TabView nuevaTareaTab = new TabView();
+
+    public TabView getNuevaTareaTab() {
+        return nuevaTareaTab;
+    }
+
+    public void setNuevaTareaTab(TabView nuevaTareaTab) {
+        this.nuevaTareaTab = nuevaTareaTab;
+    }
+
+    public void onNuevaTareaTabChange(TabChangeEvent event) {
+        TabView tabView = (TabView) event.getComponent();
+        int activeIndex = tabView.getChildren().indexOf(event.getTab());
+        this.nuevaTareaTab.setActiveIndex(activeIndex);
+    }*/
+
+
+
 
 }

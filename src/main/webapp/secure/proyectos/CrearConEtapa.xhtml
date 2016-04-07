@@ -238,7 +238,7 @@
                                                              styleClass="GreenButton White"
                                                              action="#{etapaController.rearmarEtapasProyecto}"
                                                              onclick="PF('dialogoetapa').show();" immediate="true"
-                                                             style="margin-top: 5px; margin-bottom: 5px; " title="Agregar Etapa al Proyecto" />
+                                                             style="margin-bottom: 5px; " title="Agregar Etapa al Proyecto" />
                                         </p:panelGrid>
 
                                         <p:tooltip for="btn_addetapa" />
@@ -362,33 +362,19 @@
                                             </p:column>
                                             <p:columnGroup type="footer">
                                                 <p:row>
-                                                    <p:column colspan="4" style="text-align:right"
-                                                              footerText="Totales:"/>
-
-                                                    <p:column
-                                                            footerText="#{presupuestoTareaController.sumagastocomitente}"/>
-
-                                                    <p:column
-                                                            footerText="#{presupuestoTareaController.sumagastouniversidad}"/>
-
-                                                    <p:column
-                                                            footerText="#{presupuestoTareaController.sumagastoorganismo}"/>
-
-                                                    <p:column footerText="#{presupuestoTareaController.sumatotal}"/>
-
+                                                    <p:column colspan="4" style="text-align:right" footerText="Totales:"/>
+                                                    <p:column footerText="$ #{presupuestoTareaController.sumagastocomitente}"/>
+                                                    <p:column footerText="$ #{presupuestoTareaController.sumagastouniversidad}"/>
+                                                    <p:column footerText="$ #{presupuestoTareaController.sumagastoorganismo}"/>
+                                                    <p:column footerText="$ #{presupuestoTareaController.sumatotal}"/>
                                                 </p:row>
                                             </p:columnGroup>
                                         </p:treeTable>
 
                                         <div align="center">
                                             <h:panelGrid id="pchartpresupuesto" columns="2" styleClass="left,right">
-                                                <p:chart type="pie" id="chartaportes"
-                                                         model="#{presupuestoTareaController.pieModelAportes}"
-                                                         style="width:15%;height:300px"/>
-                                                <p:chart type="pie" id="chartrubros"
-                                                         model="#{presupuestoTareaController.pieModelRubros}"
-                                                         style="width:15%;height:300px"/>
-
+                                                <p:chart type="pie" id="chartaportes" model="#{presupuestoTareaController.pieModelAportes}" style="width:15%;height:300px"/>
+                                                <p:chart type="pie" id="chartrubros" model="#{presupuestoTareaController.pieModelRubros}" style="width:15%;height:300px"/>
                                             </h:panelGrid>
                                         </div>
                                     </p:tab>
@@ -437,23 +423,41 @@
                         </div>
                     </div>
 
+                    <p:separator />
+
                     <div align="center">
-                        <p:commandButton value="Enviar para evaluacion"
-                                         actionListener="#{proyectoController.enviarEvaluarProyecto}"/>
+                        <p:commandButton value="Enviar para evaluacion" actionListener="#{proyectoController.enviarEvaluarProyecto}" icon="fa fa-check" styleClass="GreenButton White" />
                     </div>
-                    <br/>
 
                     <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"/>
 
                 </h:form>
 
+                <!-- **************************************************************
+
+                    ********************* DIALOGO NUEVA TAREA *********************
+
+                     ************************************************************** -->
+
+                <!--onShow="PF('wizardtarea').select(0);"-->
+
                 <h:form id="formd">
 
-                    <p:dialog id="dtarea" header="Tarea en Etapa #{etapaController.selected.etapa}" widgetVar="dtarea"
-                              resizable="false" onShow="PF('wizardtarea').select(0);" responsive="true"
+                    <p:dialog id="dtarea" widgetVar="dtarea" closable="true" showHeader="true"
+                              resizable="false" responsive="true"
                               showEffect="clip" hideEffect="fold" modal="true">
 
-                        <p:tabView id="wizardtarea" activeIndex="0" widgetVar="wizardtarea" styleClass="Container">
+                        <f:facet name="header">
+                            <div class="CardTopic">
+                                <i class="icon-task Fs30 Fleft MarRight10"></i>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                <h:outputText value="Nueva Tarea en Etapa #{etapaController.selected.etapa}" styleClass="Fs25 FontBold Blue Fright MarTop5"  />
+                            </div>
+                        </f:facet>
+
+                        <p:tabView id="wizardtarea" activeIndex="0" widgetVar="wizardtarea" styleClass="Container" onTabChange="return PF('wizardtarea').onTabChange(index)" >
+                            <!--binding="# {tareaController.nuevaTareaTab}" dynamic="true" cache="false"-->
+                            <!--<p:ajax event="tabChange" listener="# {tareaController.onNuevaTareaTabChange}"  />-->
 
                             <p:tab id="tab1" title="Tarea" >
 
@@ -496,9 +500,7 @@
                                             <p:column styleClass="center">
                                                 <p:calendar size="11" id="dfechafin" required="true" showOn="button"
                                                             value="#{tareaController.selected.fechafin}" title="Fechafin">
-                                                    <p:ajax event="dateSelect"
-                                                            listener="#{tareaController.calcularDiferenciaDias}"
-                                                            update=":formd:wizardtarea:dias"/>
+                                                    <p:ajax event="dateSelect" listener="#{tareaController.calcularDiferenciaDias}" update=":formd:wizardtarea:dias" />
                                                 </p:calendar>
                                             </p:column>
                                         </p:row>
@@ -538,13 +540,14 @@
                                 <p:panelGrid columns="3" layout="grid" styleClass="ui-grid-col-12, ui-panelgrid-blank" columnClasses="ui-grid-col-4, ui-grid-col-7, ui-grid-col-1">
                                     <p:outputLabel value="Agregar Personas a Tarea"  styleClass="Blue FontBold Fs14" for="advancedfiltro" />
                                     <p:selectOneMenu id="advancedfiltro" value="#{agenteViewController.selected}" filter="true" filterMatchMode="contains" styleClass="ui-grid-col-12">
-                                        <p:ajax update="@this"/>
+                                        <p:ajax update="@this, botonAgregarPersonaTarea "/>
                                         <f:selectItems value="#{agenteViewController.itemsAvailableSelectOneProyectoAgente}"/>
                                     </p:selectOneMenu>
                                     <p:commandButton id="botonAgregarPersonaTarea" onclick="PF('dialogotareaagentepresupuesto').show()"
                                                      title="Agregar Persona a la Tarea"
                                                      update=":formd:paneltareaagentepresupuesto"
                                                      actionListener="#{tareaAgenteController.armarTareaAgentePresupuesto()}"
+                                                     disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}"
                                                      icon="fa fa-plus" styleClass="GreenButton White">
                                     </p:commandButton>
                                 </p:panelGrid>
@@ -555,8 +558,7 @@
                                              var="tareaagente"
                                              editable="true" editMode="cell"
                                              rowIndexVar="indice"
-                                             styleClass="tabla tablaAjustada TablaColorEncabezado"
-                                        >
+                                             styleClass="tabla tablaAjustada TablaColorEncabezado" emptyMessage="No se agregaron personas a la tarea." >
 
                                     <p:column>
                                         <f:facet name="header">
@@ -596,7 +598,7 @@
 
                             </p:tab>
 
-                            <p:tab id="tab3" title="Presupuesto/Tarea">
+                            <p:tab id="tab3" title="Presupuesto">
 
                                 <p:tabView id="tabrubros" value="#{rubroController.rubroslist}" var="rub"
                                            orientation="left">
@@ -644,19 +646,10 @@
                                             <p:columnGroup type="footer">
                                                 <p:row>
                                                     <p:column footerText="Totales"/>
-
-                                                    <p:column
-                                                            footerText="$#{presupuestoTareaController.sumaraportesComitenteRubroenlistaPresupuestoTarea(rub)}"/>
-
-                                                    <p:column
-                                                            footerText="$#{presupuestoTareaController.sumaraportesUniversidadRubroenlistaPresupuestoTarea(rub)}"/>
-
-                                                    <p:column
-                                                            footerText="$#{presupuestoTareaController.sumaraportesOrganismoRubroenlistaPresupuestoTarea(rub)}"/>
-
-                                                    <p:column
-                                                            footerText="$#{presupuestoTareaController.sumaraportesTotalesRubroenlistaPresupuestoTarea(rub)}"/>
-
+                                                    <p:column footerText="$#{presupuestoTareaController.sumaraportesComitenteRubroenlistaPresupuestoTarea(rub)}"/>
+                                                    <p:column footerText="$#{presupuestoTareaController.sumaraportesUniversidadRubroenlistaPresupuestoTarea(rub)}"/>
+                                                    <p:column footerText="$#{presupuestoTareaController.sumaraportesOrganismoRubroenlistaPresupuestoTarea(rub)}"/>
+                                                    <p:column footerText="$#{presupuestoTareaController.sumaraportesTotalesRubroenlistaPresupuestoTarea(rub)}"/>
                                                     <p:column footerText=""/>
                                                 </p:row>
                                             </p:columnGroup>
@@ -674,113 +667,105 @@
                         <f:facet name="footer">
                             <div align="center">
 
-                                <p:commandButton id="botontareaok" value="OK" oncomplete="PF('dtarea').hide();"
-                                                 actionListener="#{tareaController.armarTareasProyecto}"
-                                                 update=":forme:tareasdeproyecto"></p:commandButton>
-
+                                <p:commandButton id="botontareaok" value="Agregar Tarea a Etapa" oncomplete="PF('dtarea').hide();"
+                                                 actionListener="#{tareaController.armarTareasProyecto}" validateClient="true"
+                                                 update=":forme:tareasdeproyecto" icon="fa fa-save" styleClass="GreenButton White" />
                             </div>
                         </f:facet>
 
                     </p:dialog>
 
                     <p:dialog id="dialogotareaagentepresupuesto" maximizable="false" modal="true" minimizable="false"
-                              header="Agente * Tarea * Presupuesto" closable="true" resizable="false"
+                              closable="true" resizable="false" responsive="true"
                               widgetVar="dialogotareaagentepresupuesto">
-                        <p:panel id="paneltareaagentepresupuesto">
-                            <div align="center"><p:outputLabel style="font-weight: bold"
-                                                               value=" Agente: #{agenteViewController.selected.cuil} - #{agenteViewController.selected.apellido}, #{agenteViewController.selected.nombres}"/>
+
+                        <f:facet name="header">
+                            <div class="CardTopic">
+                                <i class="fa fa-money Fs30 Fleft MarRight10"></i>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                <h:outputText value="Integrante de la Tarea: Costos y Aportes" styleClass="Fs25 FontBold Blue Fright MarTop5"  />
                             </div>
-                            <br/>
-                            <h:panelGrid columns="2">
+                        </f:facet>
 
-                                <p:outputLabel value="Funcion en la tarea:" for="funcion"/>
+                        <p:panel id="paneltareaagentepresupuesto" style="border: none;">
 
-                                <p:inputText size="100" id="funcion" value="#{tareaAgenteController.current2.funcion}"/>
-                            </h:panelGrid>
-                            <br/>
-                            <h:panelGrid columns="2">
-                                <p:outputLabel rendered="#{tareaAgenteController.current2.horasdedicadas > -1}"
-                                               value="Horas dedicadas:" for="horasdedicadas"/>
+                            <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-4, ui-grid-col-8" styleClass="ui-panelgrid-blank" >
+                                <p:outputLabel value=" Nombre de Integrante:" for="nombreagenteagentepresupuesto" styleClass=" FontBold"/>
+                                <p:outputLabel id="nombreagenteagentepresupuesto" style="font-weight: bold" value="#{agenteViewController.selected.apellido}, #{agenteViewController.selected.nombres}"/>
+
+                                <p:outputLabel value="Funcion en la tarea:" for="funcion" styleClass=" FontBold" style="line-height: 250%;"/>
+                                <p:inputText id="funcion" value="#{tareaAgenteController.current2.funcion}" styleClass="ui-grid-col-12"/>
+
+                                <p:outputLabel value="Participación:" for="agenteparticipacion" styleClass="FontBold"/>
+                                <p:outputLabel id="agenteparticipacion" style="font-weight: bold"
+                                               value="#{ (agenteViewController.buscarProyectoAgentePorAgenteId(agenteViewController.selected.id, proyectoController.selected.id).consultorexterno) ? 'Consultor Externo' : 'Docente' }"/>
+
+                                <p:outputLabel rendered="#{tareaAgenteController.current2.horasdedicadas > -1}" value="Horas dedicadas:" for="horasdedicadas" styleClass="FontBold" style="line-height: 250%;"/>
                                 <p:inputText size="10" rendered="#{tareaAgenteController.current2.horasdedicadas > -1}"
                                              id="horasdedicadas"
                                              value="#{tareaAgenteController.current2.horasdedicadas}"
-                                             title="Horas Dedicadas">
-                                    <p:ajax event="keyup" listener="#{tareaAgenteController.onCellEdit()}"
-                                            update=":formd:totalpresupuesto"/>
+                                             title="Horas Dedicadas" styleClass="ui-grid-col-12 TexAlRight">
+                                    <p:ajax event="keyup" listener="#{tareaAgenteController.onCellEdit()}" update=":formd:agentetotalpresupuesto"/>
                                 </p:inputText>
-                            </h:panelGrid>
-                            <br/>
-                            <p:separator/>
-                            <br/>
 
-                            <div align="center">
-                                <h:panelGrid columns="4">
+                                <p:outputLabel value="Costo unitario:" for="agentecostounitario" styleClass="FontBold"/>
+                                <p:outputLabel id="agentecostounitario" value="#{presupuestoTareaController.current2.costounitario}" title="Costounitario">
+                                    <f:convertNumber type="currency" currencySymbol="$"  groupingUsed="false" locale="es_AR"/>
+                                </p:outputLabel>
 
-                                    <p:outputLabel style="font-weight: bold" value="Costo unitario:"/>
-                                    <p:outputLabel style="font-weight: bold" id="costounitario"
-                                                   value="#{presupuestoTareaController.current2.costounitario}"
-                                                   title="Costounitario">
-                                        <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
-                                    </p:outputLabel>
+                                <p:outputLabel value="Cantidad:" for="agentecantidad" styleClass="FontBold"/>
+                                <p:outputLabel id="agentecantidad"
+                                               value="#{presupuestoTareaController.current2.cantidad}"
+                                               title="Cantidad">
+                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
+                                </p:outputLabel>
 
-                                    <p:outputLabel style="font-weight: bold" value="Cantidad:" for="cantidad"/>
-                                    <p:outputLabel style="font-weight: bold" id="cantidad"
-                                                   value="#{presupuestoTareaController.current2.cantidad}"
-                                                   title="Cantidad">
-                                        <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
-                                    </p:outputLabel>
-                                </h:panelGrid>
-                                <h:panelGrid columns="2">
+                                <p:outputLabel value="Total:" for="agentetotalpresupuesto" styleClass=" FontBold" />
+                                <p:outputLabel id="agentetotalpresupuesto" value="$ #{presupuestoTareaController.current2.total}" title="Total" styleClass="FontBold Blue">
+                                </p:outputLabel>
 
-                                    <p:outputLabel style="font-weight: 900" value="Total:" for="totalpresupuesto"/>
-                                    <p:outputLabel style="font-weight: 900" id="totalpresupuesto"
-                                                   value="$#{presupuestoTareaController.current2.total}" title="Total">
+                            </p:panelGrid>
 
-                                    </p:outputLabel>
+                            <div class="Separator" />
 
-                                </h:panelGrid>
-                                <br/>
-                                <h:panelGrid columns="6">
-                                    <p:outputLabel value="Aporte comitente:" for="aportecomitente"/>
+                            <p:panelGrid columns="2" layout="grid" columnClasses="Blue FontBold MarTop10" styleClass="ui-panelgrid-blank" >
 
-                                    <p:inputText size="10" id="aportecomitente"
-                                                 value="#{presupuestoTareaController.current2.aportecomitente}"
-                                                 title="Aportecomitente" validatorMessage="Ingrese solo números">
-                                        <!--<f:validateDoubleRange minimum="0.00" maximum="15000000.00" />-->
-                                        <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
-                                        <p:ajax event="keyup"
-                                                listener="#{presupuestoTareaController.verificarAportes2}"/>
-                                    </p:inputText>
-                                    <p:outputLabel value="Aporte universidad:" for="aporteuniversidad"/>
-                                    <p:inputText size="10" id="aporteuniversidad"
-                                                 value="#{presupuestoTareaController.current2.aporteuniversidad}"
-                                                 title="Aporteuniversidad">
-                                        <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
-                                        <p:ajax event="keyup"
-                                                listener="#{presupuestoTareaController.verificarAportes2}"/>
-                                    </p:inputText>
-                                    <p:outputLabel value="Aporte organismo:" for="aporteorganismo"/>
-                                    <p:inputText size="10" id="aporteorganismo"
-                                                 value="#{presupuestoTareaController.current2.aporteorganismo}"
-                                                 title="Aporteorganismo">
-                                        <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
-                                        <p:ajax event="keyup"
-                                                listener="#{presupuestoTareaController.verificarAportes2}"/>
-                                    </p:inputText>
-                                </h:panelGrid>
-                            </div>
-                            <br/>
+                                <p:outputLabel value="Aporte de la Universidad:" for="agenteaporteuniversidad"/>
+                                <p:inputText id="agenteaporteuniversidad"
+                                             value="#{presupuestoTareaController.current2.aporteuniversidad}"
+                                             title="Aporteuniversidad" styleClass="ui-grid-col-12 TexAlRight">
+                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
+                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
+                                </p:inputText>
 
-                            <div align="center">
-                                <p:commandButton id="agregaralpresupuesto" value="OK"
-                                                 action="#{tareaAgenteController.agregarEquipo()}"
-                                                 update=":formpresupuesto:growlpresupuesto :formpresupuesto:panelpresupuesto :form:tabview1:tablepresupuesto :form:tabview1:pchartpresupuesto :form:tabview1:chartaportes :form:tabview1:chartrubros :formd:wizardtarea:tabrubros :formd:wizardtarea:tagentes "
-                                                 oncomplete="handleTareaAgentePresupuestoRequest(xhr, status, args)">
+                                <p:outputLabel value="Aporte del Organismo:" for="agenteaporteorganismo"/>
+                                <p:inputText id="agenteaporteorganismo"
+                                             value="#{presupuestoTareaController.current2.aporteorganismo}"
+                                             title="Aporteorganismo" styleClass="ui-grid-col-12 TexAlRight">
+                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
+                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
+                                </p:inputText>
 
-                                </p:commandButton>
+                                <p:outputLabel value="Aporte del Comitente:" for="agenteaportecomitente"/>
+                                <p:inputText id="agenteaportecomitente"
+                                             value="#{presupuestoTareaController.current2.aportecomitente}"
+                                             title="Aportecomitente" validatorMessage="Ingrese solo números" styleClass="ui-grid-col-12 TexAlRight">
+                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
+                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
+                                </p:inputText>
+                            </p:panelGrid>
 
-                            </div>
                         </p:panel>
+
+                        <div class="Separator" />
+
+                        <div class="center">
+                            <p:commandButton id="agregaragentealpresupuesto" value="Agregar Persona"
+                                             action="#{tareaAgenteController.agregarEquipo()}"
+                                             update=":formpresupuesto:growlpresupuesto :formpresupuesto:panelpresupuesto :form:tabview1:tablepresupuesto :form:tabview1:pchartpresupuesto :form:tabview1:chartaportes :form:tabview1:chartrubros :formd:wizardtarea:tabrubros :formd:wizardtarea:tagentes "
+                                             oncomplete="handleTareaAgentePresupuestoRequest(xhr, status, args)" styleClass="GreenButton White" icon="fa fa-save" />
+                        </div>
+
                     </p:dialog>
 
                 </h:form>
@@ -807,9 +792,11 @@
 
                         <p:growl id="msgs" showDetail="true"/>
 
-                        <p:panelGrid columns="2" layout="grid" styleClass="ui-grid-col-12 ui-panelgrid-blank" columnClasses="ui-grid-col-4, ui-grid-col-8" style="margin-bottom: 10px;" >
-                            <p:outputLabel value="Nombre de Etapa:" for="etapa" styleClass="FontBold Blue "/>
-                            <p:inputText id="etapa" value="#{etapaController.selected.etapa}" title="Etapa" styleClass="ui-grid-col-12"/>
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-grid-col-12 ui-panelgrid-blank MarBot10" columnClasses="ui-grid-col-4, ui-grid-col-8" >
+                            <p:outputLabel value="Nombre de Etapa:" for="etapa" styleClass="FontBold Blue " />
+                            <p:inputText id="etapa" value="#{etapaController.selected.etapa}" title="Etapa" styleClass="ui-grid-col-12">
+                                <p:ajax event="keyup" update="btn_add"/>
+                            </p:inputText>
 
                             <p:outputLabel value="Resultado Esperado:" for="etapa"  styleClass="FontBold Blue"/>
                             <p:inputTextarea id="resultadoesperado" rows="4" value="#{etapaController.selected.resultadoesperado}" title="Etapa" styleClass="ui-grid-col-12"/>
@@ -824,8 +811,8 @@
                             <p:commandButton update=":formd:wizardtarea" id="btn_add"
                                              action="#{tareaController.rearmarTareasProyecto}"
                                              onclick="PF('dtarea').show();" title="Agregar Tarea" immediate="true" icon="fa fa-plus"
-                                             style="margin-top: 5px; margin-bottom: 5px;" styleClass="GreenButton White"
-                                    />
+                                             disabled="${empty etapaController.selected.etapa ? 'true' : 'false'}"
+                                             style="margin-top: 5px; margin-bottom: 5px;" styleClass="GreenButton White"  />
 
                             <p:tooltip for="btn_add" />
                         </div>
@@ -1186,6 +1173,40 @@
 
                         }
                     }
+                </script>
+
+                <!--Validar tabView de nueva tarea-->
+                <script type="text/javascript">
+                    //<![CDATA[
+                    $(function() {
+                        $.extend(PF("wizardtarea"), {
+                            onTabChange : function(tabIndex) {
+                                var $this = this;
+
+                                if (!$this.validated) {
+                                    PrimeFaces.ajax.Request.handle({
+                                        source  : $this.id,
+                                        process : $this.panelContainer.children().eq($this.cfg.selected).attr("id"),
+                                        update  : $this.id,
+                                        oncomplete : function(xhr, status, args) {
+                                            if (!args.validationFailed) {
+                                                $this.validated = true;
+                                                $this.select(tabIndex);
+                                            }
+                                        }
+                                    });
+
+                                    return false;
+                                }
+                                else {
+                                    delete $this.validated;
+
+                                    return true
+                                }
+                            }
+                        });
+                    });
+                    //]]>
                 </script>
             </div>
         </div>

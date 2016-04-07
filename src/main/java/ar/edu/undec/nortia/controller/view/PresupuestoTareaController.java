@@ -342,6 +342,14 @@ public class PresupuestoTareaController implements Serializable {
 
         sumaaportes = this.current2.getAportecomitente().add(this.current2.getAporteorganismo()).add(this.current2.getAporteuniversidad());
 
+        if(null == this.current2){
+            System.out.println("this.current2 NULO");
+        }
+
+        if(null == this.current2.getTotal()){
+            System.out.println("this.current2.getTotal NULO");
+        }
+
         if (sumaaportes.longValue() == this.current2.getTotal().longValue()) {
             return true;
         } else {

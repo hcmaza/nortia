@@ -6,6 +6,7 @@
 
 package ar.edu.undec.nortia.controller;
 
+import ar.edu.undec.nortia.controller.view.IndicadoresController;
 import ar.edu.undec.nortia.model.ProyectoAgente;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -28,6 +29,10 @@ public class ProyectoAgenteFacade extends AbstractFacade<ProyectoAgente> {
 
     public ProyectoAgenteFacade() {
         super(ProyectoAgente.class);
+    }
+
+    public ProyectoAgente buscarPorAgenteYProyecto(int agenteid, int proyectoid){
+        return em.createQuery("SELECT p FROM ProyectoAgente p WHERE p.proyectoAgentePK.agenteid = :agenteid and p.proyectoAgentePK.proyectoid = :proyectoid", ProyectoAgente.class).setParameter("agenteid", agenteid).setParameter("proyectoid", proyectoid).getSingleResult();
     }
     
      public List<ProyectoAgente> buscarEquipoTrabajo(int proyectoid) {

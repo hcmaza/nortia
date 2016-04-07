@@ -3,6 +3,11 @@
  * datatable: se eliminan los bordes verticales
  */
 
+/* se eliminan los bordes exteriores */
+.tabla{
+    border: none;
+}
+
 .tabla tbody td {
   /*border-color: #4B4B4B;*/
   border-color: #878787 !important;
@@ -191,6 +196,10 @@
 
 .VerdeClaroBack{
     background-color: #00D05E !important;
+}
+
+.VerdePlantaBack{
+    background-color: #9BBB59 !important;
 }
 
 .CelesteOscuroBack{

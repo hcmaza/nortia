@@ -9,11 +9,9 @@ package ar.edu.undec.nortia.controller.view;
 import ar.edu.undec.nortia.controller.AgenteFacade;
 import ar.edu.undec.nortia.controller.EncriptarSHA256;
 import ar.edu.undec.nortia.controller.UsuarioFacade;
-import ar.edu.undec.nortia.controller.util.Propiedades;
 import ar.edu.undec.nortia.controller.view.util.ConnectJDBCPostgresql;
 import ar.edu.undec.nortia.model.Agente;
 import ar.edu.undec.nortia.model.Agentecargo;
-import ar.edu.undec.nortia.model.DatosMapuche;
 import ar.edu.undec.nortia.model.ProyectoAgente;
 import ar.edu.undec.nortia.model.Tipodocumento;
 import java.io.Serializable;
@@ -30,8 +28,6 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -40,7 +36,6 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -57,6 +52,8 @@ public class AgenteViewController implements Serializable {
     private ar.edu.undec.nortia.controller.AgentecargoFacade ejbFacadeac;
     @EJB
     private ar.edu.undec.nortia.controller.UsuarioFacade ejbFacadeu;
+    @EJB
+    private ar.edu.undec.nortia.controller.ProyectoAgenteFacade ejbPAFacade;
     @EJB
     private ar.edu.undec.nortia.controller.ConfiguracionFacade ejbFacadec;
     private ar.edu.undec.nortia.controller.view.util.PaginationHelper pagination;
@@ -541,6 +538,16 @@ public class AgenteViewController implements Serializable {
         System.out.println("-------------");
 
         return ar.edu.undec.nortia.controller.view.util.JsfUtil.getSelectItems(ejbFacade.agentesSinUsuario(), true);
+    }
+
+    public ProyectoAgente buscarProyectoAgentePorAgenteId(int agenteId, int proyectoid){
+        try{
+            return ejbPAFacade.buscarPorAgenteYProyecto(agenteId,proyectoid);
+        }catch (Exception e){
+            System.out.println("No se pudo obtener el ProyectoAgente");
+            e.printStackTrace();
+            return null;
+        }
     }
     
 }

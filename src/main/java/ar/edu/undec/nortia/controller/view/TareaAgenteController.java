@@ -30,6 +30,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.validation.constraints.Null;
+
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 
@@ -44,11 +46,11 @@ public class TareaAgenteController implements Serializable {
     private ar.edu.undec.nortia.controller.TareaAgenteFacade ejbFacade;
     @EJB
     private ar.edu.undec.nortia.controller.ProyectoAgenteFacade ejbProyectoAgenteFacade;
-     @EJB
+    @EJB
     private RubroFacade ejbFacadeRubro;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private List<TareaAgente> tareasagentes ;
+    private List<TareaAgente> tareasagentes;
 //    @ManagedProperty(value="#{etapaController}")
 //    private EtapaController etapaController;
 
@@ -99,7 +101,7 @@ public class TareaAgenteController implements Serializable {
 
     public String prepareCreate() {
         current = new TareaAgente();
-       // current.setTareaAgentePK(new ar.edu.undec.nortia.model.TareaAgentePK());
+        // current.setTareaAgentePK(new ar.edu.undec.nortia.model.TareaAgentePK());
         selectedItemIndex = -1;
         return "Create";
     }
@@ -264,74 +266,79 @@ public class TareaAgenteController implements Serializable {
         this.tareasagentes = tareasagentes;
     }
 
-     public void agregarEquipo(){
-         
-        boolean existe=false;
+    public void agregarEquipo() {
+
+        boolean existe = false;
         FacesContext context = FacesContext.getCurrentInstance();
-        AgenteViewController agenteviewcontrol= (AgenteViewController) context.getApplication().evaluateExpressionGet(context, "#{agenteViewController}", AgenteViewController.class);
-        TareaController tareacontrol= (TareaController) context.getApplication().evaluateExpressionGet(context, "#{tareaController}", TareaController.class);
-        PresupuestoTareaController presupuestotareacontroller= (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
-        EtapaController etapacontrol= (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
-        ProyectoAgenteController proyectoagentecontroller= (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
-        
-        if(tareasagentes==null){
-            tareasagentes= new ArrayList<TareaAgente>();
+        AgenteViewController agenteviewcontrol = (AgenteViewController) context.getApplication().evaluateExpressionGet(context, "#{agenteViewController}", AgenteViewController.class);
+        TareaController tareacontrol = (TareaController) context.getApplication().evaluateExpressionGet(context, "#{tareaController}", TareaController.class);
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+        EtapaController etapacontrol = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
+        ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
+
+        if (tareasagentes == null) {
+            tareasagentes = new ArrayList<TareaAgente>();
         }
-        for (TareaAgente ta1:tareasagentes){
-            if(ta1.getAgenteid().getId().equals(this.current2.getAgenteid().getId())){
-                existe=true;
+        for (TareaAgente ta1 : tareasagentes) {
+            if (ta1.getAgenteid().getId().equals(this.current2.getAgenteid().getId())) {
+                existe = true;
             }
         }
-        if(!existe){
-            
-           // TareaAgentePK tapk = new TareaAgentePK();
+        if (!existe) {
+
+            // TareaAgentePK tapk = new TareaAgentePK();
             //tapk.setAgenteid(agenteviewcontrol.getSelected().getId());
             //tapk.setTareaid(tareasagentes.size()+1);
             //ta.setTareaAgentePK(tapk);
             RequestContext requestContext = RequestContext.getCurrentInstance();
-                
-           if(presupuestotareacontroller.agregarPresupuestoRRHHCONSULTOR(this.current2)){
-               tareasagentes.add(this.current2);
-                 requestContext.addCallbackParam("validation", true);
-              // requestContext.execute("dialogotareaagentepresupuesto.hide();");
-          
-           }else{
-                 requestContext.addCallbackParam("validation", false);
-             
-                 // context.getExternalContext().getContext().
-           }
-           
-            
-            
-            
+
+            if (presupuestotareacontroller.agregarPresupuestoRRHHCONSULTOR(this.current2)) {
+                tareasagentes.add(this.current2);
+                requestContext.addCallbackParam("validation", true);
+                // requestContext.execute("dialogotareaagentepresupuesto.hide();");
+
+            } else {
+                requestContext.addCallbackParam("validation", false);
+
+                // context.getExternalContext().getContext().
+            }
+
+
         }
     }
-    
-    public void removerEquipo(Agente a){
-        
-        for (TareaAgente ta1:tareasagentes){
-            if(ta1.getAgenteid().getId().equals(a.getId())){
-               tareasagentes.remove(ta1);
+
+    public void removerEquipo(Agente a) {
+
+        for (TareaAgente ta1 : tareasagentes) {
+            if (ta1.getAgenteid().getId().equals(a.getId())) {
+                tareasagentes.remove(ta1);
             }
         }
     }
-    
+
     public String reinit() {
         current = new TareaAgente();
-         
+
         return null;
     }
-    
-    public String controlarHorasAgente(){
-        
+
+    public String controlarHorasAgente() {
+
         return null;
     }
-    
-    public Double sumarHorasAgenteProyectos(){
-        return this.ejbProyectoAgenteFacade.sumarHorasAgenteProyectos(current.getAgenteid().getId());
+
+    public Double sumarHorasAgenteProyectos() {
+
+        try{
+            return this.ejbProyectoAgenteFacade.sumarHorasAgenteProyectos(current.getAgenteid().getId());
+        } catch (NullPointerException npe){
+            System.out.println("Error Número Nulo >> Retornamos 0");
+            npe.printStackTrace();
+            return 0d;
+        }
     }
-    
-     public Double sumarHorasAgenteProyectoActual(){
+
+    public Double sumarHorasAgenteProyectoActual() {
 //         for(Etapa e : etapaController.getEtapas()){
 //             for(Tarea t : e.getTareaList()){
 //                 for(TareaAgente ta : t.getTareaAgenteList()){
@@ -339,121 +346,138 @@ public class TareaAgenteController implements Serializable {
 //                 }
 //             }
 //         }
-        return this.ejbProyectoAgenteFacade.sumarHorasAgenteProyectos(current.getAgenteid().getId());
-    }
-   
-     public void onCellEdit() {
-          FacesContext context = FacesContext.getCurrentInstance();
-        PresupuestoTareaController presupuestotareacontroller= (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
-        
-         
-        if(verificarAgentesHoras()){
-             }else{
-            presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2,RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario())); 
-            presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getTotal().multiply(BigDecimal.valueOf(this.current2.getHorasdedicadas()))));
-            presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
-            
+
+        try{
+            return this.ejbProyectoAgenteFacade.sumarHorasAgenteProyectos(current.getAgenteid().getId());
+        } catch(NullPointerException npe){
+            System.out.println("Error Número NULO");
+            npe.printStackTrace();
+            return 0d;
         }
-      
-     }
-      
-  
-     public boolean verificarAgentesHoras(){
-                               
+    }
+
+    public void onCellEdit() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+
+        if (verificarAgentesHoras()) {
+        } else {
+
+            try{
+                presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
+                presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getTotal().multiply(BigDecimal.valueOf(this.current2.getHorasdedicadas()))));
+                presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
+            } catch(NullPointerException npe){
+                System.out.println("Error >> Costo unitario u horas dedicadas son NULOS.");
+                presupuestotareacontroller.getCurrent2().setTotal(BigDecimal.ZERO);
+            }
+        }
+    }
+
+    public boolean verificarAgentesHoras() {
+
         boolean resultado = false;
         FacesContext context = FacesContext.getCurrentInstance();
-        ProyectoAgenteController proyectoagentecontroller= (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
-        PresupuestoTareaController presupuestotareacontroller= (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+        ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
 
-        for(ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()){
-            if(pa.getAgente().getId().equals(current2.getAgenteid().getId())){
-               
-                if(current2.getHorasdedicadas()>pa.getHorasdisponibles()){
-                  
+        for (ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()) {
+            if (pa.getAgente().getId().equals(current2.getAgenteid().getId())) {
+
+                if (current2.getHorasdedicadas() > pa.getHorasdisponibles()) {
+
                     resultado = false;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las horas del Agente "+ current2.getAgenteid()  +" no puede sobrepasar las " +pa.getHorasdisponibles()+" horas que se han establecido en el proyecto"));
-                }else{
-                    
-                     presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2,RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario())); 
-                   presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las horas del Agente " + current2.getAgenteid() + " no puede sobrepasar las " + pa.getHorasdisponibles() + " horas que se han establecido en el proyecto"));
+                } else {
+
+                    presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
+                    presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
                     // cgvkhjbl.n presupuestotareacontroller.agregarPresupuestoRRHHCONSULTOR(current2);
                 }
             }
         }
-        
-         return resultado;
-     }
-    
-     public void armarTareaAgentePresupuesto(){
-          FacesContext context = FacesContext.getCurrentInstance();
-        AgenteViewController agenteviewcontroller= (AgenteViewController) context.getApplication().evaluateExpressionGet(context, "#{agenteViewController}", AgenteViewController.class);
-        TareaController tareacontroller= (TareaController) context.getApplication().evaluateExpressionGet(context, "#{tareaController}", TareaController.class);
-        PresupuestoTareaController presupuestotareacontroller= (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
-        ProyectoAgenteController proyectoagentecontroller= (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
-        EtapaController etapacontrol= (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
+
+        return resultado;
+    }
+
+    public void armarTareaAgentePresupuesto() {
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        AgenteViewController agenteviewcontroller = (AgenteViewController) context.getApplication().evaluateExpressionGet(context, "#{agenteViewController}", AgenteViewController.class);
+        TareaController tareacontroller = (TareaController) context.getApplication().evaluateExpressionGet(context, "#{tareaController}", TareaController.class);
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+        ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
+        EtapaController etapacontrol = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
         this.current2 = new TareaAgente();
-         this.current2.setAgenteid(agenteviewcontroller.getSelected());
-       
-         tareacontroller.getSelected().setEtapaid(etapacontrol.getSelected());
+        this.current2.setAgenteid(agenteviewcontroller.getSelected());
+
+        tareacontroller.getSelected().setEtapaid(etapacontrol.getSelected());
         this.current2.setTareaid(tareacontroller.getSelected());
-        
-         for(ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()){
-                if(agenteviewcontroller.getSelected().getId().equals(pa.getAgente().getId())){
-                    if(pa.getConsultorexterno()){
-                       this.current2.setHorasdedicadas(null);
-                    }else{
-                        this.current2.setHorasdedicadas(0);
-                    }
+
+        for (ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()) {
+            if (agenteviewcontroller.getSelected().getId().equals(pa.getAgente().getId())) {
+                if (pa.getConsultorexterno()) {
+                    this.current2.setHorasdedicadas(null);
+                } else {
+                    this.current2.setHorasdedicadas(0);
                 }
             }
-         ProyectoAgente pax = new ProyectoAgente();
-         presupuestotareacontroller.setCurrent2(new PresupuestoTarea());
-          
-            presupuestotareacontroller.getCurrent2().setTarea(this.current2.getTareaid());
-            Rubro r = new Rubro();
-            for(ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()){
-                    if(pa.getAgente().equals(current2.getAgenteid())){
-                       
-                        if(pa.getConsultorexterno()){
-                          r = ejbFacadeRubro.findbyId(4); 
-                        }else{
-                          r = ejbFacadeRubro.findbyId(5); 
-                        }
-                        pax = pa;
-                    }
-            }
-           presupuestotareacontroller.getCurrent2().setRubro(r);
-           
-           
-               if(pax.getConsultorexterno()){
-                   presupuestotareacontroller.getCurrent2().setCostounitario(pax.getHonorario());
-               }else{
-                    presupuestotareacontroller.getCurrent2().setCostounitario(current2.costoUnitarioCargoLegajo());
-               } 
-                presupuestotareacontroller.getCurrent2().setCantidad( BigDecimal.valueOf(tareacontroller.getSelected().getDias()) );
-                
-                presupuestotareacontroller.getCurrent2().setDescripcion(current2.getAgenteid().toString());
-                presupuestotareacontroller.getCurrent2().setAportecomitente(BigDecimal.ZERO);
-                presupuestotareacontroller.getCurrent2().setAporteorganismo(BigDecimal.ZERO);
-                presupuestotareacontroller.getCurrent2().setAporteuniversidad(BigDecimal.ZERO);
-                if(presupuestotareacontroller.getCurrent2().getCantidad().equals(BigDecimal.ZERO)){
-                    
-                }else{
-                    if(pax.getConsultorexterno()){
-                        presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(30),2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
-                        presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
-                        }else{
-                       presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2,RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario())); 
-                       presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
-                      }
+        }
+
+        ProyectoAgente pax = new ProyectoAgente();
+        presupuestotareacontroller.setCurrent2(new PresupuestoTarea());
+        presupuestotareacontroller.getCurrent2().setTarea(this.current2.getTareaid());
+        Rubro r = new Rubro();
+
+        for (ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()) {
+            if (pa.getAgente().equals(current2.getAgenteid())) {
+
+                if (pa.getConsultorexterno()) {
+                    r = ejbFacadeRubro.findbyId(4);
+                } else {
+                    r = ejbFacadeRubro.findbyId(5);
                 }
-                
-           
-         
+                pax = pa;
+            }
+        }
+        presupuestotareacontroller.getCurrent2().setRubro(r);
+
+
+        if (pax.getConsultorexterno()) {
+            presupuestotareacontroller.getCurrent2().setCostounitario(pax.getHonorario());
+            System.out.println("CONSULTOR EXTERNO COSTO UNITARIO = " + presupuestotareacontroller.getCurrent2().getCostounitario());
+        } else {
+            presupuestotareacontroller.getCurrent2().setCostounitario(current2.costoUnitarioCargoLegajo());
+            System.out.println("DOCENTE COSTO UNITARIO = " + presupuestotareacontroller.getCurrent2().getCostounitario());
+        }
+
+        presupuestotareacontroller.getCurrent2().setCantidad(BigDecimal.valueOf(tareacontroller.getSelected().getDias()));
+        presupuestotareacontroller.getCurrent2().setDescripcion(current2.getAgenteid().toString());
+        presupuestotareacontroller.getCurrent2().setAportecomitente(BigDecimal.ZERO);
+        presupuestotareacontroller.getCurrent2().setAporteorganismo(BigDecimal.ZERO);
+        presupuestotareacontroller.getCurrent2().setAporteuniversidad(BigDecimal.ZERO);
+
+        try{
+            if (presupuestotareacontroller.getCurrent2().getCantidad().equals(BigDecimal.ZERO)) {
+
+            } else {
+                if (pax.getConsultorexterno()) {
+                    presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(30), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
+                    presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
+                } else {
+                    presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
+                    presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
+                }
+            }
+        }catch (NullPointerException npe){
+            context.addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Honorarios de Integrante","Se debe extablecer los honorarios del integrante en la configuración del equipo de trabajo."));
+            npe.printStackTrace();
+            return;
+        }
     }
 
     public TareaAgente getCurrent2() {
-        if(current2==null){
+        if (current2 == null) {
             current2 = new TareaAgente();
         }
         return current2;
@@ -462,31 +486,31 @@ public class TareaAgenteController implements Serializable {
     public void setCurrent2(TareaAgente current2) {
         this.current2 = current2;
     }
-    
-    public void eliminarTareaAgente(TareaAgente ta){
-       int lugar = -1;
-       int contador=0;
-        for(TareaAgente tan : this.tareasagentes){
-            
-           if(tan.getAgenteid().equals(ta.getAgenteid())){
-               lugar = contador;
-           }
-           contador++;
-       }
+
+    public void eliminarTareaAgente(TareaAgente ta) {
+        int lugar = -1;
+        int contador = 0;
+        for (TareaAgente tan : this.tareasagentes) {
+
+            if (tan.getAgenteid().equals(ta.getAgenteid())) {
+                lugar = contador;
+            }
+            contador++;
+        }
         this.tareasagentes.remove(lugar);
-         FacesContext context = FacesContext.getCurrentInstance();
-        PresupuestoTareaController presupuestotareacontroller= (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
-         contador=0;
-         lugar=0;
-        for(PresupuestoTarea pt:presupuestotareacontroller.getPresupuestostareasitems()){
-                if(pt.getDescripcion().equals(ta.getAgenteid().toString())){
-                  lugar=contador;   
-                 }
-            
+        FacesContext context = FacesContext.getCurrentInstance();
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+        contador = 0;
+        lugar = 0;
+        for (PresupuestoTarea pt : presupuestotareacontroller.getPresupuestostareasitems()) {
+            if (pt.getDescripcion().equals(ta.getAgenteid().toString())) {
+                lugar = contador;
+            }
+
             ++contador;
-         }
+        }
         presupuestotareacontroller.getPresupuestostareasitems().remove(lugar);
     }
-     
-    
+
+
 }
