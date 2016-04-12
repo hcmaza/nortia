@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1aeabbf7-67e7-416c-982e-bfdfe91a8e51" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/PresupuestoTareaController.java" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/PresupuestoTareaController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/ProyectoAgenteFacade.java" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/ProyectoAgenteFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/TareaController.java" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/TareaController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nortia.iml" afterPath="$PROJECT_DIR$/nortia.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nortia.iws" />
@@ -46,8 +41,8 @@
       <file leaf-file-name="CrearConEtapa.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.4227129" vertical-offset="11015" max-vertical-offset="22320">
-              <caret line="637" column="98" selection-start-line="637" selection-start-column="98" selection-end-line="637" selection-end-column="98" />
+            <state vertical-scroll-proportion="0.6216216" vertical-offset="7829" max-vertical-offset="22320">
+              <caret line="449" column="42" selection-start-line="449" selection-start-column="42" selection-end-line="449" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -255,7 +250,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="preferences.keymap" />
+    <property name="options.lastSelected" value="configurable.group.tools" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -270,6 +265,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -277,7 +273,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
     </key>
   </component>
-  <component name="RunManager" selected="JBoss Server.JBoss">
+  <component name="RunManager" selected="Maven.Maven Install">
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -634,8 +630,35 @@
         </option>
       </method>
     </configuration>
-    <list size="1">
+    <configuration default="false" name="Maven Install" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="true" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="JBoss Server.JBoss" />
+      <item index="1" class="java.lang.String" itemvalue="Maven.Maven Install" />
     </list>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
@@ -694,12 +717,12 @@
       <workItem from="1459552788152" duration="1230000" />
       <workItem from="1459809820604" duration="49556000" />
       <workItem from="1460054523182" duration="4365000" />
-      <workItem from="1460394043278" duration="29008000" />
+      <workItem from="1460394043278" duration="30620000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="292159000" />
+    <option name="totallyTimeSpent" value="293771000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -723,7 +746,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1442" height="874" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -744,10 +767,10 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44966444" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32885906" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21428572" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18785714" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.50067115" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1320,8 +1343,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4227129" vertical-offset="11015" max-vertical-offset="22320">
-          <caret line="637" column="98" selection-start-line="637" selection-start-column="98" selection-end-line="637" selection-end-column="98" />
+        <state vertical-scroll-proportion="0.6216216" vertical-offset="7829" max-vertical-offset="22320">
+          <caret line="449" column="42" selection-start-line="449" selection-start-column="42" selection-end-line="449" selection-end-column="42" />
           <folding />
         </state>
       </provider>
