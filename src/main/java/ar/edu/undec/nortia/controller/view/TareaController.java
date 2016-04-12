@@ -317,41 +317,50 @@ public class TareaController implements Serializable {
     
        
     public void calcularDiferenciaDias(){
-         // tomamos la instancia del tipo de calendario
+        // tomamos la instancia del tipo de calendario
         Calendar calendarInicio = Calendar.getInstance();
         Calendar calendarFinal = Calendar.getInstance();
 
-         // Configramos la fecha del calendatio, tomando los valores del date que 
+        System.out.println("calcularDiferenciaDias 0");
+
+        // Configramos la fecha del calendatio, tomando los valores del date que
         // generamos en el parse
         calendarInicio.setTime(current.getFechainicio());
         calendarFinal.setTime(current.getFechafin());
 
-         // obtenemos el valor de las fechas en milisegundos
+        System.out.println("calcularDiferenciaDias 1");
+
+        // obtenemos el valor de las fechas en milisegundos
         long milisegundos1 = calendarInicio.getTimeInMillis();
         long milisegundos2 = calendarFinal.getTimeInMillis();
 
-         // tomamos la diferencia
+        System.out.println("calcularDiferenciaDias 2");
+
+        // tomamos la diferencia
         long diferenciaMilisegundos = milisegundos2 - milisegundos1;
 
-         // Despues va a depender en que formato queremos  mostrar esa 
+        // Despues va a depender en que formato queremos  mostrar esa
         // diferencia, minutos, segundo horas, dias, etc, aca van algunos 
         // ejemplos de conversion
-
-         // calcular la diferencia en segundos
+        // calcular la diferencia en segundos
         long diffSegundos =  Math.abs (diferenciaMilisegundos / 1000);
 
-         // calcular la diferencia en minutos
+        // calcular la diferencia en minutos
         long diffMinutos =  Math.abs (diferenciaMilisegundos / (60 * 1000));
         long restominutos = diffMinutos%60;
 
-         // calcular la diferencia en horas
+        // calcular la diferencia en horas
         long diffHoras =   (diferenciaMilisegundos / (60 * 60 * 1000));
 
-         // calcular la diferencia en dias
+        // calcular la diferencia en dias
         long diffdias = Math.abs( diferenciaMilisegundos / (24 * 60 * 60 * 1000) );
         int entero=(int) diffdias;
 
+        System.out.println("calcularDiferenciaDias 3");
+
         getSelected().setDias(entero+1);
+
+        System.out.println("calcularDiferenciaDias 4");
 
     }
 

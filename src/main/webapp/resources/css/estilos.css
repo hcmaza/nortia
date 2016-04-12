@@ -24,6 +24,10 @@
   border-right: none !important;
 }
 
+.tabla.ui-datatable .ui-datatable-tablewrapper{
+    margin: 0px;
+}
+
 /*
  * treetable: se eliminan los bordes verticales, tipo de borde solido
  */
@@ -52,6 +56,12 @@
 
 .tablaArbol.ui-treetable table thead tr th{
     border: 1px solid transparent;
+}
+
+.tablaArbol .ui-treetable tfoot td{
+    border: none;
+    border-top: #439fe0 solid 2px;
+
 }
 
 /* tamaño de triangulo de apertura de nodo */
@@ -193,6 +203,10 @@
 }
 
 /*ESTILOS DE COLORES PARA FONDO*/
+
+.CelesteBack{
+    background-color: #439fe0 !important;
+}
 
 .VerdeClaroBack{
     background-color: #00D05E !important;

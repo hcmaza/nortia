@@ -311,6 +311,19 @@ public class PresupuestoTareaController implements Serializable {
         return null;
     }
 
+    public String nuevoCurrent(){
+
+        System.out.println("PresupuestoTareaController >> nuevoCurrent");
+
+        this.current = new PresupuestoTarea();
+        this.current.setAportecomitente(BigDecimal.ZERO);
+        this.current.setAporteorganismo(BigDecimal.ZERO);
+        this.current.setAporteuniversidad(BigDecimal.ZERO);
+        this.current.setCantidad(BigDecimal.ONE);
+        this.current.setCostounitario(BigDecimal.ZERO);
+        return null;
+    }
+
     public PresupuestoTarea getCurrent2() {
         return this.current2;
     }
@@ -977,5 +990,54 @@ public class PresupuestoTareaController implements Serializable {
         // Devuelve el item a la lista de disponibles
         this.presupuestostareas.add(item);
     }
+
+
+    public BigDecimal sumaraportesUniversidadEnListaPresupuestoTareaItems() {
+        BigDecimal aportesUniversidad = BigDecimal.ZERO;
+        List<PresupuestoTarea> pt = new ArrayList<PresupuestoTarea>();
+        if (this.getPresupuestostareasitems() != null) {
+            for (PresupuestoTarea ptn : this.getPresupuestostareasitems()) {
+                aportesUniversidad = aportesUniversidad.add(ptn.getAporteuniversidad());
+            }
+        }
+        return aportesUniversidad;
+    }
+
+    public BigDecimal sumaraportesOrganismoEnListaPresupuestoTareaItems() {
+        BigDecimal aportesOrganismo = BigDecimal.ZERO;
+        List<PresupuestoTarea> pt = new ArrayList<PresupuestoTarea>();
+        if (this.getPresupuestostareasitems() != null) {
+            for (PresupuestoTarea ptn : this.getPresupuestostareasitems()) {
+                aportesOrganismo = aportesOrganismo.add(ptn.getAporteorganismo());
+            }
+        }
+        return aportesOrganismo;
+    }
+
+    public BigDecimal sumaraportesComitenteEnListaPresupuestoTareaItems() {
+        BigDecimal aportesComitente = BigDecimal.ZERO;
+        List<PresupuestoTarea> pt = new ArrayList<PresupuestoTarea>();
+        if (this.getPresupuestostareasitems() != null) {
+            for (PresupuestoTarea ptn : this.getPresupuestostareasitems()) {
+                aportesComitente = aportesComitente.add(ptn.getAportecomitente());
+            }
+        }
+        return aportesComitente;
+    }
+
+    public BigDecimal sumaraportesTotalesEnListaPresupuestoTareaItems() {
+        BigDecimal aportesTotatles = BigDecimal.ZERO;
+        List<PresupuestoTarea> pt = new ArrayList<PresupuestoTarea>();
+        if (this.getPresupuestostareasitems() != null) {
+            for (PresupuestoTarea ptn : this.getPresupuestostareasitems()) {
+                aportesTotatles = aportesTotatles.add(ptn.getAportecomitente().add(ptn.getAporteorganismo().add(ptn.getAporteuniversidad())));
+            }
+        }
+        return aportesTotatles;
+    }
+
+
+
+
 
 }
