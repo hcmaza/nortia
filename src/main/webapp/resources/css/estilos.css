@@ -202,10 +202,18 @@
     color: #BCC3C8 !important;
 }
 
+.VerdePlanta{
+    color: #9BBB59 !important;
+}
+
 /*ESTILOS DE COLORES PARA FONDO*/
 
 .CelesteBack{
     background-color: #439fe0 !important;
+}
+
+.AzulBack{
+    background-color: #0288d1 !important;
 }
 
 .VerdeClaroBack{
@@ -329,4 +337,10 @@
 
 .MargenArriba5pxAbajo10px {
     margin: 5px 0px 10px;
+}
+
+/*SIN BORDE*/
+
+.SinBorde{
+    border: none;
 }

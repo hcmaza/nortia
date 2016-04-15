@@ -299,6 +299,8 @@ public class ArchivorendicionController implements Serializable {
 
     public void agregarArchivoLista() {
 
+        System.out.println("Inicio Método agregarArchivoLista <<>><<>");
+
         // Obtenemos el controlador necesario
         FacesContext context = FacesContext.getCurrentInstance();
         RendicionController rendicioncontroller = (RendicionController) context.getApplication().evaluateExpressionGet(context, "#{rendicionController}", RendicionController.class);

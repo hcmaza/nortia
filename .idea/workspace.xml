@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1aeabbf7-67e7-416c-982e-bfdfe91a8e51" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/ArchivorendicionController.java" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/ArchivorendicionController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nortia.iml" afterPath="$PROJECT_DIR$/nortia.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/template.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/template.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nortia.iws" />
@@ -38,54 +43,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CrearConEtapa.xhtml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CrearConEtapa.xhtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6216216" vertical-offset="7829" max-vertical-offset="22320">
-              <caret line="449" column="42" selection-start-line="449" selection-start-column="42" selection-end-line="449" selection-end-column="42" />
+            <state vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="22302">
+              <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PresupuestoTareaController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/PresupuestoTareaController.java">
+      <file leaf-file-name="template.xhtml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/template.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="16844" max-vertical-offset="17586">
-              <caret line="1033" column="13" selection-start-line="1033" selection-start-column="13" selection-end-line="1033" selection-end-column="13" />
-              <folding>
-                <element signature="e#26144#26145#0" expanded="true" />
-                <element signature="e#26187#26188#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PresupuestoTarea.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/PresupuestoTarea.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="2592">
-              <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Rubro.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/Rubro.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1638">
-              <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TareaController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/TareaController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4806" max-vertical-offset="9360">
-              <caret line="328" column="49" selection-start-line="328" selection-start-column="38" selection-end-line="328" selection-end-column="49" />
+            <state vertical-scroll-proportion="-20.962963" vertical-offset="1666" max-vertical-offset="3060">
+              <caret line="124" column="14" selection-start-line="124" selection-start-column="14" selection-end-line="124" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -94,18 +66,28 @@
       <file leaf-file-name="estilos.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4087" max-vertical-offset="6084">
-              <caret line="250" column="10" selection-start-line="250" selection-start-column="1" selection-end-line="250" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5509" max-vertical-offset="6318">
+              <caret line="344" column="17" selection-start-line="344" selection-start-column="17" selection-end-line="344" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProyectoAgenteFacade.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/ProyectoAgenteFacade.java">
+      <file leaf-file-name="Create.xhtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.5832106" vertical-offset="14400" max-vertical-offset="22644">
+              <caret line="822" column="149" selection-start-line="822" selection-start-column="149" selection-end-line="822" selection-end-column="149" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArchivorendicionController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/ArchivorendicionController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.37037" vertical-offset="4202" max-vertical-offset="9828">
+              <caret line="299" column="16" selection-start-line="299" selection-start-column="16" selection-end-line="299" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -119,7 +101,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/ArchivorendicionController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/RendicionController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/secure/rendicion/Evaluacion.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/Archivorendicion.java" />
@@ -141,7 +122,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/secure/proyectos/List.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/topbar.xhtml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/template.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/usuario.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/Agente.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/EtapaController.java" />
@@ -150,9 +130,12 @@
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/TareaAgenteController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/TareaController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/ProyectoAgenteFacade.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/PresupuestoTareaController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/ArchivorendicionController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/template.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
+        <option value="$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml" />
       </list>
     </option>
   </component>
@@ -207,7 +190,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -218,30 +201,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nortia" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nortia" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nortia" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -273,7 +233,7 @@
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.Maven Install">
+  <component name="RunManager" selected="JBoss Server.JBoss">
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -717,12 +677,13 @@
       <workItem from="1459552788152" duration="1230000" />
       <workItem from="1459809820604" duration="49556000" />
       <workItem from="1460054523182" duration="4365000" />
-      <workItem from="1460394043278" duration="30620000" />
+      <workItem from="1460394043278" duration="43516000" />
+      <workItem from="1460668941256" duration="16183000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="293771000" />
+    <option name="totallyTimeSpent" value="322850000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -767,10 +728,10 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32885906" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49127516" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18785714" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18785714" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.50067115" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -792,7 +753,7 @@
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294271" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -805,10 +766,10 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43087247" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21428572" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18785714" sideWeight="0.49932885" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.50067115" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -841,29 +802,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/IndicadoresController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46458924" vertical-offset="18302" max-vertical-offset="19494">
-          <caret line="1141" column="13" selection-start-line="1141" selection-start-column="13" selection-end-line="1141" selection-end-column="13" />
-          <folding>
-            <element signature="e#25178#25194#0" expanded="false" />
-            <element signature="e#28756#28775#0" expanded="false" />
-            <element signature="e#29100#29123#0" expanded="false" />
-            <element signature="e#33406#33418#0" expanded="false" />
-            <element signature="e#34032#34043#0" expanded="false" />
-            <element signature="e#35593#35604#0" expanded="false" />
-            <element signature="e#38286#38314#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/Rendicion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1821975" vertical-offset="193" max-vertical-offset="1746">
-          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/model/Archivorendicion.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7407932" vertical-offset="71" max-vertical-offset="3312">
@@ -991,14 +929,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/faces-config.xml">
+      <provider editor-type-id="com.intellij.jsf.yfilesGraph.editor.FacesNavigationFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36578172" vertical-offset="670" max-vertical-offset="1998">
           <caret line="51" column="40" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="40" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="com.intellij.jsf.yfilesGraph.editor.FacesNavigationFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/newhtml.html">
@@ -1075,14 +1013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.0" vertical-offset="0" max-vertical-offset="558">
           <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/template.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.296297" vertical-offset="2404" max-vertical-offset="3096">
-          <caret line="158" column="53" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1173,46 +1103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="8132" max-vertical-offset="8856">
           <caret line="544" column="75" selection-start-line="544" selection-start-column="75" selection-end-line="544" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#20431#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#2735#2736#0" expanded="false" />
-            <element signature="e#2767#2768#0" expanded="false" />
-            <element signature="e#2813#2814#0" expanded="false" />
-            <element signature="e#2846#2847#0" expanded="false" />
-            <element signature="e#3139#3140#0" expanded="false" />
-            <element signature="e#3205#3206#0" expanded="false" />
-            <element signature="e#7402#7403#0" expanded="false" />
-            <element signature="e#7430#7431#0" expanded="false" />
-            <element signature="e#7471#7472#0" expanded="false" />
-            <element signature="e#7504#7505#0" expanded="false" />
-            <element signature="e#10956#10957#0" expanded="false" />
-            <element signature="e#10986#10987#0" expanded="false" />
-            <element signature="e#11038#11039#0" expanded="false" />
-            <element signature="e#11076#11077#0" expanded="false" />
-            <element signature="e#11125#11126#0" expanded="false" />
-            <element signature="e#11164#11165#0" expanded="false" />
-            <element signature="e#11234#11235#0" expanded="false" />
-            <element signature="e#11290#11291#0" expanded="false" />
-            <element signature="e#11720#11721#0" expanded="false" />
-            <element signature="e#11773#11774#0" expanded="false" />
-            <element signature="e#11821#11822#0" expanded="false" />
-            <element signature="e#11853#11854#0" expanded="false" />
-            <element signature="e#12142#12143#0" expanded="false" />
-            <element signature="e#12180#12181#0" expanded="false" />
-            <element signature="e#13128#13129#0" expanded="false" />
-            <element signature="e#13171#13172#0" expanded="false" />
-            <element signature="e#13350#13351#0" expanded="false" />
-            <element signature="e#13388#13389#0" expanded="false" />
-            <element signature="e#13451#13452#0" expanded="false" />
-            <element signature="e#13505#13506#0" expanded="false" />
-            <element signature="e#13554#13555#0" expanded="false" />
-            <element signature="e#13589#13590#0" expanded="false" />
-            <element signature="e#13644#13645#0" expanded="false" />
-            <element signature="e#13674#13675#0" expanded="false" />
-            <marker date="1460008307000" expanded="true" signature="-1:-1" placeholder="select dh01...dh03..." />
-            <marker date="1460008307000" expanded="true" signature="-1:-1" placeholder="select nro_c..dh03..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1229,24 +1119,24 @@
         <state vertical-scroll-proportion="-8.37037" vertical-offset="5048" max-vertical-offset="5760">
           <caret line="293" column="21" selection-start-line="293" selection-start-column="18" selection-end-line="293" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1353#1369#0" expanded="true" />
-            <element signature="e#1751#1752#0" expanded="true" />
-            <element signature="e#1783#1784#0" expanded="true" />
-            <element signature="e#1994#1995#0" expanded="true" />
-            <element signature="e#2060#2061#0" expanded="true" />
-            <element signature="e#6020#6021#0" expanded="true" />
-            <element signature="e#6048#6049#0" expanded="true" />
-            <element signature="e#6089#6090#0" expanded="true" />
-            <element signature="e#6122#6123#0" expanded="true" />
-            <element signature="e#6423#6424#0" expanded="true" />
-            <element signature="e#6496#6497#0" expanded="true" />
-            <element signature="e#6552#6553#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
-            <element signature="e#9020#9021#0" expanded="true" />
-            <element signature="e#9070#9071#0" expanded="true" />
-            <element signature="e#9117#9118#0" expanded="true" />
-            <element signature="e#9185#9186#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1353#1369#0" expanded="false" />
+            <element signature="e#1751#1752#0" expanded="false" />
+            <element signature="e#1783#1784#0" expanded="false" />
+            <element signature="e#1994#1995#0" expanded="false" />
+            <element signature="e#2060#2061#0" expanded="false" />
+            <element signature="e#6020#6021#0" expanded="false" />
+            <element signature="e#6048#6049#0" expanded="false" />
+            <element signature="e#6089#6090#0" expanded="false" />
+            <element signature="e#6122#6123#0" expanded="false" />
+            <element signature="e#6423#6424#0" expanded="false" />
+            <element signature="e#6496#6497#0" expanded="false" />
+            <element signature="e#6552#6553#0" expanded="false" />
+            <element signature="e#6624#6625#0" expanded="false" />
+            <element signature="e#9020#9021#0" expanded="false" />
+            <element signature="e#9070#9071#0" expanded="false" />
+            <element signature="e#9117#9118#0" expanded="false" />
+            <element signature="e#9185#9186#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1262,7 +1152,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36180905" vertical-offset="10782" max-vertical-offset="32940">
           <caret line="639" column="0" selection-start-line="639" selection-start-column="0" selection-end-line="640" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1270,7 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35555556" vertical-offset="610" max-vertical-offset="1188">
           <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1278,7 +1166,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.1796759" vertical-offset="1161" max-vertical-offset="3024">
           <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="34" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1302,7 +1189,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
           <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1322,29 +1208,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4087" max-vertical-offset="6084">
-          <caret line="250" column="10" selection-start-line="250" selection-start-column="1" selection-end-line="250" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/PresupuestoTareaController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="16844" max-vertical-offset="17586">
           <caret line="1033" column="13" selection-start-line="1033" selection-start-column="13" selection-end-line="1033" selection-end-column="13" />
           <folding>
-            <element signature="e#26144#26145#0" expanded="true" />
-            <element signature="e#26187#26188#0" expanded="true" />
+            <element signature="e#26144#26145#0" expanded="false" />
+            <element signature="e#26187#26188#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/ArchivorendicionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.37037" vertical-offset="4202" max-vertical-offset="9828">
+          <caret line="299" column="16" selection-start-line="299" selection-start-column="16" selection-end-line="299" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6216216" vertical-offset="7829" max-vertical-offset="22320">
-          <caret line="449" column="42" selection-start-line="449" selection-start-column="42" selection-end-line="449" selection-end-column="42" />
+        <state vertical-scroll-proportion="-3.3333333" vertical-offset="0" max-vertical-offset="22302">
+          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/template.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.962963" vertical-offset="1666" max-vertical-offset="3060">
+          <caret line="124" column="14" selection-start-line="124" selection-start-column="14" selection-end-line="124" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5509" max-vertical-offset="6318">
+          <caret line="344" column="17" selection-start-line="344" selection-start-column="17" selection-end-line="344" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5832106" vertical-offset="14400" max-vertical-offset="22644">
+          <caret line="822" column="149" selection-start-line="822" selection-start-column="149" selection-end-line="822" selection-end-column="149" />
           <folding />
         </state>
       </provider>
