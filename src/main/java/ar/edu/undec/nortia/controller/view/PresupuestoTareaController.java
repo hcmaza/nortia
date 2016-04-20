@@ -355,6 +355,9 @@ public class PresupuestoTareaController implements Serializable {
 
         sumaaportes = this.current2.getAportecomitente().add(this.current2.getAporteorganismo()).add(this.current2.getAporteuniversidad());
 
+        System.out.println("verificarAportes2 >> suma de aportes >>" + sumaaportes.floatValue());
+        System.out.println("verificarAportes2 >> current2.getTotal() >>" + this.current2.getTotal());
+
         if(null == this.current2){
             System.out.println("this.current2 NULO");
         }
@@ -364,8 +367,12 @@ public class PresupuestoTareaController implements Serializable {
         }
 
         if (sumaaportes.longValue() == this.current2.getTotal().longValue()) {
+            System.out.println("verificarAportes2 >> suma de aportes == al total de current2");
+            System.out.println("verificarAportes2 >> return TRUE");
             return true;
         } else {
+            System.out.println("verificarAportes2 >> suma de aportes != al total de current2");
+            System.out.println("verificarAportes2 >> return FALSE");
             return false;
         }
     }

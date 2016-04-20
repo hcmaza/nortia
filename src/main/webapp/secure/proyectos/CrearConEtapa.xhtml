@@ -574,11 +574,13 @@
                                     <p:column headerText="Función">
                                         <h:outputText value="#{tareaagente.funcion}"/>
                                     </p:column>
-                                    <p:column headerText="Dedicación">
+                                    <p:column headerText="Dedicación" styleClass="TexAlCenter">
                                         <h:outputText value="#{tareaagente.horasdedicadas eq null ? 'No aplicable':tareaagente.horasdedicadas}"/>
                                     </p:column>
-                                    <p:column headerText="Honorarios/Mes">
-                                        <h:outputText value="#{tareaagente.horasdedicadas eq null ? 'No aplicable': tareaagente.horasdedicadas * tareaagente.costoUnitarioCargoLegajo().floatValue}" />
+                                    <p:column headerText="Honorarios/Mes" styleClass="TexAlRight" >
+                                        <h:outputText value="#{tareaagente.horasdedicadas eq null ? 'No aplicable': tareaagente.horasdedicadas * tareaagente.costoUnitarioCargoLegajo().floatValue()}">
+                                            <f:convertNumber minFractionDigits="2" />
+                                        </h:outputText>
                                     </p:column>
                                     <p:column headerText="Observación">
                                         <h:outputText value="#{tareaagente.observacion}" />
@@ -735,7 +737,7 @@
                                 <p:inputText id="agenteaporteuniversidad"
                                              value="#{presupuestoTareaController.current2.aporteuniversidad}"
                                              title="Aporteuniversidad" styleClass="ui-grid-col-12 TexAlRight">
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
+                                    <f:convertNumber type="number" groupingUsed="false" locale="en"/>
                                     <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
                                 </p:inputText>
 
@@ -743,7 +745,7 @@
                                 <p:inputText id="agenteaporteorganismo"
                                              value="#{presupuestoTareaController.current2.aporteorganismo}"
                                              title="Aporteorganismo" styleClass="ui-grid-col-12 TexAlRight">
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
+                                    <f:convertNumber type="number" groupingUsed="false" locale="en"/>
                                     <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
                                 </p:inputText>
 
@@ -751,7 +753,7 @@
                                 <p:inputText id="agenteaportecomitente"
                                              value="#{presupuestoTareaController.current2.aportecomitente}"
                                              title="Aportecomitente" validatorMessage="Ingrese solo números" styleClass="ui-grid-col-12 TexAlRight">
-                                    <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
+                                    <f:convertNumber type="number" groupingUsed="false" locale="en"/>
                                     <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
                                 </p:inputText>
                             </p:panelGrid>

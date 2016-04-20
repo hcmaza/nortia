@@ -249,21 +249,20 @@ public class TareaAgente implements Serializable {
     
     public BigDecimal costoUnitarioCargoLegajo(){
          
-       
         int meshoras = 0;
         try {
             meshoras = this.ContarHorasDedicacionCargoLegajo()* 4;
+
             if(meshoras > 0){
-              
-               return this.ContarSueldoBasicoCargoLegajo().divide(BigDecimal.valueOf(Double.valueOf(""+meshoras)),RoundingMode.HALF_UP);  
+               return this.ContarSueldoBasicoCargoLegajo().divide(BigDecimal.valueOf(Double.valueOf(""+meshoras)),RoundingMode.HALF_UP).setScale(2);
             }else{
-                return BigDecimal.ZERO;
+                return BigDecimal.ZERO.setScale(2,RoundingMode.CEILING);
             }
              
         }catch (Exception ex) {
             
             System.out.println("No se realizo la consulta en la extraccion de costo unitario por cargos "+ ex);
-            return BigDecimal.ZERO;
+            return BigDecimal.ZERO.setScale(2);
         }
         
     }

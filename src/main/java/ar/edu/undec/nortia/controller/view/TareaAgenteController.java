@@ -304,7 +304,11 @@ public class TareaAgenteController implements Serializable {
             }
 
 
+        } else{
+            System.out.println("Error en Tarea Agente");
+            context.addMessage("Agente", new FacesMessage("Error en los datos del agente."));
         }
+
     }
 
     public void removerEquipo(Agente a) {
