@@ -14,6 +14,7 @@ import ar.edu.undec.nortia.model.Agente;
 import ar.edu.undec.nortia.model.Agentecargo;
 import ar.edu.undec.nortia.model.ProyectoAgente;
 import ar.edu.undec.nortia.model.Tipodocumento;
+
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,7 +39,6 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 /**
- *
  * @author Hugo
  */
 @ManagedBean
@@ -58,22 +58,22 @@ public class AgenteViewController implements Serializable {
     private ar.edu.undec.nortia.controller.ConfiguracionFacade ejbFacadec;
     private ar.edu.undec.nortia.controller.view.util.PaginationHelper pagination;
     private int selectedItemIndex;
-    
-    private List<Agente> agentes = new ArrayList<Agente>() ;
-    private List<Agente> collectoragentes = new ArrayList<Agente>() ;
+
+    private List<Agente> agentes = new ArrayList<Agente>();
+    private List<Agente> collectoragentes = new ArrayList<Agente>();
     private Agente agente1;
-    private boolean filtroapellidonombre=false;
-    private boolean filtrodocumento=false;
+    private boolean filtroapellidonombre = false;
+    private boolean filtrodocumento = false;
     private SelectItem[] itemsAgentes;
-    
-    
+
+
     /**
      * Creates a new instance of AgenteViewController
      */
     public AgenteViewController() {
     }
-    
-     public Agente getSelected() {
+
+    public Agente getSelected() {
         if (current == null) {
             current = new Agente();
             selectedItemIndex = -1;
@@ -84,7 +84,7 @@ public class AgenteViewController implements Serializable {
     private AgenteFacade getFacade() {
         return ejbFacade;
     }
-    
+
     private UsuarioFacade getFacadeu() {
         return ejbFacadeu;
     }
@@ -151,15 +151,16 @@ public class AgenteViewController implements Serializable {
             return null;
         }
     }
+
     public String solograbar() {
         try {
             getFacade().edit(current);
             ar.edu.undec.nortia.controller.view.util.JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AgenteUpdated"));
-          return null;  
+            return null;
         } catch (Exception e) {
             //JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
-           System.out.println(e); 
-           return null;
+            System.out.println(e);
+            return null;
         }
     }
 
@@ -243,11 +244,11 @@ public class AgenteViewController implements Serializable {
     public SelectItem[] getItemsAvailableSelectOne() {
         return ar.edu.undec.nortia.controller.view.util.JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
-    
-    public void findAgente(String nombreusuario){
-        if(current==null){
-             current= (Agente) getFacade().findAgente(nombreusuario);
-            System.out.println("9999999999999999999999999999999999999999999999999"+current.getId());
+
+    public void findAgente(String nombreusuario) {
+        if (current == null) {
+            current = (Agente) getFacade().findAgente(nombreusuario);
+            System.out.println("9999999999999999999999999999999999999999999999999" + current.getId());
         }
     }
 
@@ -290,30 +291,30 @@ public class AgenteViewController implements Serializable {
         }
 
     }
-    
-    public void editarMiCuenta(){
+
+    public void editarMiCuenta() {
         try {
-            current.getUsuarioid().setUsuarioclave(new EncriptarSHA256().hash256(current.getUsuarioid().getUsuarioclave().trim()) );
+            current.getUsuarioid().setUsuarioclave(new EncriptarSHA256().hash256(current.getUsuarioid().getUsuarioclave().trim()));
             getFacade().edit(current);
-            if(current.getUsuarioid().getUsuarioclave().length()>5){
+            if (current.getUsuarioid().getUsuarioclave().length() > 5) {
                 getFacadeu().edit(current.getUsuarioid());
             }
-            
+
             // FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "What we do in life", "Echoes in eternity.");  
-               
+
         } catch (Exception e) {
             ar.edu.undec.nortia.controller.view.util.JsfUtil.addErrorMessage(e, "No se pudo Modificar su cuenta!");
-            
+
         }
     }
-    
-    public void filtroDocumentooApellido(){
+
+    public void filtroDocumentooApellido() {
 //        if(nrodocoapellido.length()>2)
 //            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"+nrodocoapellido);
 //        this.setItemsAgentes(ar.edu.undec.nortia.controller.view.util.JsfUtil.getSelectItems(ejbFacade.filtroDocumentooApellido(nrodocoapellido), false));
     }
 
-    
+
     public List<Agente> getAgentes() {
         return agentes;
     }
@@ -329,64 +330,64 @@ public class AgenteViewController implements Serializable {
     public void setCollectoragentes(List<Agente> collectoragentes) {
         this.collectoragentes = collectoragentes;
     }
-    
-    public void agregarEquipo(){
-        boolean inserto =false;
-        
-        for(Agente a:collectoragentes){
-            if((current.getId().equals(a.getId())) | (current.getApellido().isEmpty()) ){
-                inserto=true;
+
+    public void agregarEquipo() {
+        boolean inserto = false;
+
+        for (Agente a : collectoragentes) {
+            if ((current.getId().equals(a.getId())) | (current.getApellido().isEmpty())) {
+                inserto = true;
             }
-            
-            
+
+
         }
-        if(!inserto){
+        if (!inserto) {
             collectoragentes.add(current);
-            
+
         }
     }
-    
-    public void removerAgenteCollector(){
+
+    public void removerAgenteCollector() {
         this.collectoragentes.remove(agente1);
     }
-   
-    public void setSelected(Agente agente){
+
+    public void setSelected(Agente agente) {
         current = agente;
     }
-    
+
     public String reinit() {
         current = new Agente();
-         
+
         return null;
     }
 
     public Agente getAgente1() {
-        if(agente1 == null){
-         agente1 = new Agente();
+        if (agente1 == null) {
+            agente1 = new Agente();
         }
         return agente1;
     }
-    
+
     public void setAgente1(Agente agente1) {
         this.agente1 = agente1;
     }
-    
-    public void registrar(){
-        
+
+    public void registrar() {
+
         System.out.println("agenteViewController -  registrar");
-        
-        if((this.ejbFacade.agentedocumento(agente1.getNumerodocumento())==null) || (ejbFacade.filtroDocumentooCuil(agente1.getCuil())==null)  ){
-             
+
+        if ((this.ejbFacade.agentedocumento(agente1.getNumerodocumento()) == null) || (ejbFacade.filtroDocumentooCuil(agente1.getCuil()) == null)) {
+
             System.out.println("agenteViewController -  registrar - if");
-            
+
             ejbFacade.createWithPersist(agente1);
-            
+
             System.out.println("agenteViewController -  registrar - if - persistido");
-           
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK", "La registracion fue Satisfactoria")); 
-        }else{
-           
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Ya Existe Una Persona con Ese Numero de Documento/CUIL")); 
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK", "La registracion fue Satisfactoria"));
+        } else {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Ya Existe Una Persona con Ese Numero de Documento/CUIL"));
         }
     }
 
@@ -405,24 +406,24 @@ public class AgenteViewController implements Serializable {
     public void setFiltrodocumento(boolean filtrodocumento) {
         this.filtrodocumento = filtrodocumento;
     }
-    
+
     public SelectItem[] getItemsAgentes() {
         return itemsAgentes;
     }
-    
+
     public void setItemsAgentes(SelectItem[] i) {
-        itemsAgentes=i;
+        itemsAgentes = i;
     }
-    
-   
+
+
     //importo datos del mapuche mediante JDBC
-    public void importardatos(){
-        
+    public void importardatos() {
+
         Calendar fecha = new GregorianCalendar();
         int año = fecha.get(Calendar.YEAR);
         int mes = fecha.get(Calendar.MONTH);
         int dia = fecha.get(Calendar.DATE);
-          
+
         ConnectJDBCPostgresql connectjdbcpostgresql = new ConnectJDBCPostgresql();
         try {
             connectjdbcpostgresql.connect(ejbFacadec.findAtributo("mapuchehost").getValor(), ejbFacadec.findAtributo("mapucheport").getValor(), ejbFacadec.findAtributo("mapuchedatabase").getValor(), ejbFacadec.findAtributo("mapucheuser").getValor(), ejbFacadec.findAtributo("mapuchepassword").getValor());
@@ -430,37 +431,38 @@ public class AgenteViewController implements Serializable {
             Logger.getLogger(AgenteViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            PreparedStatement ps= connectjdbcpostgresql.getConn().prepareStatement(" select dh01.nro_legaj, desc_appat,desc_apmat,desc_nombr,tipo_docum,nro_docum,nro_cuil1, nro_cuil, nro_cuil2,tipo_sexo,fec_nacim, sum(cant_horas) as cant_horas, max(cant_horas) as horasmayordedicacion " +
+            PreparedStatement ps = connectjdbcpostgresql.getConn().prepareStatement(" select dh01.nro_legaj, desc_appat,desc_apmat,desc_nombr,tipo_docum,nro_docum,nro_cuil1, nro_cuil, nro_cuil2,tipo_sexo,fec_nacim, sum(cant_horas) as cant_horas, max(cant_horas) as horasmayordedicacion " +
                     "	from mapuche.dh03 \n" +
                     "left join mapuche.dh01 on (dh01.nro_legaj=dh03.nro_legaj)\n" +
                     "left join mapuche.dh11 on (dh03.codc_categ=dh11.codc_categ)\n" +
                     "left join mapuche.dh31 on (dh11.codc_dedic=dh31.codc_dedic)\n" +
-                    "	where dh03.vig_caano > " + (año-1) +" and (fec_baja > '"+año+"-"+mes+"-"+dia+"' or fec_baja is NULL) and dh11.codc_dedic != 'NODO' group by dh01.nro_legaj ");
-           ResultSet rs = ps.executeQuery();
-           while(rs.next()){
-               Agente ai = new Agente();
-               
-           ai = ejbFacade.filtroDocumentooCuil(rs.getString("nro_docum"));
-            if(ai == null){
-                ai = new Agente();
-                 ai.setLegajo(rs.getInt("nro_legaj"));
-                ai.setApellido(rs.getString("desc_appat"));
-                ai.setNombres(rs.getString("desc_nombr"));
-                ai.setNumerodocumento(rs.getString("nro_docum"));
-                ai.setCuil(rs.getString("nro_cuil1")+"-"+rs.getString("nro_cuil")+"-"+rs.getString("nro_cuil2"));
-                ai.setTipodocumentoid(new Tipodocumento(1));
-                ai.setHoraslaborales(rs.getInt("cant_horas"));
-                ai.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
-                this.ejbFacade.create(ai);
-                
-            
-            }else{
-                 ai.setHoraslaborales(rs.getInt("cant_horas"));
-                ai.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
-                this.ejbFacade.edit(ai);
+                    "	where dh03.vig_caano > " + (año - 1) + " and (fec_baja > '" + año + "-" + mes + "-" + dia + "' or fec_baja is NULL) and dh11.codc_dedic != 'NODO' group by dh01.nro_legaj ");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Agente ai = new Agente();
+
+                ai = ejbFacade.filtroDocumentooCuil(rs.getString("nro_docum"));
+
+                if (ai == null) {
+                    ai = new Agente();
+                    ai.setLegajo(rs.getInt("nro_legaj"));
+                    ai.setApellido(rs.getString("desc_appat"));
+                    ai.setNombres(rs.getString("desc_nombr"));
+                    ai.setNumerodocumento(rs.getString("nro_docum"));
+                    ai.setCuil(rs.getString("nro_cuil1") + "-" + rs.getString("nro_cuil") + "-" + rs.getString("nro_cuil2"));
+                    ai.setTipodocumentoid(new Tipodocumento(1));
+                    ai.setHoraslaborales(rs.getInt("cant_horas"));
+                    ai.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
+                    this.ejbFacade.create(ai);
+
+
+                } else {
+                    ai.setHoraslaborales(rs.getInt("cant_horas"));
+                    ai.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
+                    this.ejbFacade.edit(ai);
+                }
             }
-           }
-        
+
         } catch (SQLException ex) {
             Logger.getLogger(AgenteViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -479,52 +481,53 @@ public class AgenteViewController implements Serializable {
 //        }
         // Importo Cargos
         try {
-            PreparedStatement ps= connectjdbcpostgresql.getConn().prepareStatement(" select nro_cargo, cant_horas, dh01.nro_legaj, codc_uacad, impp_basic" +
+            PreparedStatement ps = connectjdbcpostgresql.getConn().prepareStatement(" select nro_cargo, cant_horas, dh01.nro_legaj, codc_uacad, impp_basic" +
                     "	from mapuche.dh03 \n" +
                     "left join mapuche.dh01 on (dh01.nro_legaj=dh03.nro_legaj)\n" +
                     "left join mapuche.dh11 on (dh03.codc_categ=dh11.codc_categ)\n" +
                     "left join mapuche.dh31 on (dh11.codc_dedic=dh31.codc_dedic)\n" +
-                    "	where dh03.vig_caano > " + (año-1) +" and (fec_baja > '"+año+"-"+mes+"-"+dia+"' or fec_baja is NULL) and dh11.codc_dedic != 'NODO'  ");
-           ResultSet rs = ps.executeQuery();
-           while(rs.next()){
-               Agentecargo aci = new Agentecargo();
-               
-           aci = ejbFacadeac.filtrolegajo(rs.getInt("nro_legaj"));
-            if(aci == null){
-                aci = new Agentecargo();
-                 aci.setNroLegajo(rs.getInt("nro_legaj"));
-                aci.setCant_horas(rs.getInt("cant_horas"));
-                aci.setNroCargo(rs.getInt("nro_cargo"));
-                aci.setCodcUacad(rs.getString("codc_uacad"));
-               aci.setImppBasic(rs.getBigDecimal("impp_basic"));
-                this.ejbFacadeac.create(aci);
-                
-            
-            }else{
-                 aci.setCant_horas(rs.getInt("cant_horas"));
-                aci.setImppBasic(rs.getBigDecimal("impp_basic"));
-                this.ejbFacadeac.edit(aci);
+                    "	where dh03.vig_caano > " + (año - 1) + " and (fec_baja > '" + año + "-" + mes + "-" + dia + "' or fec_baja is NULL) and dh11.codc_dedic != 'NODO'  ");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Agentecargo aci = new Agentecargo();
+
+                aci = ejbFacadeac.filtrolegajo(rs.getInt("nro_legaj"));
+
+                if (aci == null) {
+                    aci = new Agentecargo();
+                    aci.setNroLegajo(rs.getInt("nro_legaj"));
+                    aci.setCant_horas(rs.getInt("cant_horas"));
+                    aci.setNroCargo(rs.getInt("nro_cargo"));
+                    aci.setCodcUacad(rs.getString("codc_uacad"));
+                    aci.setImppBasic(rs.getBigDecimal("impp_basic"));
+                    this.ejbFacadeac.create(aci);
+
+
+                } else {
+                    aci.setCant_horas(rs.getInt("cant_horas"));
+                    aci.setImppBasic(rs.getBigDecimal("impp_basic"));
+                    this.ejbFacadeac.edit(aci);
+                }
             }
-           }
-        
+
         } catch (SQLException ex) {
             Logger.getLogger(AgenteViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
     }
-    
+
     public SelectItem[] getItemsAvailableSelectOneProyectoAgente() {
-         FacesContext context = FacesContext.getCurrentInstance();    
-         ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
-         List<Agente> as = new ArrayList<Agente>();
-         for(ProyectoAgente pa:proyectoagentecontroller.getEquipotrabajo()){
-             as.add(pa.getAgente());
-         }
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
+        List<Agente> as = new ArrayList<Agente>();
+        for (ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()) {
+            as.add(pa.getAgente());
+        }
         return ar.edu.undec.nortia.controller.view.util.JsfUtil.getSelectItems(as, true);
     }
-    
+
     // CREAR USUARIO
     // Rellenar combo de Agentes sin Usuario en Usuarios/Create
     public SelectItem[] getItemsAvailableSelectOneAgentesSinUsuario() {
@@ -540,14 +543,14 @@ public class AgenteViewController implements Serializable {
         return ar.edu.undec.nortia.controller.view.util.JsfUtil.getSelectItems(ejbFacade.agentesSinUsuario(), true);
     }
 
-    public ProyectoAgente buscarProyectoAgentePorAgenteId(int agenteId, int proyectoid){
-        try{
-            return ejbPAFacade.buscarPorAgenteYProyecto(agenteId,proyectoid);
-        }catch (Exception e){
+    public ProyectoAgente buscarProyectoAgentePorAgenteId(int agenteId, int proyectoid) {
+        try {
+            return ejbPAFacade.buscarPorAgenteYProyecto(agenteId, proyectoid);
+        } catch (Exception e) {
             System.out.println("No se pudo obtener el ProyectoAgente");
             e.printStackTrace();
             return null;
         }
     }
-    
+
 }
