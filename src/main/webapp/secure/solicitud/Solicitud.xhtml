@@ -512,22 +512,26 @@
 
                                             <div class="Separator" />
 
-                                            <div class="Container100 Responsive100">
-                                                <div class="ContainerIndent">
+                                            <p:outputPanel id="panelTotalesRubro">
+                                                <div class="Container100 Responsive100">
+                                                    <div class="ContainerIndent">
 
-                                                    <ui:repeat var="o" value="#{order.orderList}" varStatus="status">
-                                                        <div class="Card SoftGrayBack">
-                                                            <i class="icon-store Fs40 Fleft Orange MarRight10"></i>
-                                                            <div class="Fleft DispInlBlock">
-                                                                <span class="Fs12 FontAdamantiumBold Gray">DEPLOYED TOOLS</span><br>
-                                                                <span class="Fs30 FontAdamantiumBold">385</span><br>
-                                                                <span class="Fs11 FontAdamantiumRegular Green">65% Deployed</span>
+                                                        <ui:repeat var="item" value="#{presupuestoRubroController.presupuestosrubros}" varStatus="estado">
+
+                                                            <div class="Card SoftGrayBack">
+                                                                <i class="icon-store Fs40 Fleft Orange MarRight10"></i>
+                                                                <div class="Fleft DispInlBlock">
+                                                                    <span class="Fs12 FontAdamantiumBold Gray"><h:outputText value="#{item.rubro}" /> </span> <br />
+                                                                    <span class="Fs30 FontAdamantiumBold">asdasd</span> <br />
+                                                                    <span class="Fs11 FontAdamantiumRegular Green">qweqwe</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </ui:repeat>
 
+                                                        </ui:repeat>
+
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </p:outputPanel>
 
                                             <div class="Separator" />
 
