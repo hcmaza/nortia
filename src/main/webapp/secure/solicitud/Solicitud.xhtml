@@ -510,8 +510,26 @@
 
                                             </p:outputPanel>
 
-                                            <br />
-                                            <p:separator />     
+                                            <div class="Separator" />
+
+                                            <div class="Container100 Responsive100">
+                                                <div class="ContainerIndent">
+
+                                                    <ui:repeat var="o" value="#{order.orderList}" varStatus="status">
+                                                        <div class="Card SoftGrayBack">
+                                                            <i class="icon-store Fs40 Fleft Orange MarRight10"></i>
+                                                            <div class="Fleft DispInlBlock">
+                                                                <span class="Fs12 FontAdamantiumBold Gray">DEPLOYED TOOLS</span><br>
+                                                                <span class="Fs30 FontAdamantiumBold">385</span><br>
+                                                                <span class="Fs11 FontAdamantiumRegular Green">65% Deployed</span>
+                                                            </div>
+                                                        </div>
+                                                    </ui:repeat>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="Separator" />
 
                                             <!-- GRAFICOS -->
 
