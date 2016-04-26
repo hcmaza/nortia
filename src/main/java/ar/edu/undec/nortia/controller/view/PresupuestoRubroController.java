@@ -10,13 +10,8 @@ import ar.edu.undec.nortia.model.Rubro;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -252,6 +247,15 @@ public class PresupuestoRubroController implements Serializable {
 
                 presupuestosrubros.add(presupuestorubro);
             }
+
+            //ordenamos la lista de acuerdo al orden del rubro
+            Collections.sort(presupuestosrubros, new Comparator<PresupuestoRubro>() {
+                @Override
+                public int compare(PresupuestoRubro o1, PresupuestoRubro o2) {
+                    return o1.getRubro().getOrden().compareTo(o2.getRubro().getOrden());
+                }
+            });
+
         } else {
 
         }

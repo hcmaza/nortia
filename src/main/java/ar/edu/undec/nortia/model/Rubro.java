@@ -51,6 +51,15 @@ public class Rubro implements Serializable {
     @Size(max = 60)
     @Column(name = "abreviado")
     private String abreviado;
+
+    @Column(name = "icono")
+    private String icono;
+
+    @Column(name = "coloricono")
+    private String coloricono;
+
+    @Column(name = "orden")
+    private Float orden;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rubro")
     private List<PresupuestoRubro> presupuestoRubroList;
@@ -127,5 +136,28 @@ public class Rubro implements Serializable {
     public String nombreDespuesEspacio(){
         return this.rubro.substring(this.rubro.indexOf(' ')+1);
     }
-    
+
+    public String getIcono() {
+        return icono;
+    }
+
+    public void setIcono(String icono) {
+        this.icono = icono;
+    }
+
+    public String getColoricono() {
+        return coloricono;
+    }
+
+    public void setColoricono(String coloricono) {
+        this.coloricono = coloricono;
+    }
+
+    public Float getOrden() {
+        return orden;
+    }
+
+    public void setOrden(Float orden) {
+        this.orden = orden;
+    }
 }

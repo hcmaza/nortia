@@ -497,7 +497,7 @@
                                                         <div class="ContainerIndent Padding5px">
 
                                                                 <div class="Card SoftGrayBack Padding15px ">
-                                                                    <i class="icon-store Fs40 Fleft Orange MarRight10"></i>
+                                                                    <i class="#{item.rubro.icono} Fs40 Fleft MarRight10" style="color: #{item.rubro.coloricono};"></i>
                                                                     <div class="Fleft DispInlBlock">
                                                                         <span class="Fs12 FontAdamantiumBold Gray"><h:outputText value="#{item.rubro.nombreAntesEspacio()}" /> </span> <br />
                                                                         <span class="Fs20 FontAdamantiumBold">
@@ -515,6 +515,28 @@
                                                     </div>
 
                                                 </ui:repeat>
+
+                                                <!--Total General-->
+                                                <!--<div class="Container100 Responsive100">
+
+                                                    <div class="ContainerIndent ">
+
+                                                        <div class="Card SoftGrayBack Padding15px ">
+                                                            <i class="fa fa-money Fs40 Fleft MarRight10 Blue" ></i>
+                                                            <div class="Fleft DispInlBlock">
+                                                                <span class="Fs12 FontAdamantiumBold Gray"><h:outputText value=" " /> </span> <br />
+                                                                        <span class="Fs20 FontAdamantiumBold">
+                                                                            <h:outputText value="$ # {presupuestoRubroController.obtenerTotalGeneral()}" >
+                                                                                <f:convertNumber pattern="#0.00" />
+                                                                            </h:outputText>
+                                                                        </span> <br />
+                                                                <span class="Fs11 FontAdamantiumBold Blue"> <h:outputText value="Total Presupuestado" />  </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>-->
 
                                             </p:outputPanel>
 
