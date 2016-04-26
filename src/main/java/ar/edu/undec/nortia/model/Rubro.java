@@ -119,5 +119,13 @@ public class Rubro implements Serializable {
     public String toString() {
         return rubro;
     }
+
+    public String nombreAntesEspacio(){
+        return this.rubro.substring(0, this.rubro.indexOf(' '));
+    }
+
+    public String nombreDespuesEspacio(){
+        return this.rubro.substring(this.rubro.indexOf(' ')+1);
+    }
     
 }
