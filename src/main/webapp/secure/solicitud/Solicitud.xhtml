@@ -370,145 +370,121 @@
 
                                         <h:form id="formTabPresupuesto">
 
-                                            <p:remoteCommand name="rcPresupuesto" actionListener="#{presupuestoRubroController.sumarGastos(null)}"
-                                                             update=" 
-                                                             contenedorTablaPresupuesto,
+                                            <!--<p:remoteCommand name="rcPresupuesto" actionListener="# {presupuestoRubroController.sumarGastos(null)}"
+                                                             update="
+                                                             panelTotalesRubro,
                                                              caportes,
                                                              crubros,
-                                                             growlprincipal "/>
+                                                             growlprincipal "/>-->
 
-                                            <p:outputPanel id="contenedorTablaPresupuesto">
 
-                                                <p:dataTable id="tpresupuesto" value="#{presupuestoRubroController.presupuestosrubros}"  
-                                                             var="item" editable="true" editMode="cell" style="width:100%;" 
-                                                             rowIndexVar="indice" 
-                                                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             styleClass="tabla"
-                                                             >
 
-                                                    <p:ajax event="cellEdit" oncomplete="rcPresupuesto()" 
-                                                            update="
-                                                            :tabviewTodo:formTabPresupuesto:contenedorTablaPresupuesto, 
-                                                            :tabviewTodo:formTabPresupuesto:caportes,
-                                                            :tabviewTodo:formTabPresupuesto:crubros
-                                                            "  />
+                                            <p:dataTable id="tpresupuesto" value="#{presupuestoRubroController.presupuestosrubros}"
+                                                         var="item" editable="true" editMode="cell" style="width:100%;"
+                                                         rowIndexVar="indice"
+                                                         styleClass="tabla "
+                                                         >
 
-                                                    <!--                                                        caportes, 
-                                                                                                            crubros, 
-                                                                                                            tpresupuestototales -->
+                                                <p:ajax event="cellEdit" listener="#{presupuestoRubroController.sumarGastos}"
+                                                        update="
+                                                        :tabviewTodo:formTabPresupuesto:panelTotalesRubro,
+                                                        :tabviewTodo:formTabPresupuesto:tpresupuestototales,
+                                                        :tabviewTodo:formTabPresupuesto:caportes,
+                                                        :tabviewTodo:formTabPresupuesto:crubros
+                                                        "  />
 
+                                                <f:facet name="header">
+                                                    Armar el Presupuesto de la Idea-Proyecto
+                                                </f:facet>
+                                                <p:column style="width:20%" >
                                                     <f:facet name="header">
-                                                        Armar el Presupuesto de la Idea-Proyecto
+                                                        <h:outputText value="Rubro"/>
                                                     </f:facet>
-                                                    <p:column style="width:20%" >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Rubro"/>
+                                                    <h:outputText style="width:96%;" value="#{item.rubro.abreviado}" />
+                                                </p:column>
+
+                                                <p:column style="width:20%; "  >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                    </f:facet>
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:outputText value="$ #{item.gastoorganismo}" styleClass="TexAlRight Fright">
+                                                                <f:convertNumber pattern="#0.00" />
+                                                            </h:outputText>
                                                         </f:facet>
-                                                        <h:outputText style="width:96%;" value="#{item.rubro.abreviado}" />
-                                                    </p:column>
-
-                                                    <p:column style="width:20%; "  >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                        <f:facet name="input">
+                                                            <p:inputText id="gastoorganismo" value="#{item.gastoorganismo}"  styleClass="TexAlRight" />
                                                         </f:facet>
-                                                        <p:cellEditor>  
-                                                            <f:facet name="output">
-                                                                <p:inputText value="$ #{item.gastoorganismo}" styleClass="TexAlRight">
-                                                                    <f:convertNumber pattern="#0.00" />
-                                                                </p:inputText>
-                                                            </f:facet>  
-                                                            <f:facet name="input">
-                                                                <p:inputText id="gastoorganismo" value="#{item.gastoorganismo}" validatorMessage="Valor Incorrecto" styleClass="TexAlRight" >
-                                                                    <p:ajax event="blur" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro"   />
-                                                                    <p:ajax event="change" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro "  />
-                                                                </p:inputText>
-                                                            </f:facet> 
-                                                        </p:cellEditor> 
-                                                    </p:column>
+                                                    </p:cellEditor>
+                                                </p:column>
 
-                                                    <p:column style="width:20%;"  >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                <p:column style="width:20%;"  >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                    </f:facet>
+                                                    <p:cellEditor >
+                                                        <f:facet name="output">
+                                                            <h:outputText value="$ #{item.gastocomitente}" styleClass="TexAlRight Fright">
+                                                                <f:convertNumber pattern="#0.00" />
+                                                            </h:outputText>
                                                         </f:facet>
-                                                        <p:cellEditor >  
-                                                            <f:facet name="output">
-                                                                <p:inputText value="$ #{item.gastocomitente}" styleClass="TexAlRight">
-                                                                    <f:convertNumber pattern="#0.00" />
-                                                                </p:inputText>
-                                                            </f:facet>  
-                                                            <f:facet name="input">
-                                                                <p:inputText id="gastocomitente" value="#{item.gastocomitente}" validatorMessage="Valor Incorrecto" styleClass="TexAlRight" >
-                                                                    <p:ajax event="blur" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro "   />
-                                                                    <p:ajax event="change" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro  "   />
-                                                                </p:inputText>
-                                                            </f:facet> 
-                                                        </p:cellEditor>  
-
-                                                    </p:column>
-
-                                                    <p:column style="width:20%;"  >
-                                                        <f:facet name="header">
-                                                            <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
+                                                        <f:facet name="input">
+                                                            <p:inputText id="gastocomitente" value="#{item.gastocomitente}"  styleClass="TexAlRight" />
                                                         </f:facet>
-                                                        <p:cellEditor>  
-                                                            <f:facet name="output">
-                                                                <p:inputText value="$ #{item.gastouniversidad}" styleClass="TexAlRight" >
-                                                                    <f:convertNumber pattern="#0.00" />
-                                                                </p:inputText>
-                                                            </f:facet>  
-                                                            <f:facet name="input">
-                                                                <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" validatorMessage="Valor Incorrecto" styleClass="TexAlRight" >
-                                                                    <p:ajax event="blur" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro "   />
-                                                                    <p:ajax event="change" listener="#{presupuestoRubroController.actualizarTabla()}" update="totalRubro  "   />
-                                                                </p:inputText>
-                                                            </f:facet>  
-                                                        </p:cellEditor> 
-                                                    </p:column>
+                                                    </p:cellEditor>
 
-                                                    <p:column headerText="Totales Rubros" style="width:20%;"   >
-                                                        <h:outputText id="totalRubro" value="$ #{item.total}" style="float: right;"  >
-                                                            <f:convertNumber pattern="#0.00" />
-                                                        </h:outputText>
-                                                    </p:column>
+                                                </p:column>
 
-                                                </p:dataTable> 
+                                                <p:column style="width:20%;"  >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
+                                                    </f:facet>
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:outputText value="$ #{item.gastouniversidad}" styleClass="TexAlRight Fright" >
+                                                                <f:convertNumber pattern="#0.00" />
+                                                            </h:outputText>
+                                                        </f:facet>
+                                                        <f:facet name="input">
+                                                            <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" styleClass="TexAlRight" />
+                                                        </f:facet>
+                                                    </p:cellEditor>
+                                                </p:column>
 
-                                                <p:dataTable id="tpresupuestototales" value="#{presupuestoRubroController.presupuestosrubros}"  
-                                                             var="item" rows="1" 
-                                                             rowIndexVar="indice" 
-                                                             rowStyleClass="#{(fn:length(presupuestoRubroController.presupuestosrubros) mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2' }"
-                                                             styleClass="tabla esconder-cabecera-columnas" >
+                                            </p:dataTable>
 
-                                                    <p:column style="width:20%" styleClass="TexAlCenter SoftBlueBack ">
-                                                        <h:outputText style="width:96%; font-weight: bold; color: white; " value="Totales"/>
-                                                    </p:column>
+                                            <p:dataTable id="tpresupuestototales" value="#{presupuestoRubroController.presupuestosrubros}"
+                                                         var="item" rows="1"
+                                                         rowIndexVar="indice"
+                                                         rowStyleClass="#{(fn:length(presupuestoRubroController.presupuestosrubros) mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2' }"
+                                                         styleClass="tabla esconder-cabecera-columnas" >
 
-                                                    <p:column style="width:20%; " styleClass="TexAlRight SoftBlueBack">
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosOrganismo()}" style="float: right; font-weight: bold; color: white; ">
-                                                            <f:convertNumber pattern="#0.00" />
-                                                        </h:outputText>
-                                                    </p:column>
+                                                <p:column style="width:20%" styleClass="TexAlCenter SoftBlueBack ">
+                                                    <h:outputText style="width:96%; font-weight: bold; color: white; " value="Totales"/>
+                                                </p:column>
 
-                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosComitente()}" style="float: right; font-weight: bold; color: white; ">
-                                                            <f:convertNumber pattern="#0.00" />
-                                                        </h:outputText>
-                                                    </p:column>
+                                                <p:column style="width:20%; " styleClass="TexAlRight SoftBlueBack">
+                                                    <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosOrganismo()}" style="float: right; font-weight: bold; color: white; ">
+                                                        <f:convertNumber pattern="#0.00" />
+                                                    </h:outputText>
+                                                </p:column>
 
-                                                    <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosUniversidad()}" style="float: right; font-weight: bold; color: white; ">
-                                                            <f:convertNumber pattern="#0.00" />
-                                                        </h:outputText>
-                                                    </p:column>
+                                                <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
+                                                    <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosComitente()}" style="float: right; font-weight: bold; color: white; ">
+                                                        <f:convertNumber pattern="#0.00" />
+                                                    </h:outputText>
+                                                </p:column>
 
-                                                    <p:column id="totalesRubro" style="width:20%;" styleClass="TexAlRight BlueBack" >
-                                                        <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGeneral()}" style="float: right; font-weight: bold; color: white; ">
-                                                            <f:convertNumber pattern="#0.00" />
-                                                        </h:outputText>
-                                                    </p:column>
-                                                </p:dataTable> 
+                                                <p:column style="width:20%;" styleClass="TexAlRight SoftBlueBack">
+                                                    <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosUniversidad()}" style="float: right; font-weight: bold; color: white; ">
+                                                        <f:convertNumber pattern="#0.00" />
+                                                    </h:outputText>
+                                                </p:column>
 
-                                            </p:outputPanel>
+                                            </p:dataTable>
+
+
 
                                             <div class="Separator" />
 
@@ -520,11 +496,16 @@
 
                                                         <div class="ContainerIndent Padding5px">
 
-                                                                <div class="Card SoftGrayBack ">
+                                                                <div class="Card SoftGrayBack Padding15px ">
                                                                     <i class="icon-store Fs40 Fleft Orange MarRight10"></i>
                                                                     <div class="Fleft DispInlBlock">
                                                                         <span class="Fs12 FontAdamantiumBold Gray"><h:outputText value="#{item.rubro.nombreAntesEspacio()}" /> </span> <br />
-                                                                        <span class="Fs30 FontAdamantiumBold"> <h:outputText value="$ #{item.gastouniversidad.add(item.gastoorganismo.add(item.gastocomitente))}" />  </span> <br />
+                                                                        <span class="Fs20 FontAdamantiumBold">
+                                                                            <!--<h:outputText value="$ # {item.gastouniversidad.add(item.gastoorganismo.add(item.gastocomitente))}" >-->
+                                                                            <h:outputText value="$ #{item.total}" >
+                                                                                <f:convertNumber pattern="#0.00" />
+                                                                            </h:outputText>
+                                                                        </span> <br />
                                                                         <span class="Fs11 FontAdamantiumRegular Green"> <h:outputText value="#{item.rubro.nombreDespuesEspacio()}" />  </span>
                                                                     </div>
                                                                 </div>
@@ -717,43 +698,43 @@
 
                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 
-                        <h:outputLabel value="Apellido" for="apellido" />
-                        <p:inputText id="apellido" value="#{agenteController.selected.apellido}" />
+                        <h:outputLabel value="Apellido" for="agenteapellido" />
+                        <p:inputText id="agenteapellido" value="#{agenteController.selected.apellido}" />
 
                         <h:outputLabel value="Nombres" for="nombres" />
-                        <p:inputText id="nombres" value="#{agenteController.selected.nombres}" />
+                        <p:inputText id="agentenombres" value="#{agenteController.selected.nombres}" />
 
                         <h:outputLabel value="Tipo de Documento" for="tipodocumentoid" />
-                        <p:selectOneMenu id="tipodocumentoid" value="#{agenteController.selected.tipodocumentoid}"  >
+                        <p:selectOneMenu id="agentetipodocumentoid" value="#{agenteController.selected.tipodocumentoid}"  >
                             <f:selectItems value="#{tipodocumentoController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu>
 
                         <h:outputLabel value="N° de Documento" for="numerodocumento" />
-                        <p:inputText id="numerodocumento" value="#{agenteController.selected.numerodocumento}" />
+                        <p:inputText id="agentenumerodocumento" value="#{agenteController.selected.numerodocumento}" />
 
-                        <h:outputLabel value="Telefono" for="telefonoa" />
-                        <p:inputText id="telefonoa" value="#{agenteController.selected.telefono}" />
+                        <h:outputLabel value="Telefono" for="agentetelefonoa" />
+                        <p:inputText id="agentetelefonoa" value="#{agenteController.selected.telefono}" />
 
-                        <h:outputLabel value="Celular" for="celular" />
-                        <p:inputText id="celular" value="#{agenteController.selected.celular}" />
+                        <h:outputLabel value="Celular" for="agentecelular" />
+                        <p:inputText id="agentecelular" value="#{agenteController.selected.celular}" />
 
-                        <h:outputLabel value="Email" for="emaila" />
-                        <p:inputText id="emaila" value="#{agenteController.selected.email}" />
+                        <h:outputLabel value="Email" for="agenteemaila" />
+                        <p:inputText id="agenteemaila" value="#{agenteController.selected.email}" />
 
-                        <h:outputLabel value="Otro Email" for="otroemail" />
-                        <p:inputText id="otroemail" value="#{agenteController.selected.otroemail}" />
+                        <h:outputLabel value="Otro Email" for="agenteotroemail" />
+                        <p:inputText id="agenteotroemail" value="#{agenteController.selected.otroemail}" />
 
-                        <h:outputLabel value="Profesion" for="profesion" />
-                        <p:inputText id="profesion" value="#{agenteController.selected.profesion}" />
+                        <h:outputLabel value="Profesion" for="agenteprofesion" />
+                        <p:inputText id="agenteprofesion" value="#{agenteController.selected.profesion}" />
 
-                        <h:outputLabel value="Especialidad" for="especialidad" />
-                        <p:inputText id="especialidad" value="#{agenteController.selected.especialidad}" />
+                        <h:outputLabel value="Especialidad" for="agenteespecialidad" />
+                        <p:inputText id="agenteespecialidad" value="#{agenteController.selected.especialidad}" />
 
-                        <h:outputLabel value="Domicilio" for="domicilio" />
-                        <p:inputText id="domicilio" value="#{agenteController.selected.domicilio}" />
+                        <h:outputLabel value="Domicilio" for="agentedomicilio" />
+                        <p:inputText id="agentedomicilio" value="#{agenteController.selected.domicilio}" />
 
-                        <h:outputLabel value="Dependencia" for="dependenciaid" />
-                        <p:selectOneMenu id="dependenciaid" value="#{agenteController.selected.dependenciaid}" >
+                        <h:outputLabel value="Dependencia" for="agentedependenciaid" />
+                        <p:selectOneMenu id="agentedependenciaid" value="#{agenteController.selected.dependenciaid}" >
                             <f:selectItems value="#{dependenciaController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu>
 
@@ -771,31 +752,31 @@
                 <p:dialog id="dcomitentecrear" widgetVar="dcomitentecrear" modal="true"  header="Crear Comitente" >
 
                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                        <h:outputLabel value="Razon Social" for="razonsocial" />
-                        <p:inputText id="razonsocial" value="#{comitenteController.selected.razonsocial}" />
+                        <h:outputLabel value="Razon Social" for="comitenterazonsocial" />
+                        <p:inputText id="comitenterazonsocial" value="#{comitenteController.selected.razonsocial}" />
 
-                        <h:outputLabel value="CUIT/CUIL" for="cuit" />
-                        <p:inputMask id="cuit" value="#{comitenteController.selected.cuit}" mask="99-99999999-9"/>
+                        <h:outputLabel value="CUIT/CUIL" for="comitentecuit" />
+                        <p:inputMask id="comitentecuit" value="#{comitenteController.selected.cuit}" mask="99-99999999-9"/>
 
-                        <h:outputLabel value="Teléfono" for="telefono" />
-                        <p:inputText id="telefono" value="#{comitenteController.selected.telefono}" />
+                        <h:outputLabel value="Teléfono" for="comitentetelefono" />
+                        <p:inputText id="comitentetelefono" value="#{comitenteController.selected.telefono}" />
 
-                        <h:outputLabel value="Contacto" for="contacto" />
-                        <p:inputText id="contacto" value="#{comitenteController.selected.contacto}" />
+                        <h:outputLabel value="Contacto" for="comitentecontacto" />
+                        <p:inputText id="comitentecontacto" value="#{comitenteController.selected.contacto}" />
 
-                        <h:outputLabel value="Cargo del Contacto" for="cargocontacto" />
-                        <p:inputText id="cargocontacto" value="#{comitenteController.selected.cargocontacto}" />
+                        <h:outputLabel value="Cargo del Contacto" for="comitentecargocontacto" />
+                        <p:inputText id="comitentecargocontacto" value="#{comitenteController.selected.cargocontacto}" />
 
-                        <h:outputLabel value="Email" for="email" />
-                        <p:inputText id="email" value="#{comitenteController.selected.email}" />
+                        <h:outputLabel value="Email" for="comitenteemail" />
+                        <p:inputText id="comitenteemail" value="#{comitenteController.selected.email}" />
 
-                        <h:outputLabel value="Tipo de Comitente" for="tipocomitenteid" />
-                        <p:selectOneMenu id="tipocomitenteid" value="#{comitenteController.selected.tipocomitenteid}" >
+                        <h:outputLabel value="Tipo de Comitente" for="comitentetipocomitenteid" />
+                        <p:selectOneMenu id="comitentetipocomitenteid" value="#{comitenteController.selected.tipocomitenteid}" >
                             <f:selectItems value="#{tipocomitenteController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu>
 
-                        <h:outputLabel value="Sector" for="sectorid" />
-                        <p:selectOneMenu id="sectorid" value="#{comitenteController.selected.sectorid}" >
+                        <h:outputLabel value="Sector" for="comitentesectorid" />
+                        <p:selectOneMenu id="comitentesectorid" value="#{comitenteController.selected.sectorid}" >
                             <f:selectItems value="#{sectorController.itemsAvailableSelectOne}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
@@ -878,8 +859,8 @@
                         <p:outputLabel value="CUIT/CUIL" for="cuit" style="font-weight: bold;" />
                         <p:outputLabel id="cuit" value="#{proyectoController.selected.comitenteid.cuit}" />
 
-                        <p:outputLabel value="Teléfono" for="telefono" style="font-weight: bold;" />
-                        <p:outputLabel id="telefono" value="#{proyectoController.selected.comitenteid.telefono}" />
+                        <p:outputLabel value="Teléfono" for="detalletelefono" style="font-weight: bold;" />
+                        <p:outputLabel id="detalletelefono" value="#{proyectoController.selected.comitenteid.telefono}" />
 
                         <p:outputLabel value="Contacto" for="contacto" style="font-weight: bold;"/>
                         <p:outputLabel id="contacto" value="#{proyectoController.selected.comitenteid.contacto}" />
@@ -887,8 +868,8 @@
                         <p:outputLabel value="Cargo del Contacto" for="cargocontacto" style="font-weight: bold;"/>
                         <p:outputLabel id="cargocontacto" value="#{proyectoController.selected.comitenteid.cargocontacto}" />
 
-                        <p:outputLabel value="Email" for="email" style="font-weight: bold;"/>
-                        <p:outputLabel id="email" value="#{proyectoController.selected.comitenteid.email}" />
+                        <p:outputLabel value="Email" for="detalleemail" style="font-weight: bold;"/>
+                        <p:outputLabel id="detalleemail" value="#{proyectoController.selected.comitenteid.email}" />
 
                         <p:outputLabel value="Tipo de Comitente" for="tipo" style="font-weight: bold;"/>
                         <p:outputLabel id="tipo" value="#{proyectoController.selected.comitenteid.tipocomitenteid.tipocomitente}" />

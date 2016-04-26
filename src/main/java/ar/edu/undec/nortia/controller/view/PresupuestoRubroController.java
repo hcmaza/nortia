@@ -316,6 +316,11 @@ public class PresupuestoRubroController implements Serializable {
     }
 
     public void sumarGastos(CellEditEvent event) {
+
+        System.out.println("SUMAR GASTOS");
+
+        System.out.println("Valor Anterior >> " + event.getOldValue());
+        System.out.println("Valor Nuevo >> " + event.getNewValue());
     
         System.out.println("PresupuestoRubroController - sumarGastos - presupuestosrubros: " + presupuestosrubros.size());
         
