@@ -539,19 +539,22 @@ public class PresupuestoTareaController implements Serializable {
     }
 
     public boolean agregarPresupuestoRRHHCONSULTOR(TareaAgente taprincipal) {
+
         FacesContext context = FacesContext.getCurrentInstance();
         ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
-        ProyectoAgente pax = new ProyectoAgente();
+        ProyectoAgente proyectoAgente = new ProyectoAgente();
+
         boolean resultado = false;
 
         for (ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()) {
             if (pa.getAgente().equals(taprincipal.getAgenteid())) {
-                pax = pa;
+                proyectoAgente = pa;
             }
         }
 
         int i = 0;
         int lugar = -1;
+
         for (PresupuestoTarea pts : presupuestostareasitems) {
 
             if (pts.getDescripcion().equals(taprincipal.getAgenteid().toString())) {

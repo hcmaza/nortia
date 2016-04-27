@@ -439,27 +439,27 @@ public class AgenteViewController implements Serializable {
                     "	where dh03.vig_caano > " + (año - 1) + " and (fec_baja > '" + año + "-" + mes + "-" + dia + "' or fec_baja is NULL) and dh11.codc_dedic != 'NODO' group by dh01.nro_legaj ");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Agente ai = new Agente();
+                Agente agente = new Agente();
 
-                ai = ejbFacade.filtroDocumentooCuil(rs.getString("nro_docum"));
+                agente = ejbFacade.filtroDocumentooCuil(rs.getString("nro_docum"));
 
-                if (ai == null) {
-                    ai = new Agente();
-                    ai.setLegajo(rs.getInt("nro_legaj"));
-                    ai.setApellido(rs.getString("desc_appat"));
-                    ai.setNombres(rs.getString("desc_nombr"));
-                    ai.setNumerodocumento(rs.getString("nro_docum"));
-                    ai.setCuil(rs.getString("nro_cuil1") + "-" + rs.getString("nro_cuil") + "-" + rs.getString("nro_cuil2"));
-                    ai.setTipodocumentoid(new Tipodocumento(1));
-                    ai.setHoraslaborales(rs.getInt("cant_horas"));
-                    ai.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
-                    this.ejbFacade.create(ai);
+                if (agente == null) {
+                    agente = new Agente();
+                    agente.setLegajo(rs.getInt("nro_legaj"));
+                    agente.setApellido(rs.getString("desc_appat"));
+                    agente.setNombres(rs.getString("desc_nombr"));
+                    agente.setNumerodocumento(rs.getString("nro_docum"));
+                    agente.setCuil(rs.getString("nro_cuil1") + "-" + rs.getString("nro_cuil") + "-" + rs.getString("nro_cuil2"));
+                    agente.setTipodocumentoid(new Tipodocumento(1));
+                    agente.setHoraslaborales(rs.getInt("cant_horas"));
+                    agente.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
+                    this.ejbFacade.create(agente);
 
 
                 } else {
-                    ai.setHoraslaborales(rs.getInt("cant_horas"));
-                    ai.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
-                    this.ejbFacade.edit(ai);
+                    agente.setHoraslaborales(rs.getInt("cant_horas"));
+                    agente.setHorasmayordedicacion(rs.getInt("horasmayordedicacion"));
+                    this.ejbFacade.edit(agente);
                 }
             }
 
@@ -490,24 +490,24 @@ public class AgenteViewController implements Serializable {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Agentecargo aci = new Agentecargo();
+                Agentecargo agentecargo = new Agentecargo();
 
-                aci = ejbFacadeac.filtrolegajo(rs.getInt("nro_legaj"));
+                agentecargo = ejbFacadeac.filtrolegajo(rs.getInt("nro_legaj"));
 
-                if (aci == null) {
-                    aci = new Agentecargo();
-                    aci.setNroLegajo(rs.getInt("nro_legaj"));
-                    aci.setCant_horas(rs.getInt("cant_horas"));
-                    aci.setNroCargo(rs.getInt("nro_cargo"));
-                    aci.setCodcUacad(rs.getString("codc_uacad"));
-                    aci.setImppBasic(rs.getBigDecimal("impp_basic"));
-                    this.ejbFacadeac.create(aci);
+                if (agentecargo == null) {
+                    agentecargo = new Agentecargo();
+                    agentecargo.setNroLegajo(rs.getInt("nro_legaj"));
+                    agentecargo.setCant_horas(rs.getInt("cant_horas"));
+                    agentecargo.setNroCargo(rs.getInt("nro_cargo"));
+                    agentecargo.setCodcUacad(rs.getString("codc_uacad"));
+                    agentecargo.setImppBasic(rs.getBigDecimal("impp_basic"));
+                    this.ejbFacadeac.create(agentecargo);
 
 
                 } else {
-                    aci.setCant_horas(rs.getInt("cant_horas"));
-                    aci.setImppBasic(rs.getBigDecimal("impp_basic"));
-                    this.ejbFacadeac.edit(aci);
+                    agentecargo.setCant_horas(rs.getInt("cant_horas"));
+                    agentecargo.setImppBasic(rs.getBigDecimal("impp_basic"));
+                    this.ejbFacadeac.edit(agentecargo);
                 }
             }
 

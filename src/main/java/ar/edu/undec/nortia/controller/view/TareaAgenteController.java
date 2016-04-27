@@ -279,28 +279,33 @@ public class TareaAgenteController implements Serializable {
         if (tareasagentes == null) {
             tareasagentes = new ArrayList<TareaAgente>();
         }
+
         for (TareaAgente ta1 : tareasagentes) {
             if (ta1.getAgenteid().getId().equals(this.current2.getAgenteid().getId())) {
                 existe = true;
             }
         }
+
+
+
         if (!existe) {
 
-            // TareaAgentePK tapk = new TareaAgentePK();
-            //tapk.setAgenteid(agenteviewcontrol.getSelected().getId());
-            //tapk.setTareaid(tareasagentes.size()+1);
-            //ta.setTareaAgentePK(tapk);
             RequestContext requestContext = RequestContext.getCurrentInstance();
 
             if (presupuestotareacontroller.agregarPresupuestoRRHHCONSULTOR(this.current2)) {
+
                 tareasagentes.add(this.current2);
                 requestContext.addCallbackParam("validation", true);
                 // requestContext.execute("dialogotareaagentepresupuesto.hide();");
+
+                context.addMessage("",new FacesMessage("Agregar Persona","Se agregó la persona correctamente a la tarea."));
 
             } else {
                 requestContext.addCallbackParam("validation", false);
 
                 // context.getExternalContext().getContext().
+
+                context.addMessage("",new FacesMessage("Agregar Persona","No se pudo agregar la persona a la tarea."));
             }
 
 
@@ -365,16 +370,48 @@ public class TareaAgenteController implements Serializable {
         PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
 
         if (verificarAgentesHoras()) {
+            System.out.println("onCellEdit >> verificarAgentesHoras >> true");
         } else {
-
+            System.out.println("onCellEdit >> verificarAgentesHoras >> false");
             try{
                 presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
                 presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getTotal().multiply(BigDecimal.valueOf(this.current2.getHorasdedicadas()))));
                 presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
+
+                if(!agenteEsConsultorExterno()){
+                    System.out.println("onCellEdit >> es Docente");
+                    System.out.println("onCellEdit >> current2.total = " + presupuestotareacontroller.getCurrent2().getTotal());
+
+                    presupuestotareacontroller.getCurrent2().setAporteuniversidad(presupuestotareacontroller.getCurrent2().getTotal());
+                    presupuestotareacontroller.getCurrent2().setAporteorganismo(BigDecimal.ZERO);
+                    presupuestotareacontroller.getCurrent2().setAportecomitente(BigDecimal.ZERO);
+
+                    System.out.println("onCellEdit >> current2.aporteUniversidad = " + presupuestotareacontroller.getCurrent2().getAporteuniversidad());
+                    System.out.println("onCellEdit >> current2.aporteOrganismo = " + presupuestotareacontroller.getCurrent2().getAporteorganismo());
+                    System.out.println("onCellEdit >> current2.aporteComitente = " + presupuestotareacontroller.getCurrent2().getAportecomitente());
+                }
+
             } catch(NullPointerException npe){
                 System.out.println("Error >> Costo unitario u horas dedicadas son NULOS.");
                 presupuestotareacontroller.getCurrent2().setTotal(BigDecimal.ZERO);
             }
+        }
+    }
+
+    public boolean agenteEsConsultorExterno(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
+
+        try{
+            for (ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()) {
+                if (pa.getAgente().getId().equals(current2.getAgenteid().getId()) && pa.getConsultorexterno()) {
+                    return true;
+                }
+            }
+            return false;
+        }catch(Exception e){
+            System.out.println("Excepcion en TareaAgenteController.agenteEsConsultorExterno()");
+            return true;
         }
     }
 
@@ -391,12 +428,31 @@ public class TareaAgenteController implements Serializable {
                 if (current2.getHorasdedicadas() > pa.getHorasdisponibles()) {
 
                     resultado = false;
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las horas del Agente " + current2.getAgenteid() + " no puede sobrepasar las " + pa.getHorasdisponibles() + " horas que se han establecido en el proyecto"));
+                    //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El agente " + current2.getAgenteid() + " sobrepasa \n las " + pa.getHorasdisponibles() + " hs que se han establecido en el proyecto. \n"));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+                            FacesMessage.SEVERITY_WARN, "Corregir!" , current2.getAgenteid().getApellido() + ", " + current2.getAgenteid().getNombres() + "<br />" + "Sobrepasa las " + pa.getHorasdisponibles() + " horas disponibles en el proyecto."));
                 } else {
+
+                    System.out.println("verificarAgentesHoras >> presupuestotareacontroller.getCurrent2().getCantidad() = " + presupuestotareacontroller.getCurrent2().getCantidad());
+                    System.out.println("verificarAgentesHoras >> presupuestotareacontroller.getCurrent2().getCostounitario() = " + presupuestotareacontroller.getCurrent2().getCostounitario());
 
                     presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
                     presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
-                    // cgvkhjbl.n presupuestotareacontroller.agregarPresupuestoRRHHCONSULTOR(current2);
+
+                    // si es docente, el aporte de la universidad es igual al total
+                    if(!pa.getConsultorexterno()){
+
+                        System.out.println("verificarAgentesHoras >> es Docente");
+                        System.out.println("verificarAgentesHoras >> current2.total = " + presupuestotareacontroller.getCurrent2().getTotal());
+
+                        presupuestotareacontroller.getCurrent2().setAporteuniversidad(presupuestotareacontroller.getCurrent2().getTotal());
+                        presupuestotareacontroller.getCurrent2().setAporteorganismo(BigDecimal.ZERO);
+                        presupuestotareacontroller.getCurrent2().setAportecomitente(BigDecimal.ZERO);
+
+                        System.out.println("verificarAgentesHoras >> current2.aporteUniversidad = " + presupuestotareacontroller.getCurrent2().getAporteuniversidad());
+                        System.out.println("verificarAgentesHoras >> current2.aporteOrganismo = " + presupuestotareacontroller.getCurrent2().getAporteorganismo());
+                        System.out.println("verificarAgentesHoras >> current2.aporteComitente = " + presupuestotareacontroller.getCurrent2().getAportecomitente());
+                    }
                 }
             }
         }
@@ -412,6 +468,7 @@ public class TareaAgenteController implements Serializable {
         PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
         ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
         EtapaController etapacontrol = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
+
         this.current2 = new TareaAgente();
         this.current2.setAgenteid(agenteviewcontroller.getSelected());
 
@@ -428,49 +485,69 @@ public class TareaAgenteController implements Serializable {
             }
         }
 
-        ProyectoAgente pax = new ProyectoAgente();
+        // nuevo proyecto agente, establecer la tarea
+        ProyectoAgente proyectoAgente = new ProyectoAgente();
         presupuestotareacontroller.setCurrent2(new PresupuestoTarea());
         presupuestotareacontroller.getCurrent2().setTarea(this.current2.getTareaid());
-        Rubro r = new Rubro();
+
+        // establecer el rubro de current 2
+        Rubro rubro = new Rubro();
 
         for (ProyectoAgente pa : proyectoagentecontroller.getEquipotrabajo()) {
             if (pa.getAgente().equals(current2.getAgenteid())) {
 
                 if (pa.getConsultorexterno()) {
-                    r = ejbFacadeRubro.findbyId(4);
+                    rubro = ejbFacadeRubro.findbyId(4);
                 } else {
-                    r = ejbFacadeRubro.findbyId(5);
+                    rubro = ejbFacadeRubro.findbyId(5);
                 }
-                pax = pa;
+                proyectoAgente = pa;
             }
         }
-        presupuestotareacontroller.getCurrent2().setRubro(r);
+        presupuestotareacontroller.getCurrent2().setRubro(rubro);
 
 
-        if (pax.getConsultorexterno()) {
-            presupuestotareacontroller.getCurrent2().setCostounitario(pax.getHonorario());
+        // costo unitario | consultor externo = honorarios | docente = costo de cargo
+        if (proyectoAgente.getConsultorexterno()) {
+            presupuestotareacontroller.getCurrent2().setCostounitario(proyectoAgente.getHonorario());
             System.out.println("CONSULTOR EXTERNO COSTO UNITARIO = " + presupuestotareacontroller.getCurrent2().getCostounitario());
         } else {
             presupuestotareacontroller.getCurrent2().setCostounitario(current2.costoUnitarioCargoLegajo());
             System.out.println("DOCENTE COSTO UNITARIO = " + presupuestotareacontroller.getCurrent2().getCostounitario());
         }
 
+        // setamos los dias
         presupuestotareacontroller.getCurrent2().setCantidad(BigDecimal.valueOf(tareacontroller.getSelected().getDias()));
+
+        // seteamos la descripcion
         presupuestotareacontroller.getCurrent2().setDescripcion(current2.getAgenteid().toString());
-        presupuestotareacontroller.getCurrent2().setAportecomitente(BigDecimal.ZERO);
-        presupuestotareacontroller.getCurrent2().setAporteorganismo(BigDecimal.ZERO);
-        presupuestotareacontroller.getCurrent2().setAporteuniversidad(BigDecimal.ZERO);
 
         try{
             if (presupuestotareacontroller.getCurrent2().getCantidad().equals(BigDecimal.ZERO)) {
 
             } else {
-                if (pax.getConsultorexterno()) {
+                if (proyectoAgente.getConsultorexterno()) {
+
+                    // CONSULTOR EXTERNO
                     presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(30), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
                     presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
+
+                    // seteamos los aportes
+                    presupuestotareacontroller.getCurrent2().setAporteuniversidad(BigDecimal.ZERO);
+                    presupuestotareacontroller.getCurrent2().setAporteorganismo(BigDecimal.ZERO);
+                    presupuestotareacontroller.getCurrent2().setAportecomitente(BigDecimal.ZERO);
                 } else {
+
+                    // DOCENTE
                     presupuestotareacontroller.getCurrent2().setTotal((presupuestotareacontroller.getCurrent2().getCantidad().divide(BigDecimal.valueOf(7), 2, RoundingMode.HALF_UP)).multiply(presupuestotareacontroller.getCurrent2().getCostounitario()));
                     presupuestotareacontroller.getCurrent2().setTotal(presupuestotareacontroller.getCurrent2().getTotal().setScale(2, RoundingMode.HALF_UP));
+
+                    // seteamos los aportes, al ser docente, el total es pagado por la universidad
+                    presupuestotareacontroller.getCurrent2().setAporteuniversidad(presupuestotareacontroller.getCurrent2().getTotal());
+                    presupuestotareacontroller.getCurrent2().setAporteorganismo(BigDecimal.ZERO);
+                    presupuestotareacontroller.getCurrent2().setAportecomitente(BigDecimal.ZERO);
+
+
                 }
             }
         }catch (NullPointerException npe){

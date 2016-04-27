@@ -323,10 +323,10 @@ public class PresupuestoRubroController implements Serializable {
 
         System.out.println("SUMAR GASTOS");
 
-        System.out.println("Valor Anterior >> " + event.getOldValue());
-        System.out.println("Valor Nuevo >> " + event.getNewValue());
+//        System.out.println("Valor Anterior >> " + event.getOldValue());
+//        System.out.println("Valor Nuevo >> " + event.getNewValue());
     
-        System.out.println("PresupuestoRubroController - sumarGastos - presupuestosrubros: " + presupuestosrubros.size());
+//        System.out.println("PresupuestoRubroController - sumarGastos - presupuestosrubros: " + presupuestosrubros.size());
         
         if (presupuestosrubros == null) {
             presupuestosrubros = new ArrayList<PresupuestoRubro>();

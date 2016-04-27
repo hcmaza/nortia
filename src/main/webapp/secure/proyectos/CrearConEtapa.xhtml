@@ -24,19 +24,19 @@
 
                     <p:tooltip/>
 
-                    <p:commandButton value="Idea Proyecto - Resumen" icon="fa fa-stack-exchange"
+<!--                    <p:commandButton value="Idea Proyecto - Resumen" icon="fa fa-stack-exchange"
                                      styleClass="Fright OrangeButton FloatNoneOnMobile"
-                                     actionListener="#{proyectoController.mostrarDialogIdeaProyecto()}"/>
+                                     actionListener="# {proyectoController.mostrarDialogIdeaProyecto()}"/>-->
 
 
                     <div class="Card ">
                         <div class="ui-fluid">
                             <div class="CardTopic">
-                                <i class="icon-list Fs30 Fleft MarRight10"></i>
+                                <i class="icon-list Fs50 Fleft MarRight10"></i>
 
                                 <div class="EmptyBox10 ShowOnMobile"></div>
                                 Proyecto N° #{proyectoController.selected.id} <br/>
-                                <span class="CardSubTopic"> #{proyectoController.selected.nombre} </span>
+                                <span class="CardSubTopic Fs16"> #{proyectoController.selected.nombre} </span>
 
                                 <div class="SeparatorFull"></div>
 
@@ -582,9 +582,6 @@
                                             <f:convertNumber minFractionDigits="2" />
                                         </h:outputText>
                                     </p:column>
-                                    <p:column headerText="Observación">
-                                        <h:outputText value="#{tareaagente.observacion}" />
-                                    </p:column>
 
                                     <p:column>
                                         <f:facet name="header">
@@ -690,6 +687,8 @@
                             </div>
                         </f:facet>
 
+                        <p:messages autoUpdate="true" showDetail="true" escape="false" closable="true" />
+
                         <p:panel id="paneltareaagentepresupuesto" style="border: none;">
 
                             <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-4, ui-grid-col-8" styleClass="ui-panelgrid-blank" >
@@ -703,12 +702,12 @@
                                 <p:outputLabel id="agenteparticipacion" style="font-weight: bold"
                                                value="#{ (agenteViewController.buscarProyectoAgentePorAgenteId(agenteViewController.selected.id, proyectoController.selected.id).consultorexterno) ? 'Consultor Externo' : 'Docente' }"/>
 
-                                <p:outputLabel rendered="#{tareaAgenteController.current2.horasdedicadas > -1}" value="Horas dedicadas:" for="horasdedicadas" styleClass="FontBold" style="line-height: 250%;"/>
+                                <p:outputLabel rendered="#{tareaAgenteController.current2.horasdedicadas > -1}" value="Horas/Semana dedicadas:" for="horasdedicadas" styleClass="FontBold" style="line-height: 250%;"/>
                                 <p:inputText size="10" rendered="#{tareaAgenteController.current2.horasdedicadas > -1}"
                                              id="horasdedicadas"
                                              value="#{tareaAgenteController.current2.horasdedicadas}"
                                              title="Horas Dedicadas" styleClass="ui-grid-col-12 TexAlRight">
-                                    <p:ajax event="keyup" listener="#{tareaAgenteController.onCellEdit()}" update=":formd:agentetotalpresupuesto"/>
+                                    <p:ajax event="keyup" listener="#{tareaAgenteController.onCellEdit()}" update=":formd:agentetotalpresupuesto, :formd:panelAportesRRHH"/>
                                 </p:inputText>
 
                                 <p:outputLabel value="Costo unitario:" for="agentecostounitario" styleClass="FontBold"/>
@@ -716,51 +715,57 @@
                                     <f:convertNumber type="currency" currencySymbol="$"  groupingUsed="false" locale="es_AR"/>
                                 </p:outputLabel>
 
-                                <p:outputLabel value="Cantidad:" for="agentecantidad" styleClass="FontBold"/>
+                                <p:outputLabel value="Dias en Tarea:" for="agentecantidad" styleClass="FontBold"/>
                                 <p:outputLabel id="agentecantidad"
                                                value="#{presupuestoTareaController.current2.cantidad}"
                                                title="Cantidad">
                                     <f:convertNumber type="number" groupingUsed="false" locale="es_AR"/>
                                 </p:outputLabel>
 
-                                <p:outputLabel value="Total:" for="agentetotalpresupuesto" styleClass=" FontBold" />
+                                <p:outputLabel value="Costo Total:" for="agentetotalpresupuesto" styleClass=" FontBold" />
                                 <p:outputLabel id="agentetotalpresupuesto" value="$ #{presupuestoTareaController.current2.total}" title="Total" styleClass="FontBold Blue">
                                 </p:outputLabel>
+
+                                <p:outputLabel value="Aporte:" for="agenteaporterealizado" styleClass=" FontBold" rendered="#{!tareaAgenteController.agenteEsConsultorExterno()}" />
+                                <p:outputLabel id="agenteaporterealizado" value="Realizado por la Universdad" styleClass="FontBold Blue" rendered="#{!tareaAgenteController.agenteEsConsultorExterno()}" />
 
                             </p:panelGrid>
 
                             <div class="Separator" />
 
-                            <p:panelGrid columns="2" layout="grid" columnClasses="Blue FontBold MarTop10" styleClass="ui-panelgrid-blank" >
+                            <p:outputPanel id="panelAportesRRHH" rendered="#{tareaAgenteController.agenteEsConsultorExterno()}">
+                                <p:panelGrid columns="2" layout="grid" columnClasses="Blue FontBold MarTop10" styleClass="ui-panelgrid-blank" >
 
-                                <p:outputLabel value="Aporte de la Universidad:" for="agenteaporteuniversidad"/>
-                                <p:inputText id="agenteaporteuniversidad"
-                                             value="#{presupuestoTareaController.current2.aporteuniversidad}"
-                                             title="Aporteuniversidad" styleClass="ui-grid-col-12 TexAlRight">
-                                    <f:convertNumber type="number" groupingUsed="false" locale="en"/>
-                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
-                                </p:inputText>
+                                    <p:outputLabel value="Aporte de la Universidad:" for="agenteaporteuniversidad"/>
+                                    <p:inputText id="agenteaporteuniversidad"
+                                                 value="#{presupuestoTareaController.current2.aporteuniversidad}"
+                                                 title="Aporteuniversidad" styleClass="ui-grid-col-12 TexAlRight">
+                                        <f:convertNumber type="number" groupingUsed="false" locale="en"/>
+                                        <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
+                                    </p:inputText>
 
-                                <p:outputLabel value="Aporte del Organismo:" for="agenteaporteorganismo"/>
-                                <p:inputText id="agenteaporteorganismo"
-                                             value="#{presupuestoTareaController.current2.aporteorganismo}"
-                                             title="Aporteorganismo" styleClass="ui-grid-col-12 TexAlRight">
-                                    <f:convertNumber type="number" groupingUsed="false" locale="en"/>
-                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
-                                </p:inputText>
+                                    <p:outputLabel value="Aporte del Organismo:" for="agenteaporteorganismo"/>
+                                    <p:inputText id="agenteaporteorganismo"
+                                                 value="#{presupuestoTareaController.current2.aporteorganismo}"
+                                                 title="Aporteorganismo" styleClass="ui-grid-col-12 TexAlRight">
+                                        <f:convertNumber type="number" groupingUsed="false" locale="en"/>
+                                        <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
+                                    </p:inputText>
 
-                                <p:outputLabel value="Aporte del Comitente:" for="agenteaportecomitente"/>
-                                <p:inputText id="agenteaportecomitente"
-                                             value="#{presupuestoTareaController.current2.aportecomitente}"
-                                             title="Aportecomitente" validatorMessage="Ingrese solo números" styleClass="ui-grid-col-12 TexAlRight">
-                                    <f:convertNumber type="number" groupingUsed="false" locale="en"/>
-                                    <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
-                                </p:inputText>
-                            </p:panelGrid>
+                                    <p:outputLabel value="Aporte del Comitente:" for="agenteaportecomitente"/>
+                                    <p:inputText id="agenteaportecomitente"
+                                                 value="#{presupuestoTareaController.current2.aportecomitente}"
+                                                 title="Aportecomitente" validatorMessage="Ingrese solo números" styleClass="ui-grid-col-12 TexAlRight">
+                                        <f:convertNumber type="number" groupingUsed="false" locale="en"/>
+                                        <p:ajax event="keyup" listener="#{presupuestoTareaController.verificarAportes2}"/>
+                                    </p:inputText>
+                                </p:panelGrid>
+
+                                <div class="Separator"   />
+
+                            </p:outputPanel>
 
                         </p:panel>
-
-                        <div class="Separator" />
 
                         <div class="center">
                             <p:commandButton id="agregaragentealpresupuesto" value="Agregar Persona"
@@ -846,25 +851,6 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </p:outputLabel>
 
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Días"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.dias}"/>
-
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Prioridad"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.prioridad}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Estado"/>
-                                </f:facet>
-                                <p:outputLabel value="#{item.estado} %" />
                             </p:column>
 
                             <p:column exportable="false">
