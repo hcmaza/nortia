@@ -345,3 +345,79 @@
     border: none;
 }
 
+/*LOGIN*/
+
+.fondoPantalla{
+
+    /*background: url(../img/laboratorio.jpg) no-repeat center center fixed;*/
+    background:url("#{resource['img:laboratorio.jpg']}") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
+
+.barraTransparenteAbajo {
+
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    background: -webkit-linear-gradient(top, rgba(2, 136, 209, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%);
+    background: linear-gradient(to bottom, rgba(2, 136, 209, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%);
+    -webkit-transition: opacity 0.1s, -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    transition: opacity 0.2s, -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    transition: opacity 0.2s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    transition: opacity 0.2s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25), -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+
+}
+
+.logoBarraAbajo {
+    float: right;
+
+    /*width: inherit;  *//* This makes the next two lines work in IE8. */
+    max-width: 100%; /* Add !important if needed. */
+    height: auto;
+    max-height: 150px;
+}
+
+.CardLogin{
+    /*width: 20%;*/
+    position: relative;
+    float: right;
+    right: 2%;
+    top: 10%;
+
+    background: -webkit-linear-gradient(top, rgba(50, 50, 50, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%);
+    /*background: linear-gradient(to bottom, rgba(50, 50, 50, 0.5) 0%, rgba(0, 0, 0, 0.6) 100%);*/
+    background: linear-gradient(to bottom, rgba(50, 50, 50, 0.57) 0%, rgba(0, 0, 0, 0.86) 100%);
+    -webkit-transition: opacity 0.1s, -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    transition: opacity 0.2s, -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    transition: opacity 0.2s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    transition: opacity 0.2s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25), -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.BordeNegro{
+    border: solid black 1px;
+}
+
+.cajaTextoLogin{
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.5);
+    color: #439fe0 !important;
+    font-weight: bold;
+}
+
+.cajaTextoLogin.ui-state-focus, .cajaTextoLogin.ui-state-hover{
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.80);
+    color: black !important;
+    font-weight: bold;
+}
