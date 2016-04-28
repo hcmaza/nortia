@@ -421,3 +421,21 @@
     color: black !important;
     font-weight: bold;
 }
+
+.divVinculacionTecnologica{
+    /*width: 20%;*/
+    position: relative;
+    float: left;
+    left: 2%;
+    top: 40%;
+
+}
+
+.logoVinculacionTecnologica{
+    float: right;
+
+    /*width: inherit;  *//* This makes the next two lines work in IE8. */
+    max-width: 100%; /* Add !important if needed. */
+    height: auto;
+    max-height: 200px;
+}
