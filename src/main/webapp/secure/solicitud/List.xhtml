@@ -15,13 +15,23 @@
                     <f:event type="preRenderView" listener="#{proyectoController.buscarProyectosAgenteFalse(agenteController.selected.id)}" ></f:event>
 
                     <h:form >
-                        <p:panel id="pprincipal" header="Lista de Ideas-Proyecto" >
+
+                        <div class="Card ">
+                        <div class="ui-fluid">
+                        <div class="CardTopic">
+                            <i class="fa fa-paper-plane-o Fs30 Fleft MarRight10"/>
+
+                            <div class="EmptyBox10 ShowOnMobile"></div>
+                            Mis Ideas-Proyecto <br/>
+                            <span class="CardSubTopic"> Listado de Ideas-Proyecto Creadas. </span>
+
+                            <div class="SeparatorFull"></div>
+
                             <h:panelGroup id="messagePanel" layout="block">
                                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                             </h:panelGroup>
-
-                            <h:outputText escape="false" value="La lista de ideas-proyecto está vacía" rendered="#{proyectoController.items.rowCount == 0}"/>
-
+                            <h:outputText escape="false" value="No hay registros"
+                                          rendered="#{proyectoController.items.rowCount == 0}"/>
                             <h:panelGroup rendered="#{proyectoController.items.rowCount > 0}">
 
                                 <p:dataTable 
@@ -37,7 +47,7 @@
                                     rowsPerPageTemplate="10,15,30" 
                                     rowIndexVar="indice"
                                     rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                    styleClass="tabla tablaAjustada"  >
+                                    styleClass="tabla tablaAjustada TablaColorEncabezado">
 
                                     <!--<p:ajax event="filter" listener="# {proyectoController.onFilterIdeasProyecto}" update = "@this"/>-->
 
@@ -107,10 +117,10 @@
                                     </p:column>
 
                                     <p:column exportable="false">
-                                        <p:commandButton icon="ui-icon-search" action="#{proyectoController.prepareView}" >
+                                        <p:commandButton title="Ver Idea-Proyecto" icon="fa fa-search" styleClass="GreenButton White" action="#{proyectoController.prepareView}"  >
                                             <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
                                         </p:commandButton>
-                                        <p:commandButton icon="ui-icon-pencil" action="#{proyectoController.prepareEdit}"  >
+                                        <p:commandButton title="Editar Idea-Proyecto" icon="fa fa-pencil" styleClass="OrangeButton White" action="#{proyectoController.prepareEdit}"  >
                                             <f:setPropertyActionListener value="#{item}" target="#{proyectoController.selected}" />
                                         </p:commandButton>
                                     </p:column>    
@@ -118,33 +128,43 @@
                                 </p:dataTable>
                             </h:panelGroup>
 
-                            <br />
-                            <p:panel header="Exportar"> 
-                                <p:commandLink action="#{proyectoController.imprimirListaIdeasProyecto()}" ajax="false">  
-                                    <p:graphicImage value="/resources/img/print_printer.png" />  
-                                </p:commandLink>                          
-                                <p:commandLink action="#{proyectoController.pdfListaIdeasProyecto()}" ajax="false">  
-                                    <p:graphicImage value="/resources/img/pdf.png" />  
-                                </p:commandLink>                          
-                                <p:commandLink>  
-                                    <p:graphicImage value="/resources/img/excel.png" />  
-                                    <p:dataExporter type="xls" target="tbl" fileName="datos" pageOnly="true"/>  
-                                </p:commandLink>  
-                                <p:commandLink>  
-                                    <p:graphicImage value="/resources/img/csv.png" />  
-                                    <p:dataExporter type="csv" target="tbl" fileName="datos" pageOnly="true"/>  
-                                </p:commandLink>  
+                        </div>
+                        </div>
+                        </div>
 
-                                <p:commandLink>  
-                                    <p:graphicImage value="/resources/img/xml.png" />  
-                                    <p:dataExporter type="xml" target="tbl" fileName="datos" pageOnly="true"/>  
-                                </p:commandLink>  
-                            </p:panel>  
-                            <br />
-                            <h:link outcome="/index" value="Inicio"/>                    
-                        </p:panel>
+                        <div class="Card " style="margin-top: 10px;">
+                            <div class="ui-fluid">
+                                <div class="CardTopic">
+                                    <i class="icon-share Fs30 Fleft MarRight10"/>
 
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    Exportar <br/>
 
+                                    <div class="SeparatorFull"></div>
+
+                                    <h:commandLink action="#{proyectoController.imprimirListaIdeasProyecto()}">
+                                        <p:graphicImage value="/resources/img/print_printer.png"/>
+                                    </h:commandLink>
+                                    <h:commandLink action="#{proyectoController.pdfListaIdeasProyecto()}">
+                                        <p:graphicImage value="/resources/img/pdf.png"/>
+                                    </h:commandLink>
+                                    <h:commandLink>
+                                        <p:graphicImage value="/resources/img/excel.png"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="datos" pageOnly="true"/>
+                                    </h:commandLink>
+                                    <h:commandLink>
+                                        <p:graphicImage value="/resources/img/csv.png"/>
+                                        <p:dataExporter type="csv" target="tbl" fileName="datos" pageOnly="true"/>
+                                    </h:commandLink>
+
+                                    <h:commandLink>
+                                        <p:graphicImage value="/resources/img/xml.png"/>
+                                        <p:dataExporter type="xml" target="tbl" fileName="datos" pageOnly="true"/>
+                                    </h:commandLink>
+
+                                </div>
+                            </div>
+                        </div>
 
                     </h:form>
                 </div>       
