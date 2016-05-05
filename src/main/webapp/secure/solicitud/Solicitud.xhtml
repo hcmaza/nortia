@@ -45,20 +45,44 @@
 
                                             <p:separator style="margin-top: 10px; margin-bottom: 10px;" />
 
-                                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-6,ui-grid-col-6"  >                    
-                                                <p:fieldset legend="Tipo de Proyecto" style="margin: 0px 0px 10px 0px; width: 100%;"  >  
-                                                    <p:selectOneMenu id="tipoproyectoid" value="#{proyectoController.selected.tipoproyectoid}" required="true" requiredMessage="Seleccione Tipo de Proyecto" >
-                                                        <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}"/>
-                                                        <p:ajax update=":tabviewTodo:formTabConvocatoria:tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />  
-                                                    </p:selectOneMenu>    
-                                                </p:fieldset>                            
+                                            <div class="Container50 Responsive100" >
+                                                <div class="Container100">
+                                                    <div class="ContainerIndent">
+                                                        <div class="Card">
+                                                            <div class="CardTopic">
+                                                                <i class="fa fa-hand-o-right Fs30 Fleft MarRight10"></i>
+                                                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                                                Tipo de Proyecto <br />
+                                                                <span class="CardSubTopic">Seleccionar el tipo de la idea-proyecto.</span> </div>
+                                                            <div class="SeparatorFull"></div>
 
-                                                <p:fieldset legend="Avance de la Idea-Proyecto" >             
-                                                    <p:selectOneMenu widgetVar="wavanceproyectoid" id="avanceproyectoid"  value="#{proyectoController.selected.avanceproyectoid}" label="Avance de Proyecto" required="true" requiredMessage="Seleccione el estado de avance"  >
-                                                        <f:selectItems  value="#{avanceproyectoController.itemsAvailableSelectOne}"/>
-                                                    </p:selectOneMenu>
-                                                </p:fieldset>                                                 
-                                            </p:panelGrid>
+                                                            <p:selectOneMenu id="tipoproyectoid" value="#{proyectoController.selected.tipoproyectoid}" required="true" requiredMessage="Seleccione Tipo de Proyecto" >
+                                                                <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}"/>
+                                                                <p:ajax update=":tabviewTodo:formTabConvocatoria:tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />
+                                                            </p:selectOneMenu>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="Container50 Responsive100" >
+                                                <div class="Container100">
+                                                    <div class="ContainerIndent">
+                                                        <div class="Card">
+                                                            <div class="CardTopic">
+                                                                <i class="fa fa-forward Fs30 Fleft MarRight10"></i>
+                                                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                                                Avance de la Idea-Proyecto <br />
+                                                                <span class="CardSubTopic">Seleccionar el avance actual de la idea-proyecto.</span> </div>
+                                                            <div class="SeparatorFull"></div>
+
+                                                            <p:selectOneMenu widgetVar="wavanceproyectoid" id="avanceproyectoid"  value="#{proyectoController.selected.avanceproyectoid}" label="Avance de Proyecto" required="true" requiredMessage="Seleccione el estado de avance"  >
+                                                                <f:selectItems  value="#{avanceproyectoController.itemsAvailableSelectOne}"/>
+                                                            </p:selectOneMenu>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </h:form>
 
