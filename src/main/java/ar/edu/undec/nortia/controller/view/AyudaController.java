@@ -1,6 +1,7 @@
 
 package ar.edu.undec.nortia.controller.view;
 
+import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -12,7 +13,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class AyudaController {
+public class AyudaController implements Serializable {
     
     private String textoAyuda = "";
 
@@ -28,6 +29,8 @@ public class AyudaController {
     }
     
     public void setearTextoAyudaPorClave(String clave){
+
+        System.out.println("AyudaController >> setearTextoAyudaPorClave >> " + clave);
         
         textoAyuda = ResourceBundle.getBundle("/Bundle").getString(clave);
     }
@@ -37,6 +40,8 @@ public class AyudaController {
     } 
     
     public String mostrarTextoAyudaPorClave(String clave){
+        System.out.println("AyudaController >> mostrarTextoAyudaPorClave >> " + clave);
+
         return ResourceBundle.getBundle("/Bundle").getString(clave);
     } 
 }

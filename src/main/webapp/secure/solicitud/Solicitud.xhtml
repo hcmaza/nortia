@@ -328,63 +328,85 @@
 
                                             <p:separator />
 
-                                            <p:fieldset legend="Convocatoria" style="margin-bottom:5px">
 
-                                                <p:dataTable widgetVar="wconvocatoria" paginator="true" id="tconvocatoria" var="conv" 
-                                                             value="#{convocatoriaController.items}" 
-                                                             selection="#{convocatoriaController.selected}" 
-                                                             selectionMode="single" rowKey="#{conv.id}" 
-                                                             paginatorPosition="bottom" paginatorAlwaysVisible="false" 
-                                                             rowIndexVar="indice" 
-                                                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             reflow="true" styleClass="tabla tablaAjustada">  
-                                                    <f:facet name="header">
-                                                        Seleccionar la Convocatoria
-                                                    </f:facet>
-                                                    <p:column headerText="Convocatoria" sortBy="#{conv.convocatoria}">  
-                                                        <h:outputText value="#{conv.convocatoria}" />  
-                                                    </p:column> 
+                                            <div class="Container100">
+                                                <div class="ContainerIndent">
+                                                    <div class="Card">
+                                                        <div class="CardTopic">
+                                                            <i class="fa fa-volume-up Fs30 Fleft MarRight10"></i>
+                                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                                            Convocatoria <br />
+                                                            <span class="CardSubTopic">Las convocatorias se filtran de acuerdo al tipo de proyecto y al tipo de financiamiento.</span> </div>
 
-                                                    <p:column headerText="Organismo" sortBy="#{conv.organismo}">  
-                                                        <h:outputText value="#{conv.organismo}" />  
-                                                    </p:column> 
-                                                    <p:column headerText="Tipo de Proyecto" sortBy="#{conv.tipoproyectoid.tipo}" filterBy="#{conv.tipoproyectoid.tipo}" filterMatchMode="exact" >  
-                                                        <f:facet name="filter">
-                                                            <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
-                                                                <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
-                                                                <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}" />
-                                                            </p:selectOneMenu>
-                                                        </f:facet>
-                                                        <h:outputText value="#{conv.tipoproyectoid.tipo}" />  
-                                                    </p:column>
-                                                    <p:column headerText="Tipo de Financiamiento" sortBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterMatchMode="exact" >  
-                                                        <f:facet name="filter">
-                                                            <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
-                                                                <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
-                                                                <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}" />
-                                                            </p:selectOneMenu>
-                                                        </f:facet>
-                                                        <p:outputLabel value="#{conv.tipofinanciamientoid.tipofinanciamiento}"  />
-                                                    </p:column>
-                                                    <p:column headerText="Fecha de Cierre" sortBy="#{conv.fechacierre}">  
-                                                        <h:outputText value="#{conv.fechacierre}">
-                                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
-                                                        </h:outputText>  
-                                                    </p:column> 
-                                                    <p:column headerText="Monto Financiamiento" sortBy="#{conv.montofinanciamiento}">  
-                                                        <h:outputText value="#{conv.montofinanciamiento}" />  
-                                                    </p:column> 
-                                                    <p:column headerText="Link"> 
-                                                        <a target="_blank" href="#{conv.link}" >Link</a>
-                                                    </p:column> 
-                                                    <p:column headerText=" " style="width: auto;"> 
-                                                        <p:commandButton id="viewButton"  rendered="#{convocatoriaController.selected ne null}" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
-                                                                         update="@widgetVar(dconvocatoria)" oncomplete="PF('dconvocatoria').show()" >
-                                                            <f:setPropertyActionListener value="#{conv}" target="#{convocatoriaController.selected}" />
-                                                        </p:commandButton>  
-                                                    </p:column>                    
-                                                </p:dataTable>               
-                                            </p:fieldset>
+                                                        <div class="SeparatorFull"></div>
+
+                                                        <p:dataTable id="tconvocatoria" widgetVar="wconvocatoria" paginator="true"
+                                                                     var="conv"
+                                                                     value="#{convocatoriaController.listaConvocatorias}"
+                                                                     filteredValue="#{convocatoriaController.tablafiltrada}"
+                                                                     selection="#{convocatoriaController.selected}"
+                                                                     rowKey="#{conv.id}" selectionMode="single"
+                                                                     paginatorPosition="bottom"
+                                                                     styleClass="tabla tablaAjustada" emptyMessage="No hay convocatorias abiertas, con los valores de filtro.">
+
+                                                            <p:ajax event="rowSelect" listener="#{convocatoriaController.solicitudSeleccionConvocatoria()}" />
+
+                                                            <f:facet name="header">
+                                                                Seleccionar la Convocatoria
+                                                                <br />
+                                                                <p:commandButton id="ayudaSeleccionConvocatoria" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPConvocatoriaTabla')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                                <p:overlayPanel for="ayudaSeleccionConvocatoria" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                                    <h:outputText value="Seleccione la convocatoria, haciendo click sobre ella." />
+                                                                </p:overlayPanel>
+                                                            </f:facet>
+                                                            <!--<p:column selectionMode="single"/>-->
+                                                            <p:column headerText="Convocatoria" sortBy="#{conv.convocatoria}">
+                                                                <h:outputText value="#{conv.convocatoria}" />
+                                                            </p:column>
+
+                                                            <p:column headerText="Organismo" sortBy="#{conv.organismo}">
+                                                                <h:outputText value="#{conv.organismo}" />
+                                                            </p:column>
+                                                            <p:column headerText="Tipo de Proyecto" sortBy="#{conv.tipoproyectoid.tipo}" filterBy="#{conv.tipoproyectoid.tipo}" filterMatchMode="exact" >
+                                                                <f:facet name="filter">
+                                                                    <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
+                                                                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
+                                                                        <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}" />
+                                                                    </p:selectOneMenu>
+                                                                </f:facet>
+                                                                <h:outputText value="#{conv.tipoproyectoid.tipo}" />
+                                                            </p:column>
+                                                            <p:column headerText="Tipo de Financiamiento" sortBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterMatchMode="exact" >
+                                                                <f:facet name="filter">
+                                                                    <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
+                                                                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
+                                                                        <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}" />
+                                                                    </p:selectOneMenu>
+                                                                </f:facet>
+                                                                <p:outputLabel value="#{conv.tipofinanciamientoid.tipofinanciamiento}"  />
+                                                            </p:column>
+                                                            <p:column headerText="Fecha de Cierre" sortBy="#{conv.fechacierre}">
+                                                                <h:outputText value="#{conv.fechacierre}">
+                                                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                                                </h:outputText>
+                                                            </p:column>
+                                                            <p:column headerText="Monto Financiamiento" sortBy="#{conv.montofinanciamiento}">
+                                                                <h:outputText value="#{conv.montofinanciamiento}" />
+                                                            </p:column>
+                                                            <p:column headerText="Link">
+                                                                <a target="_blank" href="#{conv.link}" >Link</a>
+                                                            </p:column>
+                                                            <p:column headerText=" " style="width: auto;">
+                                                                <p:commandButton id="viewButton"  rendered="#{convocatoriaController.selected ne null}" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
+                                                                                 update=":formDialogoConvocatoria:dconvocatoria" oncomplete="PF('dconvocatoria').show()" >
+                                                                    <f:setPropertyActionListener value="#{conv}" target="#{convocatoriaController.selected}" />
+                                                                </p:commandButton>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </div>
+                                                </div>
+                                            </div>
+
 
                                         </h:form>
 
@@ -420,6 +442,7 @@
                                                 <f:facet name="header">
                                                     Armar el Presupuesto de la Idea-Proyecto
                                                 </f:facet>
+
                                                 <p:column style="width:20%" >
                                                     <f:facet name="header">
                                                         <h:outputText value="Rubro"/>
@@ -427,9 +450,35 @@
                                                     <h:outputText style="width:96%;" value="#{item.rubro.abreviado}" />
                                                 </p:column>
 
+                                                <p:column style="width:20%;"  >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
+                                                        <br />
+                                                        <p:commandButton id="ayudaPresupuestoAporteUniversidad" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteUniversidad')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                        <p:overlayPanel for="ayudaPresupuestoAporteUniversidad" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                            <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
+                                                        </p:overlayPanel>
+                                                    </f:facet>
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:outputText value="$ #{item.gastouniversidad}" styleClass="TexAlRight Fright" >
+                                                                <f:convertNumber pattern="#0.00" />
+                                                            </h:outputText>
+                                                        </f:facet>
+                                                        <f:facet name="input">
+                                                            <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" styleClass="TexAlRight" />
+                                                        </f:facet>
+                                                    </p:cellEditor>
+                                                </p:column>
+
                                                 <p:column style="width:20%; "  >
                                                     <f:facet name="header">
                                                         <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                        <br />
+                                                        <p:commandButton id="ayudaPresupuestoAporteOrganismo" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteOrganismo')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                        <p:overlayPanel for="ayudaPresupuestoAporteOrganismo" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                            <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
+                                                        </p:overlayPanel>
                                                     </f:facet>
                                                     <p:cellEditor>
                                                         <f:facet name="output">
@@ -446,6 +495,11 @@
                                                 <p:column style="width:20%;"  >
                                                     <f:facet name="header">
                                                         <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                        <br />
+                                                        <p:commandButton id="ayudaPresupuestoAporteComitente" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteComitente')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                        <p:overlayPanel for="ayudaPresupuestoAporteComitente" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                            <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
+                                                        </p:overlayPanel>
                                                     </f:facet>
                                                     <p:cellEditor >
                                                         <f:facet name="output">
@@ -458,22 +512,6 @@
                                                         </f:facet>
                                                     </p:cellEditor>
 
-                                                </p:column>
-
-                                                <p:column style="width:20%;"  >
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
-                                                    </f:facet>
-                                                    <p:cellEditor>
-                                                        <f:facet name="output">
-                                                            <h:outputText value="$ #{item.gastouniversidad}" styleClass="TexAlRight Fright" >
-                                                                <f:convertNumber pattern="#0.00" />
-                                                            </h:outputText>
-                                                        </f:facet>
-                                                        <f:facet name="input">
-                                                            <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" styleClass="TexAlRight" />
-                                                        </f:facet>
-                                                    </p:cellEditor>
                                                 </p:column>
 
                                             </p:dataTable>
@@ -831,7 +869,7 @@
                 </p:dialog>
             </h:form>
 
-            <h:form>
+            <h:form id="formDialogoConvocatoria">
                 <p:dialog id="dconvocatoria" widgetVar="dconvocatoria" modal="true"  header="Convocatoria" >
 
                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
