@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1aeabbf7-67e7-416c-982e-bfdfe91a8e51" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/List.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/List.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/solicitud/List.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/solicitud/List.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nortia.iws" />
@@ -36,28 +35,18 @@
       <file leaf-file-name="Solicitud.xhtml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.880953">
-              <caret line="442" column="61" selection-start-line="442" selection-start-column="61" selection-end-line="442" selection-end-column="61" />
+            <state vertical-scroll-proportion="-8.119047">
+              <caret line="710" column="71" selection-start-line="692" selection-start-column="56" selection-end-line="710" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="List.xhtml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/List.xhtml">
+      <file leaf-file-name="CrearConEtapa.xhtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="10.708779">
-              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="List.xhtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/List.xhtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-28.09756">
-              <caret line="342" column="26" selection-start-line="310" selection-start-column="20" selection-end-line="342" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.8479657">
+              <caret line="132" column="131" selection-start-line="132" selection-start-column="131" selection-end-line="132" selection-end-column="131" />
               <folding />
             </state>
           </provider>
@@ -97,7 +86,6 @@
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/PresupuestoRubroController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/PresupuestoTareaController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/TareaAgenteController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/login.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/ConvocatoriaController.java" />
@@ -107,6 +95,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/Bundlenortia.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/secure/proyectos/List.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/secure/solicitud/List.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
       </list>
     </option>
   </component>
@@ -982,12 +971,12 @@
       <workItem from="1461638205574" duration="32649000" />
       <workItem from="1461790314448" duration="1459000" />
       <workItem from="1461807096849" duration="12254000" />
-      <workItem from="1462429053463" duration="11454000" />
+      <workItem from="1462429053463" duration="12307000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="391002000" />
+    <option name="totallyTimeSpent" value="391855000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1318,13 +1307,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24005891">
-          <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/adamantium-layout/css/adamantium-layout.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3333334">
@@ -1440,14 +1422,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.880953">
-          <caret line="442" column="61" selection-start-line="442" selection-start-column="61" selection-end-line="442" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/List.xhtml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-28.09756">
@@ -1458,8 +1432,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/List.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="10.708779">
-          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.29336187">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.119047">
+          <caret line="710" column="71" selection-start-line="692" selection-start-column="56" selection-end-line="710" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8479657">
+          <caret line="132" column="131" selection-start-line="132" selection-start-column="131" selection-end-line="132" selection-end-column="131" />
           <folding />
         </state>
       </provider>
