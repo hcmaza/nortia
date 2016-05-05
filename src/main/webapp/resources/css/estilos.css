@@ -28,6 +28,12 @@
     margin: 0px;
 }
 
+/* todas las filas de la tabla son de color blanco */
+.ui-datatable-odd{
+    background-color: white !important;
+}
+
+
 /*
  * treetable: se eliminan los bordes verticales, tipo de borde solido
  */
