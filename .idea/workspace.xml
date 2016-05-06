@@ -4,6 +4,8 @@
     <list default="true" id="1aeabbf7-67e7-416c-982e-bfdfe91a8e51" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/IndicadoresController.java" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/IndicadoresController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/SolicitudController.java" afterPath="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/SolicitudController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nortia.iws" />
@@ -53,29 +55,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Create.xhtml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Create.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.253521">
-              <caret line="245" column="121" selection-start-line="245" selection-start-column="121" selection-end-line="245" selection-end-column="121" />
+            <state vertical-scroll-proportion="0.47919145">
+              <caret line="249" column="68" selection-start-line="249" selection-start-column="68" selection-end-line="249" selection-end-column="68" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndicadoresController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IndicadoresController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/IndicadoresController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0430839">
-              <caret line="863" column="65" selection-start-line="863" selection-start-column="65" selection-end-line="863" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="918" column="54" selection-start-line="918" selection-start-column="54" selection-end-line="918" selection-end-column="54" />
               <folding>
-                <element signature="e#0#50807#0" expanded="true" />
+                <element signature="e#0#52115#0" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#3271#3272#0" expanded="true" />
                 <element signature="e#3309#3310#0" expanded="true" />
                 <element signature="e#3382#3399#0" expanded="true" />
-                <element signature="e#3831#3832#0" expanded="true" />
-                <element signature="e#3870#3871#0" expanded="true" />
+                <element signature="e#3553#3554#0" expanded="true" />
+                <element signature="e#3592#3593#0" expanded="true" />
                 <element signature="e#3943#3944#0" expanded="true" />
                 <element signature="e#3999#4000#0" expanded="true" />
                 <element signature="e#4064#4065#0" expanded="true" />
@@ -86,8 +88,8 @@
                 <element signature="e#4474#4475#0" expanded="true" />
                 <element signature="e#4533#4534#0" expanded="true" />
                 <element signature="e#4572#4573#0" expanded="true" />
-                <element signature="e#5495#5496#0" expanded="true" />
-                <element signature="e#5544#5545#0" expanded="true" />
+                <element signature="e#4763#4764#0" expanded="true" />
+                <element signature="e#4805#4806#0" expanded="true" />
                 <element signature="e#5588#5589#0" expanded="true" />
                 <element signature="e#5630#5631#0" expanded="true" />
                 <element signature="e#5698#5699#0" expanded="true" />
@@ -99,24 +101,26 @@
                 <element signature="e#9129#9412#0" expanded="true" />
                 <element signature="e#9411#9412#0" expanded="true" />
                 <element signature="e#13077#13088#0" expanded="true" />
-                <element signature="e#15997#16328#0" expanded="true" />
-                <element signature="e#16327#16328#0" expanded="true" />
-                <element signature="e#16404#16721#0" expanded="true" />
-                <element signature="e#16720#16721#0" expanded="true" />
-                <element signature="e#20526#20527#0" expanded="true" />
-                <element signature="e#20585#20586#0" expanded="true" />
-                <element signature="e#27818#28149#0" expanded="true" />
-                <element signature="e#28148#28149#0" expanded="true" />
-                <element signature="e#28217#28535#0" expanded="true" />
-                <element signature="e#28534#28535#0" expanded="true" />
-                <element signature="e#29550#29551#0" expanded="true" />
-                <element signature="e#29601#29602#0" expanded="true" />
-                <element signature="e#32164#32165#0" expanded="true" />
-                <element signature="e#32216#32217#0" expanded="true" />
-                <element signature="e#38891#38910#0" expanded="true" />
-                <element signature="e#39235#39258#0" expanded="true" />
-                <element signature="e#50059#50298#0" expanded="true" />
-                <element signature="e#50297#50298#0" expanded="true" />
+                <element signature="e#13276#13559#0" expanded="true" />
+                <element signature="e#13558#13559#0" expanded="true" />
+                <element signature="e#16842#17173#0" expanded="true" />
+                <element signature="e#17172#17173#0" expanded="true" />
+                <element signature="e#17249#17566#0" expanded="true" />
+                <element signature="e#17565#17566#0" expanded="true" />
+                <element signature="e#21371#21372#0" expanded="true" />
+                <element signature="e#21430#21431#0" expanded="true" />
+                <element signature="e#29319#29650#0" expanded="true" />
+                <element signature="e#29649#29650#0" expanded="true" />
+                <element signature="e#29718#30036#0" expanded="true" />
+                <element signature="e#30035#30036#0" expanded="true" />
+                <element signature="e#31051#31052#0" expanded="true" />
+                <element signature="e#31102#31103#0" expanded="true" />
+                <element signature="e#33665#33666#0" expanded="true" />
+                <element signature="e#33717#33718#0" expanded="true" />
+                <element signature="e#40199#40218#0" expanded="true" />
+                <element signature="e#40543#40566#0" expanded="true" />
+                <element signature="e#51367#51606#0" expanded="true" />
+                <element signature="e#51605#51606#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,7 +130,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/SolicitudController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="201" column="8" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="8" />
+              <caret line="202" column="10" selection-start-line="202" selection-start-column="10" selection-end-line="202" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -158,8 +162,8 @@
       <file leaf-file-name="estilos.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.466666">
-              <caret line="349" column="16" selection-start-line="349" selection-start-column="4" selection-end-line="349" selection-end-column="16" />
+            <state vertical-scroll-proportion="-24.133333">
+              <caret line="455" column="12" selection-start-line="455" selection-start-column="1" selection-end-line="455" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -199,11 +203,11 @@
         <option value="$PROJECT_DIR$/src/main/webapp/secure/solicitud/List.xhtml" />
         <option value="$PROJECT_DIR$/src/main/webapp/secure/proyectos/CrearConEtapa.xhtml" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/DesembolsoFacade.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/DesembolsoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/SolicitudController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/IndicadoresController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml" />
       </list>
     </option>
   </component>
@@ -1111,12 +1115,12 @@
       <workItem from="1461790314448" duration="1459000" />
       <workItem from="1461807096849" duration="12254000" />
       <workItem from="1462429053463" duration="12859000" />
-      <workItem from="1462504685339" duration="24373000" />
+      <workItem from="1462504685339" duration="30505000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="416780000" />
+    <option name="totallyTimeSpent" value="422912000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1602,40 +1606,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.466666">
-          <caret line="349" column="16" selection-start-line="349" selection-start-column="4" selection-end-line="349" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/SolicitudController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="201" column="8" selection-start-line="201" selection-start-column="8" selection-end-line="201" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.253521">
-          <caret line="245" column="121" selection-start-line="245" selection-start-column="121" selection-end-line="245" selection-end-column="121" />
+        <state vertical-scroll-proportion="-24.133333">
+          <caret line="455" column="12" selection-start-line="455" selection-start-column="1" selection-end-line="455" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/IndicadoresController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0430839">
-          <caret line="863" column="65" selection-start-line="863" selection-start-column="65" selection-end-line="863" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="918" column="54" selection-start-line="918" selection-start-column="54" selection-end-line="918" selection-end-column="54" />
           <folding>
-            <element signature="e#0#50807#0" expanded="true" />
+            <element signature="e#0#52115#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#3271#3272#0" expanded="true" />
             <element signature="e#3309#3310#0" expanded="true" />
             <element signature="e#3382#3399#0" expanded="true" />
-            <element signature="e#3831#3832#0" expanded="true" />
-            <element signature="e#3870#3871#0" expanded="true" />
+            <element signature="e#3553#3554#0" expanded="true" />
+            <element signature="e#3592#3593#0" expanded="true" />
             <element signature="e#3943#3944#0" expanded="true" />
             <element signature="e#3999#4000#0" expanded="true" />
             <element signature="e#4064#4065#0" expanded="true" />
@@ -1646,8 +1634,8 @@
             <element signature="e#4474#4475#0" expanded="true" />
             <element signature="e#4533#4534#0" expanded="true" />
             <element signature="e#4572#4573#0" expanded="true" />
-            <element signature="e#5495#5496#0" expanded="true" />
-            <element signature="e#5544#5545#0" expanded="true" />
+            <element signature="e#4763#4764#0" expanded="true" />
+            <element signature="e#4805#4806#0" expanded="true" />
             <element signature="e#5588#5589#0" expanded="true" />
             <element signature="e#5630#5631#0" expanded="true" />
             <element signature="e#5698#5699#0" expanded="true" />
@@ -1659,25 +1647,43 @@
             <element signature="e#9129#9412#0" expanded="true" />
             <element signature="e#9411#9412#0" expanded="true" />
             <element signature="e#13077#13088#0" expanded="true" />
-            <element signature="e#15997#16328#0" expanded="true" />
-            <element signature="e#16327#16328#0" expanded="true" />
-            <element signature="e#16404#16721#0" expanded="true" />
-            <element signature="e#16720#16721#0" expanded="true" />
-            <element signature="e#20526#20527#0" expanded="true" />
-            <element signature="e#20585#20586#0" expanded="true" />
-            <element signature="e#27818#28149#0" expanded="true" />
-            <element signature="e#28148#28149#0" expanded="true" />
-            <element signature="e#28217#28535#0" expanded="true" />
-            <element signature="e#28534#28535#0" expanded="true" />
-            <element signature="e#29550#29551#0" expanded="true" />
-            <element signature="e#29601#29602#0" expanded="true" />
-            <element signature="e#32164#32165#0" expanded="true" />
-            <element signature="e#32216#32217#0" expanded="true" />
-            <element signature="e#38891#38910#0" expanded="true" />
-            <element signature="e#39235#39258#0" expanded="true" />
-            <element signature="e#50059#50298#0" expanded="true" />
-            <element signature="e#50297#50298#0" expanded="true" />
+            <element signature="e#13276#13559#0" expanded="true" />
+            <element signature="e#13558#13559#0" expanded="true" />
+            <element signature="e#16842#17173#0" expanded="true" />
+            <element signature="e#17172#17173#0" expanded="true" />
+            <element signature="e#17249#17566#0" expanded="true" />
+            <element signature="e#17565#17566#0" expanded="true" />
+            <element signature="e#21371#21372#0" expanded="true" />
+            <element signature="e#21430#21431#0" expanded="true" />
+            <element signature="e#29319#29650#0" expanded="true" />
+            <element signature="e#29649#29650#0" expanded="true" />
+            <element signature="e#29718#30036#0" expanded="true" />
+            <element signature="e#30035#30036#0" expanded="true" />
+            <element signature="e#31051#31052#0" expanded="true" />
+            <element signature="e#31102#31103#0" expanded="true" />
+            <element signature="e#33665#33666#0" expanded="true" />
+            <element signature="e#33717#33718#0" expanded="true" />
+            <element signature="e#40199#40218#0" expanded="true" />
+            <element signature="e#40543#40566#0" expanded="true" />
+            <element signature="e#51367#51606#0" expanded="true" />
+            <element signature="e#51605#51606#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/undec/nortia/controller/view/SolicitudController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="202" column="10" selection-start-line="202" selection-start-column="10" selection-end-line="202" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitudes/Create.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47919145">
+          <caret line="249" column="68" selection-start-line="249" selection-start-column="68" selection-end-line="249" selection-end-column="68" />
+          <folding />
         </state>
       </provider>
     </entry>

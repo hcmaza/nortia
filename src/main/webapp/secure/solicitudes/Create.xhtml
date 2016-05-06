@@ -185,7 +185,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="Container60 Responsive ClearBoth" style="margin-top: 10px;">
+                                    <div class="Container50 Responsive ClearBoth" style="margin-top: 10px;">
                                         <div class="Container100">
                                             <div class="ContainerIndent">
                                                 <div class="Card Padding0px">
@@ -197,13 +197,13 @@
                                                     </div>
 
                                                     <div class="Container100">
-                                                        <div class="Container50">
-                                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
+                                                        <div class="Container40">
+                                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect" style="border-left: none; border-right: none; border-bottom: none;">
                                                                 <div class="EmptyBox5"></div>
                                                                 <p:chart type="donut" model="#{indicadoresController.modeloDonaDisponiblePorRubro}" responsive="true" style="max-height: 260px; color: white; " widgetVar="wvDona" />
                                                             </div>
                                                         </div>
-                                                        <div class="Container50">
+                                                        <div class="Container60">
                                                             <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
                                                                 <p:panelGrid id="gridSaldosRubro" styleClass="Fs10 WhiteBack ui-grid-col-12 ui-noborder SinBorde" >
                                                                     <ui:repeat value="#{indicadoresController.listaSaldosDeRubro.keySet().toArray()}" var="rubro"  >
@@ -228,7 +228,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="Container40 Responsive" style="margin-top: 10px;">
+                                    <div class="Container50 Responsive" style="margin-top: 10px;">
                                         <div class="Container100">
                                             <div class="ContainerIndent">
                                                 <div class="Card Padding0px">
@@ -242,17 +242,18 @@
                                                     <div class="Container100">
                                                         <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
                                                             <div class="EmptyBox5"></div>
-                                                            <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
+                                                            <div class="FontRobotoLight Fs16 White">
                                                                 <p:chart type="bar" model="#{indicadoresController.modeloBarraEjecutadoPorRubros}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
-                                                                <p:panelGrid id="gridEjecutadosRubro" columns="3" layout="grid" styleClass="ui-panelgrid-blank" style="background-color: #F9F9F9;" >
-                                                                    <h:outputText value="$ 1345,45" styleClass="Fs16 Black FontBold" />
-                                                                    <h:outputText value="$ 34.565,3" styleClass="Fs16 Black FontBold" />
-                                                                    <h:outputText value="$ 67.543,18" styleClass="Fs16 Black FontBold" />
 
-                                                                    <h:outputText value="BIENES DE USO" styleClass="Fs10 Gray" />
-                                                                    <h:outputText value="PASAJES Y VIATICOS" styleClass="Fs10 Gray" />
-                                                                    <h:outputText value="BIENES DE CONSUMO" styleClass="Fs10 Gray" />
-                                                                </p:panelGrid>
+                                                                <ui:repeat value="#{indicadoresController.listaEjecutadoRubro}" var="rubro"  >
+
+                                                                    <div class="Card Gris1Back White Fs16 FontBold DisplayCard">
+                                                                        <h:outputText value="$ #{rubro.monto}" styleClass="Fs12 White" />
+                                                                        <div class="EmptyBox10" ></div>
+                                                                        <i class="#{rubro.icono} Fs30" style="color: #{rubro.coloricono}"></i>
+                                                                    </div>
+
+                                                                </ui:repeat>
                                                             </div>
                                                         </div>
                                                     </div>

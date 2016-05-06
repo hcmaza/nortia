@@ -200,7 +200,7 @@ public class SolicitudController implements Serializable {
         IndicadoresController indicadorescontroller = (IndicadoresController) context.getApplication().evaluateExpressionGet(context, "#{indicadoresController}", IndicadoresController.class);
         indicadorescontroller.crearModeloLinealEvolucionDesembolsosEjecuciones();
         //indicadorescontroller.crearModeloDonaDisponiblePorRubro();
-        indicadorescontroller.crearModeloBarraHorizontal();
+        //indicadorescontroller.crearModeloBarraHorizontal();
 
         return "CreateSolicitud";
     }

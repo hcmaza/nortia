@@ -363,10 +363,30 @@ public class IndicadoresController implements Serializable {
         // Ejecutado por Rubro
         List<ItemRubro> ejecutado = new ArrayList<ItemRubro>();
 
-        // Llenamos el hashmap de saldos y la lista de ejecucion
-        for (Rubro r : getRubroFacade().findAll()) {
-            ejecutado.add(new ItemRubro(r.getId(), r.getRubro(), 0.0f));
+        // Llenamos la lista de ejecucion
+        List<Rubro> listaRubros = getRubroFacade().findAll();
+
+        // ordenamos la lista de rubros
+        Collections.sort(listaRubros, new Comparator<Rubro>() {
+            public int compare(Rubro o1, Rubro o2) {
+                if (o1.getOrden() == null || o2.getOrden() == null) {
+                    return 0;
+                }
+                return o1.getOrden().compareTo(o2.getOrden());
+            }
+        });
+
+        StringBuilder sb = new StringBuilder();
+
+        for (Rubro r : listaRubros) {
+            sb.append(r.getColoricono().replace("#", "") + ", ");
+
+            ejecutado.add(new ItemRubro(r.getId(), r.getRubro(), 0.0f, r.getIcono(), r.getColoricono()));
         }
+
+        // colores de los rubros
+        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1, "");
+        System.out.println("COLORES BARRA HORIZONTAL EJECUCION POR RUBROS >> " + sb.toString());
 
         for (Solicitud solicitud : listaSolicitudes) {
 
@@ -389,6 +409,9 @@ public class IndicadoresController implements Serializable {
 
         // Ejecutado por Rubro
         listaEjecutadoRubro = ejecutado;
+
+        // generar grafico de barra horizontal stack
+        crearModeloBarraHorizontal(sb.toString());
 
     }
 
@@ -657,6 +680,8 @@ public class IndicadoresController implements Serializable {
         private int id;
         private String nombrerubro;
         private float monto;
+        private String icono;
+        private String coloricono;
 
         public ItemRubro() {
         }
@@ -665,6 +690,14 @@ public class IndicadoresController implements Serializable {
             this.id = id;
             this.nombrerubro = nombrerubro;
             this.monto = monto;
+        }
+
+        public ItemRubro(int id, String nombrerubro, float monto, String icono, String coloricono) {
+            this.id = id;
+            this.nombrerubro = nombrerubro;
+            this.monto = monto;
+            this.icono = icono;
+            this.coloricono = coloricono;
         }
 
         public int getId() {
@@ -691,6 +724,13 @@ public class IndicadoresController implements Serializable {
             this.monto = monto;
         }
 
+        public String getIcono() {return icono;}
+
+        public void setIcono(String icono) { this.icono = icono; }
+
+        public String getColoricono() { return coloricono; }
+
+        public void setColoricono(String coloricono) { this.coloricono = coloricono; }
     }
 
     /**
@@ -700,7 +740,7 @@ public class IndicadoresController implements Serializable {
      */
 
 
-    //    INDICADOR LINEAL
+    //    INDICADOR LINEAL > EVOLUCION DESEMBOLSOS Y EJECUCION
     
     private LineChartModel modeloLinealEvolucionDesembolsosEjecuciones;
 
@@ -871,35 +911,30 @@ public class IndicadoresController implements Serializable {
         this.modeloBarraEjecutadoPorRubros = modeloBarraEjecutadoPorRubros;
     }
     
-    public void crearModeloBarraHorizontal() {
+    public void crearModeloBarraHorizontal(String colores) {
         modeloBarraEjecutadoPorRubros = new HorizontalBarChartModel();
-        modeloBarraEjecutadoPorRubros.setSeriesColors("EEB337, D74149, 58B14D, 2898C5, 394249");
-        modeloBarraEjecutadoPorRubros.setExtender("extensorBarraRubros");
- 
-        ChartSeries bienesUso = new ChartSeries();
-        bienesUso.setLabel("Bienes de Uso");
-        bienesUso.set("2004", 13045);
- 
-        ChartSeries pasajesViaticos = new ChartSeries();
-        pasajesViaticos.setLabel("Pasajes y Viáticos");
-        pasajesViaticos.set("2004", 34565);
-        
-        ChartSeries bienesConsumo = new ChartSeries();
-        bienesConsumo.setLabel("Bienes de Consumo");
-        bienesConsumo.set("2004", 67543);
- 
-        modeloBarraEjecutadoPorRubros.addSeries(bienesUso);
-        modeloBarraEjecutadoPorRubros.addSeries(pasajesViaticos);
-        modeloBarraEjecutadoPorRubros.addSeries(bienesConsumo);
-         
-//        modeloBarraEjecutadoPorRubros.setTitle("Ejecutado por Rubros");
+        modeloBarraEjecutadoPorRubros.setAnimate(true);
+        //        modeloBarraEjecutadoPorRubros.setTitle("Ejecutado por Rubros");
         modeloBarraEjecutadoPorRubros.setLegendPosition("e");
-        modeloBarraEjecutadoPorRubros.setStacked(true);
-         
+        modeloBarraEjecutadoPorRubros.setStacked(false);
+        modeloBarraEjecutadoPorRubros.setExtender("extensorBarraRubros");
+
+
+        //modeloBarraEjecutadoPorRubros.setSeriesColors("EEB337, D74149, 58B14D, 2898C5, 394249");
+        System.out.println("crearModeloBarraHorizontal >> COLORES >> " + colores);
+        modeloBarraEjecutadoPorRubros.setSeriesColors(colores);
+
+        for(ItemRubro ir : listaEjecutadoRubro){
+            ChartSeries serie = new ChartSeries();
+            serie.setLabel(ir.getNombrerubro());
+            serie.set(ir.getNombrerubro(), ir.getMonto());
+            modeloBarraEjecutadoPorRubros.addSeries(serie);
+
+        }
+
         Axis xAxis = modeloBarraEjecutadoPorRubros.getAxis(AxisType.X);
         xAxis.setMin(0);
-        //xAxis.setMax(125);
-         
+
         Axis yAxis = modeloBarraEjecutadoPorRubros.getAxis(AxisType.Y);
 
     }

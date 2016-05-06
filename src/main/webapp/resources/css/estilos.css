@@ -452,3 +452,7 @@
 .BordeComoCard{
     border: solid 1px #e0e0e0 !important;
 }
+
+.DisplayCard{
+    display:  block !important;
+}
