@@ -53,7 +53,12 @@ public class IndicadoresController implements Serializable {
 
     @EJB
     private TareaFacade tareaFacade;
+
+    @EJB
+    private EtapaFacade etapaFacade;
+
     public TareaFacade getTareaFacade() { return tareaFacade; }
+    public EtapaFacade getEtapaFacade() { return etapaFacade; }
 
     private List<Solicitud> listaSolicitudes;
     private List<PresupuestoTarea> listaPresupuestosTarea;
@@ -103,6 +108,9 @@ public class IndicadoresController implements Serializable {
     public SolicitudFacade getSolicitudFacade() {
         return solicitudFacade;
     }
+
+    private Map<String,Integer> mapaAvancesEtapasYTareas = new HashMap<String, Integer>();
+    public Map<String, Integer> getMapaAvancesEtapasYTareas() { return mapaAvancesEtapasYTareas; }
 
     public DesembolsoFacade getDesembolsoFacade() {
         return desembolsoFacade;
@@ -225,6 +233,8 @@ public class IndicadoresController implements Serializable {
         generarChartEjecutadoPorFecha();
         
         calcularSaldoProyecto();
+
+        calcularAvancesEtapas();
 
     }
 
@@ -665,7 +675,8 @@ public class IndicadoresController implements Serializable {
      *
      */
 
-//    INDICADOR LINEAL
+
+    //    INDICADOR LINEAL
     
     private LineChartModel modeloLinealEvolucionDesembolsosEjecuciones;
 
@@ -839,6 +850,112 @@ public class IndicadoresController implements Serializable {
         //xAxis.setMax(125);
          
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+
+    }
+
+    public void calcularAvancesEtapasYTarea(){
+
+        mapaAvancesEtapasYTareas = new HashMap<String, Integer>();
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+
+        try{
+
+            List<Etapa> listaEtapasProyecto = this.getEtapaFacade().buscarEtapasProyecto(proyectocontroller.getSelected().getId());
+
+            Integer promedioEtapa = 0;
+            Integer acumuladorTarea = 0;
+            Integer contadorTarea = 0;
+
+            for(Etapa e : listaEtapasProyecto){
+
+                promedioEtapa = 0;
+
+                String clave = "Etapa: " + e.getEtapa();
+
+                mapaAvancesEtapasYTareas.put(clave, 0 );
+
+                acumuladorTarea = 0;
+                contadorTarea = 0;
+
+                for(Tarea t : e.getTareaList()){
+
+                    acumuladorTarea += (null == t.getAvance() ? 0 : t.getAvance());
+                    contadorTarea++;
+
+                    mapaAvancesEtapasYTareas.put("\t Tarea: " + t.getTarea(),t.getAvance());
+
+                }
+
+                promedioEtapa = Math.round(acumuladorTarea / contadorTarea);
+                mapaAvancesEtapasYTareas.put(clave, promedioEtapa );
+
+            }
+
+            System.out.println("mapaAvancesEtapasYTareas ********");
+            for(Map.Entry<String,Integer> e : mapaAvancesEtapasYTareas.entrySet()){
+                System.out.println(e.getKey() + " >> " + e.getValue() );
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void calcularAvancesEtapas(){
+
+        mapaAvancesEtapasYTareas = new HashMap<String, Integer>();
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+
+        try{
+
+            List<Etapa> listaEtapasProyecto = this.getEtapaFacade().buscarEtapasProyecto(proyectocontroller.getSelected().getId());
+
+            Integer promedioEtapa = 0;
+            Integer acumuladorTarea = 0;
+            Integer contadorTarea = 0;
+
+            for(Etapa e : listaEtapasProyecto){
+
+                promedioEtapa = 0;
+
+                String clave = "Etapa: " + e.getEtapa();
+
+                mapaAvancesEtapasYTareas.put(clave, 0 );
+
+                acumuladorTarea = 0;
+                contadorTarea = 0;
+
+                for(Tarea t : e.getTareaList()){
+
+                    acumuladorTarea += (null == t.getAvance() ? 0 : t.getAvance());
+                    contadorTarea++;
+
+                    //mapaAvancesEtapasYTareas.put("\t Tarea: " + t.getTarea(),t.getAvance());
+
+                }
+
+                promedioEtapa = Math.round(acumuladorTarea / contadorTarea);
+                mapaAvancesEtapasYTareas.put(clave, promedioEtapa );
+
+            }
+
+            System.out.println("mapaAvancesEtapasYTareas ********");
+            for(Map.Entry<String,Integer> e : mapaAvancesEtapasYTareas.entrySet()){
+                System.out.println(e.getKey() + " >> " + e.getValue() );
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -1121,6 +1238,9 @@ public class IndicadoresController implements Serializable {
     }
 
 
+    /*
+              Proyectos Formalizados y Su Avance
+    */
     public void armarMapaProyectosFormalizadosConAvance(){
 
         // ordenamos la lista de proyectos por fecha
@@ -1237,5 +1357,6 @@ public class IndicadoresController implements Serializable {
         int index = generadorAleatorios.nextInt(listaColores.size());
         return listaColores.get(index);
     }
+
 
 }

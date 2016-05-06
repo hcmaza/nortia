@@ -108,7 +108,7 @@
                                                             <div class="EmptyBox5"></div>
                                                             <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
                                                                 <!--56%-->
-                                                                <h:outputText value="#{indicadoresController.porcentajeEjecutadoEntero} %" />
+                                                                <h:outputText value="#{indicadoresController.porcentajeEjecutadoEntero}" /> <h:outputText value=" %" styleClass="Fs20 FontLight White" />
                                                             </div>
                                                             <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">sobre presupuesto</div>
                                                         </div>
@@ -141,35 +141,46 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!--****************************-->
+                                    <!--****** GRADO DE AVANCE *****-->
+                                    <!--****************************-->
+
                                     <div class="Container33 Responsive">
-                                        <div class="Card Padding20px">
-                                            <div class="CardTopic">
-                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                Grado de Avance <br />
-                                                <span class="CardSubTopic">Etapas y actividades en ejecución.</span>
-                                            </div>
-                                        </div>
-                                        <div class="Container25">
-                                            <div class="Card BordoBack White TexAlCenter HoverEffect PaddingArribaAbajo20px" >
-                                                <div class="FontLatoBold FontBold Fs40 White">A</div>
-                                            </div>
-                                        </div>
-                                        <div class="Container75">
-                                            <div class="Card Gris4Back White TexAlCenter HoverEffect" style="padding: 0px; ">
-                                                <p:panelGrid id="gridAvanceEtapas" columns="2" columnClasses="GrayBack White FontBold ui-grid-col-9, LightGrayBack FontBold ui-grid-col-3" layout="grid" styleClass="Fs12 ui-panelgrid-blank" >
-                                                    <h:outputText value="1.1 Relevamiento" />
-                                                    <h:outputText value="21 %" />
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="CardTopic Padding20px">
+                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Grado de Avance <br />
+                                                        <span class="CardSubTopic">Etapas y actividades en ejecución.</span>
+                                                        </div>
 
-                                                    <h:outputText value="1.2 Desarrollo" />
-                                                    <h:outputText value="43 %" />
-
-                                                    <h:outputText value="1.3 Asistencia PH" />
-                                                    <h:outputText value="52 %" />
-
-                                                    <h:outputText value="1.4 Sistematizacion" />
-                                                    <h:outputText value="0 %" />
-                                                </p:panelGrid>
+                                                    <div class="Container100">
+                                                        <div class="Container25">
+                                                            <div class="Card BordoBack White TexAlCenter HoverEffect PaddingArribaAbajo20px" >
+                                                                <div class="FontLatoBold FontBold Fs40 White">A</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="Container75">
+                                                            <div class="Card Gris4Back White TexAlCenter HoverEffect" style="padding: 0px; ">
+                                                                <p:panelGrid id="gridAvanceEtapas" columnClasses="GrayBack White FontBold ui-grid-col-9, LightGrayBack FontBold ui-grid-col-3" styleClass="Fs12 ui-grid-col-12" >
+                                                                    <ui:repeat value="#{indicadoresController.mapaAvancesEtapasYTareas.keySet().toArray()}" var="fase"  >
+                                                                        <p:row>
+                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-9">
+                                                                                <h:outputText value="#{fase}" />
+                                                                            </p:column>
+                                                                            <p:column styleClass="BoldGrayBack White  FontBold ui-grid-col-3">
+                                                                                <h:outputText value="#{indicadoresController.mapaAvancesEtapasYTareas[fase]} %" />
+                                                                            </p:column>
+                                                                        </p:row>
+                                                                    </ui:repeat>
+                                                                </p:panelGrid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
