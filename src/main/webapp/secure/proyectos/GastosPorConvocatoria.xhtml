@@ -13,7 +13,7 @@
             <div class="Container100">    
                 <div class="ContainerIndent">
                     <f:event type="preRenderView" listener="#{agenteController.findAgente(request.getUserPrincipal().toString())}" ></f:event>
-                    <!-- <f:event type="preRenderView" listener="{indicadoresController.obtenerCalculosPorRubro()}" />-->
+                    <!-- <f:event type="preRenderView" listener="{indicadoresController.obtenerCalculos()}" />-->
                     <f:event type="preRenderView" listener="#{proyectoController.findProyectoPorConvocatoria(proyectoController.selected.convocatoriaid.id)}"></f:event>
 
 

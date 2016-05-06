@@ -20,7 +20,7 @@
                     <!--<f:event type="preRenderView" listener="{presupuestoController.findProyecto(proyectoController.selected.id)}" />-->
                     <!--<f:event type="preRenderView" listener="{presupuestoController.sumarGastosView}" />-->
                     <!--<f:event type="preRenderView" listener="{presupuestoTareaController.armarPresupuestoGeneral}" />-->
-                    <f:event type="preRenderView" listener="#{indicadoresController.obtenerCalculosPorRubro()}" />
+                    <f:event type="preRenderView" listener="#{indicadoresController.obtenerCalculos()}" />
                     <!--<f:event type="preRenderView" listener="{rendicionController.prepararRendicion()}" />-->
 
                     <h:form id="formprincipal" enctype="multipart/form-data" >
@@ -42,19 +42,24 @@
                                             <div class="Container100 Responsive100">
                                                 <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 6.584,43</div>
-                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">= 43% del último desembolso</div>
+                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                        <h:outputText value="$ #{indicadoresController.saldoProyecto}" />
+                                                    </div>
+                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                        <!--= 43% del último desembolso-->
+                                                        <h:outputText value="= #{indicadoresController.porcentajeSaldoSobreUltimoDesembolso} % del último desembolso" />
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="Container100 Responsive100">
                                                 <div class="Card CelesteClaroBack Padding10px White TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
                                                     <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
-                                                        <p:chart type="line" model="#{indicadoresController.lineModel1}" responsive="true" widgetVar="wvLineal"/>
+                                                        <p:chart type="line" model="#{indicadoresController.modeloLinealEvolucionDesembolsosEjecuciones}" responsive="true" widgetVar="wvLineal"/>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="Container100 Responsive100">
+                                            <!--<div class="Container100 Responsive100">
                                                 <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
                                                     <p:panelGrid id="gridEvolucionEstado" columns="3" layout="grid" styleClass="Fs10 ui-panelgrid-blank" >
                                                         <h:outputText value="Estado Junio" styleClass="Fs14 White" />
@@ -66,7 +71,7 @@
                                                         <h:outputText value="$ 67.543,18" styleClass="Fs12 White FontBold" />
                                                     </p:panelGrid>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>                                    
                                 </div>

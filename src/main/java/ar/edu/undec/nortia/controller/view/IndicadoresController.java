@@ -26,6 +26,7 @@ import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.MeterGaugeChartModel;
 import org.primefaces.model.chart.PieChartModel;
+import sun.security.krb5.internal.crypto.Des;
 
 /**
  *
@@ -87,9 +88,13 @@ public class IndicadoresController implements Serializable {
 
     // Monto pendiente de rendicion por proyecto
     private float pendienteRendicionProyecto;
-    
-    float porcentajeEjecutado = 0.0f;
-    
+
+    // Porcentaje Ejecutado
+    private float porcentajeEjecutado = 0.0f;
+
+    // Porcentaje de saldo disponible sobre ultimo desembolso
+    private int porcentajeSaldoSobreUltimoDesembolso = 0;
+
 //    // total desembolsado
 //    private float totalDesembolsado;
 
@@ -160,38 +165,29 @@ public class IndicadoresController implements Serializable {
     public float getEjecutadoProyecto() {
         return ejecutadoProyecto;
     }
-    
-     public void setEjecutadoProyecto(float ejecutado) {
+    public void setEjecutadoProyecto(float ejecutado) {
         this.ejecutadoProyecto=ejecutado;
     }
-
     public float getTotalPresupuestoProyecto() {
         return totalPresupuestoProyecto;
     }
-
     public float getRendidoProyecto() {
         return rendidoProyecto;
     }
-
     public float getPendienteRendicionProyecto() {
         return pendienteRendicionProyecto;
     }
-
     public float getPorcentajeEjecutado() {
         return porcentajeEjecutado;
     }
-
     public void setPorcentajeEjecutado(float porcentajeEjecutado) {
         this.porcentajeEjecutado = porcentajeEjecutado;
     }
-    
     public String getPorcentajeEjecutadoString(){
         return String.format("%.02f", porcentajeEjecutado);
     }
-
-    public ProyectoFacade getProyectoFacade() {
-        return proyectoFacade;
-    }
+    public ProyectoFacade getProyectoFacade() { return proyectoFacade; }
+    public int getPorcentajeSaldoSobreUltimoDesembolso() {return porcentajeSaldoSobreUltimoDesembolso;}
 
     /**
      * Creates a new instance of IndicadoresController
@@ -205,7 +201,7 @@ public class IndicadoresController implements Serializable {
      * rubro
      *
      */
-    public void obtenerCalculosPorRubro() {
+    public void obtenerCalculos() {
 
         calcularTotalesPorProyecto();
 
@@ -515,23 +511,22 @@ public class IndicadoresController implements Serializable {
         // Obtenemos los controladores necesarios
         FacesContext context = FacesContext.getCurrentInstance();
         DesembolsoController desembolsocontroller = (DesembolsoController) context.getApplication().evaluateExpressionGet(context, "#{desembolsoController}", DesembolsoController.class);
+        ProyectoController proyectoController = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
         
         float totalDesembolsado = desembolsocontroller.sumarDesembolsos();
         
         saldoProyecto = totalDesembolsado - ejecutadoProyecto;
+
+        // calcular el porcentaje del saldo disponible sobre la ultimo desembolso
+        calcularPorcentajeSaldoSobreUltimoDesembolso(proyectoController.getSelected().getId(),saldoProyecto);
     }
-    
-    public void calcularSaldoTotalProyecto() {
-        
-        // Obtenemos los controladores necesarios
-        FacesContext context = FacesContext.getCurrentInstance();
-        DesembolsoController desembolsocontroller = (DesembolsoController) context.getApplication().evaluateExpressionGet(context, "#{desembolsoController}", DesembolsoController.class);
-        
-        float totalDesembolsado = desembolsocontroller.sumarDesembolsos();
-        
-        saldoProyecto = totalDesembolsado - ejecutadoProyecto;
+
+    public void calcularPorcentajeSaldoSobreUltimoDesembolso(int proyectoId, float saldoProyecto){
+
+        porcentajeSaldoSobreUltimoDesembolso = (int) ((this.getDesembolsoFacade().obtenerImporteUltimoDesembolsoProyecto(proyectoId)*100) / saldoProyecto);
+
     }
-    
+
     public float calcularEjecutadoPorProyecto(Integer idProyecto) {
 
         List<Solicitud> listaSolicitudes;
@@ -651,58 +646,104 @@ public class IndicadoresController implements Serializable {
 
     /**
      *
-     * DASHBOARD DE SOLICITUDES
+     * DASHBOARD DE SOLICITUDES, MODIFICACION DE PRESUPUESTO
      *
      */
 
 //    INDICADOR LINEAL
     
-    private LineChartModel lineModel1;
+    private LineChartModel modeloLinealEvolucionDesembolsosEjecuciones;
 
-    public LineChartModel getLineModel1() {
-        return lineModel1;
+    public LineChartModel getModeloLinealEvolucionDesembolsosEjecuciones() {
+        return modeloLinealEvolucionDesembolsosEjecuciones;
     }
 
-    public void setLineModel1(LineChartModel lineModel1) {
-        this.lineModel1 = lineModel1;
+    public void setModeloLinealEvolucionDesembolsosEjecuciones(LineChartModel modeloLinealEvolucionDesembolsosEjecuciones) {
+        this.modeloLinealEvolucionDesembolsosEjecuciones = modeloLinealEvolucionDesembolsosEjecuciones;
     }
     
-    public void crearModeloLineal() {
-        lineModel1 = iniciarModeloLineal();
-        lineModel1.setLegendPosition("s");
-        Axis yAxis = lineModel1.getAxis(AxisType.Y);
+    public void crearModeloLinealEvolucionDesembolsosEjecuciones() {
+        modeloLinealEvolucionDesembolsosEjecuciones = iniciarModeloLinealEvolucionDesembolsosEjecuciones();
+        modeloLinealEvolucionDesembolsosEjecuciones.setLegendPosition("s");
+        Axis yAxis = modeloLinealEvolucionDesembolsosEjecuciones.getAxis(AxisType.Y);
         yAxis.setMin(0);
-        yAxis.setMax(100);
+        //yAxis.setMax(100);
         
     }
-     
-    public LineChartModel iniciarModeloLineal() {
-        LineChartModel model = new LineChartModel();
-        model.setExtender("extensorLineal");
-        model.setSeriesColors("BBE7E7, 6EE0F9");
- 
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Serie 1");
- 
-        series1.set(1, 12);
-        series1.set(2, 24);
-        series1.set(3, 33);
-        series1.set(4, 48);
-        series1.set(5, 68);
- 
-        LineChartSeries series2 = new LineChartSeries();
-        series2.setLabel("Serie 2");
- 
-        series2.set(1, 37);
-        series2.set(2, 42);
-        series2.set(3, 62);
-        series2.set(4, 81);
-        series2.set(5, 95);
- 
-        model.addSeries(series1);
-        model.addSeries(series2);
-         
-        return model;
+
+    public LineChartModel iniciarModeloLinealEvolucionDesembolsosEjecuciones() {
+
+        LineChartModel modelo = new LineChartModel();
+        modelo.setExtender("extensorLineal");
+        modelo.setSeriesColors("BBE7E7, 6EE0F9");
+
+        List<Solicitud> colSolicitudes;
+        List<Desembolso> colDesembolsos;
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+
+        // Llenamos la lista de solicitudes (Aprobadas)
+        colSolicitudes = this.getSolicitudFacade().obtenerAprobadasPorProyecto(proyectocontroller.getSelected().getId());
+        colSolicitudes.addAll(this.getSolicitudFacade().obtenerEjecucionPorProyecto(proyectocontroller.getSelected().getId()));
+        colSolicitudes.addAll(this.getSolicitudFacade().obtenerRendicionAEvaluarPorProyecto(proyectocontroller.getSelected().getId()));
+        colSolicitudes.addAll(this.getSolicitudFacade().obtenerRendidasPorProyecto(proyectocontroller.getSelected().getId()));
+
+        // Llenamos la lista de desembolsos
+        colDesembolsos = this.getDesembolsoFacade().obtenerPorProyecto(proyectocontroller.getSelected().getId());
+
+        // Ordenar las colecciones por fecha
+        // SOLICITUDES
+        Collections.sort(colSolicitudes, new Comparator<Solicitud>() {
+            public int compare(Solicitud o1, Solicitud o2) {
+                if (o1.getFechasolicitud() == null || o2.getFechasolicitud() == null) {
+                    return 0;
+                }
+                return o1.getFechasolicitud().compareTo(o2.getFechasolicitud());
+            }
+        });
+
+        // DESEMBOLSOS
+        Collections.sort(colDesembolsos, new Comparator<Desembolso>() {
+            public int compare(Desembolso o1, Desembolso o2) {
+                if (o1.getFechacarga() == null || o2.getFechacarga() == null) {
+                    return 0;
+                }
+                return o1.getFechacarga().compareTo(o2.getFechacarga());
+            }
+        });
+
+        // ARMAR SERIES
+        LineChartSeries desembolsos = new LineChartSeries();
+        desembolsos.setLabel("Desembolsos");
+
+        LineChartSeries solcitudes = new LineChartSeries();
+        solcitudes.setLabel("Ejecución");
+
+        // ACUMULADOR DESEMBOLSOS
+        float ad = 0f;
+        int id = 0;
+        for(Desembolso d : colDesembolsos){
+            ad = ad + d.getMonto().floatValue();
+            desembolsos.set(id,ad);
+            id++;
+        }
+
+        // ACUMULADOR SOLICITUDES (EJECUCION)
+        float as = 0f;
+        int is = 0;
+        for(Solicitud s : colSolicitudes){
+            as = as + s.getImporte().floatValue();
+            solcitudes.set(is,as);
+            is++;
+        }
+
+        // agregar series al modelo
+        modelo.addSeries(desembolsos);
+        modelo.addSeries(solcitudes);
+
+        return modelo;
     }
     
 //    CHART DE DONA
