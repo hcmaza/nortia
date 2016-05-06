@@ -11,6 +11,7 @@ import ar.edu.undec.nortia.model.Estadoproyecto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -305,4 +306,18 @@ public class DesembolsoController implements Serializable {
         return resultado;
         
     }
+
+    public float sumarDesembolsosPorProyecto(int proyectoId){
+        float resultado = 0;
+
+        List<Desembolso> listaDesembolsos = this.getFacade().obtenerPorProyecto(proyectoId);
+        Iterator<Desembolso> i = listaDesembolsos.iterator();
+        while(i.hasNext()){
+            resultado += (i.next()).getMonto().floatValue();
+        }
+
+        return resultado;
+
+    }
+
 }

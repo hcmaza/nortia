@@ -110,7 +110,7 @@
                                                                 <!--56%-->
                                                                 <h:outputText value="#{indicadoresController.porcentajeEjecutadoEntero} %" />
                                                             </div>
-                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">sobre total</div>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">sobre presupuesto</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,20 +118,26 @@
                                         </div>
 
                                     </div>
+
                                     <div class="Container33 Responsive">
-                                        <div class="Card Padding20px">
-                                            <div class="CardTopic">
-                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                Total Desembolsado <br />
-                                                <span class="CardSubTopic">Desembolsos totales acreditados en $.</span>
+                                        <div class="ContainerIndent">
+                                            <div class="Card Padding20px">
+                                                <div class="CardTopic">
+                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Total Desembolsado <br />
+                                                    <span class="CardSubTopic">Desembolsos totales acreditados en $.</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="Container100">
-                                            <div class="Card OrangeBack White Padding10px TexAlCenter HoverEffect" style="padding: 15px;">
-                                                <div class="EmptyBox5"></div>
-                                                <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 14.579,45</div>
-                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Ejecutado</div>
+                                            <div class="Container100">
+                                                <div class="Card OrangeBack White Padding10px TexAlCenter HoverEffect" style="padding: 15px;">
+                                                    <div class="EmptyBox5"></div>
+                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                        <!--$ 14.579,45-->
+                                                        <h:outputText value="$ #{indicadoresController.desembolsadoProyecto}" />
+                                                    </div>
+                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Desembolsado</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

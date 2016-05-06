@@ -95,6 +95,8 @@ public class IndicadoresController implements Serializable {
     // Porcentaje de saldo disponible sobre ultimo desembolso
     private int porcentajeSaldoSobreUltimoDesembolso = 0;
 
+    private float desembolsadoProyecto = 0.0f;
+
 //    // total desembolsado
 //    private float totalDesembolsado;
 
@@ -192,6 +194,7 @@ public class IndicadoresController implements Serializable {
     }
     public ProyectoFacade getProyectoFacade() { return proyectoFacade; }
     public int getPorcentajeSaldoSobreUltimoDesembolso() {return porcentajeSaldoSobreUltimoDesembolso;}
+    public float getDesembolsadoProyecto() { return desembolsadoProyecto; }
 
     /**
      * Creates a new instance of IndicadoresController
@@ -207,6 +210,8 @@ public class IndicadoresController implements Serializable {
      */
     public void obtenerCalculos() {
 
+        calcularDesembolsadoPorProyecto();
+
         calcularTotalesPorProyecto();
 
         calcularSaldosPorRubro();
@@ -219,9 +224,17 @@ public class IndicadoresController implements Serializable {
         
         generarChartEjecutadoPorFecha();
         
-        //calcularTotalDesembolsado();
-        
         calcularSaldoProyecto();
+
+    }
+
+    public void calcularDesembolsadoPorProyecto(){
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+        DesembolsoController desembolsoController = (DesembolsoController) context.getApplication().evaluateExpressionGet(context, "#{desembolsoController}",DesembolsoController.class);
+
+        desembolsadoProyecto = desembolsoController.sumarDesembolsosPorProyecto(proyectocontroller.getSelected().getId());
 
     }
 
@@ -517,9 +530,7 @@ public class IndicadoresController implements Serializable {
         DesembolsoController desembolsocontroller = (DesembolsoController) context.getApplication().evaluateExpressionGet(context, "#{desembolsoController}", DesembolsoController.class);
         ProyectoController proyectoController = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
         
-        float totalDesembolsado = desembolsocontroller.sumarDesembolsos();
-        
-        saldoProyecto = totalDesembolsado - ejecutadoProyecto;
+        saldoProyecto = desembolsadoProyecto - ejecutadoProyecto;
 
         // calcular el porcentaje del saldo disponible sobre la ultimo desembolso
         calcularPorcentajeSaldoSobreUltimoDesembolso(proyectoController.getSelected().getId(),saldoProyecto);
