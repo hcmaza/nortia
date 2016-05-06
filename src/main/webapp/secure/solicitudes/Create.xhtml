@@ -42,7 +42,7 @@
                                             <div class="Container100 Responsive100">
                                                 <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
                                                         <h:outputText value="$ #{indicadoresController.saldoProyecto}" />
                                                     </div>
                                                     <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
@@ -96,7 +96,7 @@
                                                     <div class="Container70">
                                                         <div class="Card VerdeClaroBack White Padding10px TexAlCenter HoverEffect">
                                                             <div class="EmptyBox5"></div>
-                                                            <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
                                                                 <!--$ 7.579,45-->
                                                                 <h:outputText value="$ #{indicadoresController.totalEjecutado}" />
                                                             </div>
@@ -106,11 +106,11 @@
                                                     <div class="Container30">
                                                         <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
                                                             <div class="EmptyBox5"></div>
-                                                            <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
                                                                 <!--56%-->
                                                                 <h:outputText value="#{indicadoresController.porcentajeEjecutadoEntero}" /> <h:outputText value=" %" styleClass="Fs20 FontLight White" />
                                                             </div>
-                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">sobre presupuesto</div>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">de presupuesto</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -132,7 +132,7 @@
                                             <div class="Container100">
                                                 <div class="Card OrangeBack White Padding10px TexAlCenter HoverEffect" style="padding: 15px;">
                                                     <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
                                                         <!--$ 14.579,45-->
                                                         <h:outputText value="$ #{indicadoresController.desembolsadoProyecto}" />
                                                     </div>
@@ -160,7 +160,7 @@
                                                     <div class="Container100">
                                                         <div class="Container25">
                                                             <div class="Card BordoBack White TexAlCenter HoverEffect PaddingArribaAbajo20px" >
-                                                                <div class="FontLatoBold FontBold Fs40 White">A</div>
+                                                                <div class="FontLatoBold FontBold Fs30 White">A</div>
                                                             </div>
                                                         </div>
                                                         <div class="Container75">
@@ -205,7 +205,7 @@
                                                         </div>
                                                         <div class="Container50">
                                                             <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
-                                                                <p:panelGrid id="gridSaldosRubro" styleClass="Fs12 WhiteBack ui-grid-col-12 ui-noborder SinBorde" >
+                                                                <p:panelGrid id="gridSaldosRubro" styleClass="Fs10 WhiteBack ui-grid-col-12 ui-noborder SinBorde" >
                                                                     <ui:repeat value="#{indicadoresController.listaSaldosDeRubro.keySet().toArray()}" var="rubro"  >
                                                                         <p:row>
                                                                             <p:column styleClass="WhiteBack White FontBold ui-grid-col-2">
@@ -227,66 +227,85 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="Container40 Responsive" style="margin-top: 10px;">
-                                        <div class="Card Padding20px">
-                                            <div class="CardTopic">
-                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                Ejecutado por Rubros<br />
-                                                <span class="CardSubTopic">$ ejecutados por presupuesto.</span>
-                                            </div>
-                                        </div>
-                                        <div class="Container100 Responsive100">
-                                            <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
-                                                <div class="EmptyBox5"></div>
-                                                <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
-                                                    <p:chart type="bar" model="#{indicadoresController.horizontalBarModel}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
-                                                    <p:panelGrid id="gridEjecutadosRubro" columns="3" layout="grid" styleClass="ui-panelgrid-blank" style="background-color: #F9F9F9;" >
-                                                        <h:outputText value="$ 1345,45" styleClass="Fs16 Black FontBold" />
-                                                        <h:outputText value="$ 34.565,3" styleClass="Fs16 Black FontBold" />
-                                                        <h:outputText value="$ 67.543,18" styleClass="Fs16 Black FontBold" />
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="CardTopic Padding20px">
+                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Ejecutado por Rubros<br />
+                                                        <span class="CardSubTopic">$ ejecutados por presupuesto.</span>
+                                                    </div>
 
-                                                        <h:outputText value="BIENES DE USO" styleClass="Fs10 Gray" />
-                                                        <h:outputText value="PASAJES Y VIATICOS" styleClass="Fs10 Gray" />
-                                                        <h:outputText value="BIENES DE CONSUMO" styleClass="Fs10 Gray" />
-                                                    </p:panelGrid>
-                                                </div>
-                                            </div>
-                                            <div class="Card Padding20px">
-                                                <div class="CardTopic">
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                                    Pendientes de Rendición<br />
-                                                    <span class="CardSubTopic">Solicitudes acreditadas no rendidas.</span>
-                                                </div>
-                                            </div>
-                                            <div class="Container30">
-                                                <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
-                                                    <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="#{fn:length(rendicionController.listaSolicitudes)}"/></div>
-                                                    <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a" /></div>
-                                                </div>
-                                            </div>
-                                            <div class="Container70">
-                                                <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
-                                                    <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="$ #{rendicionController.sumarSolicitudesARendir()}" /></div>
-                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
-                                                        <c:choose>
-                                                            <c:when test="#{empty rendicionController.listaSolicitudes}">
-                                                                <h:outputText value="sin solicitudes a rendir" />
-                                                            </c:when>
-                                                            <c:when test="#{rendicionController.listaSolicitudes.size() eq 1}">
-                                                                <h:outputText value="#{rendicionController.listaSolicitudes[0].observacion}" />
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <h:outputText value="más de una solicitud a rendir" />
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                    <div class="Container100">
+                                                        <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
+                                                            <div class="EmptyBox5"></div>
+                                                            <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
+                                                                <p:chart type="bar" model="#{indicadoresController.modeloBarraEjecutadoPorRubros}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
+                                                                <p:panelGrid id="gridEjecutadosRubro" columns="3" layout="grid" styleClass="ui-panelgrid-blank" style="background-color: #F9F9F9;" >
+                                                                    <h:outputText value="$ 1345,45" styleClass="Fs16 Black FontBold" />
+                                                                    <h:outputText value="$ 34.565,3" styleClass="Fs16 Black FontBold" />
+                                                                    <h:outputText value="$ 67.543,18" styleClass="Fs16 Black FontBold" />
 
+                                                                    <h:outputText value="BIENES DE USO" styleClass="Fs10 Gray" />
+                                                                    <h:outputText value="PASAJES Y VIATICOS" styleClass="Fs10 Gray" />
+                                                                    <h:outputText value="BIENES DE CONSUMO" styleClass="Fs10 Gray" />
+                                                                </p:panelGrid>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="CardTopic Padding20px">
+                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Pendientes de Rendición<br />
+                                                        <span class="CardSubTopic">Solicitudes acreditadas no rendidas.</span>
+                                                    </div>
+
+                                                    <div class="Container100">
+                                                        <div class="Container30">
+                                                            <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                    <h:outputText value="#{fn:length(rendicionController.listaSolicitudes)}"/>
+                                                                </div>
+                                                                <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a" /></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="Container70">
+                                                            <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                    <h:outputText value="$ #{rendicionController.sumarSolicitudesARendir()}" />
+                                                                </div>
+                                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                                    <c:choose>
+                                                                        <c:when test="#{empty rendicionController.listaSolicitudes}">
+                                                                            <h:outputText value="sin solicitudes a rendir" />
+                                                                        </c:when>
+                                                                        <c:when test="#{rendicionController.listaSolicitudes.size() eq 1}">
+                                                                            <h:outputText value="#{rendicionController.listaSolicitudes[0].observacion}" />
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <h:outputText value="más de una solicitud a rendir" />
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
 

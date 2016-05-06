@@ -829,7 +829,7 @@ public class IndicadoresController implements Serializable {
 
         }
 
-        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1,"");
+        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1, "");
 //        sbColoresCero.replace(sbColoresCero.lastIndexOf(","), sbColoresCero.lastIndexOf(",") + 1, "");
         System.out.println("COLORES DONA > 0  >> " + sb.toString());
 //        System.out.println("COLORES DONA == 0 >> " + sbColoresCero.toString());
@@ -861,20 +861,20 @@ public class IndicadoresController implements Serializable {
     
 //    BARRA HORIZONTAL
     
-    private HorizontalBarChartModel horizontalBarModel;
+    private HorizontalBarChartModel modeloBarraEjecutadoPorRubros;
 
-    public HorizontalBarChartModel getHorizontalBarModel() {
-        return horizontalBarModel;
+    public HorizontalBarChartModel getModeloBarraEjecutadoPorRubros() {
+        return modeloBarraEjecutadoPorRubros;
     }
 
-    public void setHorizontalBarModel(HorizontalBarChartModel horizontalBarModel) {
-        this.horizontalBarModel = horizontalBarModel;
+    public void setModeloBarraEjecutadoPorRubros(HorizontalBarChartModel modeloBarraEjecutadoPorRubros) {
+        this.modeloBarraEjecutadoPorRubros = modeloBarraEjecutadoPorRubros;
     }
     
     public void crearModeloBarraHorizontal() {
-        horizontalBarModel = new HorizontalBarChartModel();
-        horizontalBarModel.setSeriesColors("EEB337, D74149, 58B14D, 2898C5, 394249");
-        horizontalBarModel.setExtender("extensorBarraRubros");
+        modeloBarraEjecutadoPorRubros = new HorizontalBarChartModel();
+        modeloBarraEjecutadoPorRubros.setSeriesColors("EEB337, D74149, 58B14D, 2898C5, 394249");
+        modeloBarraEjecutadoPorRubros.setExtender("extensorBarraRubros");
  
         ChartSeries bienesUso = new ChartSeries();
         bienesUso.setLabel("Bienes de Uso");
@@ -888,19 +888,19 @@ public class IndicadoresController implements Serializable {
         bienesConsumo.setLabel("Bienes de Consumo");
         bienesConsumo.set("2004", 67543);
  
-        horizontalBarModel.addSeries(bienesUso);
-        horizontalBarModel.addSeries(pasajesViaticos);
-        horizontalBarModel.addSeries(bienesConsumo);
+        modeloBarraEjecutadoPorRubros.addSeries(bienesUso);
+        modeloBarraEjecutadoPorRubros.addSeries(pasajesViaticos);
+        modeloBarraEjecutadoPorRubros.addSeries(bienesConsumo);
          
-//        horizontalBarModel.setTitle("Ejecutado por Rubros");
-        horizontalBarModel.setLegendPosition("e");
-        horizontalBarModel.setStacked(true);
+//        modeloBarraEjecutadoPorRubros.setTitle("Ejecutado por Rubros");
+        modeloBarraEjecutadoPorRubros.setLegendPosition("e");
+        modeloBarraEjecutadoPorRubros.setStacked(true);
          
-        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+        Axis xAxis = modeloBarraEjecutadoPorRubros.getAxis(AxisType.X);
         xAxis.setMin(0);
         //xAxis.setMax(125);
          
-        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+        Axis yAxis = modeloBarraEjecutadoPorRubros.getAxis(AxisType.Y);
 
     }
 
