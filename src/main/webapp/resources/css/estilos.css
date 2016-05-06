@@ -444,3 +444,11 @@
     height: auto;
     max-height: 200px;
 }
+
+
+
+/*BORDES*/
+
+.BordeComoCard{
+    border: solid 1px #e0e0e0 !important;
+}

@@ -79,190 +79,204 @@
 
                             <div class="Container75 Responsive50">
                                 <div class="Container100" >
-                                    <div class="ContainerIndent">
-                                        <div class="Container33 Responsive">
-                                            <div class="Card Padding20px">
-                                                <div class="CardTopic"> 
+
+                                    <div class="Container33 Responsive">
+                                        <div class="ContainerIndent">
+                                            <div class="Card Padding0px">
+                                                <div class="CardTopic Padding20px">
                                                     <i class="icon-share Fs30 Fleft MarRight10"></i>
                                                     <div class="EmptyBox10 ShowOnMobile"></div>
                                                     Total Ejecutado<br />
-                                                    <span class="CardSubTopic">Gastos totales ejecutados y aprobados.</span> 
+                                                    <span class="CardSubTopic">
+                                                        Gastos totales ejecutados y aprobados.
+                                                    </span>
                                                 </div>
-                                            </div>
-                                            <div class="Container70">
-                                                <div class="Card VerdeClaroBack White Padding10px TexAlCenter HoverEffect">
-                                                    <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 7.579,45</div>
-                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Ejecutado sobre el ultimo</div>
-                                                </div>
-                                            </div>
-                                            <div class="Container30">
-                                                <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
-                                                    <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">56%</div>
-                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">sobre total</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Container33 Responsive">
-                                            <div class="Card Padding20px">
-                                                <div class="CardTopic"> 
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                                    Total Desembolsado <br />
-                                                    <span class="CardSubTopic">Desembolsos totales acreditados en $.</span> 
-                                                </div>
-                                            </div>
-                                            <div class="Container100">
-                                                <div class="Card OrangeBack White Padding10px TexAlCenter HoverEffect" style="padding: 15px;">
-                                                    <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 14.579,45</div>
-                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Ejecutado</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Container33 Responsive">
-                                            <div class="Card Padding20px">
-                                                <div class="CardTopic"> 
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                                    Grado de Avance <br />
-                                                    <span class="CardSubTopic">Etapas y actividades en ejecución.</span> 
-                                                </div>
-                                            </div>
-                                            <div class="Container25">
-                                                <div class="Card BordoBack White TexAlCenter HoverEffect PaddingArribaAbajo20px" >
-                                                    <div class="FontLatoBold FontBold Fs40 White">A</div>
-                                                </div>
-                                            </div>
-                                            <div class="Container75">
-                                                <div class="Card Gris4Back White TexAlCenter HoverEffect" style="padding: 0px; ">
-                                                    <p:panelGrid id="gridAvanceEtapas" columns="2" columnClasses="GrayBack White FontBold ui-grid-col-9, LightGrayBack FontBold ui-grid-col-3" layout="grid" styleClass="Fs12 ui-panelgrid-blank" >
-                                                        <h:outputText value="1.1 Relevamiento" />
-                                                        <h:outputText value="21 %" />
 
-                                                        <h:outputText value="1.2 Desarrollo" />
-                                                        <h:outputText value="43 %" />
-
-                                                        <h:outputText value="1.3 Asistencia PH" />
-                                                        <h:outputText value="52 %" />
-
-                                                        <h:outputText value="1.4 Sistematizacion" />
-                                                        <h:outputText value="0 %" />
-                                                    </p:panelGrid>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="Container60 Responsive ClearBoth" style="margin-top: 10px;">
-                                            <div class="Card Padding20px">
-                                                <div class="CardTopic"> 
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                                    Saldo Rubros $ <br />
-                                                    <span class="CardSubTopic">Saldos disponibles por rubro presupuestario. </span> 
-                                                </div>
-                                            </div>
-                                            <div class="Container50">
-                                                <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
-                                                    <div class="EmptyBox5"></div>
-                                                    <p:chart type="donut" model="#{indicadoresController.donutModel1}" responsive="true" style="max-height: 215px; color: white; " widgetVar="wvDona" />
-                                                </div>
-                                            </div>
-                                            <div class="Container50">
-                                                <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
-                                                    <p:panelGrid id="gridSaldosRubro" columns="4" columnClasses="WhiteBack PaddingArribaAbajo15px ui-grid-col-1, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-6, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-3, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-2" layout="grid" styleClass="Fs12 WhiteBack ui-panelgrid-blank" >
-                                                        <i class="fa fa-circle Fs14 VerdeAzuladoOscuro"></i>
-                                                        <h:outputText value="Personal" />
-                                                        <h:outputText value="$ 362.99" />
-                                                        <h:outputText value="47 %" />
-
-                                                        <i class="fa fa-circle Fs14 Gris1"></i>
-                                                        <h:outputText value="Bienes de Uso" />
-                                                        <h:outputText value="$ 209.65" />
-                                                        <h:outputText value="27 %" />
-
-                                                        <i class="fa fa-circle Fs14 Gris2"></i>
-                                                        <h:outputText value="Bienes de Consumo" />
-                                                        <h:outputText value="$ 107.82" />
-                                                        <h:outputText value="14 %" />
-
-                                                        <i class="fa fa-circle Fs14 Gris3"></i>
-                                                        <h:outputText value="Pasajes y viáticos" />
-                                                        <h:outputText value="$ 56.77" />
-                                                        <h:outputText value="13 %" />
-
-                                                        <i class="fa fa-circle Fs14 Gris4"></i>
-                                                        <h:outputText value="Transferencias" />
-                                                        <h:outputText value="$ 40.22" />
-                                                        <h:outputText value="5 %" />
-                                                    </p:panelGrid>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="Container40 Responsive" style="margin-top: 10px;">
-                                            <div class="Card Padding20px">
-                                                <div class="CardTopic"> 
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                                    Ejecutado por Rubros<br />
-                                                    <span class="CardSubTopic">$ ejecutados por presupuesto.</span> 
-                                                </div>
-                                            </div>
-                                            <div class="Container100 Responsive100">
-                                                <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
-                                                    <div class="EmptyBox5"></div>
-                                                    <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
-                                                        <p:chart type="bar" model="#{indicadoresController.horizontalBarModel}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
-                                                        <p:panelGrid id="gridEjecutadosRubro" columns="3" layout="grid" styleClass="ui-panelgrid-blank" style="background-color: #F9F9F9;" >
-                                                            <h:outputText value="$ 1345,45" styleClass="Fs16 Black FontBold" />
-                                                            <h:outputText value="$ 34.565,3" styleClass="Fs16 Black FontBold" />
-                                                            <h:outputText value="$ 67.543,18" styleClass="Fs16 Black FontBold" />
-
-                                                            <h:outputText value="BIENES DE USO" styleClass="Fs10 Gray" />
-                                                            <h:outputText value="PASAJES Y VIATICOS" styleClass="Fs10 Gray" />
-                                                            <h:outputText value="BIENES DE CONSUMO" styleClass="Fs10 Gray" />
-                                                        </p:panelGrid>
+                                                <div class="Container100">
+                                                    <div class="Container70">
+                                                        <div class="Card VerdeClaroBack White Padding10px TexAlCenter HoverEffect">
+                                                            <div class="EmptyBox5"></div>
+                                                            <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                                <!--$ 7.579,45-->
+                                                                <h:outputText value="$ #{indicadoresController.totalEjecutado}" />
+                                                            </div>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Total Ejecutado</div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="Card Padding20px">
-                                                    <div class="CardTopic"> 
-                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                        <div class="EmptyBox10 ShowOnMobile"></div>
-                                                        Pendientes de Rendición<br />
-                                                        <span class="CardSubTopic">Solicitudes acreditadas no rendidas.</span> 
-                                                    </div>
-                                                </div>
-                                                <div class="Container30">
-                                                    <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
-                                                        <div class="EmptyBox5"></div>
-                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="#{fn:length(rendicionController.listaSolicitudes)}"/></div>
-                                                        <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a" /></div>
-                                                    </div>
-                                                </div>
-                                                <div class="Container70">
-                                                    <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
-                                                        <div class="EmptyBox5"></div>
-                                                        <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="$ #{rendicionController.sumarSolicitudesARendir()}" /></div>
-                                                        <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
-                                                            <c:choose>
-                                                                <c:when test="#{empty rendicionController.listaSolicitudes}">
-                                                                    <h:outputText value="sin solicitudes a rendir" />
-                                                                </c:when>
-                                                                <c:when test="#{rendicionController.listaSolicitudes.size() eq 1}">
-                                                                    <h:outputText value="#{rendicionController.listaSolicitudes[0].observacion}" />
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <h:outputText value="más de una solicitud a rendir" />
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        
+                                                    <div class="Container30">
+                                                        <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
+                                                            <div class="EmptyBox5"></div>
+                                                            <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">
+                                                                <!--56%-->
+                                                                <h:outputText value="#{indicadoresController.porcentajeEjecutadoEntero} %" />
+                                                            </div>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">sobre total</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
+                                    <div class="Container33 Responsive">
+                                        <div class="Card Padding20px">
+                                            <div class="CardTopic">
+                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                                Total Desembolsado <br />
+                                                <span class="CardSubTopic">Desembolsos totales acreditados en $.</span>
+                                            </div>
+                                        </div>
+                                        <div class="Container100">
+                                            <div class="Card OrangeBack White Padding10px TexAlCenter HoverEffect" style="padding: 15px;">
+                                                <div class="EmptyBox5"></div>
+                                                <div class="FontRobotoBold Fs40 White DispBlock ClearBoth">$ 14.579,45</div>
+                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Ejecutado</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="Container33 Responsive">
+                                        <div class="Card Padding20px">
+                                            <div class="CardTopic">
+                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                                Grado de Avance <br />
+                                                <span class="CardSubTopic">Etapas y actividades en ejecución.</span>
+                                            </div>
+                                        </div>
+                                        <div class="Container25">
+                                            <div class="Card BordoBack White TexAlCenter HoverEffect PaddingArribaAbajo20px" >
+                                                <div class="FontLatoBold FontBold Fs40 White">A</div>
+                                            </div>
+                                        </div>
+                                        <div class="Container75">
+                                            <div class="Card Gris4Back White TexAlCenter HoverEffect" style="padding: 0px; ">
+                                                <p:panelGrid id="gridAvanceEtapas" columns="2" columnClasses="GrayBack White FontBold ui-grid-col-9, LightGrayBack FontBold ui-grid-col-3" layout="grid" styleClass="Fs12 ui-panelgrid-blank" >
+                                                    <h:outputText value="1.1 Relevamiento" />
+                                                    <h:outputText value="21 %" />
+
+                                                    <h:outputText value="1.2 Desarrollo" />
+                                                    <h:outputText value="43 %" />
+
+                                                    <h:outputText value="1.3 Asistencia PH" />
+                                                    <h:outputText value="52 %" />
+
+                                                    <h:outputText value="1.4 Sistematizacion" />
+                                                    <h:outputText value="0 %" />
+                                                </p:panelGrid>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Container60 Responsive ClearBoth" style="margin-top: 10px;">
+                                        <div class="Card Padding20px">
+                                            <div class="CardTopic">
+                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                                Saldo Rubros $ <br />
+                                                <span class="CardSubTopic">Saldos disponibles por rubro presupuestario. </span>
+                                            </div>
+                                        </div>
+                                        <div class="Container50">
+                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
+                                                <div class="EmptyBox5"></div>
+                                                <p:chart type="donut" model="#{indicadoresController.donutModel1}" responsive="true" style="max-height: 215px; color: white; " widgetVar="wvDona" />
+                                            </div>
+                                        </div>
+                                        <div class="Container50">
+                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
+                                                <p:panelGrid id="gridSaldosRubro" columns="4" columnClasses="WhiteBack PaddingArribaAbajo15px ui-grid-col-1, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-6, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-3, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-2" layout="grid" styleClass="Fs12 WhiteBack ui-panelgrid-blank" >
+                                                    <i class="fa fa-circle Fs14 VerdeAzuladoOscuro"></i>
+                                                    <h:outputText value="Personal" />
+                                                    <h:outputText value="$ 362.99" />
+                                                    <h:outputText value="47 %" />
+
+                                                    <i class="fa fa-circle Fs14 Gris1"></i>
+                                                    <h:outputText value="Bienes de Uso" />
+                                                    <h:outputText value="$ 209.65" />
+                                                    <h:outputText value="27 %" />
+
+                                                    <i class="fa fa-circle Fs14 Gris2"></i>
+                                                    <h:outputText value="Bienes de Consumo" />
+                                                    <h:outputText value="$ 107.82" />
+                                                    <h:outputText value="14 %" />
+
+                                                    <i class="fa fa-circle Fs14 Gris3"></i>
+                                                    <h:outputText value="Pasajes y viáticos" />
+                                                    <h:outputText value="$ 56.77" />
+                                                    <h:outputText value="13 %" />
+
+                                                    <i class="fa fa-circle Fs14 Gris4"></i>
+                                                    <h:outputText value="Transferencias" />
+                                                    <h:outputText value="$ 40.22" />
+                                                    <h:outputText value="5 %" />
+                                                </p:panelGrid>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="Container40 Responsive" style="margin-top: 10px;">
+                                        <div class="Card Padding20px">
+                                            <div class="CardTopic">
+                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                                Ejecutado por Rubros<br />
+                                                <span class="CardSubTopic">$ ejecutados por presupuesto.</span>
+                                            </div>
+                                        </div>
+                                        <div class="Container100 Responsive100">
+                                            <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
+                                                <div class="EmptyBox5"></div>
+                                                <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
+                                                    <p:chart type="bar" model="#{indicadoresController.horizontalBarModel}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
+                                                    <p:panelGrid id="gridEjecutadosRubro" columns="3" layout="grid" styleClass="ui-panelgrid-blank" style="background-color: #F9F9F9;" >
+                                                        <h:outputText value="$ 1345,45" styleClass="Fs16 Black FontBold" />
+                                                        <h:outputText value="$ 34.565,3" styleClass="Fs16 Black FontBold" />
+                                                        <h:outputText value="$ 67.543,18" styleClass="Fs16 Black FontBold" />
+
+                                                        <h:outputText value="BIENES DE USO" styleClass="Fs10 Gray" />
+                                                        <h:outputText value="PASAJES Y VIATICOS" styleClass="Fs10 Gray" />
+                                                        <h:outputText value="BIENES DE CONSUMO" styleClass="Fs10 Gray" />
+                                                    </p:panelGrid>
+                                                </div>
+                                            </div>
+                                            <div class="Card Padding20px">
+                                                <div class="CardTopic">
+                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Pendientes de Rendición<br />
+                                                    <span class="CardSubTopic">Solicitudes acreditadas no rendidas.</span>
+                                                </div>
+                                            </div>
+                                            <div class="Container30">
+                                                <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
+                                                    <div class="EmptyBox5"></div>
+                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="#{fn:length(rendicionController.listaSolicitudes)}"/></div>
+                                                    <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="Container70">
+                                                <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
+                                                    <div class="EmptyBox5"></div>
+                                                    <div class="FontRobotoBold Fs40 White DispBlock ClearBoth"><h:outputText value="$ #{rendicionController.sumarSolicitudesARendir()}" /></div>
+                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                        <c:choose>
+                                                            <c:when test="#{empty rendicionController.listaSolicitudes}">
+                                                                <h:outputText value="sin solicitudes a rendir" />
+                                                            </c:when>
+                                                            <c:when test="#{rendicionController.listaSolicitudes.size() eq 1}">
+                                                                <h:outputText value="#{rendicionController.listaSolicitudes[0].observacion}" />
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <h:outputText value="más de una solicitud a rendir" />
+                                                            </c:otherwise>
+                                                        </c:choose>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 

@@ -186,6 +186,10 @@ public class IndicadoresController implements Serializable {
     public String getPorcentajeEjecutadoString(){
         return String.format("%.02f", porcentajeEjecutado);
     }
+    public int getPorcentajeEjecutadoEntero(){
+        //return String.format("%.0f", porcentajeEjecutado);
+        return (int) porcentajeEjecutado;
+    }
     public ProyectoFacade getProyectoFacade() { return proyectoFacade; }
     public int getPorcentajeSaldoSobreUltimoDesembolso() {return porcentajeSaldoSobreUltimoDesembolso;}
 
