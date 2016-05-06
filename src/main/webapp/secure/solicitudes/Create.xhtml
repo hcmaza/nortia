@@ -55,7 +55,7 @@
                                                 <div class="Card CelesteClaroBack Padding10px White TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
                                                     <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
-                                                        <p:chart type="line" model="#{indicadoresController.modeloLinealEvolucionDesembolsosEjecuciones}" responsive="true" widgetVar="wvLineal"/>
+                                                        <p:chart type="line" model="#{indicadoresController.modeloLinealEvolucionDesembolsosEjecuciones}" responsive="true" widgetVar="wvLineal" style="height: 350px;"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,7 +192,7 @@
                                                     <div class="CardTopic Padding20px">
                                                         <i class="icon-share Fs30 Fleft MarRight10"></i>
                                                         <div class="EmptyBox10 ShowOnMobile"></div>
-                                                        Saldo Rubros $ <br />
+                                                        Saldo de Rubros $ <br />
                                                         <span class="CardSubTopic">Saldos disponibles por rubro presupuestario. </span>
                                                     </div>
 
@@ -200,36 +200,25 @@
                                                         <div class="Container50">
                                                             <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
                                                                 <div class="EmptyBox5"></div>
-                                                                <p:chart type="donut" model="#{indicadoresController.donutModel1}" responsive="true" style="max-height: 215px; color: white; " widgetVar="wvDona" />
+                                                                <p:chart type="donut" model="#{indicadoresController.modeloDonaDisponiblePorRubro}" responsive="true" style="max-height: 260px; color: white; " widgetVar="wvDona" />
                                                             </div>
                                                         </div>
                                                         <div class="Container50">
                                                             <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
-                                                                <p:panelGrid id="gridSaldosRubro" columns="4" columnClasses="WhiteBack PaddingArribaAbajo15px ui-grid-col-1, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-6, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-3, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-2" layout="grid" styleClass="Fs12 WhiteBack ui-panelgrid-blank" >
-                                                                    <i class="fa fa-circle Fs14 VerdeAzuladoOscuro"></i>
-                                                                    <h:outputText value="Personal" />
-                                                                    <h:outputText value="$ 362.99" />
-                                                                    <h:outputText value="47 %" />
-
-                                                                    <i class="fa fa-circle Fs14 Gris1"></i>
-                                                                    <h:outputText value="Bienes de Uso" />
-                                                                    <h:outputText value="$ 209.65" />
-                                                                    <h:outputText value="27 %" />
-
-                                                                    <i class="fa fa-circle Fs14 Gris2"></i>
-                                                                    <h:outputText value="Bienes de Consumo" />
-                                                                    <h:outputText value="$ 107.82" />
-                                                                    <h:outputText value="14 %" />
-
-                                                                    <i class="fa fa-circle Fs14 Gris3"></i>
-                                                                    <h:outputText value="Pasajes y viáticos" />
-                                                                    <h:outputText value="$ 56.77" />
-                                                                    <h:outputText value="13 %" />
-
-                                                                    <i class="fa fa-circle Fs14 Gris4"></i>
-                                                                    <h:outputText value="Transferencias" />
-                                                                    <h:outputText value="$ 40.22" />
-                                                                    <h:outputText value="5 %" />
+                                                                <p:panelGrid id="gridSaldosRubro" styleClass="Fs12 WhiteBack ui-grid-col-12 ui-noborder SinBorde" >
+                                                                    <ui:repeat value="#{indicadoresController.listaSaldosDeRubro.keySet().toArray()}" var="rubro"  >
+                                                                        <p:row>
+                                                                            <p:column styleClass="WhiteBack White FontBold ui-grid-col-2">
+                                                                                <i class="#{rubro.icono} Fs30" style="color: #{rubro.coloricono}"></i>
+                                                                            </p:column>
+                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-7 TexAlLeft" style="line-height: 30px;">
+                                                                                <h:outputText value="#{rubro.rubro}" />
+                                                                            </p:column>
+                                                                            <p:column styleClass="BoldGrayBack White FontBold ui-grid-col-3 TexAlRight" style="line-height: 30px;">
+                                                                                <h:outputText value="$ #{indicadoresController.listaSaldosDeRubro[rubro]}" />
+                                                                            </p:column>
+                                                                        </p:row>
+                                                                    </ui:repeat>
                                                                 </p:panelGrid>
                                                             </div>
                                                         </div>
@@ -1231,10 +1220,10 @@
                         rendererOptions: {
                             sliceMargin: 5,
                             padding: 1,
-                            innerDiameter: 100,
+                            innerDiameter: 125,
                             startAngle: -90,
                             dataLabels: 'percent',
-                            showDataLabels: true
+                            showDataLabels: true,
                         }
                     };
                 }

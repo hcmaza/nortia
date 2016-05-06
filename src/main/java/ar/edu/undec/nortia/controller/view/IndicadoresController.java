@@ -26,7 +26,6 @@ import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.MeterGaugeChartModel;
 import org.primefaces.model.chart.PieChartModel;
-import sun.security.krb5.internal.crypto.Des;
 
 /**
  *
@@ -63,6 +62,9 @@ public class IndicadoresController implements Serializable {
     private List<Solicitud> listaSolicitudes;
     private List<PresupuestoTarea> listaPresupuestosTarea;
     private HashMap<String, Float> listaSaldosRubro;
+
+    private LinkedHashMap<Rubro, Float> listaSaldosDeRubro;
+    public LinkedHashMap<Rubro, Float> getListaSaldosDeRubro() { return listaSaldosDeRubro; }
 
     private List<String> columnasListaSaldosRubro;
     private List<Float> valoresListaSaldosRubro;
@@ -254,7 +256,7 @@ public class IndicadoresController implements Serializable {
         saldoProyecto = 0.0f;
 
         // Saldos por Rubro
-        HashMap<String, Float> saldos = new HashMap<String, Float>();
+        LinkedHashMap<Rubro, Float> saldos = new LinkedHashMap<Rubro, Float>();
 
         // Obtenemos los controladores necesarios
         FacesContext context = FacesContext.getCurrentInstance();
@@ -272,9 +274,22 @@ public class IndicadoresController implements Serializable {
         // Lista de solicitudes disponibles
         List<Solicitud> listaSolicitudesDisponibles = new ArrayList<Solicitud>();
 
+        // Lista de rubros
+        List<Rubro> listaRubros = getRubroFacade().findAll();
+
+        //ordenar la lista de rubros
+        Collections.sort(listaRubros, new Comparator<Rubro>() {
+            public int compare(Rubro r1, Rubro r2) {
+                if (r1.getOrden() == null || r2.getOrden() == null) {
+                    return 0;
+                }
+                return r1.getOrden().compareTo(r2.getOrden());
+            }
+        });
+
         // Llenamos el hashmap de saldos y la lista de ejecucion
-        for (Rubro r : getRubroFacade().findAll()) {
-            saldos.put(r.getAbreviado(), 0.0f);
+        for (Rubro r : listaRubros) {
+            saldos.put(r, 0.0f);
         }
 
         // Obtenemos los importes de solicitud disponibles
@@ -305,7 +320,7 @@ public class IndicadoresController implements Serializable {
                 listaSolicitudesDisponibles.add(solicitud);
 
                 // Acumulamos en la lista de saldos
-                saldos.put(solicitud.getPresupuestotarea().getRubro().getAbreviado(), saldos.get(solicitud.getPresupuestotarea().getRubro().getAbreviado()) + solicitud.getDisponible().floatValue());
+                saldos.put(solicitud.getPresupuestotarea().getRubro(), saldos.get(solicitud.getPresupuestotarea().getRubro()) + solicitud.getDisponible().floatValue());
 
                 
 
@@ -313,10 +328,19 @@ public class IndicadoresController implements Serializable {
         }
 
         // Saldos por Rubro
-        listaSaldosRubro = saldos;
+        listaSaldosDeRubro = saldos;
+
+        System.out.println("listaSaldosDeRubro **********");
+        for (Map.Entry<Rubro,Float> e : listaSaldosDeRubro.entrySet()){
+            System.out.println("Rubro >> " +e.getKey().getRubro() + " - Saldo >> " +e.getValue() );
+        }
+
+        // genera el grafico de dona
+        crearModeloDonaDisponiblePorRubro();
         
-        columnasListaSaldosRubro = new ArrayList<String>(saldos.keySet());
-        valoresListaSaldosRubro = new ArrayList<Float>(saldos.values());
+//        columnasListaSaldosRubro = new ArrayList<String>(saldos.keySet());
+//        valoresListaSaldosRubro = new ArrayList<Float>(saldos.values());
+
     }
 
     public void calcularEjecutadoPorRubro() {
@@ -774,38 +798,65 @@ public class IndicadoresController implements Serializable {
     
 //    CHART DE DONA
       
-    private DonutChartModel donutModel1;
+    private DonutChartModel modeloDonaDisponiblePorRubro;
 
-    public DonutChartModel getDonutModel1() {
-        return donutModel1;
+    public DonutChartModel getModeloDonaDisponiblePorRubro() {
+        return modeloDonaDisponiblePorRubro;
     }
 
-    public void setDonutModel1(DonutChartModel donutModel1) {
-        this.donutModel1 = donutModel1;
+    public void setModeloDonaDisponiblePorRubro(DonutChartModel modeloDonaDisponiblePorRubro) {
+        this.modeloDonaDisponiblePorRubro = modeloDonaDisponiblePorRubro;
     }
-    public void crearModeloDona(){
-        donutModel1 = iniciarModeloDona();
-        donutModel1.setLegendPosition("e");
-        donutModel1.setSliceMargin(5);
-        donutModel1.setShowDataLabels(true);
-        donutModel1.setDataFormat("value");
-        donutModel1.setShadow(false);
-        donutModel1.setSeriesColors("2898C5, 394249, 667382, 84888B, BCC3C8");
+    public void crearModeloDonaDisponiblePorRubro(){
+        modeloDonaDisponiblePorRubro = iniciarModeloDona();
+        modeloDonaDisponiblePorRubro.setLegendPosition("e");
+        modeloDonaDisponiblePorRubro.setSliceMargin(5);
+        modeloDonaDisponiblePorRubro.setShowDataLabels(true);
+//        modeloDonaDisponiblePorRubro.setDataLabelFormatString("color: #000000;");
+        modeloDonaDisponiblePorRubro.setDataFormat("value");
+        modeloDonaDisponiblePorRubro.setShadow(false);
+
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sbColoresCero = new StringBuilder();
+
+        for(Map.Entry<Rubro,Float> e : listaSaldosDeRubro.entrySet()){
+            /*if(e.getValue() != 0.0f) {
+                sb.append(e.getKey().getColoricono().replace("#","") + ", ");
+            } else {
+                sbColoresCero.append(e.getKey().getColoricono().replace("#","") + ", ");
+            }*/
+            sb.append(e.getKey().getColoricono().replace("#","") + ", ");
+
+        }
+
+        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1,"");
+//        sbColoresCero.replace(sbColoresCero.lastIndexOf(","), sbColoresCero.lastIndexOf(",") + 1, "");
+        System.out.println("COLORES DONA > 0  >> " + sb.toString());
+//        System.out.println("COLORES DONA == 0 >> " + sbColoresCero.toString());
+
+//        sb.append(", " + sbColoresCero.toString());
+
+        System.out.println("COLORES TODOS >> " + sb.toString());
+
+        //modeloDonaDisponiblePorRubro.setSeriesColors("2898C5, 394249, 667382, 84888B, BCC3C8");
+        //modeloDonaDisponiblePorRubro.setSeriesColors("03A9F4, 8E24AA, F7D100, FF4081, FB8C00, E53935, 43A047");
+
+        modeloDonaDisponiblePorRubro.setSeriesColors(sb.toString());
     }
     
     private DonutChartModel iniciarModeloDona() {
-        DonutChartModel model = new DonutChartModel();
-        model.setExtender("extensorDona");
+        DonutChartModel modelo = new DonutChartModel();
+        modelo.setExtender("extensorDona");
          
-        Map<String, Number> circle1 = new LinkedHashMap<String, Number>();
-        circle1.put("Personal", 150);
-        circle1.put("Bienes de Consumo", 400);
-        circle1.put("Bienes de Consumo", 200);
-        circle1.put("Pasajes y Viáticos", 60);
-        circle1.put("Transferencias", 10);
-        model.addCircle(circle1);
-         
-        return model;
+        Map<String, Number> mapaSaldosRubro = new LinkedHashMap<String, Number>();
+
+        for(Map.Entry<Rubro,Float> e : listaSaldosDeRubro.entrySet()){
+            mapaSaldosRubro.put(e.getKey().getRubro(), e.getValue());
+        }
+
+        modelo.addCircle(mapaSaldosRubro);
+
+        return modelo;
     }
     
 //    BARRA HORIZONTAL
