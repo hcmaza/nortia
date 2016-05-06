@@ -186,48 +186,55 @@
                                     </div>
 
                                     <div class="Container60 Responsive ClearBoth" style="margin-top: 10px;">
-                                        <div class="Card Padding20px">
-                                            <div class="CardTopic">
-                                                <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                Saldo Rubros $ <br />
-                                                <span class="CardSubTopic">Saldos disponibles por rubro presupuestario. </span>
-                                            </div>
-                                        </div>
-                                        <div class="Container50">
-                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
-                                                <div class="EmptyBox5"></div>
-                                                <p:chart type="donut" model="#{indicadoresController.donutModel1}" responsive="true" style="max-height: 215px; color: white; " widgetVar="wvDona" />
-                                            </div>
-                                        </div>
-                                        <div class="Container50">
-                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
-                                                <p:panelGrid id="gridSaldosRubro" columns="4" columnClasses="WhiteBack PaddingArribaAbajo15px ui-grid-col-1, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-6, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-3, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-2" layout="grid" styleClass="Fs12 WhiteBack ui-panelgrid-blank" >
-                                                    <i class="fa fa-circle Fs14 VerdeAzuladoOscuro"></i>
-                                                    <h:outputText value="Personal" />
-                                                    <h:outputText value="$ 362.99" />
-                                                    <h:outputText value="47 %" />
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="CardTopic Padding20px">
+                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Saldo Rubros $ <br />
+                                                        <span class="CardSubTopic">Saldos disponibles por rubro presupuestario. </span>
+                                                    </div>
 
-                                                    <i class="fa fa-circle Fs14 Gris1"></i>
-                                                    <h:outputText value="Bienes de Uso" />
-                                                    <h:outputText value="$ 209.65" />
-                                                    <h:outputText value="27 %" />
+                                                    <div class="Container100">
+                                                        <div class="Container50">
+                                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
+                                                                <div class="EmptyBox5"></div>
+                                                                <p:chart type="donut" model="#{indicadoresController.donutModel1}" responsive="true" style="max-height: 215px; color: white; " widgetVar="wvDona" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="Container50">
+                                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
+                                                                <p:panelGrid id="gridSaldosRubro" columns="4" columnClasses="WhiteBack PaddingArribaAbajo15px ui-grid-col-1, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-6, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-3, WhiteBack FontBold PaddingArribaAbajo15px ui-grid-col-2" layout="grid" styleClass="Fs12 WhiteBack ui-panelgrid-blank" >
+                                                                    <i class="fa fa-circle Fs14 VerdeAzuladoOscuro"></i>
+                                                                    <h:outputText value="Personal" />
+                                                                    <h:outputText value="$ 362.99" />
+                                                                    <h:outputText value="47 %" />
 
-                                                    <i class="fa fa-circle Fs14 Gris2"></i>
-                                                    <h:outputText value="Bienes de Consumo" />
-                                                    <h:outputText value="$ 107.82" />
-                                                    <h:outputText value="14 %" />
+                                                                    <i class="fa fa-circle Fs14 Gris1"></i>
+                                                                    <h:outputText value="Bienes de Uso" />
+                                                                    <h:outputText value="$ 209.65" />
+                                                                    <h:outputText value="27 %" />
 
-                                                    <i class="fa fa-circle Fs14 Gris3"></i>
-                                                    <h:outputText value="Pasajes y viáticos" />
-                                                    <h:outputText value="$ 56.77" />
-                                                    <h:outputText value="13 %" />
+                                                                    <i class="fa fa-circle Fs14 Gris2"></i>
+                                                                    <h:outputText value="Bienes de Consumo" />
+                                                                    <h:outputText value="$ 107.82" />
+                                                                    <h:outputText value="14 %" />
 
-                                                    <i class="fa fa-circle Fs14 Gris4"></i>
-                                                    <h:outputText value="Transferencias" />
-                                                    <h:outputText value="$ 40.22" />
-                                                    <h:outputText value="5 %" />
-                                                </p:panelGrid>
+                                                                    <i class="fa fa-circle Fs14 Gris3"></i>
+                                                                    <h:outputText value="Pasajes y viáticos" />
+                                                                    <h:outputText value="$ 56.77" />
+                                                                    <h:outputText value="13 %" />
+
+                                                                    <i class="fa fa-circle Fs14 Gris4"></i>
+                                                                    <h:outputText value="Transferencias" />
+                                                                    <h:outputText value="$ 40.22" />
+                                                                    <h:outputText value="5 %" />
+                                                                </p:panelGrid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
