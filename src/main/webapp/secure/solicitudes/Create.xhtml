@@ -33,7 +33,7 @@
                                         <div class="Container100 Responsive">
                                             <div class="Card Padding20px">
                                                 <div class="CardTopic"> 
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                    <i class="fa fa-usd Fs30 Fleft MarRight10"></i>
                                                     <div class="EmptyBox10 ShowOnMobile"></div>
                                                     Dinero Disponible <br />
                                                     <span class="CardSubTopic">Saldo disponible en cuenta del proyecto. </span> 
@@ -55,7 +55,7 @@
                                                 <div class="Card CelesteClaroBack Padding10px White TexAlCenter HoverEffect">
                                                     <div class="EmptyBox5"></div>
                                                     <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
-                                                        <p:chart type="line" model="#{indicadoresController.modeloLinealEvolucionDesembolsosEjecuciones}" responsive="true" widgetVar="wvLineal" style="height: 350px;"/>
+                                                        <p:chart type="line" model="#{indicadoresController.modeloLinealEvolucionDesembolsosEjecuciones}" responsive="true" widgetVar="wvLineal" style="height: 352px;"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,7 +84,7 @@
                                         <div class="ContainerIndent">
                                             <div class="Card Padding0px">
                                                 <div class="CardTopic Padding20px">
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                    <i class="icon-wallet Fs30 Fleft MarRight10"></i>
                                                     <div class="EmptyBox10 ShowOnMobile"></div>
                                                     Total Ejecutado<br />
                                                     <span class="CardSubTopic">
@@ -98,7 +98,7 @@
                                                             <div class="EmptyBox5"></div>
                                                             <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
                                                                 <!--$ 7.579,45-->
-                                                                <h:outputText value="$ #{indicadoresController.totalEjecutado}" />
+                                                                <h:outputText value="$ #{indicadoresController.ejecutadoProyecto}" />
                                                             </div>
                                                             <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Total Ejecutado</div>
                                                         </div>
@@ -123,7 +123,7 @@
                                         <div class="ContainerIndent">
                                             <div class="Card Padding20px">
                                                 <div class="CardTopic">
-                                                    <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                    <i class="icon-moneybag Fs30 Fleft MarRight10"></i>
                                                     <div class="EmptyBox10 ShowOnMobile"></div>
                                                     Total Desembolsado <br />
                                                     <span class="CardSubTopic">Desembolsos totales acreditados en $.</span>
@@ -151,7 +151,7 @@
                                             <div class="ContainerIndent">
                                                 <div class="Card Padding0px">
                                                     <div class="CardTopic Padding20px">
-                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <i class="fa fa-forward Fs30 Fleft MarRight10"></i>
                                                         <div class="EmptyBox10 ShowOnMobile"></div>
                                                         Grado de Avance <br />
                                                         <span class="CardSubTopic">Etapas y actividades en ejecución.</span>
@@ -165,13 +165,13 @@
                                                         </div>
                                                         <div class="Container75">
                                                             <div class="Card Gris4Back White TexAlCenter HoverEffect" style="padding: 0px; ">
-                                                                <p:panelGrid id="gridAvanceEtapas" columnClasses="GrayBack White FontBold ui-grid-col-9, LightGrayBack FontBold ui-grid-col-3" styleClass="Fs12 ui-grid-col-12" >
+                                                                <p:panelGrid id="gridAvanceEtapas" columnClasses="GrayBack White FontBold ui-grid-col-9, LightGrayBack FontBold ui-grid-col-3" styleClass="Fs12 ui-grid-col-12 ui-noborder" >
                                                                     <ui:repeat value="#{indicadoresController.mapaAvancesEtapasYTareas.keySet().toArray()}" var="fase"  >
                                                                         <p:row>
-                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-9">
+                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-9 BordeAbajoBlanco">
                                                                                 <h:outputText value="#{fase}" />
                                                                             </p:column>
-                                                                            <p:column styleClass="BoldGrayBack White  FontBold ui-grid-col-3">
+                                                                            <p:column styleClass="BoldGrayBack White FontBold ui-grid-col-3 BordeAbajoBlanco">
                                                                                 <h:outputText value="#{indicadoresController.mapaAvancesEtapasYTareas[fase]} %" />
                                                                             </p:column>
                                                                         </p:row>
@@ -190,7 +190,7 @@
                                             <div class="ContainerIndent">
                                                 <div class="Card Padding0px">
                                                     <div class="CardTopic Padding20px">
-                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <i class="fa fa-pie-chart Fs30 Fleft MarRight10"></i>
                                                         <div class="EmptyBox10 ShowOnMobile"></div>
                                                         Saldo de Rubros $ <br />
                                                         <span class="CardSubTopic">Saldos disponibles por rubro presupuestario. </span>
@@ -209,12 +209,12 @@
                                                                     <ui:repeat value="#{indicadoresController.listaSaldosDeRubro.keySet().toArray()}" var="rubro"  >
                                                                         <p:row>
                                                                             <p:column styleClass="WhiteBack White FontBold ui-grid-col-2">
-                                                                                <i class="#{rubro.icono} Fs30" style="color: #{rubro.coloricono}"></i>
+                                                                                <i class="#{rubro.icono} Fs25" style="color: #{rubro.coloricono}"></i>
                                                                             </p:column>
-                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-7 TexAlLeft" style="line-height: 30px;">
+                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-7 TexAlLeft BordeAbajoBlanco LineHeightPanelGrid" >
                                                                                 <h:outputText value="#{rubro.rubro}" />
                                                                             </p:column>
-                                                                            <p:column styleClass="BoldGrayBack White FontBold ui-grid-col-3 TexAlRight" style="line-height: 30px;">
+                                                                            <p:column styleClass="BoldGrayBack White FontBold ui-grid-col-3 TexAlRight BordeAbajoBlanco LineHeightPanelGrid" >
                                                                                 <h:outputText value="$ #{indicadoresController.listaSaldosDeRubro[rubro]}" />
                                                                             </p:column>
                                                                         </p:row>
@@ -233,7 +233,7 @@
                                             <div class="ContainerIndent">
                                                 <div class="Card Padding0px">
                                                     <div class="CardTopic Padding20px">
-                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
+                                                        <i class="icon-aperture Fs30 Fleft MarRight10"></i>
                                                         <div class="EmptyBox10 ShowOnMobile"></div>
                                                         Ejecutado por Rubros<br />
                                                         <span class="CardSubTopic">$ ejecutados por presupuesto.</span>
@@ -243,17 +243,28 @@
                                                         <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
                                                             <div class="EmptyBox5"></div>
                                                             <div class="FontRobotoLight Fs16 White">
+
                                                                 <p:chart type="bar" model="#{indicadoresController.modeloBarraEjecutadoPorRubros}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
 
-                                                                <ui:repeat value="#{indicadoresController.listaEjecutadoRubro}" var="rubro"  >
-
-                                                                    <div class="Card Gris1Back White Fs16 FontBold DisplayCard">
-                                                                        <h:outputText value="$ #{rubro.monto}" styleClass="Fs12 White" />
-                                                                        <div class="EmptyBox10" ></div>
-                                                                        <i class="#{rubro.icono} Fs30" style="color: #{rubro.coloricono}"></i>
+                                                                <div class="Container100">
+                                                                    <div class="Card BoldGrayBack White Fs16 FontBold" style="padding: 13px;">
+                                                                        <h:outputText value="Rubros más ejecutados" styleClass="Fs14 White" />
                                                                     </div>
+                                                                </div>
 
-                                                                </ui:repeat>
+                                                                <div class="Container100">
+
+                                                                        <ui:repeat value="#{indicadoresController.listaEjecutadoRubroOrdenadoPorMontoDesc}" var="rubro" size="4"  >
+                                                                            <div class="Container20">
+                                                                                <div class="Card BoldGrayBack White Fs16 FontBold Padding5px" style="background-color: #{rubro.coloricono}">
+                                                                                    <h:outputText value="$ #{rubro.monto}" styleClass="Fs12 White" />
+                                                                                    <div class="EmptyBox10" ></div>
+                                                                                    <i class="#{rubro.icono} Fs30 White" ></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </ui:repeat>
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -264,24 +275,19 @@
                                         <div class="Container100">
                                             <div class="ContainerIndent">
                                                 <div class="Card Padding0px">
-                                                    <div class="CardTopic Padding20px">
-                                                        <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                                        <div class="EmptyBox10 ShowOnMobile"></div>
-                                                        Pendientes de Rendición<br />
-                                                        <span class="CardSubTopic">Solicitudes acreditadas no rendidas.</span>
-                                                    </div>
-
                                                     <div class="Container100">
-                                                        <div class="Container30">
+                                                        <div class="Container40">
                                                             <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
                                                                 <div class="EmptyBox5"></div>
                                                                 <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
                                                                     <h:outputText value="#{fn:length(rendicionController.listaSolicitudes)}"/>
                                                                 </div>
-                                                                <div class="FontRobotoLight Fs10 BoldGray Fright DispBlock ClearBoth"><h:outputText value="a" /></div>
+                                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                                    <h:outputText value="solicitudes a rendir" />
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="Container70">
+                                                        <div class="Container60">
                                                             <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
                                                                 <div class="EmptyBox5"></div>
                                                                 <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
@@ -1238,7 +1244,7 @@
                     this.cfg.seriesDefaults = {
                         renderer: $.jqplot.DonutRenderer,
                         rendererOptions: {
-                            sliceMargin: 5,
+                            sliceMargin: 4,
                             padding: 1,
                             innerDiameter: 125,
                             startAngle: -90,

@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.sun.mail.imap.protocol.Item;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.ChartSeries;
@@ -104,7 +105,10 @@ public class IndicadoresController implements Serializable {
 
     private float desembolsadoProyecto = 0.0f;
 
-//    // total desembolsado
+    private float totalEjecutadoEnProyecto = 0.0f;
+
+
+    //    // total desembolsado
 //    private float totalDesembolsado;
 
     public SolicitudFacade getSolicitudFacade() {
@@ -162,6 +166,22 @@ public class IndicadoresController implements Serializable {
         return listaEjecutadoRubro;
     }
 
+    public List<ItemRubro> getListaEjecutadoRubroOrdenadoPorMontoDesc(){
+        //ordenar la lista de rubros por monto descendente
+        Collections.sort(listaEjecutadoRubro, new Comparator<ItemRubro>() {
+            public int compare(ItemRubro ir1, ItemRubro ir2) {
+                if(ir1.getMonto() < ir2.getMonto()){
+                    return 1;
+                } else{
+                    return 0;
+                }
+
+            }
+        });
+
+        return listaEjecutadoRubro;
+    }
+
     public PieChartModel getChartEjecutadoPorRubro() {
         return chartEjecutadoPorRubro;
     }
@@ -205,6 +225,7 @@ public class IndicadoresController implements Serializable {
     public ProyectoFacade getProyectoFacade() { return proyectoFacade; }
     public int getPorcentajeSaldoSobreUltimoDesembolso() {return porcentajeSaldoSobreUltimoDesembolso;}
     public float getDesembolsadoProyecto() { return desembolsadoProyecto; }
+    public float getTotalEjecutadoEnProyecto() { return totalEjecutadoEnProyecto; }
 
     /**
      * Creates a new instance of IndicadoresController
@@ -376,18 +397,16 @@ public class IndicadoresController implements Serializable {
             }
         });
 
-        StringBuilder sb = new StringBuilder();
 
+        // llenamos la lista de item-rubro >> ejecutado
         for (Rubro r : listaRubros) {
-            sb.append(r.getColoricono().replace("#", "") + ", ");
+
 
             ejecutado.add(new ItemRubro(r.getId(), r.getRubro(), 0.0f, r.getIcono(), r.getColoricono()));
         }
 
-        // colores de los rubros
-        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1, "");
-        System.out.println("COLORES BARRA HORIZONTAL EJECUCION POR RUBROS >> " + sb.toString());
 
+        // recorremos la lista de solicitudes ejecutadas y acumulamos en el rubro correspondiente
         for (Solicitud solicitud : listaSolicitudes) {
 
             //Acumulamos en el total ejecutado del proyecto
@@ -410,6 +429,16 @@ public class IndicadoresController implements Serializable {
         // Ejecutado por Rubro
         listaEjecutadoRubro = ejecutado;
 
+        // colores de rubro
+        StringBuilder sb = new StringBuilder();
+
+        for(ItemRubro ir : this.getListaEjecutadoRubroOrdenadoPorMontoDesc()){
+            sb.append(ir.getColoricono().replace("#", "") + ", ");
+        }
+
+        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1, "");
+        System.out.println("COLORES BARRA HORIZONTAL EJECUCION POR RUBROS >> " + sb.toString());
+
         // generar grafico de barra horizontal stack
         crearModeloBarraHorizontal(sb.toString());
 
@@ -418,7 +447,7 @@ public class IndicadoresController implements Serializable {
     public void generarChartEjecutadoPorRubro() {
         chartEjecutadoPorRubro = new PieChartModel();
 
-        for (ItemRubro ir : listaEjecutadoRubro) {
+        for (ItemRubro ir : this.getListaEjecutadoRubroOrdenadoPorMontoDesc()) {
             chartEjecutadoPorRubro.set(ir.nombrerubro, ir.monto);
         }
 
@@ -731,6 +760,7 @@ public class IndicadoresController implements Serializable {
         public String getColoricono() { return coloricono; }
 
         public void setColoricono(String coloricono) { this.coloricono = coloricono; }
+
     }
 
     /**
@@ -757,7 +787,9 @@ public class IndicadoresController implements Serializable {
         modeloLinealEvolucionDesembolsosEjecuciones.setLegendPosition("s");
         Axis yAxis = modeloLinealEvolucionDesembolsosEjecuciones.getAxis(AxisType.Y);
         yAxis.setMin(0);
-        //yAxis.setMax(100);
+
+        Axis xAxis = modeloLinealEvolucionDesembolsosEjecuciones.getAxis(AxisType.X);
+        xAxis.setMin(0);
         
     }
 
@@ -850,7 +882,7 @@ public class IndicadoresController implements Serializable {
     public void crearModeloDonaDisponiblePorRubro(){
         modeloDonaDisponiblePorRubro = iniciarModeloDona();
         modeloDonaDisponiblePorRubro.setLegendPosition("e");
-        modeloDonaDisponiblePorRubro.setSliceMargin(5);
+        modeloDonaDisponiblePorRubro.setSliceMargin(4);
         modeloDonaDisponiblePorRubro.setShowDataLabels(true);
 //        modeloDonaDisponiblePorRubro.setDataLabelFormatString("color: #000000;");
         modeloDonaDisponiblePorRubro.setDataFormat("value");
@@ -916,7 +948,7 @@ public class IndicadoresController implements Serializable {
         modeloBarraEjecutadoPorRubros.setAnimate(true);
         //        modeloBarraEjecutadoPorRubros.setTitle("Ejecutado por Rubros");
         modeloBarraEjecutadoPorRubros.setLegendPosition("e");
-        modeloBarraEjecutadoPorRubros.setStacked(false);
+        modeloBarraEjecutadoPorRubros.setStacked(true);
         modeloBarraEjecutadoPorRubros.setExtender("extensorBarraRubros");
 
 
@@ -924,7 +956,7 @@ public class IndicadoresController implements Serializable {
         System.out.println("crearModeloBarraHorizontal >> COLORES >> " + colores);
         modeloBarraEjecutadoPorRubros.setSeriesColors(colores);
 
-        for(ItemRubro ir : listaEjecutadoRubro){
+        for(ItemRubro ir : this.getListaEjecutadoRubroOrdenadoPorMontoDesc()){
             ChartSeries serie = new ChartSeries();
             serie.setLabel(ir.getNombrerubro());
             serie.set(ir.getNombrerubro(), ir.getMonto());

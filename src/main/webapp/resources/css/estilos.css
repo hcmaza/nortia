@@ -453,6 +453,12 @@
     border: solid 1px #e0e0e0 !important;
 }
 
-.DisplayCard{
-    display:  block !important;
+.BordeAbajoBlanco{
+    border-bottom: white 1px solid !important;
+}
+
+/*LINE HEIGHT*/
+
+.LineHeightPanelGrid{
+    line-height: 29px;
 }
