@@ -103,6 +103,26 @@ public class DesembolsoController implements Serializable {
     public String prepareCreate() {
         current = new Desembolso();
         selectedItemIndex = -1;
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        PresupuestoController presupuestocontroller = (PresupuestoController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoController}", PresupuestoController.class);
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+        EtapaController etapacontroller = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
+
+        // Buscar presupuesto por proyecto
+        presupuestocontroller.findProyecto(proyectocontroller.getSelected().getId());
+
+        // Sumar los gastos del presupuesto
+        presupuestocontroller.sumarGastosView();
+
+        // Seteamos el tree de etapas y tareas para el proyecto actual
+        etapacontroller.armarTreeEtapasYTareasPorProyecto();
+
+        // Armar presupuesto general
+        presupuestotareacontroller.armarPresupuestoGeneral();
+
         return "CreateDesembolso";
     }
 
