@@ -86,6 +86,10 @@
     table-layout: fixed !important;
 }
 
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td, .ui-datatable table thead tr th{
+    color: white;
+}
+
 /*
  * treetable: columnas se ajustan al contenido
  */

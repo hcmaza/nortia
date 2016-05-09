@@ -319,6 +319,10 @@
 
                         <!--****** DASHBOARD: fin ******-->
 
+                        <!--*********************************************-->
+                        <!--**** MODIFICACION DE PRESUPUESTO: inicio ****-->
+                        <!--*********************************************-->
+
                         <div class="Container100">
                             <div class="Card " style="margin: 10px;">
                                 <div class="ui-fluid">
@@ -335,123 +339,158 @@
 
                                 <p:outputPanel id="pprincipal" >
 
-                                    <p:panel header="Gestión del Proyecto" >
+                                    <p:tabView id="tabmodificaciones" dynamic="true" style="margin-bottom: 10px;" >
 
-                                        <p:tabView id="tabmodificaciones" dynamic="true" style="margin-bottom: 10px;" >
+                                        <p:tab id="tabpresupuesto" title="Modificación de Presupuesto" >
 
-                                            <p:tab id="tabpresupuesto" title="Presupuesto Detallado" >
+                                            <div class="ContainerIndent Padding0px">
+                                                <p:outputPanel id="indicadoresModificaciones">
+                                                    <div class="Container50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card BlueBack White TexAlCenter HoverEffect Padding10px">
+                                                                <div class="EmptyBox5"></div>
+                                                                <i class="fa fa-usd Fs30"></i>
+                                                                <div class="EmptyBox10"></div>
+                                                                <h:outputText id="labelPresupuestoDisponible"
+                                                                              value="$ #{modificacionpresupuestoController.presupuestoDisponible}"
+                                                                              styleClass="Fs20 FontAdamantiumBold" />
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoLight Fs14 White DispBlock Fright ClearBoth">Total Disponible en Presupuesto</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card White TexAlCenter HoverEffect Padding10px #{modificacionpresupuestoController.obtenerEstiloDiferencia()}">
+                                                                <div class="EmptyBox5"></div>
+                                                                <i class="icon-moneybag Fs30"></i>
+                                                                <div class="EmptyBox10"></div>
+                                                                <h:outputText id="labelPresupuestoDiferencia"
+                                                                              value="$ #{modificacionpresupuestoController.presupuestoDiferencia}"
+                                                                              styleClass="Fs20 FontAdamantiumBold" />
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoLight Fs14 White DispBlock Fright ClearBoth">Disponible</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </p:outputPanel>
 
-                                                <p:panelGrid style="width: 100%;" styleClass="sinBordes">
-                                                    <p:row >
-                                                        <p:column style="width: 50%;" >
-                                                            <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30"  >
-                                                                <f:facet name="legend" >
-                                                                    Total Disponible en Presupuesto
-                                                                </f:facet>
-                                                                <div class="centrarEnFieldSetAnchoTotal" >
-                                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                                        <p:outputLabel id="labelPresupuestoDisponible" value="$ #{modificacionpresupuestoController.presupuestoDisponible}" style="color: #777777; font-weight: bold; font-size: 18px !important; " />
-                                                                    </p:panelGrid>
-                                                                </div>
-                                                            </p:fieldset>
+                                                <div class="Container100">
+                                                    <!--TABLA ARBOL de MODIFICACION DE PRESUPUESTO-->
+
+                                                    <p:treeTable id="tablapresupuesto" value="#{modificacionpresupuestoController.root}"
+                                                                 var="item"
+                                                                 styleClass="tablaArbol tabla tablaAjustada TablaColorEncabezado Fs10"  >
+                                                        <p:column headerText="Etapa">
+                                                            <h:outputText value="#{item.presupuestoTarea.tarea.etapaid.etapa}" />
                                                         </p:column>
-                                                        <p:column style="width: 50%;">
-                                                            <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30"  >
-                                                                <f:facet name="legend" >
-                                                                    Disponible
-                                                                </f:facet>
-                                                                <div class="centrarEnFieldSetAnchoTotal" >
-                                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                                        <p:outputLabel id="labelPresupuestoDiferencia" value="$ #{modificacionpresupuestoController.presupuestoDiferencia}" style="font-weight: bold; font-size: 18px !important;  " styleClass="#{modificacionpresupuestoController.obtenerEstiloDiferencia()}" />
-                                                                    </p:panelGrid>
-                                                                </div>
-                                                            </p:fieldset>
+                                                        <p:column headerText="Tarea">
+                                                            <h:outputText value="#{item.presupuestoTarea.tarea.tarea}" />
                                                         </p:column>
+                                                        <p:column headerText="Descripcion">
+                                                            <h:outputText value="[#{item.presupuestoTarea.rubro.abreviado}] #{item.descripcion}" rendered="#{not empty item.descripcion}" />
+                                                        </p:column>
+                                                        <p:column headerText="Original"  style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeOriginal}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Solicitudes" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeSolicitudes}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Disponible" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeSinModificacion}" />
+                                                        </p:column>
+                                                        <p:column headerText="Modificación" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeModificacion}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Importe Final" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeFinal}" />
+                                                        </p:column>
+                                                        <p:column headerText=" " style="width:24px; min-width: 24px !important; max-width: 24px !important;">
+                                                            <p:commandButton update=":formitem, :formprincipal:growlprincipal, "
+                                                                             oncomplete="PF('dialogoModificacion').show();"
+                                                                             icon="fa fa-pencil" styleClass="OrangeBack White"
+                                                                             title="Modificar Presupuesto" rendered="#{not empty item.descripcion}"  >
+                                                                <f:setPropertyActionListener value="#{item}" target="#{modificacionpresupuestoController.piSeleccionado}" />
+                                                            </p:commandButton>
+                                                        </p:column>
+                                                        <p:columnGroup type="footer">
+                                                            <p:row>
+                                                                <p:column colspan="3" style="text-align:right" footerText="Totales:" styleClass="Gris3Back White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{presupuestoTareaController.sumatotal}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalSolicitudes}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalSinModificaciones}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalModificaciones}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalImportesFinales}" styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText=" " styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
+                                                            </p:row>
+                                                        </p:columnGroup>
+                                                    </p:treeTable>
+                                                </div>
+                                            </div>
+
+                                            <div class="Separator"></div>
+                                        </p:tab>
+                                    </p:tabView>
+
+                                    <!--TABLA ARBOL de MODIFICACIONES HECHAS-->
+
+                                    <div class="Container100">
+                                        <p:outputPanel id="op" >
+                                            <p:dataTable id="tablamodificaciones" var="item"
+                                                         value="#{modificacionpresupuestoController.modificaciones}"
+                                                         styleClass="tabla tablaAjustada TablaColorEncabezado" >
+                                                <f:facet name="header">
+                                                    Items del Presupuesto a Modificar
+                                                </f:facet>
+                                                <p:column headerText="Fecha">
+                                                    <h:outputText value="#{item.fecha}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column headerText="Etapa" >
+                                                    <h:outputText value="#{item.presupuestotareaid.tarea.etapaid.etapa}" />
+                                                </p:column>
+                                                <p:column headerText="Tarea" >
+                                                    <h:outputText value="#{item.presupuestotareaid.tarea.tarea}" />
+                                                </p:column>
+                                                <p:column headerText="Item" >
+                                                    <h:outputText value="#{item.presupuestotareaid.descripcion}" />
+                                                </p:column>
+                                                <p:column headerText="Rubro" >
+                                                    <h:outputText value="#{item.presupuestotareaid.rubro.rubro}" />
+                                                </p:column>
+                                                <p:column headerText="Modificación">
+                                                    <h:outputText value="$ #{item.modificacion.floatValue()}" styleClass="Fright" />
+                                                </p:column>
+                                                <p:column style="width:32px;text-align: center">
+                                                    <p:commandButton actionListener="#{modificacionpresupuestoController.quitarModificacion(item)}"
+                                                                     title="Eliminar Modificación de Presupuesto"
+                                                                     icon="fa fa-trash-o" styleClass="RedButton White"
+                                                                     update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:indicadoresModificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" >
+                                                        <p:confirm header="Eliminar" message="Esta seguro que desea eliminar el Item?" icon="icon-alert"  />
+                                                    </p:commandButton>
+                                                </p:column>
+                                                <p:columnGroup type="footer">
+                                                    <p:row>
+                                                        <p:column colspan="5" style="text-align:right" footerText="Totales:" styleClass="Gris3Back White Fs16 FontBold TexAlRight" />
+                                                        <p:column footerText="$ #{modificacionpresupuestoController.sumarModificaciones()}" styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
+                                                        <p:column footerText=" " styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
                                                     </p:row>
-                                                </p:panelGrid>
+                                                </p:columnGroup>
+                                            </p:dataTable>
+                                        </p:outputPanel>
+                                    </div>
 
-                                                <p:treeTable id="tablapresupuesto" value="#{modificacionpresupuestoController.root}"
-                                                             var="item"
-                                                             style="padding: 0px; width: 100%; margin: 5px auto; overflow: hidden;"
-                                                             styleClass="tablaArbol fuente10"  >
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Presupuesto" />
-                                                    </f:facet>
-                                                    <p:column headerText="Etapa">
-                                                        <h:outputText value="#{item.presupuestoTarea.tarea.etapaid.etapa}" />
-                                                    </p:column>
-                                                    <p:column headerText="Tarea">
-                                                        <h:outputText value="#{item.presupuestoTarea.tarea.tarea}" />
-                                                    </p:column>
-                                                    <p:column headerText="Descripcion">
-                                                        <h:outputText value="[#{item.presupuestoTarea.rubro.abreviado}] #{item.descripcion}" rendered="#{not empty item.descripcion}" />
-                                                    </p:column>
-                                                    <p:column headerText="Original"  style="text-align: right;" >
-                                                        <h:outputText value="#{item.importeOriginal}"  />
-                                                    </p:column>
-                                                    <p:column headerText="Solicitudes" style="text-align: right;" >
-                                                        <h:outputText value="#{item.importeSolicitudes}"  />
-                                                    </p:column>
-                                                    <p:column headerText="Disponible" style="text-align: right;" >
-                                                        <h:outputText value="#{item.importeSinModificacion}" />
-                                                    </p:column>
-                                                    <p:column headerText="Modificación" style="text-align: right;" >
-                                                        <h:outputText value="#{item.importeModificacion}"  />
-                                                    </p:column>
-                                                    <p:column headerText="Importe Final" style="text-align: right;" >
-                                                        <h:outputText value="#{item.importeFinal}" />
-                                                    </p:column>
-                                                    <p:column headerText=" " style="width:24px; min-width: 24px !important; max-width: 24px !important;">
-                                                        <p:commandButton update=":formitem, :formprincipal:growlprincipal, " oncomplete="PF('dialogoModificacion').show();" icon="ui-icon-pencil" title="Modificar Presupuesto" rendered="#{not empty item.descripcion}"  >
-                                                            <f:setPropertyActionListener value="#{item}" target="#{modificacionpresupuestoController.piSeleccionado}" />
-                                                        </p:commandButton>
-                                                    </p:column>
-                                                    <p:columnGroup type="footer">
-                                                        <p:row>
-                                                            <p:column colspan="3" style="text-align:right" footerText="Totales:" />
-                                                            <p:column footerText="$ #{presupuestoTareaController.sumatotal}" style="text-align: right;" />
-                                                            <p:column footerText="$ #{modificacionpresupuestoController.totalSolicitudes}" style="text-align: right;" />
-                                                            <p:column footerText="$ #{modificacionpresupuestoController.totalSinModificaciones}" style="text-align: right;" />
-                                                            <p:column footerText="$ #{modificacionpresupuestoController.totalModificaciones}" style="text-align: right;" />
-                                                            <p:column footerText="$ #{modificacionpresupuestoController.totalImportesFinales}" style="text-align: right;" />
-                                                            <p:column footerText=" "  />
-                                                        </p:row>
-                                                    </p:columnGroup>
-                                                </p:treeTable>
-                                            </p:tab>
-                                        </p:tabView>
-                                    </p:panel>
-
-                                    <p:outputPanel id="op" >
-                                        <p:dataTable id="tablamodificaciones" var="item" value="#{modificacionpresupuestoController.modificaciones}" >
-                                            <f:facet name="header">
-                                                Lista de Modificaciones del Presupuesto a Realizar
-                                            </f:facet>
-                                            <p:column headerText="Fecha">
-                                                <h:outputText value="#{item.fecha}">
-                                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                                </h:outputText>
-                                            </p:column>
-                                            <p:column headerText="Item" >
-                                                <h:outputText value="#{item.presupuestotareaid.descripcion}" />
-                                            </p:column>
-                                            <p:column headerText="Modificación">
-                                                <h:outputText value="#{item.modificacion.floatValue()}" style="text-align: right;" />
-                                            </p:column>
-                                            <p:column style="width:32px;text-align: center">
-                                                <p:commandButton actionListener="#{modificacionpresupuestoController.quitarModificacion(item)}" title="Eliminar" icon="ui-icon-trash" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" >
-                                                    <p:confirm header="Eliminar" message="Esta seguro que desea eliminar el Item?" icon="ui-icon-alert"  />
-                                                </p:commandButton>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                El total de modificaciones de presupuesto es $ #{modificacionpresupuestoController.sumarModificaciones()}
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </p:outputPanel>
+                                    <div class="Separator"></div>
 
                                     <p:outputPanel id="botonsolicitud"  >
                                         <div align="center">
-                                            <p:commandButton action="#{modificacionpresupuestoController.create}" value="Guardar Modificaciones de Presupuesto" style="display: inline-block; margin-top: 5px;" icon="ui-icon-disk" update=":formprincipal:pprincipal" oncomplete="PF('dfinalmodificacion').show();" immediate="true" />
+                                            <p:commandButton action="#{modificacionpresupuestoController.create}"
+                                                             value="Guardar Modificaciones de Presupuesto"
+                                                             icon="fa fa-save" styleClass="GreenButton White"
+                                                             update=":formprincipal:pprincipal"
+                                                             oncomplete="PF('dfinalmodificacion').show();"
+                                                             immediate="true" />
                                         </div>
                                     </p:outputPanel>
 
@@ -490,7 +529,7 @@
                         <!--**********************************************-->
 
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" style="float:left;" /> 
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:indicadoresModificaciones , :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" style="float:left;" />
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="float: right;" />
                         </p:confirmDialog>
 
@@ -540,7 +579,10 @@
                             <p:separator/>
 
                             <div align="center" >
-                                <p:commandButton value="Modificar Presupuesto"  actionListener="#{modificacionpresupuestoController.agregarModificacion()}" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia, :formprincipal:growlprincipal"  oncomplete="PF('dialogoModificacion').hide();" /> 
+                                <p:commandButton value="Modificar Presupuesto" icon="fa fa-save" styleClass="GreenButton White"
+                                                 actionListener="#{modificacionpresupuestoController.agregarModificacion()}"
+                                                 update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:indicadoresModificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia, :formprincipal:growlprincipal"
+                                                 oncomplete="PF('dialogoModificacion').hide();" />
                             </div>
 
                         </h:form>

@@ -131,14 +131,14 @@ public class ModificacionpresupuestoController implements Serializable {
         
         // Si el valor es 0 > color gris
         if(presupuestoDiferencia.equals(0f)){
-            return "colorGris";
+            return "BoldGrayBack White";
         }
         
         // si el valor es positivo o negativo, cambiar el color
         if(presupuestoDiferencia > 0){
-            return "colorVerde";
+            return "GreenBack SoftGreen";
         } else {
-            return "colorRojo";
+            return "RedBack SoftRed";
         }
     }
 
