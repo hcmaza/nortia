@@ -11,32 +11,65 @@
         <ui:define name="content">       
             <div class="Container100">       
                 <div class="ContainerIndent">
-                    <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
-                    <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
-                    <script src="#{request.contextPath}/resources/js/exporting.js"></script>           
 
                     <h:form id="form" >
-                        <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}"  >
-                            <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />                                                        
-                            <p:panelGrid columns="2" styleClass="sinBordes sinFondo" columnClasses="left,right"> 
-                                <h:outputLabel value="CUDAP" for="cudap" />
-                                <p:inputText id="cudap" value="#{proyectoController.selected.cudap}" title="CUDAP" />
-                                <h:outputLabel value="Fecha de Resolucion" for="fecharesolucion" />
-                                <p:calendar id="fecharesolucion" value="#{proyectoController.selected.fecharesolucion}" title="Fecha de Resolución"/>                                         
-                                <h:outputLabel value="N° Resolucion" for="resolucion" />
-                                <p:inputText id="resolucion" value="#{proyectoController.selected.resolucion}" title="Resolucion" />
-                                <h:outputLabel value="Fecha Expediente" for="fechaexpediente" />
-                                <p:calendar id="fechaexpediente" value="#{proyectoController.selected.fechaexpediente}" title="Fecha de Expediente"/> 
-                                <h:outputLabel value="N° Expediente" for="expediente" />
-                                <p:inputText id="expediente" value="#{proyectoController.selected.expediente}" title="Expediente" />     
 
-                            </p:panelGrid>
-                            <p:separator />
-                            <div align="center" >
-                                <p:commandButton icon="ui-icon-disk" value="Guardar" actionListener="#{proyectoController.setFormalizar}"  />  
-                                <p:commandButton icon="ui-icon-close" value="Cancelar" action="List" ajax="false" />
+                        <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
+
+                        <div class="Card Padding20px">
+                            <div class="CardTopic">
+                                <i class="fa fa-paperclip Fs30 Fleft MarRight10"></i>
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                Formalizar Proyecto <br />
+                                    <span class="CardSubTopic">
+                                        <h:outputText value="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" />
+                                    </span>
                             </div>
-                        </p:panel>
+
+                            <div class="Separator"></div>
+
+                            <div class="Container100">
+                                <div class="ContainerIndent">
+
+                                    <!--<h:outputLabel value="Fecha Expediente" for="fechaexpediente" />-->
+                                    <!--<p:calendar id="fechaexpediente" value="#{proyectoController.selected.fechaexpediente}" title="Fecha de Expediente"/>-->
+
+                                    <p:panelGrid columns="4" layout="grid"
+                                                 styleClass="ui-grid-col-12 ui-panelgrid-blank" >
+
+                                        <p:outputLabel value="N° Expediente" for="expediente" styleClass="Fright" style="padding-top: 13px" />
+                                        <p:inputText id="expediente" value="#{proyectoController.selected.expediente}" title="Expediente"  />
+
+                                        <p:outputLabel value="CUDAP" for="cudap" styleClass="Fright" style="padding-top: 13px" />
+                                        <p:inputText id="cudap" value="#{proyectoController.selected.cudap}" title="CUDAP" />
+
+                                        <p:outputLabel value="N° Resolución UNDEC" for="resolucion" styleClass="Fright" style="padding-top: 13px" />
+                                        <p:inputText id="resolucion" value="#{proyectoController.selected.resolucion}" title="Resolución" />
+
+                                        <p:outputLabel value="Fecha de Resolucion UNDEC" for="fecharesolucion" styleClass="Fright" style="padding-top: 13px" />
+                                        <p:calendar id="fecharesolucion" value="#{proyectoController.selected.fecharesolucion}" title="Fecha de Resolución"/>
+
+                                        <p:outputLabel value="N° Resolución Organismo" for="resolucionroganismo" styleClass="Fright" style="padding-top: 13px" />
+                                        <p:inputText id="resolucionroganismo" value="#{proyectoController.selected.resolucionorganismo}" title="Expediente" />
+
+                                        <p:outputLabel value="Fecha de Resolución Organismo" for="fecharesolucionorganismo" styleClass="Fright" style="padding-top: 13px" />
+                                        <p:calendar id="fecharesolucionorganismo" value="#{proyectoController.selected.fecharesolucionorganismo}" title="Fecha de Expediente"/>
+
+                                    </p:panelGrid>
+
+                                    <div class="EmptyBox10"></div>
+
+                                    <div class="Separator"></div>
+
+                                    <div align="center" >
+                                        <p:commandButton icon="fa fa-save" styleClass="GreenButton White MarRight10" value="Formalizar Proyecto" actionListener="#{proyectoController.setFormalizar}"  />
+                                        <p:commandButton icon="fa fa-times" styleClass="RedButton White" value="Cancelar" action="List" ajax="false" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <p:dialog id="dfinal" widgetVar="dfinal"  modal="true" closable="false"  header="Formalización del Proyecto" >
                             Proyecto Formalizado Satisfactoriamente!!!
                             <div align="center" >

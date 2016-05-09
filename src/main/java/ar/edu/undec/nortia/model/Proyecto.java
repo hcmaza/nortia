@@ -46,6 +46,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Proyecto.findByCudap", query = "SELECT p FROM Proyecto p WHERE p.cudap = :cudap")})
 public class Proyecto implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Column(name = "resolucionorganismo")
+    private String resolucionorganismo;
+
+    @Column(name = "fecharesolucionorganismo")
+    private Date fecharesolucionorganismo;
+
     //@Basic(optional = false)
     //@NotNull
     @Column(name = "fecharesolucion")
@@ -329,8 +336,22 @@ public class Proyecto implements Serializable {
     public void setEstadoproyectoid(Estadoproyecto estadoproyectoid) {
         this.estadoproyectoid = estadoproyectoid;
     }
-    
-    
+
+    public String getResolucionorganismo() {
+        return resolucionorganismo;
+    }
+
+    public void setResolucionorganismo(String resolucionorganismo) {
+        this.resolucionorganismo = resolucionorganismo;
+    }
+
+    public Date getFecharesolucionorganismo() {
+        return fecharesolucionorganismo;
+    }
+
+    public void setFecharesolucionorganismo(Date fecharesolucionorganismo) {
+        this.fecharesolucionorganismo = fecharesolucionorganismo;
+    }
     
     
 
