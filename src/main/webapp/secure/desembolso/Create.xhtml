@@ -75,30 +75,48 @@
                                     </p:tab>
 
                                     <p:tab id="tabdesembolso" title="Crear Desembolso" >
-                                        <p:panel header="Desembolso" >
-                                            <h:panelGrid columns="2">
 
-                                                <p:outputLabel value="Nº de Desembolso" for="numerodesembolso" />
-                                                <p:inputText id="numerodesembolso" value="#{desembolsoController.selected.numerodesembolso}" title="#{bundle.CreateDesembolsoTitle_numerodesembolso}" />
+                                        <div class="EmptyBox20"></div>
 
-                                                <p:outputLabel value="Cuenta Bancaria" for="numerocuentabancaria" />
-                                                <p:selectOneMenu id="numerocuentabancaria" value="#{desembolsoController.selected.numerocuentabancaria}" >
-                                                    <f:selectItems value="#{cuentabancariaController.itemsAvailableSelectOne}"/>
-                                                </p:selectOneMenu>
+                                        <div class="CardTopic">
+                                            Datos del Desembolso <br/>
+                                        </div>
 
-                                                <p:outputLabel value="Importe del Desembolso" for="monto" />
-                                                <p:inputText id="monto" value="#{desembolsoController.selected.monto}" title="#{bundle.CreateDesembolsoTitle_monto}" />
+                                        <div class="Separator"></div>
 
-                                            </h:panelGrid>
-                                        </p:panel>
+                                        <p:messages closable="true" autoUpdate="true" />
 
-                                        <br style="clear: both;"/>
+                                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank"  >
 
-                                        <p:separator />
-                                        <p:commandButton action="#{desembolsoController.create}" value="Crear Desembolso" style="display: inline-block;" icon="ui-icon-disk" validateClient="true" update=":formprincipal:tab" oncomplete="PF('dfinal').show();" />
-                                        <p:commandButton action="#{desembolsoController.prepareList}" value="Lista de Desembolsos" immediate="true" style="display: inline-block; float: right;" icon="ui-icon-document" ajax="false" />
-                                        <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block;float:right;" icon="ui-icon-home"  ajax="false" />
-                                        <p:separator/>
+                                            <p:outputLabel value="Organismo" for="organismo" styleClass="Fright" style="padding-top: 13px" />
+                                            <p:outputLabel id="organismo" value="#{proyectoController.selected.convocatoriaid.organismo}"  styleClass="Fleft" style="padding-top: 13px" />
+
+                                            <p:outputLabel value="Convocatoria" for="convocatoria" styleClass="Fright" style="padding-top: 13px" />
+                                            <p:outputLabel id="convocatoria" value="#{proyectoController.selected.convocatoriaid.convocatoria}" styleClass="Fleft" style="padding-top: 13px" />
+
+                                            <p:outputLabel value="Nº de Desembolso" for="numerodesembolso" styleClass="Fright" style="padding-top: 13px" />
+                                            <p:inputText id="numerodesembolso" value="#{desembolsoController.selected.numerodesembolso}" title="Nº de Desembolso" />
+
+                                            <p:outputLabel value="Fecha de Desembolso" for="fechadesembolso" styleClass="Fright" style="padding-top: 13px" />
+                                            <p:calendar id="fechadesembolso" value="#{desembolsoController.selected.fechadesembolso}" title="Fecha del Desembolso" required="true" requiredMessage="Ingresar la fecha del desembolso, por favor." />
+
+                                            <p:outputLabel value="Importe del Desembolso" for="monto" styleClass="Fright" style="padding-top: 13px" />
+                                            <p:inputText id="monto" value="#{desembolsoController.selected.monto}" title="Monto del Desembolso" required="true" requiredMessage="Ingresar el monto del desembolso, por favor." />
+
+                                        </p:panelGrid>
+
+                                        <div class="Separator"></div>
+
+                                        <div align="center">
+                                            <p:commandButton action="#{desembolsoController.create}" value="Crear Desembolso"
+                                                             icon="fa fa-usd" styleClass="GreenButton White MarRight20"
+                                                             validateClient="true" update=":formprincipal:tab"
+                                                             oncomplete="PF('dfinal').show();" />
+                                            <p:commandButton action="#{desembolsoController.prepareList}" value="Lista de Desembolsos"
+                                                             immediate="true"
+                                                             icon="fa fa-arrow-left" styleClass="OrangeButton White" ajax="false" />
+                                        </div>
+
                                     </p:tab>
 
                                 </p:tabView>
@@ -115,8 +133,11 @@
                     <h:form>
                         <p:dialog id="dfinal" widgetVar="dfinal" modal="true" header="Nuevo Desembolso" >
                             <h:panelGroup id="panelMensajes" layout="block">
-                                <p:messages autoUpdate="true" />
+                                <p:messages id="mensajeFinal" autoUpdate="true" />
                             </h:panelGroup>
+                            <div class="CardTopic">
+                                Desembolso Creado Correctamente
+                            </div>
                             <p:separator />
                             <div align="center" >
                                 <p:commandButton value="Volver a la Lista" action="#{desembolsoController.prepareList()}" ajax="false" />

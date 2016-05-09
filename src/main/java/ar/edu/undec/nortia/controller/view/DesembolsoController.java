@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -154,7 +155,11 @@ public class DesembolsoController implements Serializable {
             this.getProyectoFacade().edit(proyectocontroller.getSelected());
             
             JsfUtil.addSuccessMessage("El Desembolso se ha creado con éxito");
-            return prepareCreate();
+
+            //return prepareCreate();
+
+            return "/index?faces-redirect=true";
+
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
