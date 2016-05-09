@@ -405,7 +405,7 @@
                                                         <p:column headerText="Importe Final" style="text-align: right;" >
                                                             <h:outputText value="#{item.importeFinal}" />
                                                         </p:column>
-                                                        <p:column headerText=" " style="width:24px; min-width: 24px !important; max-width: 24px !important;">
+                                                        <p:column headerText=" " styleClass="TexAlCenter">
                                                             <p:commandButton update=":formitem, :formprincipal:growlprincipal, "
                                                                              oncomplete="PF('dialogoModificacion').show();"
                                                                              icon="fa fa-pencil" styleClass="OrangeBack White"
@@ -472,7 +472,7 @@
                                                 </p:column>
                                                 <p:columnGroup type="footer">
                                                     <p:row>
-                                                        <p:column colspan="5" style="text-align:right" footerText="Totales:" styleClass="Gris3Back White Fs16 FontBold TexAlRight" />
+                                                        <p:column colspan="5" style="text-align:right" footerText="Total de Modificaciones:" styleClass="Gris3Back White Fs16 FontBold TexAlRight" />
                                                         <p:column footerText="$ #{modificacionpresupuestoController.sumarModificaciones()}" styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
                                                         <p:column footerText=" " styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
                                                     </p:row>
