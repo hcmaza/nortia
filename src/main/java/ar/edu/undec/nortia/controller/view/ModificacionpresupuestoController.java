@@ -249,6 +249,11 @@ public class ModificacionpresupuestoController implements Serializable {
         
         // operacion inicial
         this.setOperacion("suma");
+
+        // preparar indicadores TEMPORALES para ejemplo
+        IndicadoresController indicadorescontroller = (IndicadoresController) context.getApplication().evaluateExpressionGet(context, "#{indicadoresController}", IndicadoresController.class);
+        indicadorescontroller.obtenerCalculos();
+        //indicadorescontroller.crearModeloLinealEvolucionDesembolsosEjecuciones();
         
         return "CreateModificacionPresupuesto";
     }

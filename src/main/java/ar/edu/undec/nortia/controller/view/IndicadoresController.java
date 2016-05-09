@@ -245,8 +245,12 @@ public class IndicadoresController implements Serializable {
 
         calcularTotalesPorProyecto();
 
+        // calcula ejecutado por rubro y
+        // genera el grafico de dona con los porcentajes para cada rubro
         calcularSaldosPorRubro();
 
+        // calcula ejecutado por rubro y
+        // genera el grafico de barra horizonal stack
         calcularEjecutadoPorRubro();
 
         crearIndicadorEjecutado();
@@ -254,10 +258,14 @@ public class IndicadoresController implements Serializable {
         generarChartEjecutadoPorRubro();
         
         generarChartEjecutadoPorFecha();
-        
+
         calcularSaldoProyecto();
 
         calcularAvancesEtapas();
+
+        // genera el grafico de linea,
+        // con la evolucion de desembolsos y ejecuciones
+        crearModeloLinealEvolucionDesembolsosEjecuciones();
 
     }
 
