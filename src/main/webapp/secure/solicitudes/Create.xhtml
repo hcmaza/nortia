@@ -114,7 +114,7 @@
                                                                 <!--56%-->
                                                                 <h:outputText value="#{indicadoresController.porcentajeEjecutadoEntero}" /> <h:outputText value=" %" styleClass="Fs20 FontLight White" />
                                                             </div>
-                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">de presupuesto</div>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">presupuesto</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -258,7 +258,7 @@
 
                                                                 <div class="Container100">
 
-                                                                        <ui:repeat value="#{indicadoresController.listaEjecutadoRubroOrdenadoPorMontoDesc}" var="rubro" size="4"  >
+                                                                        <ui:repeat value="#{indicadoresController.listaEjecutadoRubroOrdenadoPorMontoDesc}" var="rubro" size="5"  >
                                                                             <div class="Container20">
                                                                                 <div class="Card BoldGrayBack White Fs16 FontBold Padding5px" style="background-color: #{rubro.coloricono}">
                                                                                     <h:outputText value="$ #{rubro.monto}" styleClass="Fs12 White" />
