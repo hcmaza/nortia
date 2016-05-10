@@ -16,6 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.sun.mail.imap.protocol.Item;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.ChartSeries;
@@ -52,11 +53,19 @@ public class IndicadoresController implements Serializable {
 
     @EJB
     private TareaFacade tareaFacade;
+
+    @EJB
+    private EtapaFacade etapaFacade;
+
     public TareaFacade getTareaFacade() { return tareaFacade; }
+    public EtapaFacade getEtapaFacade() { return etapaFacade; }
 
     private List<Solicitud> listaSolicitudes;
     private List<PresupuestoTarea> listaPresupuestosTarea;
     private HashMap<String, Float> listaSaldosRubro;
+
+    private LinkedHashMap<Rubro, Float> listaSaldosDeRubro;
+    public LinkedHashMap<Rubro, Float> getListaSaldosDeRubro() { return listaSaldosDeRubro; }
 
     private List<String> columnasListaSaldosRubro;
     private List<Float> valoresListaSaldosRubro;
@@ -87,15 +96,27 @@ public class IndicadoresController implements Serializable {
 
     // Monto pendiente de rendicion por proyecto
     private float pendienteRendicionProyecto;
-    
-    float porcentajeEjecutado = 0.0f;
-    
-//    // total desembolsado
+
+    // Porcentaje Ejecutado
+    private float porcentajeEjecutado = 0.0f;
+
+    // Porcentaje de saldo disponible sobre ultimo desembolso
+    private int porcentajeSaldoSobreUltimoDesembolso = 0;
+
+    private float desembolsadoProyecto = 0.0f;
+
+    private float totalEjecutadoEnProyecto = 0.0f;
+
+
+    //    // total desembolsado
 //    private float totalDesembolsado;
 
     public SolicitudFacade getSolicitudFacade() {
         return solicitudFacade;
     }
+
+    private Map<String,Integer> mapaAvancesEtapasYTareas = new HashMap<String, Integer>();
+    public Map<String, Integer> getMapaAvancesEtapasYTareas() { return mapaAvancesEtapasYTareas; }
 
     public DesembolsoFacade getDesembolsoFacade() {
         return desembolsoFacade;
@@ -145,6 +166,22 @@ public class IndicadoresController implements Serializable {
         return listaEjecutadoRubro;
     }
 
+    public List<ItemRubro> getListaEjecutadoRubroOrdenadoPorMontoDesc(){
+        //ordenar la lista de rubros por monto descendente
+        Collections.sort(listaEjecutadoRubro, new Comparator<ItemRubro>() {
+            public int compare(ItemRubro ir1, ItemRubro ir2) {
+                if(ir1.getMonto() < ir2.getMonto()){
+                    return 1;
+                } else{
+                    return 0;
+                }
+
+            }
+        });
+
+        return listaEjecutadoRubro;
+    }
+
     public PieChartModel getChartEjecutadoPorRubro() {
         return chartEjecutadoPorRubro;
     }
@@ -160,38 +197,35 @@ public class IndicadoresController implements Serializable {
     public float getEjecutadoProyecto() {
         return ejecutadoProyecto;
     }
-    
-     public void setEjecutadoProyecto(float ejecutado) {
+    public void setEjecutadoProyecto(float ejecutado) {
         this.ejecutadoProyecto=ejecutado;
     }
-
     public float getTotalPresupuestoProyecto() {
         return totalPresupuestoProyecto;
     }
-
     public float getRendidoProyecto() {
         return rendidoProyecto;
     }
-
     public float getPendienteRendicionProyecto() {
         return pendienteRendicionProyecto;
     }
-
     public float getPorcentajeEjecutado() {
         return porcentajeEjecutado;
     }
-
     public void setPorcentajeEjecutado(float porcentajeEjecutado) {
         this.porcentajeEjecutado = porcentajeEjecutado;
     }
-    
     public String getPorcentajeEjecutadoString(){
         return String.format("%.02f", porcentajeEjecutado);
     }
-
-    public ProyectoFacade getProyectoFacade() {
-        return proyectoFacade;
+    public int getPorcentajeEjecutadoEntero(){
+        //return String.format("%.0f", porcentajeEjecutado);
+        return (int) porcentajeEjecutado;
     }
+    public ProyectoFacade getProyectoFacade() { return proyectoFacade; }
+    public int getPorcentajeSaldoSobreUltimoDesembolso() {return porcentajeSaldoSobreUltimoDesembolso;}
+    public float getDesembolsadoProyecto() { return desembolsadoProyecto; }
+    public float getTotalEjecutadoEnProyecto() { return totalEjecutadoEnProyecto; }
 
     /**
      * Creates a new instance of IndicadoresController
@@ -205,12 +239,18 @@ public class IndicadoresController implements Serializable {
      * rubro
      *
      */
-    public void obtenerCalculosPorRubro() {
+    public void obtenerCalculos() {
+
+        calcularDesembolsadoPorProyecto();
 
         calcularTotalesPorProyecto();
 
+        // calcula ejecutado por rubro y
+        // genera el grafico de dona con los porcentajes para cada rubro
         calcularSaldosPorRubro();
 
+        // calcula ejecutado por rubro y
+        // genera el grafico de barra horizonal stack
         calcularEjecutadoPorRubro();
 
         crearIndicadorEjecutado();
@@ -218,10 +258,24 @@ public class IndicadoresController implements Serializable {
         generarChartEjecutadoPorRubro();
         
         generarChartEjecutadoPorFecha();
-        
-        //calcularTotalDesembolsado();
-        
+
         calcularSaldoProyecto();
+
+        calcularAvancesEtapas();
+
+        // genera el grafico de linea,
+        // con la evolucion de desembolsos y ejecuciones
+        crearModeloLinealEvolucionDesembolsosEjecuciones();
+
+    }
+
+    public void calcularDesembolsadoPorProyecto(){
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+        DesembolsoController desembolsoController = (DesembolsoController) context.getApplication().evaluateExpressionGet(context, "#{desembolsoController}",DesembolsoController.class);
+
+        desembolsadoProyecto = desembolsoController.sumarDesembolsosPorProyecto(proyectocontroller.getSelected().getId());
 
     }
 
@@ -231,7 +285,7 @@ public class IndicadoresController implements Serializable {
         saldoProyecto = 0.0f;
 
         // Saldos por Rubro
-        HashMap<String, Float> saldos = new HashMap<String, Float>();
+        LinkedHashMap<Rubro, Float> saldos = new LinkedHashMap<Rubro, Float>();
 
         // Obtenemos los controladores necesarios
         FacesContext context = FacesContext.getCurrentInstance();
@@ -249,9 +303,22 @@ public class IndicadoresController implements Serializable {
         // Lista de solicitudes disponibles
         List<Solicitud> listaSolicitudesDisponibles = new ArrayList<Solicitud>();
 
+        // Lista de rubros
+        List<Rubro> listaRubros = getRubroFacade().findAll();
+
+        //ordenar la lista de rubros
+        Collections.sort(listaRubros, new Comparator<Rubro>() {
+            public int compare(Rubro r1, Rubro r2) {
+                if (r1.getOrden() == null || r2.getOrden() == null) {
+                    return 0;
+                }
+                return r1.getOrden().compareTo(r2.getOrden());
+            }
+        });
+
         // Llenamos el hashmap de saldos y la lista de ejecucion
-        for (Rubro r : getRubroFacade().findAll()) {
-            saldos.put(r.getAbreviado(), 0.0f);
+        for (Rubro r : listaRubros) {
+            saldos.put(r, 0.0f);
         }
 
         // Obtenemos los importes de solicitud disponibles
@@ -282,7 +349,7 @@ public class IndicadoresController implements Serializable {
                 listaSolicitudesDisponibles.add(solicitud);
 
                 // Acumulamos en la lista de saldos
-                saldos.put(solicitud.getPresupuestotarea().getRubro().getAbreviado(), saldos.get(solicitud.getPresupuestotarea().getRubro().getAbreviado()) + solicitud.getDisponible().floatValue());
+                saldos.put(solicitud.getPresupuestotarea().getRubro(), saldos.get(solicitud.getPresupuestotarea().getRubro()) + solicitud.getDisponible().floatValue());
 
                 
 
@@ -290,10 +357,19 @@ public class IndicadoresController implements Serializable {
         }
 
         // Saldos por Rubro
-        listaSaldosRubro = saldos;
+        listaSaldosDeRubro = saldos;
+
+        System.out.println("listaSaldosDeRubro **********");
+        for (Map.Entry<Rubro,Float> e : listaSaldosDeRubro.entrySet()){
+            System.out.println("Rubro >> " +e.getKey().getRubro() + " - Saldo >> " +e.getValue() );
+        }
+
+        // genera el grafico de dona
+        crearModeloDonaDisponiblePorRubro();
         
-        columnasListaSaldosRubro = new ArrayList<String>(saldos.keySet());
-        valoresListaSaldosRubro = new ArrayList<Float>(saldos.values());
+//        columnasListaSaldosRubro = new ArrayList<String>(saldos.keySet());
+//        valoresListaSaldosRubro = new ArrayList<Float>(saldos.values());
+
     }
 
     public void calcularEjecutadoPorRubro() {
@@ -316,11 +392,29 @@ public class IndicadoresController implements Serializable {
         // Ejecutado por Rubro
         List<ItemRubro> ejecutado = new ArrayList<ItemRubro>();
 
-        // Llenamos el hashmap de saldos y la lista de ejecucion
-        for (Rubro r : getRubroFacade().findAll()) {
-            ejecutado.add(new ItemRubro(r.getId(), r.getRubro(), 0.0f));
+        // Llenamos la lista de ejecucion
+        List<Rubro> listaRubros = getRubroFacade().findAll();
+
+        // ordenamos la lista de rubros
+        Collections.sort(listaRubros, new Comparator<Rubro>() {
+            public int compare(Rubro o1, Rubro o2) {
+                if (o1.getOrden() == null || o2.getOrden() == null) {
+                    return 0;
+                }
+                return o1.getOrden().compareTo(o2.getOrden());
+            }
+        });
+
+
+        // llenamos la lista de item-rubro >> ejecutado
+        for (Rubro r : listaRubros) {
+
+
+            ejecutado.add(new ItemRubro(r.getId(), r.getRubro(), 0.0f, r.getIcono(), r.getColoricono()));
         }
 
+
+        // recorremos la lista de solicitudes ejecutadas y acumulamos en el rubro correspondiente
         for (Solicitud solicitud : listaSolicitudes) {
 
             //Acumulamos en el total ejecutado del proyecto
@@ -343,12 +437,25 @@ public class IndicadoresController implements Serializable {
         // Ejecutado por Rubro
         listaEjecutadoRubro = ejecutado;
 
+        // colores de rubro
+        StringBuilder sb = new StringBuilder();
+
+        for(ItemRubro ir : this.getListaEjecutadoRubroOrdenadoPorMontoDesc()){
+            sb.append(ir.getColoricono().replace("#", "") + ", ");
+        }
+
+        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1, "");
+        System.out.println("COLORES BARRA HORIZONTAL EJECUCION POR RUBROS >> " + sb.toString());
+
+        // generar grafico de barra horizontal stack
+        crearModeloBarraHorizontal(sb.toString());
+
     }
 
     public void generarChartEjecutadoPorRubro() {
         chartEjecutadoPorRubro = new PieChartModel();
 
-        for (ItemRubro ir : listaEjecutadoRubro) {
+        for (ItemRubro ir : this.getListaEjecutadoRubroOrdenadoPorMontoDesc()) {
             chartEjecutadoPorRubro.set(ir.nombrerubro, ir.monto);
         }
 
@@ -515,23 +622,20 @@ public class IndicadoresController implements Serializable {
         // Obtenemos los controladores necesarios
         FacesContext context = FacesContext.getCurrentInstance();
         DesembolsoController desembolsocontroller = (DesembolsoController) context.getApplication().evaluateExpressionGet(context, "#{desembolsoController}", DesembolsoController.class);
+        ProyectoController proyectoController = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
         
-        float totalDesembolsado = desembolsocontroller.sumarDesembolsos();
-        
-        saldoProyecto = totalDesembolsado - ejecutadoProyecto;
+        saldoProyecto = desembolsadoProyecto - ejecutadoProyecto;
+
+        // calcular el porcentaje del saldo disponible sobre la ultimo desembolso
+        calcularPorcentajeSaldoSobreUltimoDesembolso(proyectoController.getSelected().getId(),saldoProyecto);
     }
-    
-    public void calcularSaldoTotalProyecto() {
-        
-        // Obtenemos los controladores necesarios
-        FacesContext context = FacesContext.getCurrentInstance();
-        DesembolsoController desembolsocontroller = (DesembolsoController) context.getApplication().evaluateExpressionGet(context, "#{desembolsoController}", DesembolsoController.class);
-        
-        float totalDesembolsado = desembolsocontroller.sumarDesembolsos();
-        
-        saldoProyecto = totalDesembolsado - ejecutadoProyecto;
+
+    public void calcularPorcentajeSaldoSobreUltimoDesembolso(int proyectoId, float saldoProyecto){
+
+        porcentajeSaldoSobreUltimoDesembolso = (int) ((this.getDesembolsoFacade().obtenerImporteUltimoDesembolsoProyecto(proyectoId)*100) / saldoProyecto);
+
     }
-    
+
     public float calcularEjecutadoPorProyecto(Integer idProyecto) {
 
         List<Solicitud> listaSolicitudes;
@@ -613,6 +717,8 @@ public class IndicadoresController implements Serializable {
         private int id;
         private String nombrerubro;
         private float monto;
+        private String icono;
+        private String coloricono;
 
         public ItemRubro() {
         }
@@ -621,6 +727,14 @@ public class IndicadoresController implements Serializable {
             this.id = id;
             this.nombrerubro = nombrerubro;
             this.monto = monto;
+        }
+
+        public ItemRubro(int id, String nombrerubro, float monto, String icono, String coloricono) {
+            this.id = id;
+            this.nombrerubro = nombrerubro;
+            this.monto = monto;
+            this.icono = icono;
+            this.coloricono = coloricono;
         }
 
         public int getId() {
@@ -647,142 +761,327 @@ public class IndicadoresController implements Serializable {
             this.monto = monto;
         }
 
+        public String getIcono() {return icono;}
+
+        public void setIcono(String icono) { this.icono = icono; }
+
+        public String getColoricono() { return coloricono; }
+
+        public void setColoricono(String coloricono) { this.coloricono = coloricono; }
+
     }
 
     /**
      *
-     * DASHBOARD DE SOLICITUDES
+     * DASHBOARD DE SOLICITUDES, MODIFICACION DE PRESUPUESTO
      *
      */
 
-//    INDICADOR LINEAL
-    
-    private LineChartModel lineModel1;
 
-    public LineChartModel getLineModel1() {
-        return lineModel1;
+    //    INDICADOR LINEAL > EVOLUCION DESEMBOLSOS Y EJECUCION
+    
+    private LineChartModel modeloLinealEvolucionDesembolsosEjecuciones;
+
+    public LineChartModel getModeloLinealEvolucionDesembolsosEjecuciones() {
+        return modeloLinealEvolucionDesembolsosEjecuciones;
     }
 
-    public void setLineModel1(LineChartModel lineModel1) {
-        this.lineModel1 = lineModel1;
+    public void setModeloLinealEvolucionDesembolsosEjecuciones(LineChartModel modeloLinealEvolucionDesembolsosEjecuciones) {
+        this.modeloLinealEvolucionDesembolsosEjecuciones = modeloLinealEvolucionDesembolsosEjecuciones;
     }
     
-    public void crearModeloLineal() {
-        lineModel1 = iniciarModeloLineal();
-        lineModel1.setLegendPosition("s");
-        Axis yAxis = lineModel1.getAxis(AxisType.Y);
+    public void crearModeloLinealEvolucionDesembolsosEjecuciones() {
+        modeloLinealEvolucionDesembolsosEjecuciones = iniciarModeloLinealEvolucionDesembolsosEjecuciones();
+        modeloLinealEvolucionDesembolsosEjecuciones.setLegendPosition("s");
+        Axis yAxis = modeloLinealEvolucionDesembolsosEjecuciones.getAxis(AxisType.Y);
         yAxis.setMin(0);
-        yAxis.setMax(100);
+
+        Axis xAxis = modeloLinealEvolucionDesembolsosEjecuciones.getAxis(AxisType.X);
+        xAxis.setMin(0);
         
     }
-     
-    public LineChartModel iniciarModeloLineal() {
-        LineChartModel model = new LineChartModel();
-        model.setExtender("extensorLineal");
-        model.setSeriesColors("BBE7E7, 6EE0F9");
- 
-        LineChartSeries series1 = new LineChartSeries();
-        series1.setLabel("Serie 1");
- 
-        series1.set(1, 12);
-        series1.set(2, 24);
-        series1.set(3, 33);
-        series1.set(4, 48);
-        series1.set(5, 68);
- 
-        LineChartSeries series2 = new LineChartSeries();
-        series2.setLabel("Serie 2");
- 
-        series2.set(1, 37);
-        series2.set(2, 42);
-        series2.set(3, 62);
-        series2.set(4, 81);
-        series2.set(5, 95);
- 
-        model.addSeries(series1);
-        model.addSeries(series2);
-         
-        return model;
+
+    public LineChartModel iniciarModeloLinealEvolucionDesembolsosEjecuciones() {
+
+        LineChartModel modelo = new LineChartModel();
+        modelo.setExtender("extensorLineal");
+        modelo.setSeriesColors("BBE7E7, 6EE0F9");
+
+        List<Solicitud> colSolicitudes;
+        List<Desembolso> colDesembolsos;
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+
+        // Llenamos la lista de solicitudes (Aprobadas)
+        colSolicitudes = this.getSolicitudFacade().obtenerAprobadasPorProyecto(proyectocontroller.getSelected().getId());
+        colSolicitudes.addAll(this.getSolicitudFacade().obtenerEjecucionPorProyecto(proyectocontroller.getSelected().getId()));
+        colSolicitudes.addAll(this.getSolicitudFacade().obtenerRendicionAEvaluarPorProyecto(proyectocontroller.getSelected().getId()));
+        colSolicitudes.addAll(this.getSolicitudFacade().obtenerRendidasPorProyecto(proyectocontroller.getSelected().getId()));
+
+        // Llenamos la lista de desembolsos
+        colDesembolsos = this.getDesembolsoFacade().obtenerPorProyecto(proyectocontroller.getSelected().getId());
+
+        // Ordenar las colecciones por fecha
+        // SOLICITUDES
+        Collections.sort(colSolicitudes, new Comparator<Solicitud>() {
+            public int compare(Solicitud o1, Solicitud o2) {
+                if (o1.getFechasolicitud() == null || o2.getFechasolicitud() == null) {
+                    return 0;
+                }
+                return o1.getFechasolicitud().compareTo(o2.getFechasolicitud());
+            }
+        });
+
+        // DESEMBOLSOS
+        Collections.sort(colDesembolsos, new Comparator<Desembolso>() {
+            public int compare(Desembolso o1, Desembolso o2) {
+                if (o1.getFechacarga() == null || o2.getFechacarga() == null) {
+                    return 0;
+                }
+                return o1.getFechacarga().compareTo(o2.getFechacarga());
+            }
+        });
+
+        // ARMAR SERIES
+        LineChartSeries desembolsos = new LineChartSeries();
+        desembolsos.setLabel("Desembolsos");
+
+        LineChartSeries solcitudes = new LineChartSeries();
+        solcitudes.setLabel("Ejecución");
+
+        // ACUMULADOR DESEMBOLSOS
+        float ad = 0f;
+        int id = 0;
+        for(Desembolso d : colDesembolsos){
+            ad = ad + d.getMonto().floatValue();
+            desembolsos.set(id,ad);
+            id++;
+        }
+
+        // ACUMULADOR SOLICITUDES (EJECUCION)
+        float as = 0f;
+        int is = 0;
+        for(Solicitud s : colSolicitudes){
+            as = as + s.getImporte().floatValue();
+            solcitudes.set(is,as);
+            is++;
+        }
+
+        // agregar series al modelo
+        modelo.addSeries(desembolsos);
+        modelo.addSeries(solcitudes);
+
+        return modelo;
     }
     
 //    CHART DE DONA
       
-    private DonutChartModel donutModel1;
+    private DonutChartModel modeloDonaDisponiblePorRubro;
 
-    public DonutChartModel getDonutModel1() {
-        return donutModel1;
+    public DonutChartModel getModeloDonaDisponiblePorRubro() {
+        return modeloDonaDisponiblePorRubro;
     }
 
-    public void setDonutModel1(DonutChartModel donutModel1) {
-        this.donutModel1 = donutModel1;
+    public void setModeloDonaDisponiblePorRubro(DonutChartModel modeloDonaDisponiblePorRubro) {
+        this.modeloDonaDisponiblePorRubro = modeloDonaDisponiblePorRubro;
     }
-    public void crearModeloDona(){
-        donutModel1 = iniciarModeloDona();
-        donutModel1.setLegendPosition("e");
-        donutModel1.setSliceMargin(5);
-        donutModel1.setShowDataLabels(true);
-        donutModel1.setDataFormat("value");
-        donutModel1.setShadow(false);
-        donutModel1.setSeriesColors("2898C5, 394249, 667382, 84888B, BCC3C8");
+    public void crearModeloDonaDisponiblePorRubro(){
+        modeloDonaDisponiblePorRubro = iniciarModeloDona();
+        modeloDonaDisponiblePorRubro.setLegendPosition("e");
+        modeloDonaDisponiblePorRubro.setSliceMargin(4);
+        modeloDonaDisponiblePorRubro.setShowDataLabels(true);
+//        modeloDonaDisponiblePorRubro.setDataLabelFormatString("color: #000000;");
+        modeloDonaDisponiblePorRubro.setDataFormat("value");
+        modeloDonaDisponiblePorRubro.setShadow(false);
+
+        StringBuilder sb = new StringBuilder();
+        StringBuilder sbColoresCero = new StringBuilder();
+
+        for(Map.Entry<Rubro,Float> e : listaSaldosDeRubro.entrySet()){
+            /*if(e.getValue() != 0.0f) {
+                sb.append(e.getKey().getColoricono().replace("#","") + ", ");
+            } else {
+                sbColoresCero.append(e.getKey().getColoricono().replace("#","") + ", ");
+            }*/
+            sb.append(e.getKey().getColoricono().replace("#","") + ", ");
+
+        }
+
+        sb.replace(sb.lastIndexOf(","), sb.lastIndexOf(",") + 1, "");
+//        sbColoresCero.replace(sbColoresCero.lastIndexOf(","), sbColoresCero.lastIndexOf(",") + 1, "");
+        System.out.println("COLORES DONA > 0  >> " + sb.toString());
+//        System.out.println("COLORES DONA == 0 >> " + sbColoresCero.toString());
+
+//        sb.append(", " + sbColoresCero.toString());
+
+        System.out.println("COLORES TODOS >> " + sb.toString());
+
+        //modeloDonaDisponiblePorRubro.setSeriesColors("2898C5, 394249, 667382, 84888B, BCC3C8");
+        //modeloDonaDisponiblePorRubro.setSeriesColors("03A9F4, 8E24AA, F7D100, FF4081, FB8C00, E53935, 43A047");
+
+        modeloDonaDisponiblePorRubro.setSeriesColors(sb.toString());
     }
     
     private DonutChartModel iniciarModeloDona() {
-        DonutChartModel model = new DonutChartModel();
-        model.setExtender("extensorDona");
+        DonutChartModel modelo = new DonutChartModel();
+        modelo.setExtender("extensorDona");
          
-        Map<String, Number> circle1 = new LinkedHashMap<String, Number>();
-        circle1.put("Personal", 150);
-        circle1.put("Bienes de Consumo", 400);
-        circle1.put("Bienes de Consumo", 200);
-        circle1.put("Pasajes y Viáticos", 60);
-        circle1.put("Transferencias", 10);
-        model.addCircle(circle1);
-         
-        return model;
+        Map<String, Number> mapaSaldosRubro = new LinkedHashMap<String, Number>();
+
+        for(Map.Entry<Rubro,Float> e : listaSaldosDeRubro.entrySet()){
+            mapaSaldosRubro.put(e.getKey().getRubro(), e.getValue());
+        }
+
+        modelo.addCircle(mapaSaldosRubro);
+
+        return modelo;
     }
     
 //    BARRA HORIZONTAL
     
-    private HorizontalBarChartModel horizontalBarModel;
+    private HorizontalBarChartModel modeloBarraEjecutadoPorRubros;
 
-    public HorizontalBarChartModel getHorizontalBarModel() {
-        return horizontalBarModel;
+    public HorizontalBarChartModel getModeloBarraEjecutadoPorRubros() {
+        return modeloBarraEjecutadoPorRubros;
     }
 
-    public void setHorizontalBarModel(HorizontalBarChartModel horizontalBarModel) {
-        this.horizontalBarModel = horizontalBarModel;
+    public void setModeloBarraEjecutadoPorRubros(HorizontalBarChartModel modeloBarraEjecutadoPorRubros) {
+        this.modeloBarraEjecutadoPorRubros = modeloBarraEjecutadoPorRubros;
     }
     
-    public void crearModeloBarraHorizontal() {
-        horizontalBarModel = new HorizontalBarChartModel();
-        horizontalBarModel.setSeriesColors("EEB337, D74149, 58B14D, 2898C5, 394249");
-        horizontalBarModel.setExtender("extensorBarraRubros");
- 
-        ChartSeries bienesUso = new ChartSeries();
-        bienesUso.setLabel("Bienes de Uso");
-        bienesUso.set("2004", 13045);
- 
-        ChartSeries pasajesViaticos = new ChartSeries();
-        pasajesViaticos.setLabel("Pasajes y Viáticos");
-        pasajesViaticos.set("2004", 34565);
-        
-        ChartSeries bienesConsumo = new ChartSeries();
-        bienesConsumo.setLabel("Bienes de Consumo");
-        bienesConsumo.set("2004", 67543);
- 
-        horizontalBarModel.addSeries(bienesUso);
-        horizontalBarModel.addSeries(pasajesViaticos);
-        horizontalBarModel.addSeries(bienesConsumo);
-         
-//        horizontalBarModel.setTitle("Ejecutado por Rubros");
-        horizontalBarModel.setLegendPosition("e");
-        horizontalBarModel.setStacked(true);
-         
-        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+    public void crearModeloBarraHorizontal(String colores) {
+        modeloBarraEjecutadoPorRubros = new HorizontalBarChartModel();
+        modeloBarraEjecutadoPorRubros.setAnimate(true);
+        //        modeloBarraEjecutadoPorRubros.setTitle("Ejecutado por Rubros");
+        modeloBarraEjecutadoPorRubros.setLegendPosition("e");
+        modeloBarraEjecutadoPorRubros.setStacked(true);
+        modeloBarraEjecutadoPorRubros.setExtender("extensorBarraRubros");
+
+
+        //modeloBarraEjecutadoPorRubros.setSeriesColors("EEB337, D74149, 58B14D, 2898C5, 394249");
+        System.out.println("crearModeloBarraHorizontal >> COLORES >> " + colores);
+        modeloBarraEjecutadoPorRubros.setSeriesColors(colores);
+
+        for(ItemRubro ir : this.getListaEjecutadoRubroOrdenadoPorMontoDesc()){
+            ChartSeries serie = new ChartSeries();
+            serie.setLabel(ir.getNombrerubro());
+            serie.set(ir.getNombrerubro(), ir.getMonto());
+            modeloBarraEjecutadoPorRubros.addSeries(serie);
+
+        }
+
+        Axis xAxis = modeloBarraEjecutadoPorRubros.getAxis(AxisType.X);
         xAxis.setMin(0);
-        //xAxis.setMax(125);
-         
-        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+
+        Axis yAxis = modeloBarraEjecutadoPorRubros.getAxis(AxisType.Y);
+
+    }
+
+    public void calcularAvancesEtapasYTarea(){
+
+        mapaAvancesEtapasYTareas = new HashMap<String, Integer>();
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+
+        try{
+
+            List<Etapa> listaEtapasProyecto = this.getEtapaFacade().buscarEtapasProyecto(proyectocontroller.getSelected().getId());
+
+            Integer promedioEtapa = 0;
+            Integer acumuladorTarea = 0;
+            Integer contadorTarea = 0;
+
+            for(Etapa e : listaEtapasProyecto){
+
+                promedioEtapa = 0;
+
+                String clave = "Etapa: " + e.getEtapa();
+
+                mapaAvancesEtapasYTareas.put(clave, 0 );
+
+                acumuladorTarea = 0;
+                contadorTarea = 0;
+
+                for(Tarea t : e.getTareaList()){
+
+                    acumuladorTarea += (null == t.getAvance() ? 0 : t.getAvance());
+                    contadorTarea++;
+
+                    mapaAvancesEtapasYTareas.put("\t Tarea: " + t.getTarea(),t.getAvance());
+
+                }
+
+                promedioEtapa = Math.round(acumuladorTarea / contadorTarea);
+                mapaAvancesEtapasYTareas.put(clave, promedioEtapa );
+
+            }
+
+            System.out.println("mapaAvancesEtapasYTareas ********");
+            for(Map.Entry<String,Integer> e : mapaAvancesEtapasYTareas.entrySet()){
+                System.out.println(e.getKey() + " >> " + e.getValue() );
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void calcularAvancesEtapas(){
+
+        mapaAvancesEtapasYTareas = new HashMap<String, Integer>();
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+
+        try{
+
+            List<Etapa> listaEtapasProyecto = this.getEtapaFacade().buscarEtapasProyecto(proyectocontroller.getSelected().getId());
+
+            Integer promedioEtapa = 0;
+            Integer acumuladorTarea = 0;
+            Integer contadorTarea = 0;
+
+            for(Etapa e : listaEtapasProyecto){
+
+                promedioEtapa = 0;
+
+                String clave = "Etapa: " + e.getEtapa();
+
+                mapaAvancesEtapasYTareas.put(clave, 0 );
+
+                acumuladorTarea = 0;
+                contadorTarea = 0;
+
+                for(Tarea t : e.getTareaList()){
+
+                    acumuladorTarea += (null == t.getAvance() ? 0 : t.getAvance());
+                    contadorTarea++;
+
+                    //mapaAvancesEtapasYTareas.put("\t Tarea: " + t.getTarea(),t.getAvance());
+
+                }
+
+                promedioEtapa = Math.round(acumuladorTarea / contadorTarea);
+                mapaAvancesEtapasYTareas.put(clave, promedioEtapa );
+
+            }
+
+            System.out.println("mapaAvancesEtapasYTareas ********");
+            for(Map.Entry<String,Integer> e : mapaAvancesEtapasYTareas.entrySet()){
+                System.out.println(e.getKey() + " >> " + e.getValue() );
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -1065,6 +1364,9 @@ public class IndicadoresController implements Serializable {
     }
 
 
+    /*
+              Proyectos Formalizados y Su Avance
+    */
     public void armarMapaProyectosFormalizadosConAvance(){
 
         // ordenamos la lista de proyectos por fecha
@@ -1181,5 +1483,6 @@ public class IndicadoresController implements Serializable {
         int index = generadorAleatorios.nextInt(listaColores.size());
         return listaColores.get(index);
     }
+
 
 }

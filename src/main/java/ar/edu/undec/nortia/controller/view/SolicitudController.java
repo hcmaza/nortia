@@ -10,10 +10,8 @@ import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
 import ar.edu.undec.nortia.controller.SolicitudFacade;
 import ar.edu.undec.nortia.controller.TiposolicitudFacade;
 import ar.edu.undec.nortia.controller.TrasladoFacade;
-import ar.edu.undec.nortia.model.Estadosolicitud;
 import ar.edu.undec.nortia.model.Pasajero;
 import ar.edu.undec.nortia.model.PresupuestoTarea;
-import ar.edu.undec.nortia.model.Proyecto;
 import ar.edu.undec.nortia.model.ProyectoAgente;
 import ar.edu.undec.nortia.model.Rubro;
 import ar.edu.undec.nortia.model.Traslado;
@@ -22,13 +20,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -41,11 +36,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TabChangeEvent;
-import org.primefaces.event.TransferEvent;
-import org.primefaces.event.UnselectEvent;
-import org.primefaces.model.DualListModel;
 import org.primefaces.model.chart.MeterGaugeChartModel;
 
 @ManagedBean(name = "solicitudController")
@@ -207,9 +198,9 @@ public class SolicitudController implements Serializable {
         
         // preparar indicadores TEMPORALES para ejemplo
         IndicadoresController indicadorescontroller = (IndicadoresController) context.getApplication().evaluateExpressionGet(context, "#{indicadoresController}", IndicadoresController.class);
-        indicadorescontroller.crearModeloLineal();
-        indicadorescontroller.crearModeloDona();
-        indicadorescontroller.crearModeloBarraHorizontal();
+        indicadorescontroller.crearModeloLinealEvolucionDesembolsosEjecuciones();
+        //indicadorescontroller.crearModeloDonaDisponiblePorRubro();
+        //indicadorescontroller.crearModeloBarraHorizontal();
 
         return "CreateSolicitud";
     }

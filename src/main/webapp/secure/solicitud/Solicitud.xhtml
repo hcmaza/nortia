@@ -23,7 +23,7 @@
                             <p:growl globalOnly="true" for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
 
                             <div class="CardTopic"> 
-                                <i class="fa fa-paper-plane-o Fs30 Fleft MarRight10"></i>
+                                <i class="icon-share Fs30 Fleft MarRight10"></i>
 
                                 <div class="EmptyBox10 ShowOnMobile"></div>
                                 Alta de Idea-Proyecto <br />
@@ -34,7 +34,7 @@
                                 <p:tabView id="tabviewTodo" styleClass="Container100 Responsive100 Fs12" > 
                                     <!--<p:tabView id="tabviewTodo" flowListener="# {proyectoController.onFlowProcess}">-->
 
-                                    <p:tab id="tabideaproyecto" title="Idea-Proyecto">
+                                    <p:tab id="tabideaproyecto" title="Idea-Proyecto">z
 
                                         <h:form id="formTabIdeaProyecto">
 
@@ -92,139 +92,126 @@
 
                                         <h:form id="formTabComitente">
 
-                                            <div class="Container100 Responsive100" >
-                                                <div class="Container100">
-                                                    <div class="ContainerIndent">
-                                                        <div class="Card">
-                                                            <div class="CardTopic">
-                                                                <i class="fa fa-child Fs30 Fleft MarRight10"></i>
-                                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                                Comitente <br />
-                                                                <span class="CardSubTopic">Seleccionar si la idea-proyecto tiene un comitente e ingresar sus datos.</span> </div>
-                                                            <div class="SeparatorFull"></div>
+                                            <p:fieldset legend="Comitente" style="margin-bottom:5px">
+                                                
+                                                <p:panelGrid id="pcomitente" columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9" style="border: none; "  > 
 
-                                                            <p:panelGrid id="pcomitente" columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9" style="border: none; "  >
+                                                    <p:selectOneRadio id="options" value="#{proyectoController.habilitarcomitente}"   >  
+                                                        <f:selectItem itemLabel="No" itemValue="0"  />  
+                                                        <f:selectItem itemLabel="Si" itemValue="1" />  
+                                                        <p:ajax update="pcomitente" event="valueChange" />
+                                                    </p:selectOneRadio>                                    
 
-                                                                <p:selectOneRadio id="options" value="#{proyectoController.habilitarcomitente}"   >
-                                                                    <f:selectItem itemLabel="No" itemValue="0"  />
-                                                                    <f:selectItem itemLabel="Si" itemValue="1" />
-                                                                    <p:ajax update="pcomitente" event="valueChange" />
-                                                                </p:selectOneRadio>
+                                                    <p:panel id="phabilitarcomitente" rendered="#{proyectoController.habilitarcomitente eq 1}" styleClass="Container100" style="border: none; " >
+                                                        <p:panelGrid columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9"  >
+                                                            <p:outputLabel style="font-weight:bold;"  value="Ingrese el N° de CUIT/CUIL"  />                 
 
-                                                                <p:panel id="phabilitarcomitente" rendered="#{proyectoController.habilitarcomitente eq 1}" styleClass="Container100" style="border: none; " >
-                                                                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-3,ui-grid-col-9"  >
-                                                                        <p:outputLabel style="font-weight:bold;"  value="Ingrese el N° de CUIT/CUIL"  />
+                                                            <p:selectOneMenu widgetVar="comitentedid" id="comitenteid"  value="#{proyectoController.selected.comitenteid}" label="Comitente" filter="true" filterMatchMode="contains"  >
+                                                                <f:selectItems  value="#{comitenteController.itemsAvailableSelectOne}"/>
+                                                                <p:ajax update="pgcomitente, :formDetallesComitente:detallesComitente" event="change" />
+                                                            </p:selectOneMenu>                                                    
+                                                        </p:panelGrid>
 
-                                                                        <p:selectOneMenu widgetVar="comitentedid" id="comitenteid"  value="#{proyectoController.selected.comitenteid}" label="Comitente" filter="true" filterMatchMode="contains"  >
-                                                                            <f:selectItems  value="#{comitenteController.itemsAvailableSelectOne}"/>
-                                                                            <p:ajax update="pgcomitente, :formDetallesComitente:detallesComitente" event="change" />
-                                                                        </p:selectOneMenu>
-                                                                    </p:panelGrid>
+                                                        <p:separator rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
 
-                                                                    <p:separator rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
+                                                        <p:panelGrid id="pgcomitente" style="width: 100%; margin-top: 10px;"  styleClass="ui-noborder" >
+                                                            <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}" styleClass="SoftBlueBack White">
+                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Tipo"/></p:column>
+                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Contacto"/></p:column>
+                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Cargo del Contacto"/></p:column>
+                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Sector" /></p:column>
+                                                                <p:column ></p:column>
+                                                            </p:row>
+                                                            <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}">
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.tipocomitenteid.tipocomitente}" title="Tipo" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>                                                                                                                        
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.contacto}" title="Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.cargocontacto}" title="Cargo del Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.sectorid.sector}" title="Sector" rendered="#{not empty proyectoController.selected.comitenteid.sectorid.sector}"/>
+                                                                </p:column> 
+                                                                <p:column>
+                                                                    <p:commandButton rendered="#{proyectoController.selected.comitenteid ne null}" id="detalleComitenteBtn" value="Detalles" icon="fa fa-search" styleClass="GreenButton White" style="width: auto; "  
+                                                                                     onclick="PF('detallesComitente').show()" immediate="true" />  
+                                                                </p:column> 
+                                                            </p:row>
+                                                        </p:panelGrid>                                                    
 
-                                                                    <p:panelGrid id="pgcomitente" styleClass="MarBot10 MarTop10 Wid100" >
-                                                                        <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}" styleClass="SoftBlueBack White">
-                                                                            <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Tipo"/></p:column>
-                                                                            <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Contacto"/></p:column>
-                                                                            <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Cargo del Contacto"/></p:column>
-                                                                            <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Sector" /></p:column>
-                                                                            <p:column ></p:column>
-                                                                        </p:row>
-                                                                        <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}">
-                                                                            <p:column>
-                                                                                <p:outputLabel value="#{proyectoController.selected.comitenteid.tipocomitenteid.tipocomitente}" title="Tipo" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
-                                                                            </p:column>
-                                                                            <p:column>
-                                                                                <p:outputLabel value="#{proyectoController.selected.comitenteid.contacto}" title="Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
-                                                                            </p:column>
-                                                                            <p:column>
-                                                                                <p:outputLabel value="#{proyectoController.selected.comitenteid.cargocontacto}" title="Cargo del Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
-                                                                            </p:column>
-                                                                            <p:column>
-                                                                                <p:outputLabel value="#{proyectoController.selected.comitenteid.sectorid.sector}" title="Sector" rendered="#{not empty proyectoController.selected.comitenteid.sectorid.sector}"/>
-                                                                            </p:column>
-                                                                            <p:column>
-                                                                                <p:commandButton rendered="#{proyectoController.selected.comitenteid ne null}" id="detalleComitenteBtn" title="Detalles" icon="fa fa-search" styleClass="OrangeButton White"
-                                                                                                 onclick="PF('detallesComitente').show()" immediate="true" />
-                                                                                <p:tooltip for="detalleComitenteBtn" />
-                                                                            </p:column>
-                                                                        </p:row>
-                                                                    </p:panelGrid>
 
-                                                                    <p:commandButton value="Crear Comitente" onclick="PF('dcomitentecrear').show();" immediate="true" icon="fa fa-pencil" styleClass="GreenButton White" style="width: auto; "  />
+                                                        <p:separator />
 
-                                                                </p:panel>
-                                                            </p:panelGrid>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                        <!--<p:commandButton value="Agregar Persona" onclick="PF('dregistrar').show();" ></p:commandButton>-->
+                                                        <!--<p:commandButton value="Crear Comitente" onclick="dcomitentecrear.show()" immediate="true"  />-->
+                                                        <p:commandButton value="Crear Comitente" onclick="PF('dcomitentecrear').show();" immediate="true" styleClass="GreenButton" style="width: auto; "  />
 
-                                            <div class="Container100 Responsive100" >
-                                                <div class="Container100">
-                                                    <div class="ContainerIndent">
-                                                        <div class="Card">
-                                                            <div class="CardTopic">
-                                                                <i class="fa fa-user Fs30 Fleft MarRight10"></i>
-                                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                                Responsable Técnico <br />
-                                                                <span class="CardSubTopic">Datos del responsable de la idea-proyecto.</span> </div>
-                                                            <div class="SeparatorFull"></div>
+                                                    </p:panel>
+                                                </p:panelGrid>
+                                            </p:fieldset>
 
-                                                            <p:panelGrid id="pagente" styleClass="Container100" style="margin-bottom: 10px;" >
-                                                                <p:row styleClass="SoftBlueBack TexAlCenter">
-                                                                    <p:column>
-                                                                        <p:outputLabel style="font-weight:bold; color: white; " value="Nombre"/>
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel style="font-weight:bold; color: white; " value="Documento"/>
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel style="font-weight:bold; color: white; " value="Profesion"/>
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel style="font-weight:bold; color: white; " value="Especialidad"/>
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel style="font-weight:bold; color: white; " value="Email"/>
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel style="font-weight:bold; color: white; " value="Dependencia"/>
-                                                                    </p:column>
-                                                                </p:row>
+                                            <p:fieldset legend="Responsable Técnico" style="margin-bottom:5px">
+                                                <!-- RESPONSABLE TECNICO -->
 
-                                                                <p:row styleClass="TexAlCenter">
-                                                                    <p:column>
-                                                                        <p:outputLabel value="#{agenteController.selected.apellido}, #{agenteController.selected.nombres}" title="Nombre" />
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel value="#{agenteController.selected.tipodocumentoid.tipodocumento} - #{agenteController.selected.numerodocumento}" title="Tipo de Documento" rendered="#{not empty agenteController.selected.tipodocumentoid.tipodocumento}"/>
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel value="#{agenteController.selected.profesion}" title="Profesion" />
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel value="#{agenteController.selected.especialidad}" title="Especialidad" />
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel value="#{agenteController.selected.email}" title="Email" />
-                                                                    </p:column>
-                                                                    <p:column>
-                                                                        <p:outputLabel value="#{agenteController.selected.dependenciaid.dependencia}" title="Dependencia" />
-                                                                    </p:column>
+                                                <p:panelGrid id="pagente" styleClass="ui-noborder Container100" style="margin-bottom: 10px;" >  
+                                                    <p:row styleClass="SoftBlueBack">
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Apellido"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Nombres"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Documento"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Profesion"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Especialidad"/>                            
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Email"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Dependencia"/>
+                                                        </p:column>
+                                                    </p:row>
 
-                                                                </p:row>
-                                                            </p:panelGrid>
+                                                    <p:row>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.apellido}" title="Apellido" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.nombres}" title="Nombres" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.tipodocumentoid.tipodocumento} - #{agenteController.selected.numerodocumento}" title="Tipo de Documento" rendered="#{not empty agenteController.selected.tipodocumentoid.tipodocumento}"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.profesion}" title="Profesion" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.especialidad}" title="Especialidad" />                            
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.email}" title="Email" />
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:outputLabel value="#{agenteController.selected.dependenciaid.dependencia}" title="Dependencia" />
+                                                        </p:column>
 
-                                                            <p:separator />
+                                                    </p:row>
+                                                </p:panelGrid>       
 
-                                                            <!--<p:commandButton onclick="dagenteeditar.show()" type="button" value="Editar Responsable Técnico" />-->
-                                                            <p:commandButton value="Editar Responsable Técnico" onclick="PF('dagenteeditar').show();" immediate="true"  styleClass="GreenButton" style="width: auto; "  />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <p:separator />
+
+                                                <!--<p:commandButton onclick="dagenteeditar.show()" type="button" value="Editar Responsable Técnico" />-->                                 
+                                                <p:commandButton value="Editar Responsable Técnico" onclick="PF('dagenteeditar').show();" immediate="true"  styleClass="GreenButton" style="width: auto; "  />
+                                            </p:fieldset>
 
                                         </h:form>
 
@@ -234,95 +221,69 @@
 
                                         <h:form id="formTabDocumentacion" enctype="multipart/form-data" >
 
-                                            <div class="Container100 Responsive100" >
-                                                <div class="Container100">
-                                                    <div class="ContainerIndent">
-                                                        <div class="Card">
-                                                            <div class="CardTopic">
-                                                                <i class="fa fa-pencil Fs30 Fleft MarRight10"></i>
-                                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                                Descripción <br />
-                                                                <span class="CardSubTopic">Descripción, resumen y objetivos de la idea-proyecto.</span> </div>
-                                                            <div class="SeparatorFull"></div>
+                                            <p:fieldset legend="Descripción de la Idea-Proyecto" style="margin-bottom:5px">
+                                                <!-- DESCRIPCIÓN -->
+                                                <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank" style="width: 100%;">
+                                                    <p:row>
+                                                        <p:column style="width: 100%;" colspan="2">
+                                                            <p:outputLabel style="font-weight:bold;font-size:larger"  value="Resumen" for="resumen" />                                            
+                                                            <p:inputTextarea rows="5" id="resumen" value="#{proyectoController.selected.resumen}" title="Resumen" maxlength="2500" autoResize="true" required="true" requiredMessage="Ingrese Diagnostico y resumen descriptivo " counter="contadorResumen"  counterTemplate="{0} caracteres restantes." style="width: 100%;" placeholder="Diagnóstico y Descripción del Proyecto" />
+                                                            <h:outputText id="contadorResumen" />
+                                                        </p:column>
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style="width: 100%;" colspan="2" >
+                                                            <p:outputLabel style="font-weight:bold;font-size:larger" value="Objetivos" for="observaciones" />                                                                                
+                                                            <p:inputTextarea rows="5" id="observaciones" value="#{proyectoController.selected.observaciones}" title="Observaciones" maxlength="2500" autoResize="true" required="true" requiredMessage="Objetivos y Resultados Esperados" style="width: 100%;" counter="contadorObservaciones"  counterTemplate="{0} caracteres restantes." placeholder="Objetivos generales, particulares y resultados esperados"/>
+                                                            <h:outputText id="contadorObservaciones" />
+                                                        </p:column>                                
+                                                    </p:row>
 
-                                                            <!-- DESCRIPCIÓN -->
-                                                            <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank" style="width: 100%;">
-                                                                <p:row>
-                                                                    <p:column style="width: 100%;" colspan="2">
-                                                                        <p:outputLabel style="font-weight:bold;font-size:larger"  value="Resumen" for="resumen" />
-                                                                        <p:inputTextarea rows="5" id="resumen" value="#{proyectoController.selected.resumen}" title="Resumen" maxlength="2500" autoResize="true" required="true" requiredMessage="Ingrese Diagnostico y resumen descriptivo " counter="contadorResumen"  counterTemplate="{0} caracteres restantes." style="width: 100%;" placeholder="Diagnóstico y Descripción del Proyecto" />
-                                                                        <h:outputText id="contadorResumen" />
-                                                                    </p:column>
-                                                                </p:row>
-                                                                <p:row>
-                                                                    <p:column style="width: 100%;" colspan="2" >
-                                                                        <p:outputLabel style="font-weight:bold;font-size:larger" value="Objetivos" for="observaciones" />
-                                                                        <p:inputTextarea rows="5" id="observaciones" value="#{proyectoController.selected.observaciones}" title="Observaciones" maxlength="2500" autoResize="true" required="true" requiredMessage="Objetivos y Resultados Esperados" style="width: 100%;" counter="contadorObservaciones"  counterTemplate="{0} caracteres restantes." placeholder="Objetivos generales, particulares y resultados esperados"/>
-                                                                        <h:outputText id="contadorObservaciones" />
-                                                                    </p:column>
-                                                                </p:row>
+                                                    <p:row>
+                                                        <p:column style="width: 25%;">
+                                                            <p:outputLabel style="font-weight:bold;font-size:larger" value="Lugar (Domicilio)" for="localizacion" />
+                                                        </p:column>
+                                                        <p:column style="width: 75%;">
+                                                            <p:inputTextarea rows="1" id="localizacion" value="#{proyectoController.selected.localizacion}" title="localizacion" placeholder="Por ejemplo = Martin Fierro 1054 - Chilecito, La Rioja" required="true" requiredMessage="Ingrese la localización" style="width: 100%;" />
+                                                        </p:column>                                
+                                                    </p:row>
+                                                    <p:row>
+                                                        <p:column style="width: 25%;">
+                                                            <p:outputLabel style="font-weight:bold;font-size:larger" value="Duración (Meses)" for="duracion" />
+                                                        </p:column>
+                                                        <p:column style="width: 75%;">
+                                                            <p:spinner id="duracion" value="#{proyectoController.selected.duracion}" 
+                                                                       title="duracion" min="1" maxlength="3" 
+                                                                       required="true" requiredMessage="Por favor, ingrese la duración (meses) del proyecto." style="width: 100px;"  />
+                                                        </p:column>                                
+                                                    </p:row>
+                                                </p:panelGrid>                                
+                                            </p:fieldset>
 
-                                                                <p:row>
-                                                                    <p:column style="width: 25%;">
-                                                                        <p:outputLabel style="font-weight:bold;font-size:larger" value="Lugar (Domicilio)" for="localizacion" />
-                                                                    </p:column>
-                                                                    <p:column style="width: 75%;">
-                                                                        <p:inputTextarea rows="1" id="localizacion" value="#{proyectoController.selected.localizacion}" title="localizacion" placeholder="Por ejemplo = Martin Fierro 1054 - Chilecito, La Rioja" required="true" requiredMessage="Ingrese la localización" style="width: 100%;" />
-                                                                    </p:column>
-                                                                </p:row>
-                                                                <p:row>
-                                                                    <p:column style="width: 25%;">
-                                                                        <p:outputLabel style="font-weight:bold;font-size:larger" value="Duración (Meses)" for="duracion" />
-                                                                    </p:column>
-                                                                    <p:column style="width: 75%;">
-                                                                        <p:spinner id="duracion" value="#{proyectoController.selected.duracion}"
-                                                                                   title="duracion" min="1" maxlength="3"
-                                                                                   required="true" requiredMessage="Por favor, ingrese la duración (meses) del proyecto." style="width: 100px;"  />
-                                                                    </p:column>
-                                                                </p:row>
-                                                            </p:panelGrid>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <p:fieldset legend="Documentación" style="margin-bottom:5px">
+                                                <!-- DOCUMENTACION -->
+                                                <p:panelGrid columnClasses="right,left" columns="3" layout="grid" styleClass="ui-panelgrid-blank">    
 
-                                            <div class="Container50 Responsive100" >
-                                                <div class="Container100">
-                                                    <div class="ContainerIndent">
-                                                        <div class="Card">
-                                                            <div class="CardTopic">
-                                                                <i class="icon-document-stroke Fs30 Fleft MarRight10"></i>
-                                                                <div class="EmptyBox10 ShowOnMobile"></div>
-                                                                Documentación <br />
-                                                                <span class="CardSubTopic">Se permite subir archivos relacionados con la idea-proyecto.</span> </div>
-                                                            <div class="SeparatorFull"></div>
+                                                    <h:form id="fupload" enctype="multipart/form-data">
+                                                        <p:fileUpload label="Documentación para subir" id="documentacion" fileUploadListener="#{archivoproyectoController.handleFileUpload}" mode="advanced"  
+                                                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"   >
 
-                                                            <!-- DOCUMENTACION -->
-                                                            <p:panelGrid columnClasses="right,left" columns="3" layout="grid" styleClass="ui-panelgrid-blank">
+                                                        </p:fileUpload>    
+                                                    </h:form>
+                                                    <p:dataTable id="tdocumentacionnombre1" var="arc" value="#{archivoproyectoController.collectorArchivoProyecto}" >  
 
-                                                                <h:form id="fupload" enctype="multipart/form-data">
-                                                                    <p:fileUpload label="Documentación para subir" id="documentacion" fileUploadListener="#{archivoproyectoController.handleFileUpload}" mode="advanced"
-                                                                                  sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"   >
+                                                        <p:column headerText="Archivos">  
+                                                            <h:outputText value="#{arc.nombre}" />  
+                                                        </p:column> 
+                                                        <p:column headerText="">  
+                                                            <p:commandLink immediate="true" value="Eliminar" action="#{archivoproyectoController.removerArchivoCollection}" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"  >
+                                                                <f:setPropertyActionListener value="#{arc}" target="#{archivoproyectoController.selected}" />  
+                                                            </p:commandLink>
+                                                        </p:column> 
+                                                    </p:dataTable>
 
-                                                                    </p:fileUpload>
-                                                                </h:form>
-
-                                                                <p:dataTable id="tdocumentacionnombre1" var="arc" value="#{archivoproyectoController.collectorArchivoProyecto}" >
-                                                                    <p:column headerText="Archivos">
-                                                                        <h:outputText value="#{arc.nombre}" />
-                                                                    </p:column>
-                                                                    <p:column headerText="">
-                                                                        <p:commandLink immediate="true" value="Eliminar" action="#{archivoproyectoController.removerArchivoCollection}" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"  >
-                                                                            <f:setPropertyActionListener value="#{arc}" target="#{archivoproyectoController.selected}" />
-                                                                        </p:commandLink>
-                                                                    </p:column>
-                                                                </p:dataTable>
-
-                                                            </p:panelGrid>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                </p:panelGrid>         
+                                            </p:fieldset>
 
                                         </h:form>
 
@@ -367,63 +328,85 @@
 
                                             <p:separator />
 
-                                            <p:fieldset legend="Convocatoria" style="margin-bottom:5px">
 
-                                                <p:dataTable widgetVar="wconvocatoria" paginator="true" id="tconvocatoria" var="conv" 
-                                                             value="#{convocatoriaController.items}" 
-                                                             selection="#{convocatoriaController.selected}" 
-                                                             selectionMode="single" rowKey="#{conv.id}" 
-                                                             paginatorPosition="bottom" paginatorAlwaysVisible="false" 
-                                                             rowIndexVar="indice" 
-                                                             rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             reflow="true" styleClass="tabla tablaAjustada">  
-                                                    <f:facet name="header">
-                                                        Seleccionar la Convocatoria
-                                                    </f:facet>
-                                                    <p:column headerText="Convocatoria" sortBy="#{conv.convocatoria}">  
-                                                        <h:outputText value="#{conv.convocatoria}" />  
-                                                    </p:column> 
+                                            <div class="Container100">
+                                                <div class="ContainerIndent">
+                                                    <div class="Card">
+                                                        <div class="CardTopic">
+                                                            <i class="fa fa-volume-up Fs30 Fleft MarRight10"></i>
+                                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                                            Convocatoria <br />
+                                                            <span class="CardSubTopic">Las convocatorias se filtran de acuerdo al tipo de proyecto y al tipo de financiamiento.</span> </div>
 
-                                                    <p:column headerText="Organismo" sortBy="#{conv.organismo}">  
-                                                        <h:outputText value="#{conv.organismo}" />  
-                                                    </p:column> 
-                                                    <p:column headerText="Tipo de Proyecto" sortBy="#{conv.tipoproyectoid.tipo}" filterBy="#{conv.tipoproyectoid.tipo}" filterMatchMode="exact" >  
-                                                        <f:facet name="filter">
-                                                            <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
-                                                                <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
-                                                                <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}" />
-                                                            </p:selectOneMenu>
-                                                        </f:facet>
-                                                        <h:outputText value="#{conv.tipoproyectoid.tipo}" />  
-                                                    </p:column>
-                                                    <p:column headerText="Tipo de Financiamiento" sortBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterMatchMode="exact" >  
-                                                        <f:facet name="filter">
-                                                            <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
-                                                                <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
-                                                                <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}" />
-                                                            </p:selectOneMenu>
-                                                        </f:facet>
-                                                        <p:outputLabel value="#{conv.tipofinanciamientoid.tipofinanciamiento}"  />
-                                                    </p:column>
-                                                    <p:column headerText="Fecha de Cierre" sortBy="#{conv.fechacierre}">  
-                                                        <h:outputText value="#{conv.fechacierre}">
-                                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
-                                                        </h:outputText>  
-                                                    </p:column> 
-                                                    <p:column headerText="Monto Financiamiento" sortBy="#{conv.montofinanciamiento}">  
-                                                        <h:outputText value="#{conv.montofinanciamiento}" />  
-                                                    </p:column> 
-                                                    <p:column headerText="Link"> 
-                                                        <a target="_blank" href="#{conv.link}" >Link</a>
-                                                    </p:column> 
-                                                    <p:column headerText=" " style="width: auto;"> 
-                                                        <p:commandButton id="viewButton"  rendered="#{convocatoriaController.selected ne null}" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
-                                                                         update="@widgetVar(dconvocatoria)" oncomplete="PF('dconvocatoria').show()" >
-                                                            <f:setPropertyActionListener value="#{conv}" target="#{convocatoriaController.selected}" />
-                                                        </p:commandButton>  
-                                                    </p:column>                    
-                                                </p:dataTable>               
-                                            </p:fieldset>
+                                                        <div class="SeparatorFull"></div>
+
+                                                        <p:dataTable id="tconvocatoria" widgetVar="wconvocatoria" paginator="true"
+                                                                     var="conv"
+                                                                     value="#{convocatoriaController.listaConvocatorias}"
+                                                                     filteredValue="#{convocatoriaController.tablafiltrada}"
+                                                                     selection="#{convocatoriaController.selected}"
+                                                                     rowKey="#{conv.id}" selectionMode="single"
+                                                                     paginatorPosition="bottom"
+                                                                     styleClass="tabla tablaAjustada" emptyMessage="No hay convocatorias abiertas, con los valores de filtro.">
+
+                                                            <p:ajax event="rowSelect" listener="#{convocatoriaController.solicitudSeleccionConvocatoria()}" />
+
+                                                            <f:facet name="header">
+                                                                Seleccionar la Convocatoria
+                                                                <br />
+                                                                <p:commandButton id="ayudaSeleccionConvocatoria" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPConvocatoriaTabla')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                                <p:overlayPanel for="ayudaSeleccionConvocatoria" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                                    <h:outputText value="Seleccione la convocatoria, haciendo click sobre ella." />
+                                                                </p:overlayPanel>
+                                                            </f:facet>
+                                                            <!--<p:column selectionMode="single"/>-->
+                                                            <p:column headerText="Convocatoria" sortBy="#{conv.convocatoria}">
+                                                                <h:outputText value="#{conv.convocatoria}" />
+                                                            </p:column>
+
+                                                            <p:column headerText="Organismo" sortBy="#{conv.organismo}">
+                                                                <h:outputText value="#{conv.organismo}" />
+                                                            </p:column>
+                                                            <p:column headerText="Tipo de Proyecto" sortBy="#{conv.tipoproyectoid.tipo}" filterBy="#{conv.tipoproyectoid.tipo}" filterMatchMode="exact" >
+                                                                <f:facet name="filter">
+                                                                    <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
+                                                                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
+                                                                        <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}" />
+                                                                    </p:selectOneMenu>
+                                                                </f:facet>
+                                                                <h:outputText value="#{conv.tipoproyectoid.tipo}" />
+                                                            </p:column>
+                                                            <p:column headerText="Tipo de Financiamiento" sortBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterMatchMode="exact" >
+                                                                <f:facet name="filter">
+                                                                    <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
+                                                                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
+                                                                        <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}" />
+                                                                    </p:selectOneMenu>
+                                                                </f:facet>
+                                                                <p:outputLabel value="#{conv.tipofinanciamientoid.tipofinanciamiento}"  />
+                                                            </p:column>
+                                                            <p:column headerText="Fecha de Cierre" sortBy="#{conv.fechacierre}">
+                                                                <h:outputText value="#{conv.fechacierre}">
+                                                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                                                </h:outputText>
+                                                            </p:column>
+                                                            <p:column headerText="Monto Financiamiento" sortBy="#{conv.montofinanciamiento}">
+                                                                <h:outputText value="#{conv.montofinanciamiento}" />
+                                                            </p:column>
+                                                            <p:column headerText="Link">
+                                                                <a target="_blank" href="#{conv.link}" >Link</a>
+                                                            </p:column>
+                                                            <p:column headerText=" " style="width: auto;">
+                                                                <p:commandButton id="viewButton"  rendered="#{convocatoriaController.selected ne null}" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
+                                                                                 update=":formDialogoConvocatoria:dconvocatoria" oncomplete="PF('dconvocatoria').show()" >
+                                                                    <f:setPropertyActionListener value="#{conv}" target="#{convocatoriaController.selected}" />
+                                                                </p:commandButton>
+                                                            </p:column>
+                                                        </p:dataTable>
+                                                    </div>
+                                                </div>
+                                            </div>
+
 
                                         </h:form>
 
@@ -459,6 +442,7 @@
                                                 <f:facet name="header">
                                                     Armar el Presupuesto de la Idea-Proyecto
                                                 </f:facet>
+
                                                 <p:column style="width:20%" >
                                                     <f:facet name="header">
                                                         <h:outputText value="Rubro"/>
@@ -466,9 +450,35 @@
                                                     <h:outputText style="width:96%;" value="#{item.rubro.abreviado}" />
                                                 </p:column>
 
+                                                <p:column style="width:20%;"  >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
+                                                        <br />
+                                                        <p:commandButton id="ayudaPresupuestoAporteUniversidad" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteUniversidad')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                        <p:overlayPanel for="ayudaPresupuestoAporteUniversidad" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                            <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
+                                                        </p:overlayPanel>
+                                                    </f:facet>
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:outputText value="$ #{item.gastouniversidad}" styleClass="TexAlRight Fright" >
+                                                                <f:convertNumber pattern="#0.00" />
+                                                            </h:outputText>
+                                                        </f:facet>
+                                                        <f:facet name="input">
+                                                            <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" styleClass="TexAlRight" />
+                                                        </f:facet>
+                                                    </p:cellEditor>
+                                                </p:column>
+
                                                 <p:column style="width:20%; "  >
                                                     <f:facet name="header">
                                                         <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                        <br />
+                                                        <p:commandButton id="ayudaPresupuestoAporteOrganismo" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteOrganismo')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                        <p:overlayPanel for="ayudaPresupuestoAporteOrganismo" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                            <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
+                                                        </p:overlayPanel>
                                                     </f:facet>
                                                     <p:cellEditor>
                                                         <f:facet name="output">
@@ -485,6 +495,11 @@
                                                 <p:column style="width:20%;"  >
                                                     <f:facet name="header">
                                                         <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
+                                                        <br />
+                                                        <p:commandButton id="ayudaPresupuestoAporteComitente" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteComitente')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                        <p:overlayPanel for="ayudaPresupuestoAporteComitente" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                            <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
+                                                        </p:overlayPanel>
                                                     </f:facet>
                                                     <p:cellEditor >
                                                         <f:facet name="output">
@@ -497,22 +512,6 @@
                                                         </f:facet>
                                                     </p:cellEditor>
 
-                                                </p:column>
-
-                                                <p:column style="width:20%;"  >
-                                                    <f:facet name="header">
-                                                        <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
-                                                    </f:facet>
-                                                    <p:cellEditor>
-                                                        <f:facet name="output">
-                                                            <h:outputText value="$ #{item.gastouniversidad}" styleClass="TexAlRight Fright" >
-                                                                <f:convertNumber pattern="#0.00" />
-                                                            </h:outputText>
-                                                        </f:facet>
-                                                        <f:facet name="input">
-                                                            <p:inputText id="gastouniversidad" value="#{item.gastouniversidad}" styleClass="TexAlRight" />
-                                                        </f:facet>
-                                                    </p:cellEditor>
                                                 </p:column>
 
                                             </p:dataTable>
@@ -870,7 +869,7 @@
                 </p:dialog>
             </h:form>
 
-            <h:form>
+            <h:form id="formDialogoConvocatoria">
                 <p:dialog id="dconvocatoria" widgetVar="dconvocatoria" modal="true"  header="Convocatoria" >
 
                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">

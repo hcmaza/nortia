@@ -33,7 +33,6 @@
     background-color: white !important;
 }
 
-
 /*
  * treetable: se eliminan los bordes verticales, tipo de borde solido
  */
@@ -85,6 +84,10 @@
 
 .tablaAjustada.ui-datatable-scrollable table {
     table-layout: fixed !important;
+}
+
+.ui-datatable table thead tr th, .ui-datatable table tfoot tr td, .ui-datatable table thead tr th{
+    color: white;
 }
 
 /*
@@ -444,4 +447,22 @@
     max-width: 100%; /* Add !important if needed. */
     height: auto;
     max-height: 200px;
+}
+
+
+
+/*BORDES*/
+
+.BordeComoCard{
+    border: solid 1px #e0e0e0 !important;
+}
+
+.BordeAbajoBlanco{
+    border-bottom: white 1px solid !important;
+}
+
+/*LINE HEIGHT*/
+
+.LineHeightPanelGrid{
+    line-height: 29px;
 }

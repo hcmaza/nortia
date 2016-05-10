@@ -12,9 +12,9 @@
         <ui:define name="content">   
             <div class="Container100">       
                 <div class="ContainerIndent">
-                    <script src="#{request.contextPath}/resources/js/highcharts.js"></script>
-                    <script src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
-                    <script src="#{request.contextPath}/resources/js/exporting.js"></script>
+                    <script type="text/javascript" src="#{request.contextPath}/resources/js/highcharts.js"></script>
+                    <script type="text/javascript" src="#{request.contextPath}/resources/js/highcharts-more.js"></script>
+                    <script type="text/javascript" src="#{request.contextPath}/resources/js/exporting.js"></script>
                     <f:event type="preRenderView" listener="#{presupuestoController.findProyecto(proyectoController.selected.id)}" />
                     <f:event type="preRenderView" listener="#{presupuestoController.sumarGastosView()}" />
 
@@ -22,179 +22,236 @@
                     <h:form id="form" >
 
                         <p:tooltip/>
-                        <p:commandButton value="Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogProyecto()}">
 
-                        </p:commandButton>
-                        <p:panel header="Proyecto N° #{proyectoController.selected.id} - #{proyectoController.selected.nombre}" >
-                            <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
+                        <!--<p:commandButton value="Proyecto - Resumen"  icon="fa fa-stack-exchange" styleClass="Fright BrownButton FloatNoneOnMobile" actionListener="#{proyectoController.mostrarDialogProyecto()}">
+                        </p:commandButton>-->
+
+                        <div class="Card ">
+                            <div class="ui-fluid">
+                                <div class="CardTopic">
+                                <i class="fa fa-forward Fs30 Fleft MarRight10"></i>
+
+                                <div class="EmptyBox10 ShowOnMobile"></div>
+                                Proyecto N° #{proyectoController.selected.id} <br/>
+                                <span class="CardSubTopic Fs16"> #{proyectoController.selected.nombre} </span>
+
+                                <div class="SeparatorFull"></div>
+
+                                    <p:growl  for="growlprincipal" id="growlprincipal" showDetail="true" sticky="true" />
+
+                                    <p:treeTable id="treetableetapas" value="#{etapaController.root}"
+                                                 var="document"
+                                                 styleClass="tablaArbol tablaAjustada tabla TablaColorEncabezado">
+
+                                        <p:column headerText="Etapa/Tarea">
+                                            <h:outputText value="#{document.tarea}" />
+                                        </p:column>
+                                        <p:column headerText="Fecha Inicio">
+                                            <h:outputText value="#{document.fechainicio}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Fecha Fin">
+                                            <h:outputText value="#{document.fechafin}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Dias">
+                                            <h:outputText value="#{document.dias}" >
+
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Equipo">
+
+                                            <ui:repeat value="#{document.tareaAgenteList}" var="ta"  >
+                                                <p:outputLabel value="#{ta.agenteid.apellido},#{ta.agenteid.nombres} (#{ta.funcion})"  />
+                                                <br />
+
+                                            </ui:repeat>
+                                        </p:column>
+                                        <p:column headerText="Estado">
+                                            <p:outputLabel value="Terminada" rendered="#{document.estado eq -1 }" styleClass="Blue" />
+                                        </p:column>
+
+                                        <p:column >
+                                            <p:commandButton id="ceditar" title="Editar Avance" rendered="#{document.estado eq 0 }"
+                                                             immediate="true"  onclick="PF('dtarea').show()" update=":formd:panelAvance"
+                                                             action="#{tareaController.editarAvanceTarea(document)}"
+                                                             icon="fa fa-pencil" styleClass="GreenButton White" >
+                                                <f:setPropertyActionListener value="#{document}" target="#{tareaController.selected}" />
+                                            </p:commandButton>
+                                        </p:column>
+
+                                    </p:treeTable>
 
 
-                            <p:treeTable id="treetableetapas" value="#{etapaController.root}" var="document">
+                                    <br />
+                                    <br />
 
-                                <p:column headerText="Etapa/Tarea">
-                                    <h:outputText value="#{document.tarea}" />
-                                </p:column>
-                                <p:column headerText="Fecha Inicio">
-                                    <h:outputText value="#{document.fechainicio}" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:outputText>
-                                </p:column>
-                                <p:column headerText="Fecha Fin">
-                                    <h:outputText value="#{document.fechafin}" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:outputText>
-                                </p:column>
-                                <p:column headerText="Dias">
-                                    <h:outputText value="#{document.dias}" >
+                                    <p:outputPanel id="contenedor"  >
 
-                                    </h:outputText>
-                                </p:column>
-                                <p:column headerText="Equipo">
+                                        <div class="Container100">
+                                            <div class="Card Padding10px SinBorde">
+                                                <div class="CardTopic">
+                                                    <i class="fa fa-calendar Fs20 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Gantt <br/>
+                                                </div>
 
-                                    <ui:repeat value="#{document.tareaAgenteList}" var="ta"  >
-                                        <p:outputLabel value="#{ta.agenteid.apellido},#{ta.agenteid.nombres} (#{ta.funcion})"  />
-                                        <br />      
+                                                <div class="Separator"></div>
 
-                                    </ui:repeat>
-                                </p:column>
-                                <p:column headerText="Estado">
-                                    <p:outputLabel value="Terminada" rendered="#{document.estado eq -1 }" >
+                                                <div id="containergrafico" ></div>
+                                            </div>
+                                        </div>
 
-                                    </p:outputLabel>
-                                </p:column>
-
-                                <p:column >
-                                    <p:commandButton rendered="#{document.estado eq 0 }" id="ceditar" immediate="true" value="Editar" onclick="PF('dtarea').show()" update=":formd:pavance" action="#{tareaController.editarAvanceTarea(document)}"  >
-                                        <f:setPropertyActionListener value="#{item}" target="#{tareaController.selected}" />  
-                                    </p:commandButton>
-
-
-                                </p:column>
-
-                            </p:treeTable>
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/excel.png" />  
-                                <p:dataExporter type="xls" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/pdf.png" />  
-                                <p:dataExporter type="pdf" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/csv.png" />  
-                                <p:dataExporter type="csv" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-
-                            <h:commandLink>  
-                                <p:graphicImage value="/resources/img/xml.png" />  
-                                <p:dataExporter type="xml" target="tareasdeproyecto" fileName="tareas" />  
-                            </h:commandLink>  
-                            <br />
-                            <br />
-                            <p:panel id="contenedor" header="Gantt" toggleable="true" toggleTitle="Ver Gantt"  >
-
-                                <div id="containergrafico"   >
+                                    </p:outputPanel>
 
 
                                 </div>
-                            </p:panel>
+                            </div>
+                        </div>
 
+                        <!--<div class="Container100">
+                            <div class="ContainerIndent">
+                                <div class="Card">
+                                    <h:commandLink>
+                                        <p:graphicImage value="/resources/img/excel.png" />
+                                        <p:dataExporter type="xls" target="tareasdeproyecto" fileName="tareas" />
+                                    </h:commandLink>
 
-                        </p:panel>
+                                    <h:commandLink>
+                                        <p:graphicImage value="/resources/img/pdf.png" />
+                                        <p:dataExporter type="pdf" target="tareasdeproyecto" fileName="tareas" />
+                                    </h:commandLink>
 
+                                    <h:commandLink>
+                                        <p:graphicImage value="/resources/img/csv.png" />
+                                        <p:dataExporter type="csv" target="tareasdeproyecto" fileName="tareas" />
+                                    </h:commandLink>
 
+                                    <h:commandLink>
+                                        <p:graphicImage value="/resources/img/xml.png" />
+                                        <p:dataExporter type="xml" target="tareasdeproyecto" fileName="tareas" />
+                                    </h:commandLink>
+                                </div>
+                            </div>
+                        </div>-->
 
                         <h:inputHidden value="#{etapaController.gsoncategoria}" id="beanvalue"  />
 
                     </h:form>
 
+                    <!--***************************-->
+                    <!--****** DIALOGO TAREA ******-->
+                    <!--***************************-->
 
                     <h:form id="formd">
 
-                        <p:dialog id="dtarea" header="Tarea" widgetVar="dtarea" resizable="false" showEffect="clip" hideEffect="fold" modal="true">  
+                        <p:dialog id="dtarea" widgetVar="dtarea"
+                                  closable="true" showHeader="true"
+                                  resizable="false" responsive="true"
+                                  showEffect="clip" hideEffect="fold" modal="true">
 
-                            <p:panel id="pavance" header="#{tareaController.selected.tarea} " >   
+                            <f:facet name="header">
+                                <div class="CardTopic">
+                                    <i class="icon-task Fs30 Fleft MarRight10"></i>
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    <h:outputText value="Editar Avance de Tarea" styleClass="Fs25 FontBold Blue Fright MarTop5"  />
+                                </div>
+                            </f:facet>
 
-                                <h:panelGrid >
-                                    <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                        <p:outputLabel id="descripcion" value="#{tareaController.selected.descripcion}" styleClass="Fright" title="Descripcion" />
-                                        <div class="EmptyBox10 ShowOnMobile"></div>
-                                        Descripción <br/>
+                            <p:outputPanel id="panelAvance">
+                                <div class="Container100">
+                                    <div class="Card Padding10px SinBorde">
+                                        <div class="CardTopic">
+                                            <i class="fa fa-forward Fs20 Fleft MarRight10"></i>
+                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                            Avance <br/>
+                                        </div>
+
+                                        <div class="EmptyBox10"></div>
+
+                                        <div class="Container100">
+                                            <p:panelGrid columns="3" layout="grid"
+                                                         styleClass="Fright ui-grid-col-12 ui-panelgrid-blank"
+                                                         columnClasses="ui-grid-col-9, ui-grid-col-2, ui-grid-col-1">
+
+                                                <p:slider  minValue="0" maxValue="100" for="iavance2" animate="enable" styleClass="Wid100 MarTop10"  />
+                                                <p:inputText required="true" requiredMessage="Ingrese el porcentaje de avance!" size="3" id="iavance2" value="#{tareaavanceController.selected.avance}" title="Avance" />
+                                                <p:outputLabel value="%" />
+                                            </p:panelGrid>
+                                        </div>
+
                                     </div>
-                                    <div class="SeparatorFull"></div>
-                                </h:panelGrid>
-                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                    <p:outputLabel id="fechainicio" value="#{tareaController.selected.fechainicio}" styleClass="Fright" title="Fechainicio" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </p:outputLabel>
-                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                    Fecha de inicio <br/>
                                 </div>
-                                <div class="SeparatorFull"></div>
 
-                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                    <p:outputLabel id="dias" value="#{tareaController.selected.dias}" styleClass="Fright" title="Dias" />
-                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                    Días <br/>
+                                <div class="Separator"></div>
+
+                                <div align="center" >
+
+                                    <p:commandButton id="botontareaok" value="Guardar Avance" onclick="PF('dtarea').hide(); crearGrafico()"
+                                                     icon="fa fa-check" styleClass="GreenButton White MarRight10"
+                                                     actionListener="#{tareaController.armarTareasAvancesProyecto()}"
+                                                     update=":form:contenedor :form:treetableetapas :form:beanvalue :forma:pinformeavanceavance "   />
+
+                                    <p:commandButton id="botontareacancelar" value="Cancelar" icon="fa fa-times" styleClass="RedButton White"
+                                                     onclick="PF('dtarea').hide();"
+                                                     action="#{tareaController.editarAvanceTarea(null)}" />
                                 </div>
-                                <div class="SeparatorFull"></div>
+                            </p:outputPanel>
 
-
-                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                    <p:outputLabel id="dfechafin" value="#{tareaController.selected.fechafin}" styleClass="Fright" title="Fechafin" >
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </p:outputLabel> 
-                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                    Fecha fin <br/>
-                                </div>
-                                <div class="SeparatorFull"></div>
-
-                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                    <p:outputLabel id="prioridad" value="#{tareaController.selected.prioridad}" styleClass="Fright" />
-                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                    Prioridad <br/>
-                                </div>
-                                <div class="SeparatorFull"></div>
-
-
-                                <div class="CardTopic"> <i class="icon-share Fs30 Fleft MarRight10"></i>
-                                    <h:panelGrid styleClass="Fright" columns="2">
-                                        <h:panelGrid columns="1">     
-                                            <p:slider  minValue="0" maxValue="100" for="iavance2" animate="enable" style="width: 330px" />
-                                        </h:panelGrid>
-                                        <h:panelGrid columns="2">
-                                            <p:inputText required="true" requiredMessage="Ingrese el porcentaje de avance!" size="8" id="iavance2" value="#{tareaavanceController.selected.avance}" title="Avance"   />
-                                            <p:outputLabel value="%" />
-                                        </h:panelGrid>
-                                    </h:panelGrid>
-
-                                    <div class="EmptyBox10 ShowOnMobile"></div>
-                                    Avance <br/>
-                                </div>
-                                <div class="SeparatorFull"></div>
-
-
-
-
-
-
-                                <f:facet name="footer">
-                                    <div align="center" >
-
-                                        <p:commandButton id="botontareaok" value="OK" onclick="PF('dtarea').hide();
-                                                crearGrafico()" actionListener="#{tareaController.armarTareasAvancesProyecto()}" update=":form:contenedor :form:treetableetapas :form:beanvalue :forma:pinformeavanceavance "   ></p:commandButton>
-                                        <p:commandButton id="botontareacancelar" value="Cancelar" onclick="PF('dtarea').hide();" action="#{tareaController.editarAvanceTarea(null)}" ></p:commandButton>
-                                    </div>
-                                </f:facet>
-                            </p:panel>
                         </p:dialog>
+                    </h:form>
 
+                    <!--***************************-->
+                    <!--**** INFORME DE AVANCE ****-->
+                    <!--***************************-->
 
+                    <h:form id="forma">
 
+                        <p:dialog id="dinformeavance" widgetVar="dinformeavance"
+                                  resizable="false" showEffect="clip" hideEffect="fold" modal="true">
 
+                            <f:facet name="header">
+                                <div class="CardTopic">
+                                    <i class="icon-document-stroke Fs30 Fleft MarRight10"></i>
+                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                    <h:outputText value="Informe de Avance de la Etapa" styleClass="Fs25 FontBold Blue Fright MarTop5"  />
+                                </div>
+                            </f:facet>
+
+                            <p:outputPanel id="pinformeavanceavance">
+                                <div class="Container100">
+                                    <div class="Card Padding10px SinBorde">
+                                        <div class="CardTopic">
+                                            <i class="fa fa-pencil Fs20 Fleft MarRight10"></i>
+                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                            Informe de Etapa: #{tareaController.selected.etapaid.etapa} <br/>
+                                        </div>
+
+                                        <div class="EmptyBox10"></div>
+
+                                        <div class="Container100">
+
+                                            <p:inputTextarea value="#{tareaController.selected.etapaid.resultadoobtenido}"
+                                                             placeholder="Ingrese el o los resultados obtenidos de la etapa "
+                                                             styleClass="Wid100" />
+
+                                            <div class="Separator"></div>
+
+                                            <div align="center">
+                                                <p:commandButton id="botoninformetareaok"
+                                                                 value="Guardar Informe de Etapa" icon="fa fa-save" styleClass="GreenButton White"
+                                                                 onclick="PF('dinformeavance').hide();"
+                                                                 actionListener="#{tareaavanceController.enviarInformeAvance()}" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </p:outputPanel>
+
+                        </p:dialog>
                     </h:form>
 
                     <h:form id="forme" >
@@ -213,25 +270,6 @@
                         </p:dialog>
 
                     </h:form>
-
-
-                    <h:form id="forma">
-
-                        <p:dialog id="dinformeavance" header="Informe de Avance de la Etapa" widgetVar="dinformeavance" resizable="false" showEffect="clip" hideEffect="fold" modal="true">  
-
-                            <p:panel id="pinformeavanceavance" header="#{tareaController.selected.etapaid.etapa} " >  
-
-                                <p:inputTextarea placeholder="Ingrese el o los resultados obtenidos de la etapa " value="#{tareaController.selected.etapaid.resultadoobtenido}" >
-                                </p:inputTextarea>
-                                <p:commandButton id="botontareaok" value="OK" onclick="PF('dinformeavance').hide();" actionListener="#{tareaavanceController.enviarInformeAvance()}" >
-                                </p:commandButton>
-                            </p:panel>
-                        </p:dialog>
-                    </h:form>
-
-
-
-
 
                     <script type="text/javascript" >
                         $(function crearGrafico() {

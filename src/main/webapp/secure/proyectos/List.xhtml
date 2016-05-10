@@ -36,7 +36,6 @@
 
                                 <div class="SeparatorFull"></div>
 
-
                                 <h:panelGroup id="messagePanel" layout="block">
                                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                                 </h:panelGroup>
@@ -139,7 +138,7 @@
                                                     </p:menuitem>
 
                                                     <p:menuitem value="Crear Desembolso"
-                                                                rendered="#{item.estadoproyectoid.id eq 8}"
+                                                                rendered="#{item.estadoproyectoid.id eq 12}"
                                                                 action="#{desembolsoController.prepareCreate()}"
                                                                 ajax="false" icon="ui-icon-plus" styleClass="menuAncho">
                                                         <f:setPropertyActionListener value="#{item}"

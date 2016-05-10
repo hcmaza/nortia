@@ -11,8 +11,10 @@ import ar.edu.undec.nortia.model.Estadoproyecto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -102,6 +104,26 @@ public class DesembolsoController implements Serializable {
     public String prepareCreate() {
         current = new Desembolso();
         selectedItemIndex = -1;
+
+        // Obtenemos los controladores necesarios
+        FacesContext context = FacesContext.getCurrentInstance();
+        PresupuestoController presupuestocontroller = (PresupuestoController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoController}", PresupuestoController.class);
+        PresupuestoTareaController presupuestotareacontroller = (PresupuestoTareaController) context.getApplication().evaluateExpressionGet(context, "#{presupuestoTareaController}", PresupuestoTareaController.class);
+        ProyectoController proyectocontroller = (ProyectoController) context.getApplication().evaluateExpressionGet(context, "#{proyectoController}", ProyectoController.class);
+        EtapaController etapacontroller = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
+
+        // Buscar presupuesto por proyecto
+        presupuestocontroller.findProyecto(proyectocontroller.getSelected().getId());
+
+        // Sumar los gastos del presupuesto
+        presupuestocontroller.sumarGastosView();
+
+        // Seteamos el tree de etapas y tareas para el proyecto actual
+        etapacontroller.armarTreeEtapasYTareasPorProyecto();
+
+        // Armar presupuesto general
+        presupuestotareacontroller.armarPresupuestoGeneral();
+
         return "CreateDesembolso";
     }
 
@@ -133,7 +155,11 @@ public class DesembolsoController implements Serializable {
             this.getProyectoFacade().edit(proyectocontroller.getSelected());
             
             JsfUtil.addSuccessMessage("El Desembolso se ha creado con éxito");
-            return prepareCreate();
+
+            //return prepareCreate();
+
+            return "/index?faces-redirect=true";
+
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -305,4 +331,18 @@ public class DesembolsoController implements Serializable {
         return resultado;
         
     }
+
+    public float sumarDesembolsosPorProyecto(int proyectoId){
+        float resultado = 0;
+
+        List<Desembolso> listaDesembolsos = this.getFacade().obtenerPorProyecto(proyectoId);
+        Iterator<Desembolso> i = listaDesembolsos.iterator();
+        while(i.hasNext()){
+            resultado += (i.next()).getMonto().floatValue();
+        }
+
+        return resultado;
+
+    }
+
 }

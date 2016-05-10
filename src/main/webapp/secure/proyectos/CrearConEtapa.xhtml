@@ -121,30 +121,23 @@
                                                         <h:outputText value="Participación" style="font-weight: bold;"
                                                                       title="Click e indique si el agente es consultor externo."/>
                                                     </f:facet>
+
                                                     <p:cellEditor>
                                                         <f:facet name="output">
-                                                            <p:selectBooleanCheckbox id="ssconsultorexterno"
-                                                                                     value="#{agentea.consultorexterno}"
-                                                                                     style="width:20px; "/>
-                                                            <h:outputLabel id="labelConsultorexterno"
-                                                                           value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"
-                                                                           styleClass="Fs16" />
+                                                            <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="oconsultorexterno" value="#{agentea.consultorexterno}" styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"   >
+                                                            </p:selectBooleanButton>
                                                         </f:facet>
                                                         <f:facet name="input">
-                                                            <!--                                                            <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="# {agentea.consultorexterno}"  >
-                                                                                                                                <p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />
-                                                                                                                            </p:selectBooleanButton>-->
-                                                            <p:selectBooleanCheckbox id="sconsultorexterno"
-                                                                                     value="#{agentea.consultorexterno}"
-                                                                                     style="width:20px; ">
-                                                                <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion"
+                                                            <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="#{agentea.consultorexterno}"
+                                                                                   styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"  >
+                                                                <p:ajax update="ihorasdisponibles horasdedicacion oconsultorexterno"
                                                                         oncomplete="$(function(){PrimeFaces.focus(':formprincipal:tabviewTodo:horasdedicacion');});"/>
-                                                            </p:selectBooleanCheckbox>
-                                                            <p:outputLabel id="labelConsultorexterno2"
-                                                                           value="#{agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" styleClass="Fs16 DispBlock Fright" style="padding-top: 2px;"
-                                                                           />
+                                                            </p:selectBooleanButton>
+
                                                         </f:facet>
                                                     </p:cellEditor>
+
+
                                                 </p:column>
                                                 <p:column styleClass="TexAlCenter">
                                                     <f:facet name="header">

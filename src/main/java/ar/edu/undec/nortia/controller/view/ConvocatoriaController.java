@@ -39,6 +39,8 @@ public class ConvocatoriaController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private StreamedContent file;
+
+    private List<Convocatoria> listaConvocatorias;
     private List<Convocatoria> tablafiltrada; 
 
     public ConvocatoriaController() {
@@ -53,10 +55,19 @@ public class ConvocatoriaController implements Serializable {
     }
     public void setSelected(Convocatoria convocatoria){
         current=convocatoria;
+        System.out.println("Convocatoria >> SET >> " + current.getConvocatoria());
     }
     
     public void resetearSelected(){
         current = null;
+    }
+
+    public List<Convocatoria> getListaConvocatorias() {
+        return listaConvocatorias;
+    }
+
+    public void setListaConvocatorias(List<Convocatoria> listaConvocatorias) {
+        this.listaConvocatorias = listaConvocatorias;
     }
 
     private ConvocatoriaFacade getFacade() {
@@ -263,24 +274,39 @@ public class ConvocatoriaController implements Serializable {
     public void findConvocatoriafinanciamiento(Integer tipoproyectoid, Integer tipofinanciamientoid){
         
         items= new ListDataModel(getFacade().findConvocatoriafinanciamiento(tipoproyectoid, tipofinanciamientoid));
-        this.tablafiltrada= getFacade().findConvocatoriafinanciamiento(tipoproyectoid, tipofinanciamientoid);
+        listaConvocatorias = getFacade().findConvocatoriafinanciamiento(tipoproyectoid, tipofinanciamientoid);
+
     }
     
     // buscar convocatorias entre fechas
     public void findConvocatoriasEnFecha(Date fecha){
         items = new ListDataModel(getFacade().findConvocatoriasEnFecha(fecha));
-        this.tablafiltrada = getFacade().findConvocatoriasEnFecha(fecha);
+        listaConvocatorias = getFacade().findConvocatoriasEnFecha(fecha);
     }
     
     // buscar convocatorias por tipo de proyecto, tipo de financiamiento, abierta en una fecha determinada
     public void findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(int tipoproyecto, int tipofinanciamiento){
-        
-        System.out.println("Tipo de Proyecto= " + tipoproyecto + " - Tipo de Financiamiento= " + tipofinanciamiento);
-        
-        items = new ListDataModel(getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date()));
-        this.tablafiltrada = getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date());
-        
-        Iterator i = items.iterator();
+
+        try{
+
+            System.out.println("Tipo de Proyecto= " + tipoproyecto + " - Tipo de Financiamiento= " + tipofinanciamiento);
+
+            items = new ListDataModel(getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date()));
+            listaConvocatorias = getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date());
+
+        }catch(IllegalArgumentException iae){
+            System.out.println("findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta >> IllegalArgumentException");
+            // en caso de argumento ilegal, se buscan las convocatorias solo por fecha
+            items= new ListDataModel(getFacade().findConvocatoriasEnFecha(new Date()));
+            listaConvocatorias  = getFacade().findConvocatoriasEnFecha(new Date());
+        }catch(Exception e){
+            System.out.println("findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta >> Excepcion Generica");
+            // en caso de excepcion, se buscan las convocatorias solo por fecha
+            items= new ListDataModel(getFacade().findConvocatoriasEnFecha(new Date()));
+            listaConvocatorias  = getFacade().findConvocatoriasEnFecha(new Date());
+        }
+
+        Iterator i = getItems().iterator();
         
         while(i.hasNext()){
             Convocatoria c = (Convocatoria) i.next();
@@ -340,5 +366,11 @@ public class ConvocatoriaController implements Serializable {
         StreamedContent sc = new DefaultStreamedContent(is);
 
         return sc;
+    }
+
+    public void solicitudSeleccionConvocatoria(){
+        System.out.println("solicitudSeleccionConvocatoria");
+        System.out.println("Convocatoria Seleccionada >> " + this.getSelected().getConvocatoria());
+
     }
 }

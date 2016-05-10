@@ -519,8 +519,8 @@ public class TareaController implements Serializable {
               // realizo el infome de avance de esa etapa
               int contadortotaltareas = 0;
               int contadortareascompletas = 0;
-              for(Tarea treal : ejbetapa.find(tareaavancecontroller.getSelected().getTareaid().getEtapaid().getId()).getTareaList()){
-                  if(ejbtareaavance.findLastDate(treal).getAvance()==100){
+              for(Tarea tarea : ejbetapa.find(tareaavancecontroller.getSelected().getTareaid().getEtapaid().getId()).getTareaList()){
+                  if(ejbtareaavance.findLastDate(tarea).getAvance()==100){
                       ++contadortareascompletas;
                       System.out.println("contadortareascompletas "+contadortareascompletas);
                   

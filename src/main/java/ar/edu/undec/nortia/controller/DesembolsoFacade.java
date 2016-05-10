@@ -6,6 +6,8 @@
 package ar.edu.undec.nortia.controller;
 
 import ar.edu.undec.nortia.model.Desembolso;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -34,6 +36,29 @@ public class DesembolsoFacade extends AbstractFacade<Desembolso> {
         Query consulta = em.createQuery("SELECT d FROM Desembolso d WHERE d.proyectoid.id = :proyectoid");
         consulta.setParameter("proyectoid", proyectoid);
         return consulta.getResultList();
+    }
+
+    public float obtenerImporteUltimoDesembolsoProyecto(int proyectoId){
+
+        List<Desembolso> listaDesembolsos;
+
+        try{
+            Query consulta = em.createQuery("SELECT d FROM Desembolso d WHERE d.proyectoid.id = :proyectoid ORDER BY d.fechadesembolso DESC");
+            consulta.setParameter("proyectoid", proyectoId);
+            listaDesembolsos = consulta.getResultList();
+
+            // si la lista de desembolsos está vacía o nula, se devuelve cero
+            if(null == listaDesembolsos || listaDesembolsos.isEmpty()){
+                return 0.0f;
+            } else{
+                return listaDesembolsos.get(0).getMonto().floatValue();
+            }
+        } catch(Exception e){
+            System.out.println("Error en la consulta >> DesembolsoFacade >> obtenerImporteUltimoDesembolsoProyecto");
+            return 0.0f;
+        }
+
+
     }
     
     

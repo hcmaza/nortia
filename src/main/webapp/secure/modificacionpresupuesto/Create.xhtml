@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
     <ui:composition template="/WEB-INF/template.xhtml">
         <ui:define name="title">
@@ -15,225 +16,499 @@
             <div class="Container100">       
                 <div class="ContainerIndent">
 
-                    <f:event type="preRenderView" listener="#{indicadoresController.obtenerCalculosPorRubro()}" />
+                    <f:event type="preRenderView" listener="#{indicadoresController.obtenerCalculos()}" />
 
                     <h:form id="formprincipal" enctype="multipart/form-data" >
                         <p:growl id="growlprincipal" autoUpdate="true" showDetail="true"  />
 
-                        <p:panel id="pprincipal" header="Proyecto N° #{proyectoController.selected.id}  - #{proyectoController.selected.nombre}" >
+                        <!--*******************************-->
+                        <!--****** DASHBOARD: inicio ******-->
+                        <!--*******************************-->
 
-                            <p:panel header="Indicadores de Ejecución" style="margin: 5px auto 10px;">
-                                <p:panelGrid style="width: 100%;" styleClass="sinBordes">
-                                    <p:row >
-                                        <p:column style="width: 25%;" >
-                                            <p:fieldset legend="Total Ejecutado" style="height: 110px !important; " styleClass="fieldSetCentrado110" >
-                                                <div class="centrarEnFieldSet" >
-                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                        <p:outputLabel value="$#{indicadoresController.ejecutadoProyecto}" style="color: #94D352; font-weight: bold; font-size: 21px !important; " />
+                        <div class="Container100">
+                            <div class="Container25 Responsive50">
+                                <div class="Container100">
+                                    <div class="ContainerIndent">
+                                        <div class="Container100 Responsive">
+                                            <div class="Card Padding20px">
+                                                <div class="CardTopic">
+                                                    <i class="fa fa-usd Fs30 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Dinero Disponible <br />
+                                                    <span class="CardSubTopic">Saldo disponible en cuenta del proyecto. </span>
+                                                </div>
+                                            </div>
+                                            <div class="Container100 Responsive100">
+                                                <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
+                                                    <div class="EmptyBox5"></div>
+                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                        <h:outputText value="$ #{indicadoresController.saldoProyecto}" />
+                                                    </div>
+                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                        <!--= 43% del último desembolso-->
+                                                        <h:outputText value="= #{indicadoresController.porcentajeSaldoSobreUltimoDesembolso} % del último desembolso" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Container100 Responsive100">
+                                                <div class="Card CelesteClaroBack Padding10px White TexAlCenter HoverEffect">
+                                                    <div class="EmptyBox5"></div>
+                                                    <div class="FontRobotoLight Fs16 White DispBlock ClearBoth">
+                                                        <p:chart type="line" model="#{indicadoresController.modeloLinealEvolucionDesembolsosEjecuciones}" responsive="true" widgetVar="wvLineal" style="height: 352px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<div class="Container100 Responsive100">
+                                                <div class="Card CelesteOscuroBack White Padding10px TexAlCenter HoverEffect">
+                                                    <p:panelGrid id="gridEvolucionEstado" columns="3" layout="grid" styleClass="Fs10 ui-panelgrid-blank" >
+                                                        <h:outputText value="Estado Junio" styleClass="Fs14 White" />
+                                                        <h:outputText value="Estado Julio" styleClass="Fs14 White" />
+                                                        <h:outputText value="Estado Agosto" styleClass="Fs14 White" />
+
+                                                        <h:outputText value="$ 1345,45" styleClass="Fs12 White FontBold" />
+                                                        <h:outputText value="$ 34.565,3" styleClass="Fs12 White FontBold" />
+                                                        <h:outputText value="$ 67.543,18" styleClass="Fs12 White FontBold" />
                                                     </p:panelGrid>
                                                 </div>
-                                            </p:fieldset>
-                                        </p:column>
-                                        <p:column style="width: 25%;">
-                                            <p:fieldset legend="Ejecución #{indicadoresController.porcentajeEjecutadoString}%" style="height: 110px !important; ">
-                                                <p:chart type="metergauge" model="#{indicadoresController.indicadorEjecutado}" style="height: 100px;"  />
-                                            </p:fieldset>
-                                        </p:column>
-                                        <p:column style="width: 25%;">
-                                            <p:fieldset legend="Ejecutado por Rubros" style="height: 110px !important; ">
-                                                <p:chart type="pie" model="#{indicadoresController.chartEjecutadoPorRubro}" style="height:100px" styleClass="sinBordes" />
-                                            </p:fieldset>
-                                        </p:column>
-                                        <p:column style="width: 25%;">
-                                            <p:fieldset legend="Evolución de Ejecución" style="height: 110px !important; ">
-                                                <p:chart type="line" model="#{indicadoresController.chartEjecutadoPorFecha}" style="height:90px;" styleClass="sinBordes"/>
-                                            </p:fieldset>
-                                        </p:column>
-                                    </p:row>
-                                    <p:row>
-                                        <p:column style="width: 25%;">
-                                            <p:fieldset legend="Saldo" style="height: 70px !important; " styleClass="fieldSetCentrado70" >
-                                                <div class="centrarEnFieldSet" >
-                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                        <p:outputLabel value="$ #{indicadoresController.saldoProyecto}" style="color: #FF964A; font-weight: bold; font-size: 21px !important;  " />
-                                                    </p:panelGrid>
-                                                </div>
-                                            </p:fieldset>
-                                        </p:column>
-                                        <p:column colspan="3" style="width: 75%;">
-                                            <!--<p:fieldset legend="Saldo Rubros" style="height: 70px !important; ">-->
-                                            <p:dataTable  value="#{indicadoresController.valoresListaSaldosRubro}" var="saldo" rows="1" style="font-size: 12px !important; margin-top: 15px; text-align: center;">
-                                                <f:facet name="header">
-                                                    Saldo por Rubros
-                                                </f:facet>
-                                                <p:columns value="#{indicadoresController.columnasListaSaldosRubro}" columnIndexVar="i" var="columna" headerText="#{columna}">
-                                                    <p:outputLabel value="$ #{indicadoresController.valoresListaSaldosRubro.get(i)}" style="font-size: 11px !important; font-weight: bold; color: #555555;"  />
-                                                </p:columns>
-                                            </p:dataTable>
-                                            <!--</p:fieldset>-->
-                                        </p:column>
-                                    </p:row>
-                                    <p:row>
-                                        <p:column colspan="2"  style="width: 50%;">
-                                            <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30"  >
-                                                <f:facet name="legend" >
-                                                    Total Desembolsado
-                                                </f:facet>
-                                                <div class="centrarEnFieldSet30" >
-                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                        <p:outputLabel value="$ #{desembolsoController.sumarDesembolsos()}" style="color: #777777; font-weight: bold; font-size: 18px !important;  " />
-                                                    </p:panelGrid>
-                                                </div>
-                                            </p:fieldset>
-                                        </p:column>
-                                        <p:column colspan="2"  style="width: 50%;">
-                                            <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30" >
-                                                <f:facet name="legend" >
-                                                    Solicitudes a Rendir
-                                                </f:facet>
-                                                <div class="centrarEnFieldSet30" >
-                                                    <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                        <p:outputLabel value="#{rendicionController.listaSolicitudes.size()} Solicitud/es por $#{rendicionController.sumarSolicitudesARendir()}" style="color: #00C7F6; font-weight: bold; font-size: 15px !important; " rendered="#{rendicionController.listaSolicitudes.size() > 0}"  />
-                                                        <p:outputLabel value="Sin Solicitudes por Rendir" style="color: #00C7F6; font-weight: bold; font-size: 16px !important; " rendered="#{rendicionController.listaSolicitudes.size() eq 0}" />
-                                                    </p:panelGrid>
-                                                </div>
-                                            </p:fieldset>
-                                        </p:column>
-                                    </p:row>
-                                </p:panelGrid>
-                            </p:panel>
-
-                            <p:panel header="Gestión del Proyecto" >
-
-                                <p:tabView id="tabmodificaciones" dynamic="true" style="margin-bottom: 10px;" >
-
-                                    <p:tab id="tabpresupuesto" title="Presupuesto Detallado" >
-
-                                        <p:panelGrid style="width: 100%;" styleClass="sinBordes">
-                                            <p:row >
-                                                <p:column style="width: 50%;" >
-                                                    <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30"  >
-                                                        <f:facet name="legend" >
-                                                            Total Disponible en Presupuesto
-                                                        </f:facet>
-                                                        <div class="centrarEnFieldSetAnchoTotal" >
-                                                            <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                                <p:outputLabel id="labelPresupuestoDisponible" value="$ #{modificacionpresupuestoController.presupuestoDisponible}" style="color: #777777; font-weight: bold; font-size: 18px !important; " />
-                                                            </p:panelGrid>
-                                                        </div>
-                                                    </p:fieldset>
-                                                </p:column>
-                                                <p:column style="width: 50%;">
-                                                    <p:fieldset style="height: 30px; padding: 5px;" styleClass="fieldSetCentrado30"  >
-                                                        <f:facet name="legend" >
-                                                            Disponible
-                                                        </f:facet>
-                                                        <div class="centrarEnFieldSetAnchoTotal" >
-                                                            <p:panelGrid columns="1" style="width: 100%; height: 100%; margin: 0 auto;">
-                                                                <p:outputLabel id="labelPresupuestoDiferencia" value="$ #{modificacionpresupuestoController.presupuestoDiferencia}" style="font-weight: bold; font-size: 18px !important;  " styleClass="#{modificacionpresupuestoController.obtenerEstiloDiferencia()}" />
-                                                            </p:panelGrid>
-                                                        </div>
-                                                    </p:fieldset>
-                                                </p:column>
-                                            </p:row>
-                                        </p:panelGrid>
-
-                                        <p:treeTable id="tablapresupuesto" value="#{modificacionpresupuestoController.root}" 
-                                                     var="item" 
-                                                     style="padding: 0px; width: 100%; margin: 5px auto; overflow: hidden;" 
-                                                     styleClass="tablaArbol fuente10"  >
-                                            <f:facet name="header">
-                                                <h:outputText value="Presupuesto" />
-                                            </f:facet>
-                                            <p:column headerText="Etapa">
-                                                <h:outputText value="#{item.presupuestoTarea.tarea.etapaid.etapa}" />
-                                            </p:column>
-                                            <p:column headerText="Tarea">
-                                                <h:outputText value="#{item.presupuestoTarea.tarea.tarea}" />
-                                            </p:column>
-                                            <p:column headerText="Descripcion">
-                                                <h:outputText value="[#{item.presupuestoTarea.rubro.abreviado}] #{item.descripcion}" rendered="#{not empty item.descripcion}" /> 
-                                            </p:column>
-                                            <p:column headerText="Original"  style="text-align: right;" >
-                                                <h:outputText value="#{item.importeOriginal}"  />
-                                            </p:column>
-                                            <p:column headerText="Solicitudes" style="text-align: right;" >
-                                                <h:outputText value="#{item.importeSolicitudes}"  />
-                                            </p:column>
-                                            <p:column headerText="Disponible" style="text-align: right;" >
-                                                <h:outputText value="#{item.importeSinModificacion}" />
-                                            </p:column>
-                                            <p:column headerText="Modificación" style="text-align: right;" >
-                                                <h:outputText value="#{item.importeModificacion}"  />
-                                            </p:column>
-                                            <p:column headerText="Importe Final" style="text-align: right;" >
-                                                <h:outputText value="#{item.importeFinal}" />
-                                            </p:column>
-                                            <p:column headerText=" " style="width:24px; min-width: 24px !important; max-width: 24px !important;">
-                                                <p:commandButton update=":formitem, :formprincipal:growlprincipal, " oncomplete="PF('dialogoModificacion').show();" icon="ui-icon-pencil" title="Modificar Presupuesto" rendered="#{not empty item.descripcion}"  >
-                                                    <f:setPropertyActionListener value="#{item}" target="#{modificacionpresupuestoController.piSeleccionado}" />
-                                                </p:commandButton> 
-                                            </p:column>
-                                            <p:columnGroup type="footer">
-                                                <p:row>
-                                                    <p:column colspan="3" style="text-align:right" footerText="Totales:" />
-                                                    <p:column footerText="$ #{presupuestoTareaController.sumatotal}" style="text-align: right;" />
-                                                    <p:column footerText="$ #{modificacionpresupuestoController.totalSolicitudes}" style="text-align: right;" />
-                                                    <p:column footerText="$ #{modificacionpresupuestoController.totalSinModificaciones}" style="text-align: right;" />
-                                                    <p:column footerText="$ #{modificacionpresupuestoController.totalModificaciones}" style="text-align: right;" />
-                                                    <p:column footerText="$ #{modificacionpresupuestoController.totalImportesFinales}" style="text-align: right;" />
-                                                    <p:column footerText=" "  />
-                                                </p:row>
-                                            </p:columnGroup>
-                                        </p:treeTable>
-                                    </p:tab>
-                                </p:tabView>
-                            </p:panel>
-
-                            <p:outputPanel id="op" >
-                                <p:dataTable id="tablamodificaciones" var="item" value="#{modificacionpresupuestoController.modificaciones}" >
-                                    <f:facet name="header">
-                                        Lista de Modificaciones del Presupuesto a Realizar
-                                    </f:facet>
-                                    <p:column headerText="Fecha">
-                                        <h:outputText value="#{item.fecha}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Item" >
-                                        <h:outputText value="#{item.presupuestotareaid.descripcion}" />
-                                    </p:column>
-                                    <p:column headerText="Modificación">
-                                        <h:outputText value="#{item.modificacion.floatValue()}" style="text-align: right;" />
-                                    </p:column>
-                                    <p:column style="width:32px;text-align: center">
-                                        <p:commandButton actionListener="#{modificacionpresupuestoController.quitarModificacion(item)}" title="Eliminar" icon="ui-icon-trash" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" >
-                                            <p:confirm header="Eliminar" message="Esta seguro que desea eliminar el Item?" icon="ui-icon-alert"  />
-                                        </p:commandButton>
-                                    </p:column>
-                                    <f:facet name="footer">
-                                        El total de modificaciones de presupuesto es $ #{modificacionpresupuestoController.sumarModificaciones()}
-                                    </f:facet>
-                                </p:dataTable>
-                            </p:outputPanel>
-
-                            <p:outputPanel id="botonsolicitud"  >
-                                <div align="center">
-                                    <p:commandButton action="#{modificacionpresupuestoController.create}" value="Guardar Modificaciones de Presupuesto" style="display: inline-block; margin-top: 5px;" icon="ui-icon-disk" update=":formprincipal:pprincipal" oncomplete="PF('dfinalmodificacion').show();" immediate="true" />
+                                            </div>-->
+                                        </div>
+                                    </div>
                                 </div>
-                            </p:outputPanel>
+                            </div>
 
-                            <p:separator />
-                            <br style="clear: both;"/>
+                            <div class="Container75 Responsive50">
+                                <div class="Container100" >
 
-                            <p:commandButton action="#{modificacionpresupuestoController.prepareList}" value="Lista de Solicitudes" immediate="true" style="display: inline-block; float: right;  margin-bottom: 10px;" icon="ui-icon-document" ajax="false" />
-                            <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block; float:right;   margin-bottom: 10px;" icon="ui-icon-home"  ajax="false" />
+                                    <div class="Container33 Responsive">
+                                        <div class="ContainerIndent">
+                                            <div class="Card Padding0px">
+                                                <div class="CardTopic Padding20px">
+                                                    <i class="icon-wallet Fs30 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Total Ejecutado<br />
+                                                    <span class="CardSubTopic">
+                                                        Gastos totales ejecutados y aprobados.
+                                                    </span>
+                                                </div>
 
-                            <br style="clear: both;"/>
-                            <!--<p:separator/>-->
-                            <!--<h:link outcome="/index" value="Inicio"/>-->
+                                                <div class="Container100">
+                                                    <div class="Container70">
+                                                        <div class="Card VerdeClaroBack White Padding10px TexAlCenter HoverEffect">
+                                                            <div class="EmptyBox5"></div>
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <!--$ 7.579,45-->
+                                                                <h:outputText value="$ #{indicadoresController.ejecutadoProyecto}" />
+                                                            </div>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">$ Total Ejecutado</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container30">
+                                                        <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
+                                                            <div class="EmptyBox5"></div>
+                                                            <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                <!--56%-->
+                                                                <h:outputText value="#{indicadoresController.porcentajeEjecutadoEntero}" /> <h:outputText value=" %" styleClass="Fs20 FontLight White" />
+                                                            </div>
+                                                            <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">presupuesto</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        </p:panel>
+                                    </div>
+
+                                    <div class="Container33 Responsive">
+                                        <div class="ContainerIndent">
+                                            <div class="Card Padding20px">
+                                                <div class="CardTopic">
+                                                    <i class="icon-moneybag Fs30 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Total Desembolsado <br />
+                                                    <span class="CardSubTopic">Desembolsos totales acreditados en $.</span>
+                                                </div>
+                                            </div>
+                                            <div class="Container100">
+                                                <div class="Card OrangeBack White Padding10px TexAlCenter HoverEffect" style="padding: 15px;">
+                                                    <div class="EmptyBox5"></div>
+                                                    <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                        <!--$ 14.579,45-->
+                                                        <h:outputText value="$ #{indicadoresController.desembolsadoProyecto}" />
+                                                    </div>
+                                                    <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">Total Desembolsado</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--****************************-->
+                                    <!--****** GRADO DE AVANCE *****-->
+                                    <!--****************************-->
+
+                                    <div class="Container33 Responsive">
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="CardTopic Padding20px">
+                                                        <i class="fa fa-forward Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Grado de Avance <br />
+                                                        <span class="CardSubTopic">Etapas y actividades en ejecución.</span>
+                                                    </div>
+
+                                                    <div class="Container100">
+                                                        <div class="Container25">
+                                                            <div class="Card BordoBack White TexAlCenter HoverEffect PaddingArribaAbajo20px" >
+                                                                <div class="FontLatoBold FontBold Fs30 White">A</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="Container75">
+                                                            <div class="Card Gris4Back White TexAlCenter HoverEffect" style="padding: 0px; ">
+                                                                <p:panelGrid id="gridAvanceEtapas" columnClasses="GrayBack White FontBold ui-grid-col-9, LightGrayBack FontBold ui-grid-col-3" styleClass="Fs12 ui-grid-col-12 ui-noborder" >
+                                                                    <ui:repeat value="#{indicadoresController.mapaAvancesEtapasYTareas.keySet().toArray()}" var="fase"  >
+                                                                        <p:row>
+                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-9 BordeAbajoBlanco">
+                                                                                <h:outputText value="#{fase}" />
+                                                                            </p:column>
+                                                                            <p:column styleClass="BoldGrayBack White FontBold ui-grid-col-3 BordeAbajoBlanco">
+                                                                                <h:outputText value="#{indicadoresController.mapaAvancesEtapasYTareas[fase]} %" />
+                                                                            </p:column>
+                                                                        </p:row>
+                                                                    </ui:repeat>
+                                                                </p:panelGrid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Container50 Responsive ClearBoth" style="margin-top: 10px;">
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="CardTopic Padding20px">
+                                                        <i class="fa fa-pie-chart Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Saldo de Rubros $ <br />
+                                                        <span class="CardSubTopic">Saldos disponibles por rubro presupuestario. </span>
+                                                    </div>
+
+                                                    <div class="Container100">
+                                                        <div class="Container40">
+                                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect" style="border-left: none; border-right: none; border-bottom: none;">
+                                                                <div class="EmptyBox5"></div>
+                                                                <p:chart type="donut" model="#{indicadoresController.modeloDonaDisponiblePorRubro}" responsive="true" style="max-height: 260px; color: white; " widgetVar="wvDona" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="Container60">
+                                                            <div class="Card WhiteBack White Padding0px TexAlCenter HoverEffect">
+                                                                <p:panelGrid id="gridSaldosRubro" styleClass="Fs10 WhiteBack ui-grid-col-12 ui-noborder SinBorde" >
+                                                                    <ui:repeat value="#{indicadoresController.listaSaldosDeRubro.keySet().toArray()}" var="rubro"  >
+                                                                        <p:row>
+                                                                            <p:column styleClass="WhiteBack White FontBold ui-grid-col-2">
+                                                                                <i class="#{rubro.icono} Fs25" style="color: #{rubro.coloricono}"></i>
+                                                                            </p:column>
+                                                                            <p:column styleClass="GrayBack White FontBold ui-grid-col-7 TexAlLeft BordeAbajoBlanco LineHeightPanelGrid" >
+                                                                                <h:outputText value="#{rubro.rubro}" />
+                                                                            </p:column>
+                                                                            <p:column styleClass="BoldGrayBack White FontBold ui-grid-col-3 TexAlRight BordeAbajoBlanco LineHeightPanelGrid" >
+                                                                                <h:outputText value="$ #{indicadoresController.listaSaldosDeRubro[rubro]}" />
+                                                                            </p:column>
+                                                                        </p:row>
+                                                                    </ui:repeat>
+                                                                </p:panelGrid>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Container50 Responsive" style="margin-top: 10px;">
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="CardTopic Padding20px">
+                                                        <i class="icon-aperture Fs30 Fleft MarRight10"></i>
+                                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                                        Ejecutado por Rubros<br />
+                                                        <span class="CardSubTopic">$ ejecutados por presupuesto.</span>
+                                                    </div>
+
+                                                    <div class="Container100">
+                                                        <div class="Card WhiteBack Black Padding0px TexAlCenter HoverEffect">
+                                                            <div class="EmptyBox5"></div>
+                                                            <div class="FontRobotoLight Fs16 White">
+
+                                                                <p:chart type="bar" model="#{indicadoresController.modeloBarraEjecutadoPorRubros}" responsive="true" style="height: 50px; width: 100%; " widgetVar="wvBarra" />
+
+                                                                <div class="Container100">
+                                                                    <div class="Card BoldGrayBack White Fs16 FontBold" style="padding: 13px;">
+                                                                        <h:outputText value="Rubros más ejecutados" styleClass="Fs14 White" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="Container100">
+
+                                                                    <ui:repeat value="#{indicadoresController.listaEjecutadoRubroOrdenadoPorMontoDesc}" var="rubro" size="5"  >
+                                                                        <div class="Container20">
+                                                                            <div class="Card BoldGrayBack White Fs16 FontBold Padding5px" style="background-color: #{rubro.coloricono}">
+                                                                                <h:outputText value="$ #{rubro.monto}" styleClass="Fs12 White" />
+                                                                                <div class="EmptyBox10" ></div>
+                                                                                <i class="#{rubro.icono} Fs30 White" ></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </ui:repeat>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="Container100">
+                                            <div class="ContainerIndent">
+                                                <div class="Card Padding0px">
+                                                    <div class="Container100">
+                                                        <div class="Container40">
+                                                            <div class="Card BoldGrayBack White Padding10px TexAlCenter HoverEffect">
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                    <h:outputText value="#{fn:length(rendicionController.listaSolicitudes)}"/>
+                                                                </div>
+                                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                                    <h:outputText value="solicitudes a rendir" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="Container60">
+                                                            <div class="Card VerdeAzuladoBack White Padding10px TexAlCenter HoverEffect">
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoBold Fs30 White DispBlock ClearBoth">
+                                                                    <h:outputText value="$ #{rendicionController.sumarSolicitudesARendir()}" />
+                                                                </div>
+                                                                <div class="FontRobotoLight Fs10 White Fright DispBlock ClearBoth">
+                                                                    <c:choose>
+                                                                        <c:when test="#{empty rendicionController.listaSolicitudes}">
+                                                                            <h:outputText value="sin solicitudes a rendir" />
+                                                                        </c:when>
+                                                                        <c:when test="#{rendicionController.listaSolicitudes.size() eq 1}">
+                                                                            <h:outputText value="#{rendicionController.listaSolicitudes[0].observacion}" />
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <h:outputText value="más de una solicitud a rendir" />
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--****** DASHBOARD: fin ******-->
+
+                        <!--*********************************************-->
+                        <!--**** MODIFICACION DE PRESUPUESTO: inicio ****-->
+                        <!--*********************************************-->
+
+                        <div class="Container100">
+                            <div class="Card " style="margin: 10px;">
+                                <div class="ui-fluid">
+                                    <div class="CardTopic">
+                                        <i class="icon-list Fs30 Fleft MarRight10"></i>
+
+                                        <div class="EmptyBox10 ShowOnMobile"></div>
+                                        Proyecto N° #{proyectoController.selected.id} <br/>
+                                        <span class="CardSubTopic"> #{proyectoController.selected.nombre} </span>
+                                    </div>
+                                </div>
+
+                            <div class="SeparatorFull"></div>
+
+                                <p:outputPanel id="pprincipal" >
+
+                                    <p:tabView id="tabmodificaciones" dynamic="true" style="margin-bottom: 10px;" >
+
+                                        <p:tab id="tabpresupuesto" title="Modificación de Presupuesto" >
+
+                                            <div class="ContainerIndent Padding0px">
+                                                <p:outputPanel id="indicadoresModificaciones">
+                                                    <div class="Container50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card BlueBack White TexAlCenter HoverEffect Padding10px">
+                                                                <div class="EmptyBox5"></div>
+                                                                <i class="fa fa-usd Fs30"></i>
+                                                                <div class="EmptyBox10"></div>
+                                                                <h:outputText id="labelPresupuestoDisponible"
+                                                                              value="$ #{modificacionpresupuestoController.presupuestoDisponible}"
+                                                                              styleClass="Fs20 FontAdamantiumBold" />
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoLight Fs14 White DispBlock Fright ClearBoth">Total Disponible en Presupuesto</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="Container50">
+                                                        <div class="ContainerIndent">
+                                                            <div class="Card White TexAlCenter HoverEffect Padding10px #{modificacionpresupuestoController.obtenerEstiloDiferencia()}">
+                                                                <div class="EmptyBox5"></div>
+                                                                <i class="icon-moneybag Fs30"></i>
+                                                                <div class="EmptyBox10"></div>
+                                                                <h:outputText id="labelPresupuestoDiferencia"
+                                                                              value="$ #{modificacionpresupuestoController.presupuestoDiferencia}"
+                                                                              styleClass="Fs20 FontAdamantiumBold" />
+                                                                <div class="EmptyBox5"></div>
+                                                                <div class="FontRobotoLight Fs14 White DispBlock Fright ClearBoth">Disponible</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </p:outputPanel>
+
+                                                <div class="Container100">
+                                                    <!--TABLA ARBOL de MODIFICACION DE PRESUPUESTO-->
+
+                                                    <p:treeTable id="tablapresupuesto" value="#{modificacionpresupuestoController.root}"
+                                                                 var="item"
+                                                                 styleClass="tablaArbol tabla tablaAjustada TablaColorEncabezado Fs10"  >
+                                                        <p:column headerText="Etapa">
+                                                            <h:outputText value="#{item.presupuestoTarea.tarea.etapaid.etapa}" />
+                                                        </p:column>
+                                                        <p:column headerText="Tarea">
+                                                            <h:outputText value="#{item.presupuestoTarea.tarea.tarea}" />
+                                                        </p:column>
+                                                        <p:column headerText="Descripcion">
+                                                            <h:outputText value="[#{item.presupuestoTarea.rubro.abreviado}] #{item.descripcion}" rendered="#{not empty item.descripcion}" />
+                                                        </p:column>
+                                                        <p:column headerText="Original"  style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeOriginal}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Solicitudes" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeSolicitudes}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Disponible" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeSinModificacion}" />
+                                                        </p:column>
+                                                        <p:column headerText="Modificación" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeModificacion}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Importe Final" style="text-align: right;" >
+                                                            <h:outputText value="#{item.importeFinal}" />
+                                                        </p:column>
+                                                        <p:column headerText=" " styleClass="TexAlCenter">
+                                                            <p:commandButton update=":formitem, :formprincipal:growlprincipal, "
+                                                                             oncomplete="PF('dialogoModificacion').show();"
+                                                                             icon="fa fa-pencil" styleClass="OrangeBack White"
+                                                                             title="Modificar Presupuesto" rendered="#{not empty item.descripcion}"  >
+                                                                <f:setPropertyActionListener value="#{item}" target="#{modificacionpresupuestoController.piSeleccionado}" />
+                                                            </p:commandButton>
+                                                        </p:column>
+                                                        <p:columnGroup type="footer">
+                                                            <p:row>
+                                                                <p:column colspan="3" style="text-align:right" footerText="Totales:" styleClass="Gris3Back White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{presupuestoTareaController.sumatotal}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalSolicitudes}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalSinModificaciones}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalModificaciones}" styleClass="VerdePlantaBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText="$ #{modificacionpresupuestoController.totalImportesFinales}" styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
+                                                                <p:column footerText=" " styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
+                                                            </p:row>
+                                                        </p:columnGroup>
+                                                    </p:treeTable>
+                                                </div>
+                                            </div>
+
+                                            <div class="Separator"></div>
+                                        </p:tab>
+                                    </p:tabView>
+
+                                    <!--TABLA ARBOL de MODIFICACIONES HECHAS-->
+
+                                    <div class="Container100">
+                                        <p:outputPanel id="op" >
+                                            <p:dataTable id="tablamodificaciones" var="item"
+                                                         value="#{modificacionpresupuestoController.modificaciones}"
+                                                         styleClass="tabla tablaAjustada TablaColorEncabezado" >
+                                                <f:facet name="header">
+                                                    Items del Presupuesto a Modificar
+                                                </f:facet>
+                                                <p:column headerText="Fecha">
+                                                    <h:outputText value="#{item.fecha}">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                                    </h:outputText>
+                                                </p:column>
+                                                <p:column headerText="Etapa" >
+                                                    <h:outputText value="#{item.presupuestotareaid.tarea.etapaid.etapa}" />
+                                                </p:column>
+                                                <p:column headerText="Tarea" >
+                                                    <h:outputText value="#{item.presupuestotareaid.tarea.tarea}" />
+                                                </p:column>
+                                                <p:column headerText="Item" >
+                                                    <h:outputText value="#{item.presupuestotareaid.descripcion}" />
+                                                </p:column>
+                                                <p:column headerText="Rubro" >
+                                                    <h:outputText value="#{item.presupuestotareaid.rubro.rubro}" />
+                                                </p:column>
+                                                <p:column headerText="Modificación">
+                                                    <h:outputText value="$ #{item.modificacion.floatValue()}" styleClass="Fright" />
+                                                </p:column>
+                                                <p:column style="width:32px;text-align: center">
+                                                    <p:commandButton actionListener="#{modificacionpresupuestoController.quitarModificacion(item)}"
+                                                                     title="Eliminar Modificación de Presupuesto"
+                                                                     icon="fa fa-trash-o" styleClass="RedButton White"
+                                                                     update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:indicadoresModificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" >
+                                                        <p:confirm header="Eliminar" message="Esta seguro que desea eliminar el Item?" icon="icon-alert"  />
+                                                    </p:commandButton>
+                                                </p:column>
+                                                <p:columnGroup type="footer">
+                                                    <p:row>
+                                                        <p:column colspan="5" style="text-align:right" footerText="Total de Modificaciones:" styleClass="Gris3Back White Fs16 FontBold TexAlRight" />
+                                                        <p:column footerText="$ #{modificacionpresupuestoController.sumarModificaciones()}" styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
+                                                        <p:column footerText=" " styleClass="CelesteBack White Fs16 FontBold TexAlRight" />
+                                                    </p:row>
+                                                </p:columnGroup>
+                                            </p:dataTable>
+                                        </p:outputPanel>
+                                    </div>
+
+                                    <div class="Separator"></div>
+
+                                    <p:outputPanel id="botonsolicitud"  >
+                                        <div align="center">
+                                            <p:commandButton action="#{modificacionpresupuestoController.create}"
+                                                             value="Guardar Modificaciones de Presupuesto"
+                                                             icon="fa fa-save" styleClass="GreenButton White"
+                                                             update=":formprincipal:pprincipal"
+                                                             oncomplete="PF('dfinalmodificacion').show();"
+                                                             immediate="true" />
+                                        </div>
+                                    </p:outputPanel>
+
+                                    <p:separator />
+                                    <br style="clear: both;"/>
+
+                                    <p:commandButton action="#{modificacionpresupuestoController.prepareList}" value="Lista de Solicitudes" immediate="true" style="display: inline-block; float: right;  margin-bottom: 10px;" icon="ui-icon-document" ajax="false" />
+                                    <p:commandButton action="/index?faces-redirect=true" value="Inicio" style="display: inline-block; float:right;   margin-bottom: 10px;" icon="ui-icon-home"  ajax="false" />
+
+                                    <br style="clear: both;"/>
+                                    <!--<p:separator/>-->
+                                    <!--<h:link outcome="/index" value="Inicio"/>-->
+
+                                </p:outputPanel>
+
+                            </div>
+                        </div>
+
 
                         <!--**********************************************-->
                         <!--******** DIALAGO FINAL MODIFICACION **********-->
@@ -254,7 +529,7 @@
                         <!--**********************************************-->
 
                         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" style="float:left;" /> 
+                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:indicadoresModificaciones , :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia" style="float:left;" />
                             <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="float: right;" />
                         </p:confirmDialog>
 
@@ -304,14 +579,120 @@
                             <p:separator/>
 
                             <div align="center" >
-                                <p:commandButton value="Modificar Presupuesto"  actionListener="#{modificacionpresupuestoController.agregarModificacion()}" update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia, :formprincipal:growlprincipal"  oncomplete="PF('dialogoModificacion').hide();" /> 
+                                <p:commandButton value="Modificar Presupuesto" icon="fa fa-save" styleClass="GreenButton White"
+                                                 actionListener="#{modificacionpresupuestoController.agregarModificacion()}"
+                                                 update=":formprincipal:tabmodificaciones:tablapresupuesto, :formprincipal:tablamodificaciones, :formprincipal:tabmodificaciones:indicadoresModificaciones, :formprincipal:tabmodificaciones:labelPresupuestoDisponible, :formprincipal:tabmodificaciones:labelPresupuestoDiferencia, :formprincipal:growlprincipal"
+                                                 oncomplete="PF('dialogoModificacion').hide();" />
                             </div>
 
                         </h:form>
                     </p:dialog>
 
                 </div>   
-            </div>   
+            </div>
+
+            <!--INICIO SCRIPS DE GRAFICOS-->
+
+            <script type="text/javascript">
+                function extensorLineal() {
+
+                    this.cfg.grid = {
+                        drawGridLines: false, // seteamos para que la lineas del grid no se vean
+                        borderWidth: 0, // ancho en pixeles del borde alrededor del grid
+                        borderColor: '#4CD5FF', // color CSS del borde alrededor del grid
+                        background: '#4CD5FF', // seteamos el color de fondo
+                        shadow: false, // sin sombra
+                        gridLineColor: '#4CD5FF' // color de las lineas del grid
+                    };
+
+                    this.cfg.seriesDefaults = {
+                        shadow: false // no mostrar sombra debajo de la linea de las series
+                    };
+
+                    //this.plot.replot({});
+                }
+            </script>
+
+            <script type="text/javascript">
+                function extensorDona() {
+                    this.cfg.grid = {
+                        drawGridLines: false, // seteamos para que la lineas del grid no se vean
+                        borderWidth: 0, // ancho en pixeles del borde alrededor del grid
+                        borderColor: '#FFFFFF', // color CSS del borde alrededor del grid
+                        background: '#FFFFFF', // seteamos el color de fondo
+                        shadow: false, // sin sombra
+                        gridLineColor: '#FFFFFF' // color de las lineas del grid
+                    };
+
+                    this.cfg.legend = {
+                        show: false
+                    };
+
+                    this.cfg.seriesDefaults = {
+                        renderer: $.jqplot.DonutRenderer,
+                        rendererOptions: {
+                            sliceMargin: 4,
+                            padding: 1,
+                            innerDiameter: 125,
+                            startAngle: -90,
+                            dataLabels: 'percent',
+                            showDataLabels: true,
+                        }
+                    };
+                }
+
+            </script>
+
+            <script type="text/javascript">
+
+                function extensorBarraRubros() {
+                    this.cfg.grid = {
+                        drawGridLines: false, // seteamos para que la lineas del grid no se vean
+                        borderWidth: 0, // ancho en pixeles del borde alrededor del grid
+                        borderColor: '#FFFFFF', // color CSS del borde alrededor del grid
+                        background: '#FFFFFF', // seteamos el color de fondo
+                        shadow: false, // sin sombra
+                        gridLineColor: '#FFFFFF' // color de las lineas del grid
+                    };
+
+                    this.cfg.legend = {
+                        show: false
+                    };
+
+                    this.cfg.axes = {
+                        yaxis: {
+                            tickOptions: {
+                                showMark: false, // whether or not to show the mark on the axis
+                                showGridline: false, // whether to draw a gridline (across the whole grid) at this tick
+                                show: false, // whether to show the tick (mark and label)
+                                showLabel: false // whether to show the text label at the tick
+                            }
+                        },
+                        xaxis: {
+                            tickOptions: {
+                                showMark: false, // whether or not to show the mark on the axis
+                                showGridline: false, // whether to draw a gridline (across the whole grid) at this tick
+                                show: false, // whether to show the tick (mark and label)
+                                showLabel: false // whether to show the text label at the tick
+                            }
+                        }
+                    };
+
+//                    this.plot.replot({});
+
+//                    this.cfg.seriesDefaults = {
+//                        shadow: false // no mostrar sombra debajo de la linea de las series
+//                    };
+
+//                    chart = PF('wvBarra').plot;
+//                    chart.replot();
+
+                    PrimeFaces.widgets.wvDona.plot.replot();
+
+                }
+
+            </script>
+
         </ui:define>
     </ui:composition>
 
