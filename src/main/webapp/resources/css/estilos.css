@@ -466,3 +466,16 @@
 .LineHeightPanelGrid{
     line-height: 29px;
 }
+
+/*PANEL*/
+
+.ui-panel .ui-panel-titlebar{
+    background-color: #0288d1 !important;
+}
+
+
+/*ACORDEON TABS*/
+
+.tabAzul{
+    background-color: #0288d1 !important;
+}
