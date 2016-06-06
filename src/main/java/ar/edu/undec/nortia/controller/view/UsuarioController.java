@@ -279,51 +279,50 @@ public class UsuarioController implements Serializable {
 
         return "index";
     }
-    
-   public String recuperarPassword(){
-             try {
-            
-           final String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+";
-       StringBuilder result = new StringBuilder();
-       int length=8;
-       while(length > 0) {
-           Random rand = new Random();
-           result.append(characters.charAt(rand.nextInt(characters.length())));
-           length--;
-       }
-      
-                 
-                 
-           current= getFacade().findUsuarioNombreEmail(current.getUsuarionombre());
-           
-            current.setUsuarioclave(new EncriptarSHA256().hash256(result.toString()) );
-           
-            getFacade().edit(current);
-            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"+current.getUsuarioid());
 
-            if(!new EnviarMail().mailRecuperarPassword(current.getUsuarionombre(),result.toString(),((Agente) getFacadea().findAgente(current.getUsuarionombre())).getEmail() )){
+    public String recuperarPassword() {
+        try {
+
+            final String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+";
+            StringBuilder result = new StringBuilder();
+            int length = 8;
+
+            while (length > 0) {
+                Random rand = new Random();
+                result.append(characters.charAt(rand.nextInt(characters.length())));
+                length--;
+            }
+
+            current = getFacade().findUsuarioNombreEmail(current.getUsuarionombre());
+
+            current.setUsuarioclave(new EncriptarSHA256().hash256(result.toString()));
+
+            getFacade().edit(current);
+            System.out.println("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm" + current.getUsuarioid());
+
+            if (!new EnviarMail().mailRecuperarPassword(current.getUsuarionombre(), result.toString(), ((Agente) getFacadea().findAgente(current.getUsuarionombre())).getEmail())) {
                 JsfUtil.addErrorMessage("No se pudo enviar el mail para restablecer su password!");
 
-
-                current=null;
-               currenta=null;
+                current = null;
+                currenta = null;
                 return "index";
-            }else{
-               current=null;
-               currenta=null;
-              //RequestContext.getCurrentInstance().execute("PF('dregistrar').hide()");
-               FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
-               
-               return "index";
+
+            } else {
+                current = null;
+                currenta = null;
+                //RequestContext.getCurrentInstance().execute("PF('dregistrar').hide()");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("./index.xhtml");
+
+                return "index";
             }
-              
+
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, "Disculpe las molestias, no se pudo realizar la recuperacion de password");
 
-            current=null;
-            currenta=null;
-            
-            
+            current = null;
+            currenta = null;
+
+
             return "index";
         }
     }
