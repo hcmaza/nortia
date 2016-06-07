@@ -1735,7 +1735,10 @@ public class ProyectoController implements Serializable {
         return null;
     }
 
+    // ************************************************************************
     // **************************  REPORTES  **********************************
+    // ************************************************************************
+
     public void pdfIdeaProyecto() throws JRException, IOException {
 
         // Obtengo la ruta absoluta del archivo compilado del reporte
