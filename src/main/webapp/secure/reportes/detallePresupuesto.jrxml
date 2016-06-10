@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version last-->
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-06-09T19:44:03 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detallePresupuesto" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="20" uuid="4ef8ae83-499f-4c9e-8d0a-af17296bd175">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
 	<property name="ireport.x" value="30"/>
@@ -50,56 +51,62 @@
 	</background>
 	<columnHeader>
 		<band height="23">
-			<rectangle radius="0">
-				<reportElement mode="Opaque" x="0" y="6" width="556" height="15" backcolor="#8A8A8A" uuid="d050502b-5df6-4f3a-a4f4-6c35c2f8d817">
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<graphicElement>
-					<pen lineStyle="Solid" lineColor="#E3E3E3"/>
-				</graphicElement>
-			</rectangle>
 			<staticText>
-				<reportElement x="267" y="7" width="71" height="15" forecolor="#FFFFFF" uuid="b4de9690-0da3-42b4-a283-b47abb93ac16">
+				<reportElement x="267" y="7" width="71" height="15" forecolor="#000000" uuid="b4de9690-0da3-42b4-a283-b47abb93ac16">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<bottomPen lineWidth="2.0" lineColor="#656565"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Comitente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="338" y="7" width="71" height="15" forecolor="#FFFFFF" uuid="1175df15-0d49-4467-97ed-12555663f2cd">
+				<reportElement x="338" y="7" width="71" height="15" forecolor="#000000" uuid="1175df15-0d49-4467-97ed-12555663f2cd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<bottomPen lineWidth="2.0" lineColor="#656565"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Universidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="408" y="7" width="71" height="15" forecolor="#FFFFFF" uuid="5a2a95f2-d3ee-4173-9832-5f56e083828a">
+				<reportElement x="408" y="7" width="71" height="15" forecolor="#000000" uuid="5a2a95f2-d3ee-4173-9832-5f56e083828a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<bottomPen lineWidth="2.0" lineColor="#656565"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Organismo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="479" y="7" width="71" height="15" forecolor="#FFFFFF" uuid="3f3a8c14-a9d3-4621-bde2-0c8da7bfb482">
+				<reportElement x="479" y="7" width="71" height="15" forecolor="#000000" uuid="3f3a8c14-a9d3-4621-bde2-0c8da7bfb482">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<bottomPen lineWidth="2.0" lineColor="#656565"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="7" width="240" height="15" forecolor="#FFFFFF" uuid="f509aa2a-9b27-4db7-b6ed-be505b6e55ee">
+				<reportElement x="0" y="7" width="259" height="15" forecolor="#000000" uuid="f509aa2a-9b27-4db7-b6ed-be505b6e55ee">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
+				<box>
+					<bottomPen lineWidth="2.0" lineColor="#656565"/>
+				</box>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
@@ -109,28 +116,28 @@
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="267" y="0" width="71" height="20" uuid="12102c43-3e92-453a-ba09-8d4f86f43a4e"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{gastocomitente}.floatValue()]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="338" y="0" width="71" height="20" uuid="2181973e-93b5-479c-95ac-74a5d42b8b59"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{gastouniversidad}.floatValue()]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="408" y="0" width="71" height="20" uuid="27e54b9e-623a-4521-ade4-86c53a123203"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{gastoorganismo}.floatValue()]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="479" y="0" width="71" height="20" uuid="bf02c111-e98c-4e23-aa25-4d1a59e03724"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{total}.floatValue()]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="0" y="0" width="240" height="20" uuid="f8d21c7e-8b98-4e88-8c6d-bfba1dbaab5f"/>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="259" height="20" uuid="f8d21c7e-8b98-4e88-8c6d-bfba1dbaab5f"/>
 				<textFieldExpression><![CDATA[$F{rubro.rubro}]]></textFieldExpression>
 			</textField>
 			<line>
@@ -141,28 +148,28 @@
 	<columnFooter>
 		<band height="21">
 			<staticText>
-				<reportElement x="0" y="0" width="240" height="20" uuid="3c6037f8-86a2-42d0-baf4-b73f04090f1b"/>
+				<reportElement x="0" y="0" width="259" height="20" uuid="3c6037f8-86a2-42d0-baf4-b73f04090f1b"/>
 				<textElement textAlignment="Left">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Totales]]></text>
 			</staticText>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="267" y="1" width="71" height="20" uuid="d62cda1f-f18b-44e7-b796-ef287784972c"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{totalComitente}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="338" y="1" width="70" height="20" uuid="ea603e10-c601-47fb-843a-52c1dbf3e6fc"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{totalUniversidad}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="409" y="1" width="70" height="20" uuid="5a5854e7-f909-44b9-ad51-f9929b075ebb"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{totalOrganismo}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00">
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="479" y="1" width="71" height="20" uuid="a2ddb31d-d5b7-4ebd-82ef-0db746405c4a"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
