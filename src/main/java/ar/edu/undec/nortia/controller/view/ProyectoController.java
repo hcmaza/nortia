@@ -1,17 +1,9 @@
 package ar.edu.undec.nortia.controller.view;
 
-import ar.edu.undec.nortia.controller.ArchivorendicionFacade;
-import ar.edu.undec.nortia.controller.ConvocatoriaFacade;
-import ar.edu.undec.nortia.controller.DesembolsoFacade;
-import ar.edu.undec.nortia.controller.EnviarMail;
-import ar.edu.undec.nortia.controller.EstadoproyectoFacade;
-import ar.edu.undec.nortia.controller.PresupuestoRubroFacade;
-import ar.edu.undec.nortia.controller.PresupuestoTareaFacade;
+import ar.edu.undec.nortia.controller.*;
 import ar.edu.undec.nortia.model.Proyecto;
 import ar.edu.undec.nortia.controller.view.util.JsfUtil;
 import ar.edu.undec.nortia.controller.view.util.PaginationHelper;
-import ar.edu.undec.nortia.controller.ProyectoFacade;
-import ar.edu.undec.nortia.controller.SolicitudFacade;
 import ar.edu.undec.nortia.controller.view.IndicadoresController.ItemRubro;
 import ar.edu.undec.nortia.model.Agente;
 import ar.edu.undec.nortia.model.Archivoproyecto;
@@ -150,6 +142,9 @@ public class ProyectoController implements Serializable {
     private ar.edu.undec.nortia.controller.SolicitudFacade ejbsolicitud;
     @EJB
     private ar.edu.undec.nortia.controller.ArchivorendicionFacade ejbarchivorendicion;
+
+    @EJB
+    private PresupuestoRubroitemFacade ejbpresupuestorubroitem;
 
     private PaginationHelper pagination;
     private int selectedItemIndex;
@@ -1915,6 +1910,8 @@ public class ProyectoController implements Serializable {
         // Ruta absoluta del archivo compilado del reporte
         String rutaJasper = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/secure/reportes/proyecto.jasper");
 
+        System.out.println("pdfEtapas Proyecto >> " + getSelected().getId() + " - " + getSelected().getNombre());
+
         // FUENTES DE DATOS
         JRBeanArrayDataSource beanArrayDataSource = new JRBeanArrayDataSource(new Proyecto[]{this.getSelected()});
 
@@ -1929,7 +1926,7 @@ public class ProyectoController implements Serializable {
             }
         }
 
-        // OrdenaciÃ³n por fecha de inicio
+        // Ordenación por fecha de inicio
         Collections.sort(listaTareas, new Comparator<Tarea>() {
             @Override
             public int compare(Tarea tarea1, Tarea tarea2) {
@@ -1939,19 +1936,25 @@ public class ProyectoController implements Serializable {
 
         JRBeanCollectionDataSource tareas = new JRBeanCollectionDataSource(listaTareas);
 
+        // ----------------------------------------------------------------
+
         // PRESUPUESTO
-       /* List<PresupuestoRubroitem> listaPresupuestoItems = this.ejbpresupuestorubroitem.findByPresupuesto(this.ejbFacadep.findporProyecto(current.getId()));
+        List<PresupuestoRubroitem> listaPresupuestoItems = this.ejbpresupuestorubroitem.findByPresupuesto(this.ejbFacadep.findporProyecto(current.getId()));
 
-         for (PresupuestoRubroitem pri : listaPresupuestoItems) {
-         System.out.println("PRI" + pri.getDescripcion() + " - " + pri.getCantidad().toString() + " - " + pri.getTotal().toString());
-         }
+        System.out.println("listaPresupuestoItems tamaño: " + listaPresupuestoItems.size());
 
-         JRBeanCollectionDataSource presupuesto = new JRBeanCollectionDataSource(listaPresupuestoItems);
-         */
+        for (PresupuestoRubroitem pri : listaPresupuestoItems) {
+            System.out.println("PRI" + pri.getDescripcion() + " - " + pri.getCantidad().toString() + " - " + pri.getTotal().toString());
+        }
+
+        JRBeanCollectionDataSource presupuesto = new JRBeanCollectionDataSource(listaPresupuestoItems);
+
+        // ----------------------------------------------------------------
+
         //Agregando los parametros
         Hashtable<String, Object> parametros = new Hashtable<String, Object>();
         parametros.put("idProyecto", this.getSelected().getId());
-        //parametros.put("presupuesto", presupuesto);
+        parametros.put("presupuesto", presupuesto);
         parametros.put("tareas", tareas);
 
         // Llenamos el reporte con la fuente de datos
@@ -1959,7 +1962,7 @@ public class ProyectoController implements Serializable {
 
         // Generamos el archivo a descargar
         HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-        httpServletResponse.addHeader("Content-disposition", "attachment; filename=gantt.pdf");
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=proyectoDefinitivo.pdf");
         ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
         JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
         FacesContext.getCurrentInstance().responseComplete();
@@ -2442,16 +2445,17 @@ public class ProyectoController implements Serializable {
      
     //preparo la vista del proyecto 
     public String prepareViewEtapa() {
+
         current = (Proyecto) getItems().getRowData();
-        System.out.println("fffffffffffff1fffffffffff");
+
         FacesContext context = FacesContext.getCurrentInstance();
         EtapaController etapacontroller = (EtapaController) context.getApplication().evaluateExpressionGet(context, "#{etapaController}", EtapaController.class);
-        System.out.println("ffffffffffff2ffffffffffff");
+
         etapacontroller.setEtapas(this.ejbetapa.findByProyecto(current));
         //etapacontroller.agregaralListadoEtapas();
         etapacontroller.prepareEditarListadoEtapas();
         etapacontroller.agentesProyecto();
-        System.out.println("ffffffffffffff3ffffffffff");
+
         //proyecto Agente
         ProyectoAgenteController proyectoagentecontroller = (ProyectoAgenteController) context.getApplication().evaluateExpressionGet(context, "#{proyectoAgenteController}", ProyectoAgenteController.class);
 
@@ -2465,7 +2469,6 @@ public class ProyectoController implements Serializable {
 
         presupuestotareacontroller.armarPresupuestoNodos();
 
-        System.out.println("fffffffffffff4fffffffffff");
         return "viewproyectoreporte";
     }
 

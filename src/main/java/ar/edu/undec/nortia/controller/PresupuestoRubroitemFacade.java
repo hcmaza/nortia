@@ -32,7 +32,7 @@ public class PresupuestoRubroitemFacade extends AbstractFacade<PresupuestoRubroi
     }
     
     public List<PresupuestoRubroitem> findByPresupuesto(Presupuesto pr){
-        //System.out.println("iiiiiiiiiiiiiiiiiiii"+pr.getId());
+        System.out.println("FindByPresupuesto >> Presupuesto: " + pr.getId());
         return em.createQuery("select pri from PresupuestoRubroitem pri where pri.presupuesto.id="+pr.getId(), PresupuestoRubroitem.class).getResultList();
     }
     
