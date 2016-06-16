@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-06-15T21:47:01 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="firmas" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="05eb5a0d-f2ac-4caf-999e-86344f1fd409">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="204" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="27" y="10" width="500" height="88" uuid="b88d78b5-e7b4-46e2-b7d0-5ce850627fe3"/>
+			</rectangle>
+			<line>
+				<reportElement x="38" y="52" width="120" height="1" uuid="41dd67ae-30de-427b-b0c3-48e70f990823">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="48" y="55" width="100" height="20" uuid="a2334471-0041-4588-ad75-94de6a967515">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Responsable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="55" width="34" height="20" uuid="5c590021-e758-40da-9e99-8898a7946d9f"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="55" width="120" height="20" uuid="b7f9e81b-2578-4490-b12d-3f3d3398591c"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Director Dpto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="55" width="70" height="20" uuid="8afca28e-d397-4504-a25c-e892dbe2bcba"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<line>
+				<reportElement x="170" y="52" width="100" height="1" uuid="a419a3a7-1273-41fa-bb0f-d9eed8570d9d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="291" y="52" width="120" height="1" uuid="df4140a2-c8f3-448c-bb62-fc4f7f54797b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="420" y="52" width="100" height="1" uuid="0ff86991-f666-43eb-9e99-7273bd59a641">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="123" y="79" width="88" height="20" uuid="aa4ec3f9-ab13-4b72-ba7d-65968924fef8">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Presentado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="79" width="110" height="20" uuid="0931d545-2dfe-4c22-b239-728e81403e59">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aprobado Dpto.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="270" y="110" width="256" height="80" uuid="ed191a66-23f2-4c06-9ee6-9ac8347a3b1d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="344" y="172" width="110" height="22" uuid="107466b8-e88f-498c-adf6-c57be800722f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibido UVT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="151" width="60" height="20" uuid="3cf45d97-e0ee-4cbd-bd09-c8ea6eecf887">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibió]]></text>
+			</staticText>
+			<line>
+				<reportElement x="276" y="148" width="85" height="1" uuid="d097880a-dc30-47dc-83a9-4c1996da4a91">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="461" y="148" width="60" height="1" uuid="4d15cd2e-5b1c-4def-85b9-05c77819e1d7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="474" y="151" width="34" height="20" uuid="753663ea-1001-487c-a8b3-55b8645bb2b2"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<line>
+				<reportElement x="367" y="148" width="85" height="1" uuid="df46cf46-ef36-46ce-b170-1a299fab7d8c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="392" y="151" width="34" height="20" uuid="09d00255-673c-45f8-9fd2-d997cc5291c9"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
