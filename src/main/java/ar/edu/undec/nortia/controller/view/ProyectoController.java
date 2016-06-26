@@ -694,7 +694,9 @@ public class ProyectoController implements Serializable {
     }
 
     public void setHabilitarcomitente(String habilitarcomitente) {
+
         this.habilitarcomitente = habilitarcomitente;
+        System.out.println("Habilitar Comitente >> " + this.habilitarcomitente);
     }
 
     public void evaluarIdea() {
