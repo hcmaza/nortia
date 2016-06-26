@@ -539,7 +539,7 @@
                                                             <f:facet name="header">
                                                                 <h:outputText value="Aporte Universidad" style="font-weight: bold;"  title="Click en la celda e ingrese el importe."/>
                                                                 <br />
-                                                                <p:commandButton id="ayudaPresupuestoAporteUniversidad" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteUniversidad')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                                <p:commandButton id="ayudaPresupuestoAporteUniversidad" icon="fa fa-question" styleClass="OrangeButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteUniversidad')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
                                                                 <p:overlayPanel for="ayudaPresupuestoAporteUniversidad" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
                                                                     <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
                                                                 </p:overlayPanel>
@@ -560,7 +560,7 @@
                                                             <f:facet name="header">
                                                                 <h:outputText value="Aporte Organismo" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
                                                                 <br />
-                                                                <p:commandButton id="ayudaPresupuestoAporteOrganismo" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteOrganismo')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                                <p:commandButton id="ayudaPresupuestoAporteOrganismo" icon="fa fa-question" styleClass="OrangeButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteOrganismo')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
                                                                 <p:overlayPanel for="ayudaPresupuestoAporteOrganismo" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
                                                                     <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
                                                                 </p:overlayPanel>
@@ -584,7 +584,7 @@
                                                                 <h:outputText rendered="#{proyectoController.habilitarcomitente eq '0'}" value="Deshabilitado" title="Deshabilitado debido a que se seleccionó que no hay comitente." style="color: #000 !important;"/>
                                                                 <br />
                                                                 <p:commandButton id="ayudaPresupuestoAporteComitente" icon="fa fa-question"
-                                                                                 styleClass="CyanButton White"
+                                                                                 styleClass="OrangeButton White"
                                                                                  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteComitente')}"
                                                                                  oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; "
                                                                                  rendered="#{proyectoController.habilitarcomitente eq '1'}" />
@@ -754,7 +754,7 @@
 
                                                             <h:panelGrid columns="2" id="agenteselecciona" >
                                                                 <p:commandButton title="Agregar al Equipo de Trabajo de la Idea-Proyecto" icon="fa fa-plus" id="agregaraequipo" immediate="true" update="agentesa" action="#{proyectoAgenteController.agregarEquipo}" disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}" styleClass="GreenButton White" style="width: auto; " />
-                                                                <p:commandButton title="Nueva Persona" icon="fa fa-user-plus" onclick="PF('dregistrar').show();" styleClass="CyanButton White" style="width: auto; " />
+                                                                <p:commandButton title="Nueva Persona" icon="fa fa-user-plus" onclick="PF('dregistrar').show();" styleClass="OrangeButton White" style="width: auto; " />
                                                             </h:panelGrid>
                                                         </p:panelGrid>
 
@@ -781,7 +781,7 @@
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Función en el Proyecto" style="font-weight: bold;" title="Ingrese la función del agente en el proyecto." />
                                                                     <br />
-                                                                    <p:commandButton id="ayudaFuncion" icon="fa fa-question" styleClass="CyanButton White"  action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColFuncion')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
+                                                                    <p:commandButton id="ayudaFuncion" icon="fa fa-question" styleClass="OrangeButton White"  action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColFuncion')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
                                                                     <p:overlayPanel for="ayudaFuncion" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
                                                                         <h:outputText value="Ingrese la función del agente en el proyecto." />
                                                                     </p:overlayPanel>
@@ -803,7 +803,7 @@
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Participación" style="font-weight: bold;" title="Click e indique si el agente es consultor externo." />
                                                                     <br />
-                                                                    <p:commandButton id="ayudaParticipacion" icon="fa fa-question" styleClass="CyanButton White" action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColParticipacion')}" oncomplete="PF('wdialogoAyuda').show();"  update="dialogoAyuda" style="height: 15px; " />
+                                                                    <p:commandButton id="ayudaParticipacion" icon="fa fa-question" styleClass="OrangeButton White" action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColParticipacion')}" oncomplete="PF('wdialogoAyuda').show();"  update="dialogoAyuda" style="height: 15px; " />
                                                                     <p:overlayPanel for="ayudaParticipacion" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
                                                                         <h:outputText value="Indique si el agente es docente o consultor externo haciendo click en el botón." />
                                                                     </p:overlayPanel>
@@ -832,7 +832,7 @@
                                                                 <f:facet name="header">
                                                                     <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="Ingrese las horas dedicadas al proyecto por semana." />
                                                                     <br />
-                                                                    <p:commandButton id="ayudaDedicacion" icon="fa fa-question" styleClass="CyanButton White" action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColHsDedicacion')}" oncomplete="PF('wdialogoAyuda').show();"  update="dialogoAyuda" style="height: 15px; "  />
+                                                                    <p:commandButton id="ayudaDedicacion" icon="fa fa-question" styleClass="OrangeButton White" action="#{ayudaController.setearTextoAyudaPorClave('AyudaIPEquipoTrabajoColHsDedicacion')}" oncomplete="PF('wdialogoAyuda').show();"  update="dialogoAyuda" style="height: 15px; "  />
                                                                     <p:overlayPanel for="ayudaDedicacion" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
                                                                         <h:outputText value="Ingrese las horas dedicadas al proyecto por semana." />
                                                                     </p:overlayPanel>
@@ -1181,7 +1181,7 @@
                     Idea-Proyecto fue creada Satisfactoriamente!!!
                     <div align="center" >
                         <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfIdeaProyecto()}" ajax="false" styleClass="CyanButton" style="width: auto; "  />
+                            <p:commandButton value="Imprimir" actionListener="#{proyectoController.pdfIdeaProyecto()}" ajax="false" styleClass="OrangeButton" style="width: auto; "  />
                             <p:commandButton value="OK" ajax="false" action="List" oncomplete="#{proyectoController.reiniciarValoresSolicitud}" onclick="PF('dfinal').hide();" styleClass="GreenButton" style="width: auto; " />
                         </p:panelGrid>
                     </div>
