@@ -215,6 +215,10 @@
     color: #9BBB59 !important;
 }
 
+.GrisNortia{
+    color: #455A64 !important;
+}
+
 /*ESTILOS DE COLORES PARA FONDO*/
 
 .CelesteBack{
@@ -275,6 +279,10 @@
 
 .BordoBack{
     background-color: #953735 !important;
+}
+
+.GrisNortiaBack{
+    background-color: #455A64 !important;
 }
 
 /* ESTILOS DE COLORES PARA BOTONES */
@@ -340,12 +348,20 @@
 /* MENU */
 
 .BotonMenu button{
-    background-color: #00D05E ;
+    /*background-color: #00D05E ;*/
+    background-color: #85CB88 ;
     color: #ffffff ;
 }
 
 .MargenArriba5pxAbajo10px {
     margin: 5px 0px 10px;
+}
+
+
+/*MARGENES*/
+
+.Mar5{
+    margin: 5px;
 }
 
 /*SIN BORDE*/
