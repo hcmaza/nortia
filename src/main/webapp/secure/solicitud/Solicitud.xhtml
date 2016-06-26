@@ -92,126 +92,157 @@
 
                                         <h:form id="formTabComitente">
 
-                                            <p:fieldset legend="Comitente" style="margin-bottom:5px">
-                                                
-                                                <p:panelGrid id="pcomitente" columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9" style="border: none; "  > 
+                                            <div class="Container100">
+                                                <div class="ContainerIndent">
 
-                                                    <p:selectOneRadio id="options" value="#{proyectoController.habilitarcomitente}"   >  
-                                                        <f:selectItem itemLabel="No" itemValue="0"  />  
-                                                        <f:selectItem itemLabel="Si" itemValue="1" />  
-                                                        <p:ajax update="pcomitente" event="valueChange" />
-                                                    </p:selectOneRadio>                                    
+                                                    <!-- RESPONSABLE TECNICO -->
+                                                    <div class="Card">
+                                                        <div class="CardTopic">
+                                                            <i class="fa fa-certificate Fs30 Fleft MarRight10"></i>
 
-                                                    <p:panel id="phabilitarcomitente" rendered="#{proyectoController.habilitarcomitente eq 1}" styleClass="Container100" style="border: none; " >
-                                                        <p:panelGrid columns="2" layout="grid" styleClass="ui-noborder" columnClasses="ui-grid-col-3,ui-grid-col-9"  >
-                                                            <p:outputLabel style="font-weight:bold;"  value="Ingrese el N° de CUIT/CUIL"  />                 
+                                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                                            Responsable Técnico
+                                                            <br/>
+                                                            <span class="CardSubTopic">Confirmar los datos del responsable técnico.</span>
+                                                        </div>
 
-                                                            <p:selectOneMenu widgetVar="comitentedid" id="comitenteid"  value="#{proyectoController.selected.comitenteid}" label="Comitente" filter="true" filterMatchMode="contains"  >
-                                                                <f:selectItems  value="#{comitenteController.itemsAvailableSelectOne}"/>
-                                                                <p:ajax update="pgcomitente, :formDetallesComitente:detallesComitente" event="change" />
-                                                            </p:selectOneMenu>                                                    
+                                                        <div class="SeparatorFull"></div>
+
+                                                        <p:panelGrid id="pagente" styleClass="ui-noborder Container100" style="margin-bottom: 10px;" >
+                                                            <p:row styleClass="SoftBlueBack">
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Apellido"/>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Nombres"/>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Documento"/>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Profesion"/>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Especialidad"/>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Email"/>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold; color: white; " value="Dependencia"/>
+                                                                </p:column>
+                                                            </p:row>
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{agenteController.selected.apellido}" title="Apellido" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{agenteController.selected.nombres}" title="Nombres" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{agenteController.selected.tipodocumentoid.tipodocumento} - #{agenteController.selected.numerodocumento}" title="Tipo de Documento" rendered="#{not empty agenteController.selected.tipodocumentoid.tipodocumento}"/>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{agenteController.selected.profesion}" title="Profesion" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{agenteController.selected.especialidad}" title="Especialidad" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{agenteController.selected.email}" title="Email" />
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel value="#{agenteController.selected.dependenciaid.dependencia}" title="Dependencia" />
+                                                                </p:column>
+
+                                                            </p:row>
                                                         </p:panelGrid>
-
-                                                        <p:separator rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
-
-                                                        <p:panelGrid id="pgcomitente" style="width: 100%; margin-top: 10px;"  styleClass="ui-noborder" >
-                                                            <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}" styleClass="SoftBlueBack White">
-                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Tipo"/></p:column>
-                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Contacto"/></p:column>
-                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Cargo del Contacto"/></p:column>
-                                                                <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Sector" /></p:column>
-                                                                <p:column ></p:column>
-                                                            </p:row>
-                                                            <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}">
-                                                                <p:column>
-                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.tipocomitenteid.tipocomitente}" title="Tipo" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>                                                                                                                        
-                                                                </p:column> 
-                                                                <p:column>
-                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.contacto}" title="Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
-                                                                </p:column> 
-                                                                <p:column>
-                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.cargocontacto}" title="Cargo del Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
-                                                                </p:column> 
-                                                                <p:column>
-                                                                    <p:outputLabel value="#{proyectoController.selected.comitenteid.sectorid.sector}" title="Sector" rendered="#{not empty proyectoController.selected.comitenteid.sectorid.sector}"/>
-                                                                </p:column> 
-                                                                <p:column>
-                                                                    <p:commandButton rendered="#{proyectoController.selected.comitenteid ne null}" id="detalleComitenteBtn" value="Detalles" icon="fa fa-search" styleClass="GreenButton White" style="width: auto; "  
-                                                                                     onclick="PF('detallesComitente').show()" immediate="true" />  
-                                                                </p:column> 
-                                                            </p:row>
-                                                        </p:panelGrid>                                                    
-
 
                                                         <p:separator />
 
-                                                        <!--<p:commandButton value="Agregar Persona" onclick="PF('dregistrar').show();" ></p:commandButton>-->
-                                                        <!--<p:commandButton value="Crear Comitente" onclick="dcomitentecrear.show()" immediate="true"  />-->
-                                                        <p:commandButton value="Crear Comitente" onclick="PF('dcomitentecrear').show();" immediate="true" styleClass="GreenButton" style="width: auto; "  />
+                                                        <!--<p:commandButton onclick="dagenteeditar.show()" type="button" value="Editar Responsable Técnico" />-->
+                                                        <p:commandButton value="Editar Responsable Técnico" onclick="PF('dagenteeditar').show();" immediate="true"  styleClass="GreenButton" style="width: auto; "  />
 
-                                                    </p:panel>
-                                                </p:panelGrid>
-                                            </p:fieldset>
+                                                    </div>
 
-                                            <p:fieldset legend="Responsable Técnico" style="margin-bottom:5px">
-                                                <!-- RESPONSABLE TECNICO -->
+                                                    <!-- COMITENTE -->
+                                                    <div class="Card MarTop20">
+                                                        <div class="CardTopic">
+                                                            <i class="fa fa-suitcase Fs30 Fleft MarRight10"></i>
 
-                                                <p:panelGrid id="pagente" styleClass="ui-noborder Container100" style="margin-bottom: 10px;" >  
-                                                    <p:row styleClass="SoftBlueBack">
-                                                        <p:column>
-                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Apellido"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Nombres"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Documento"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Profesion"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Especialidad"/>                            
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Email"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel style="font-weight:bold; color: white; " value="Dependencia"/>
-                                                        </p:column>
-                                                    </p:row>
+                                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                                            Comitente
+                                                            <br/>
+                                                            <span class="CardSubTopic">Ingresar los datos del comitente.</span>
+                                                        </div>
 
-                                                    <p:row>
-                                                        <p:column>
-                                                            <p:outputLabel value="#{agenteController.selected.apellido}" title="Apellido" />
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel value="#{agenteController.selected.nombres}" title="Nombres" />
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel value="#{agenteController.selected.tipodocumentoid.tipodocumento} - #{agenteController.selected.numerodocumento}" title="Tipo de Documento" rendered="#{not empty agenteController.selected.tipodocumentoid.tipodocumento}"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel value="#{agenteController.selected.profesion}" title="Profesion" />
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel value="#{agenteController.selected.especialidad}" title="Especialidad" />                            
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel value="#{agenteController.selected.email}" title="Email" />
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:outputLabel value="#{agenteController.selected.dependenciaid.dependencia}" title="Dependencia" />
-                                                        </p:column>
+                                                        <div class="SeparatorFull"></div>
 
-                                                    </p:row>
-                                                </p:panelGrid>       
+                                                        <p:panelGrid id="pcomitente" columns="2" layout="grid"
+                                                                     styleClass="ui-noborder"
+                                                                     columnClasses="ui-grid-col-1,ui-grid-col-11" style="border: none; "  >
 
-                                                <p:separator />
+                                                            <p:selectOneRadio id="options" value="#{proyectoController.habilitarcomitente}"   >
+                                                                <f:selectItem itemLabel="No" itemValue="0"  />
+                                                                <f:selectItem itemLabel="Si" itemValue="1" />
+                                                                <p:ajax update="pcomitente" event="valueChange" />
+                                                            </p:selectOneRadio>
 
-                                                <!--<p:commandButton onclick="dagenteeditar.show()" type="button" value="Editar Responsable Técnico" />-->                                 
-                                                <p:commandButton value="Editar Responsable Técnico" onclick="PF('dagenteeditar').show();" immediate="true"  styleClass="GreenButton" style="width: auto; "  />
-                                            </p:fieldset>
+                                                            <p:panel id="phabilitarcomitente" rendered="#{proyectoController.habilitarcomitente eq 1}" styleClass="Container100" style="border: none; " >
+                                                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-3 #{(proyectoController.habilitarcomitente)?'BorderRight':'' }, ui-grid-col-9"  >
+                                                                    <p:outputLabel value="Ingrese el N° de CUIT/CUIL" styleClass="FontAdamantiumBold DispBlock MarTop10 Fright" />
+
+                                                                    <p:selectOneMenu widgetVar="comitentedid" id="comitenteid"  value="#{proyectoController.selected.comitenteid}" label="Comitente" filter="true" filterMatchMode="contains"  >
+                                                                        <f:selectItems  value="#{comitenteController.itemsAvailableSelectOne}"/>
+                                                                        <p:ajax update="pgcomitente, :formDetallesComitente:detallesComitente" event="change" />
+                                                                    </p:selectOneMenu>
+                                                                </p:panelGrid>
+
+                                                                <p:separator rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
+
+                                                                <p:panelGrid id="pgcomitente" style="width: 100%; margin-top: 10px;"  styleClass="ui-noborder" >
+                                                                    <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}" styleClass="SoftBlueBack White">
+                                                                        <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Tipo"/></p:column>
+                                                                        <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Contacto"/></p:column>
+                                                                        <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Cargo del Contacto"/></p:column>
+                                                                        <p:column ><p:outputLabel style="font-weight:bold; color: white; " value="Sector" /></p:column>
+                                                                        <p:column ></p:column>
+                                                                    </p:row>
+                                                                    <p:row rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}">
+                                                                        <p:column>
+                                                                            <p:outputLabel value="#{proyectoController.selected.comitenteid.tipocomitenteid.tipocomitente}" title="Tipo" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
+                                                                        </p:column>
+                                                                        <p:column>
+                                                                            <p:outputLabel value="#{proyectoController.selected.comitenteid.contacto}" title="Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
+                                                                        </p:column>
+                                                                        <p:column>
+                                                                            <p:outputLabel value="#{proyectoController.selected.comitenteid.cargocontacto}" title="Cargo del Contacto" rendered="#{not empty proyectoController.selected.comitenteid.razonsocial}"/>
+                                                                        </p:column>
+                                                                        <p:column>
+                                                                            <p:outputLabel value="#{proyectoController.selected.comitenteid.sectorid.sector}" title="Sector" rendered="#{not empty proyectoController.selected.comitenteid.sectorid.sector}"/>
+                                                                        </p:column>
+                                                                        <p:column>
+                                                                            <p:commandButton rendered="#{proyectoController.selected.comitenteid ne null}" id="detalleComitenteBtn" title="Detalles" icon="fa fa-search" styleClass="GreenButton White"
+                                                                                             onclick="PF('detallesComitente').show()" immediate="true" />
+                                                                        </p:column>
+                                                                    </p:row>
+                                                                </p:panelGrid>
+
+
+                                                                <p:separator />
+
+                                                                <!--<p:commandButton value="Agregar Persona" onclick="PF('dregistrar').show();" ></p:commandButton>-->
+                                                                <!--<p:commandButton value="Crear Comitente" onclick="dcomitentecrear.show()" immediate="true"  />-->
+                                                                <p:commandButton value="Crear Comitente" onclick="PF('dcomitentecrear').show();"
+                                                                                 immediate="true" styleClass="GreenButton White Fright" style="width: auto; "  />
+
+                                                            </p:panel>
+                                                        </p:panelGrid>
+                                                    </div>
+
+                                                </div>
+                                            </div>
 
                                         </h:form>
 
@@ -863,7 +894,9 @@
 
             <h:form> 
                 <p:growl globalOnly="true" for="growla" id="growla" showDetail="true" sticky="true" />
-                <p:dialog id="dagenteeditar" widgetVar="dagenteeditar" modal="true"  header="Editar Responsable Técnico" responsive="true" resizable="false" >
+                <p:dialog id="dagenteeditar" widgetVar="dagenteeditar" modal="true"
+                          header="Editar Responsable Técnico" responsive="true" resizable="false"
+                          closable="true" closeOnEscape="true"  >
 
                     <p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 

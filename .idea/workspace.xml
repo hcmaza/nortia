@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1aeabbf7-67e7-416c-982e-bfdfe91a8e51" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nortia.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,8 +47,8 @@
       <file leaf-file-name="Solicitud.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81450653">
-              <caret line="315" column="143" selection-start-line="315" selection-start-column="143" selection-end-line="315" selection-end-column="143" />
+            <state vertical-scroll-proportion="0.6575505">
+              <caret line="237" column="134" selection-start-line="237" selection-start-column="134" selection-end-line="237" selection-end-column="134" />
               <folding />
             </state>
           </provider>
@@ -1114,12 +1114,12 @@
       <workItem from="1466063717233" duration="1090000" />
       <workItem from="1466584458808" duration="1712000" />
       <workItem from="1466925592441" duration="38000" />
-      <workItem from="1466928449091" duration="10365000" />
+      <workItem from="1466928449091" duration="11853000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="534033000" />
+    <option name="totallyTimeSpent" value="535521000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1323,13 +1323,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="87" column="44" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/less/layout/adamantium-layout.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34958383">
-          <caret line="217" column="1" selection-start-line="217" selection-start-column="1" selection-end-line="217" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1608,10 +1601,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/less/layout/adamantium-layout.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34958383">
+          <caret line="238" column="1" selection-start-line="238" selection-start-column="1" selection-end-line="238" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81450653">
-          <caret line="315" column="143" selection-start-line="315" selection-start-column="143" selection-end-line="315" selection-end-column="143" />
+        <state vertical-scroll-proportion="0.6575505">
+          <caret line="237" column="134" selection-start-line="237" selection-start-column="134" selection-end-line="237" selection-end-column="134" />
           <folding />
         </state>
       </provider>
