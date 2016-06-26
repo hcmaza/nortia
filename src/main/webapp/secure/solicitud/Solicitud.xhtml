@@ -184,7 +184,7 @@
                                                             <f:selectItem itemLabel="No" itemValue="0"  />
                                                             <f:selectItem itemLabel="Si" itemValue="1" />
                                                             <!--<p:ajax update="phabilitarcomitente" event="valueChange" />-->
-                                                            <p:ajax update=":tabviewTodo:formTabComitente" />
+                                                            <p:ajax update=":tabviewTodo:formTabComitente :tabviewTodo:formTabPresupuesto" />
                                                         </p:selectOneRadio>
 
                                                         <p:separator rendered="#{proyectoController.habilitarcomitente eq '1'}" />
@@ -577,16 +577,23 @@
                                                             </p:cellEditor>
                                                         </p:column>
 
-                                                        <p:column style="width:20%;"  >
+                                                        <p:column style="width:20%;" styleClass="#{(proyectoController.habilitarcomitente eq '0')?'GrayBack Gray':''} "  >
                                                             <f:facet name="header">
                                                                 <h:outputText value="Aporte Comitente" style="font-weight: bold;" title="Click en la celda e ingrese el importe."/>
                                                                 <br />
-                                                                <p:commandButton id="ayudaPresupuestoAporteComitente" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteComitente')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
-                                                                <p:overlayPanel for="ayudaPresupuestoAporteComitente" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
+                                                                <h:outputText rendered="#{proyectoController.habilitarcomitente eq '0'}" value="Deshabilitado" title="Deshabilitado debido a que se seleccionó que no hay comitente." style="color: #000 !important;"/>
+                                                                <br />
+                                                                <p:commandButton id="ayudaPresupuestoAporteComitente" icon="fa fa-question"
+                                                                                 styleClass="CyanButton White"
+                                                                                 actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPpresupuestoAporteComitente')}"
+                                                                                 oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; "
+                                                                                 rendered="#{proyectoController.habilitarcomitente eq '1'}" />
+                                                                <p:overlayPanel for="ayudaPresupuestoAporteComitente" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade"
+                                                                                rendered="#{proyectoController.habilitarcomitente eq '1'}" >
                                                                     <h:outputText value="Click en la celda para ingresar el importe del rubro y tipo de aporte." />
                                                                 </p:overlayPanel>
                                                             </f:facet>
-                                                            <p:cellEditor >
+                                                            <p:cellEditor rendered="#{proyectoController.habilitarcomitente eq '1'}" >
                                                                 <f:facet name="output">
                                                                     <h:outputText value="$ #{item.gastocomitente}" styleClass="TexAlRight Fright">
                                                                         <f:convertNumber pattern="#0.00" />
@@ -623,8 +630,10 @@
                                                             </h:outputText>
                                                         </p:column>
 
-                                                        <p:column style="width:20%;" styleClass="TexAlRight">
-                                                            <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosComitente()}" styleClass="FontAdamantiumBold Fright Fs18" style="color: #439fe0; ">
+                                                        <p:column style="width:20%;" styleClass="#{(proyectoController.habilitarcomitente eq '0')?'GrayBack Gray TexAlRight':'TexAlRight'} ">
+                                                            <h:outputText value="$ #{presupuestoRubroController.obtenerTotalGastosComitente()}"
+                                                                          styleClass="FontAdamantiumBold Fright Fs18" style="color: #439fe0; "
+                                                                          rendered="#{proyectoController.habilitarcomitente eq '1'}">
                                                                 <f:convertNumber pattern="#0.00" />
                                                             </h:outputText>
                                                         </p:column>
