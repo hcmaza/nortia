@@ -34,7 +34,7 @@
                                 <p:tabView id="tabviewTodo" styleClass="Container100 Responsive100 Fs12" > 
                                     <!--<p:tabView id="tabviewTodo" flowListener="# {proyectoController.onFlowProcess}">-->
 
-                                    <p:tab id="tabideaproyecto" title="Idea-Proyecto">z
+                                    <p:tab id="tabideaproyecto" title="Idea-Proyecto">
 
                                         <h:form id="formTabIdeaProyecto">
 
@@ -293,117 +293,120 @@
 
                                         <h:form id="formTabConvocatoria">
 
-                                            <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank" >
-                                                <p:row>
-                                                    <p:column>
-                                                        <p:outputLabel style="font-weight:bold;font-size:larger"  value="Beneficiario" for="beneficiarioid" />
-                                                    </p:column>
-                                                    <p:column style="width: 50%;" >
-                                                        <p:selectOneMenu widgetVar="beneficiarioid" id="beneficiarioid" value="#{proyectoController.selected.beneficiarioid}" label="Beneficiario" required="true" requiredMessage="Seleccione Beneficiario" style="width:100%;">
-                                                            <f:selectItems value="#{beneficiarioController.itemsAvailableSelectOne}"/>
-                                                        </p:selectOneMenu>
-                                                    </p:column>
-                                                    <p:column>
-                                                        <p:outputLabel style="font-weight:bold;font-size:larger"  value="Modalidad de Presentación" for="fuentefinanciamientoid" />
-                                                    </p:column>
-                                                    <p:column style="width: 50%;">
-                                                        <p:selectOneMenu widgetVar="fuentefinanciamientoid" id="fuentefinanciamientoid" value="#{proyectoController.selected.fuentefinanciamientoid}" label="Fuente de Financiamiento" required="true" requiredMessage="Seleccione Fuente de Financiamiento" style="width:100%;" >
-                                                            <f:selectItems value="#{fuentefinanciamientoController.itemsAvailableSelectOne}"/>
-                                                        </p:selectOneMenu>
-                                                    </p:column>                                
-                                                </p:row>
-
-                                                <p:row>
-                                                    <p:column>
-                                                        <p:outputLabel style="font-weight:bold;font-size:larger"  value="Tipo de Financiamiento" for="tipofinanciamientoid" />
-                                                    </p:column>
-                                                    <p:column colspan="3">
-                                                        <p:selectOneMenu widgetVar="tipofinanciamientoid" id="tipofinanciamientoid" value="#{proyectoController.selected.tipofinanciamientoid}" label="Tipo de Financiamiento" required="true" requiredMessage="Seleccione el Tipo de Financiamiento" style="width: 100%;" >
-                                                            <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}"/>
-                                                            <p:ajax update=":tabviewTodo:formTabConvocatoria:tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />  
-                                                        </p:selectOneMenu>
-                                                    </p:column>                                
-                                                </p:row>
-                                            </p:panelGrid>
-
-                                            <p:separator />
-
-
                                             <div class="Container100">
                                                 <div class="ContainerIndent">
+
                                                     <div class="Card">
+                                                        <div class="CardTopic">
+                                                            <i class="icon-wallet Fs30 Fleft MarRight10"></i>
+                                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                                            Opciones de financiamiento
+                                                            <br />
+                                                            <span class="CardSubTopic">Ingresar las opciones de financiamiento.</span>
+                                                        </div>
+
+                                                        <div class="Separator"></div>
+
+                                                        <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank" >
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold;font-size:larger"  value="Beneficiario" for="beneficiarioid" />
+                                                                </p:column>
+                                                                <p:column style="width: 50%;" >
+                                                                    <p:selectOneMenu widgetVar="beneficiarioid" id="beneficiarioid" value="#{proyectoController.selected.beneficiarioid}" label="Beneficiario" required="true" requiredMessage="Seleccione Beneficiario" style="width:100%;">
+                                                                        <f:selectItems value="#{beneficiarioController.itemsAvailableSelectOne}"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold;font-size:larger"  value="Modalidad de Presentación" for="fuentefinanciamientoid" />
+                                                                </p:column>
+                                                                <p:column style="width: 50%;">
+                                                                    <p:selectOneMenu widgetVar="fuentefinanciamientoid" id="fuentefinanciamientoid" value="#{proyectoController.selected.fuentefinanciamientoid}" label="Fuente de Financiamiento" required="true" requiredMessage="Seleccione Fuente de Financiamiento" style="width:100%;" >
+                                                                        <f:selectItems value="#{fuentefinanciamientoController.itemsAvailableSelectOne}"/>
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+
+                                                            <p:row>
+                                                                <p:column>
+                                                                    <p:outputLabel style="font-weight:bold;font-size:larger"  value="Tipo de Financiamiento" for="tipofinanciamientoid" />
+                                                                </p:column>
+                                                                <p:column colspan="3">
+                                                                    <p:selectOneMenu widgetVar="tipofinanciamientoid" id="tipofinanciamientoid" value="#{proyectoController.selected.tipofinanciamientoid}" label="Tipo de Financiamiento" required="true" requiredMessage="Seleccione el Tipo de Financiamiento" style="width: 100%;" >
+                                                                        <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}"/>
+                                                                        <p:ajax update=":tabviewTodo:formTabConvocatoria:tconvocatoria" listener="#{convocatoriaController.findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(proyectoController.selected.tipoproyectoid.id, proyectoController.selected.tipofinanciamientoid.id)}" />
+                                                                    </p:selectOneMenu>
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                    </div>
+
+                                                    <div class="Card MarTop20">
                                                         <div class="CardTopic">
                                                             <i class="fa fa-volume-up Fs30 Fleft MarRight10"></i>
                                                             <div class="EmptyBox10 ShowOnMobile"></div>
-                                                            Convocatoria <br />
-                                                            <span class="CardSubTopic">Las convocatorias se filtran de acuerdo al tipo de proyecto y al tipo de financiamiento.</span> </div>
-
-                                                        <div class="SeparatorFull"></div>
-
-                                                        <p:dataTable id="tconvocatoria" widgetVar="wconvocatoria" paginator="true"
-                                                                     var="conv"
-                                                                     value="#{convocatoriaController.listaConvocatorias}"
-                                                                     filteredValue="#{convocatoriaController.tablafiltrada}"
-                                                                     selection="#{convocatoriaController.selected}"
-                                                                     rowKey="#{conv.id}" selectionMode="single"
-                                                                     paginatorPosition="bottom"
-                                                                     styleClass="tabla tablaAjustada" emptyMessage="No hay convocatorias abiertas, con los valores de filtro.">
-
-                                                            <p:ajax event="rowSelect" listener="#{convocatoriaController.solicitudSeleccionConvocatoria()}" />
-
-                                                            <f:facet name="header">
-                                                                Seleccionar la Convocatoria
-                                                                <br />
-                                                                <p:commandButton id="ayudaSeleccionConvocatoria" icon="fa fa-question" styleClass="CyanButton White"  actionListener="#{ayudaController.setearTextoAyudaPorClave('AyudaIPConvocatoriaTabla')}" oncomplete="PF('wdialogoAyuda').show();" update="dialogoAyuda" style="height: 15px; " />
-                                                                <p:overlayPanel for="ayudaSeleccionConvocatoria" showEvent="mouseover" hideEvent="mouseout" hideEffect="fade" >
-                                                                    <h:outputText value="Seleccione la convocatoria, haciendo click sobre ella." />
-                                                                </p:overlayPanel>
-                                                            </f:facet>
-                                                            <!--<p:column selectionMode="single"/>-->
-                                                            <p:column headerText="Convocatoria" sortBy="#{conv.convocatoria}">
-                                                                <h:outputText value="#{conv.convocatoria}" />
-                                                            </p:column>
-
-                                                            <p:column headerText="Organismo" sortBy="#{conv.organismo}">
-                                                                <h:outputText value="#{conv.organismo}" />
-                                                            </p:column>
-                                                            <p:column headerText="Tipo de Proyecto" sortBy="#{conv.tipoproyectoid.tipo}" filterBy="#{conv.tipoproyectoid.tipo}" filterMatchMode="exact" >
-                                                                <f:facet name="filter">
-                                                                    <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
-                                                                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
-                                                                        <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}" />
-                                                                    </p:selectOneMenu>
-                                                                </f:facet>
-                                                                <h:outputText value="#{conv.tipoproyectoid.tipo}" />
-                                                            </p:column>
-                                                            <p:column headerText="Tipo de Financiamiento" sortBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterMatchMode="exact" >
-                                                                <f:facet name="filter">
-                                                                    <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
-                                                                        <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
-                                                                        <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}" />
-                                                                    </p:selectOneMenu>
-                                                                </f:facet>
-                                                                <p:outputLabel value="#{conv.tipofinanciamientoid.tipofinanciamiento}"  />
-                                                            </p:column>
-                                                            <p:column headerText="Fecha de Cierre" sortBy="#{conv.fechacierre}">
-                                                                <h:outputText value="#{conv.fechacierre}">
-                                                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
-                                                                </h:outputText>
-                                                            </p:column>
-                                                            <p:column headerText="Monto Financiamiento" sortBy="#{conv.montofinanciamiento}">
-                                                                <h:outputText value="#{conv.montofinanciamiento}" />
-                                                            </p:column>
-                                                            <p:column headerText="Link">
-                                                                <a target="_blank" href="#{conv.link}" >Link</a>
-                                                            </p:column>
-                                                            <p:column headerText=" " style="width: auto;">
-                                                                <p:commandButton id="viewButton"  rendered="#{convocatoriaController.selected ne null}" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
-                                                                                 update=":formDialogoConvocatoria:dconvocatoria" oncomplete="PF('dconvocatoria').show()" >
-                                                                    <f:setPropertyActionListener value="#{conv}" target="#{convocatoriaController.selected}" />
-                                                                </p:commandButton>
-                                                            </p:column>
-                                                        </p:dataTable>
+                                                            Convocatoria
+                                                            <br />
+                                                            <span class="CardSubTopic">Las convocatorias se filtran de acuerdo al tipo de proyecto y al tipo de financiamiento.</span>
+                                                        </div>
                                                     </div>
+
+                                                    <p:dataTable id="tconvocatoria" widgetVar="wconvocatoria" paginator="true"
+                                                                 var="conv"
+                                                                 value="#{convocatoriaController.listaConvocatorias}"
+                                                                 filteredValue="#{convocatoriaController.tablafiltrada}"
+                                                                 selection="#{convocatoriaController.selected}"
+                                                                 rowKey="#{conv.id}" selectionMode="single"
+                                                                 paginatorPosition="bottom"
+                                                                 styleClass="tabla tablaAjustada TablaColorEncabezado" emptyMessage="No hay convocatorias abiertas, con los valores de filtro.">
+
+                                                        <p:ajax event="rowSelect" listener="#{convocatoriaController.solicitudSeleccionConvocatoria()}" />
+
+                                                        <!--<p:column selectionMode="single"/>-->
+                                                        <p:column headerText="Convocatoria" sortBy="#{conv.convocatoria}">
+                                                            <h:outputText value="#{conv.convocatoria}" />
+                                                        </p:column>
+
+                                                        <p:column headerText="Organismo" sortBy="#{conv.organismo}">
+                                                            <h:outputText value="#{conv.organismo}" />
+                                                        </p:column>
+                                                        <p:column headerText="Tipo de Proyecto" sortBy="#{conv.tipoproyectoid.tipo}" filterBy="#{conv.tipoproyectoid.tipo}" filterMatchMode="exact" >
+                                                            <f:facet name="filter">
+                                                                <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
+                                                                    <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
+                                                                    <f:selectItems value="#{tipoproyectoController.itemsAvailableSelectOne}" />
+                                                                </p:selectOneMenu>
+                                                            </f:facet>
+                                                            <h:outputText value="#{conv.tipoproyectoid.tipo}" />
+                                                        </p:column>
+                                                        <p:column headerText="Tipo de Financiamiento" sortBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterBy="#{conv.tipofinanciamientoid.tipofinanciamiento}" filterMatchMode="exact" >
+                                                            <f:facet name="filter">
+                                                                <p:selectOneMenu onchange="PF('wconvocatoria').filter()" >
+                                                                    <f:selectItem itemLabel="Seleccionar" itemValue="#{null}" noSelectionOption="true" />
+                                                                    <f:selectItems value="#{tipofinanciamientoController.itemsAvailableSelectOne}" />
+                                                                </p:selectOneMenu>
+                                                            </f:facet>
+                                                            <p:outputLabel value="#{conv.tipofinanciamientoid.tipofinanciamiento}"  />
+                                                        </p:column>
+                                                        <p:column headerText="Fecha de Cierre" sortBy="#{conv.fechacierre}">
+                                                            <h:outputText value="#{conv.fechacierre}">
+                                                                <f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+                                                            </h:outputText>
+                                                        </p:column>
+                                                        <p:column headerText="Monto Financiamiento" sortBy="#{conv.montofinanciamiento}">
+                                                            <h:outputText value="#{conv.montofinanciamiento}" />
+                                                        </p:column>
+                                                        <p:column headerText="Link">
+                                                            <a target="_blank" href="#{conv.link}" >Link</a>
+                                                        </p:column>
+                                                        <p:column headerText=" " style="width: auto;">
+                                                            <p:commandButton id="viewButton"  rendered="#{convocatoriaController.selected ne null}" icon="fa fa-search"  title="Ver Detalle de Convocatoria" styleClass="GreenButton White" style="width: auto; "
+                                                                             update=":formDialogoConvocatoria:dconvocatoria" oncomplete="PF('dconvocatoria').show()" >
+                                                                <f:setPropertyActionListener value="#{conv}" target="#{convocatoriaController.selected}" />
+                                                            </p:commandButton>
+                                                        </p:column>
+                                                    </p:dataTable>
+
                                                 </div>
                                             </div>
 
@@ -423,12 +426,20 @@
                                                              crubros,
                                                              growlprincipal "/>-->
 
-
+                                            <div class="Card">
+                                                <div class="CardTopic">
+                                                    <i class="fa fa-usd Fs30 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Armar Presupuesto
+                                                    <br />
+                                                    <span class="CardSubTopic">Ingresar los importes para cada rubro y tipo de aporte.</span>
+                                                </div>
+                                            </div>
 
                                             <p:dataTable id="tpresupuesto" value="#{presupuestoRubroController.presupuestosrubros}"
                                                          var="item" editable="true" editMode="cell" style="width:100%;"
                                                          rowIndexVar="indice"
-                                                         styleClass="tabla "
+                                                         styleClass="tabla TablaColorEncabezado"
                                                          >
 
                                                 <p:ajax event="cellEdit" listener="#{presupuestoRubroController.sumarGastos}"
@@ -438,10 +449,6 @@
                                                         :tabviewTodo:formTabPresupuesto:caportes,
                                                         :tabviewTodo:formTabPresupuesto:crubros
                                                         "  />
-
-                                                <f:facet name="header">
-                                                    Armar el Presupuesto de la Idea-Proyecto
-                                                </f:facet>
 
                                                 <p:column style="width:20%" >
                                                     <f:facet name="header">
@@ -622,30 +629,38 @@
 
                                         <h:form id="formTabEquipoTrabajo">
 
-                                            <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank" style="margin-bottom: 10px;">
-                                                <p:outputLabel style="font-weight: bold" value="Ingrese N° de Documento / Cuil " ></p:outputLabel>
-                                                <p:selectOneMenu  id="advancedfiltroa" value="#{agenteViewController.selected}" filter="true" filterMatchMode="contains"    >
-                                                    <!--<p:ajax update="@this, agregaraequipo" />-->
-                                                    <p:ajax update="agregaraequipo" />
-                                                    <f:selectItems value="#{agenteViewController.itemsAvailableSelectOne}"  />
+                                            <div class="Card">
+                                                <div class="CardTopic">
+                                                    <i class="fa fa-group Fs30 Fleft MarRight10"></i>
+                                                    <div class="EmptyBox10 ShowOnMobile"></div>
+                                                    Miembros del Equipo de Trabajo
+                                                    <br />
+                                                    <span class="CardSubTopic">Agregar las personas que trabajarán en el proyecto.</span>
+                                                </div>
 
-                                                </p:selectOneMenu> 
+                                                <div class="SeparatorFull"></div>
 
-                                                <h:panelGrid columns="6" id="agenteselecciona" >
-                                                    <p:commandButton title="Agregar al Equipo de Trabajo de la Idea-Proyecto" icon="fa fa-plus" id="agregaraequipo" immediate="true" update="agentesa" action="#{proyectoAgenteController.agregarEquipo}" disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}" styleClass="GreenButton White" style="width: auto; " />
-                                                    <p:commandButton title="Nueva Persona" icon="fa fa-user-plus" onclick="PF('dregistrar').show();" styleClass="CyanButton White" style="width: auto; " />
-                                                </h:panelGrid>
-                                            </p:panelGrid>
+                                                <p:panelGrid columns="3" layout="grid" styleClass="ui-panelgrid-blank MarBot20 Wid100">
+                                                    <p:outputLabel for="advancedfiltroa" value="Ingrese N° de Documento / Cuil " styleClass="DispBlock MarTop10 FontAdamantiumBold" />
+                                                    <p:selectOneMenu  id="advancedfiltroa" value="#{agenteViewController.selected}" filter="true" filterMatchMode="contains"    >
+                                                        <!--<p:ajax update="@this, agregaraequipo" />-->
+                                                        <p:ajax update="agregaraequipo" />
+                                                        <f:selectItems value="#{agenteViewController.itemsAvailableSelectOne}"  />
 
-                                            <div align="center">
-                                                <p:dataTable id="agentesa" value="#{proyectoAgenteController.equipotrabajo}" 
-                                                             var="agentea" editable="true" editMode="cell" 
-                                                             rowIndexVar="indice" 
+                                                    </p:selectOneMenu>
+
+                                                    <h:panelGrid columns="2" id="agenteselecciona" >
+                                                        <p:commandButton title="Agregar al Equipo de Trabajo de la Idea-Proyecto" icon="fa fa-plus" id="agregaraequipo" immediate="true" update="agentesa" action="#{proyectoAgenteController.agregarEquipo}" disabled="${empty agenteViewController.selected.apellido ? 'true' : 'false'}" styleClass="GreenButton White" style="width: auto; " />
+                                                        <p:commandButton title="Nueva Persona" icon="fa fa-user-plus" onclick="PF('dregistrar').show();" styleClass="CyanButton White" style="width: auto; " />
+                                                    </h:panelGrid>
+                                                </p:panelGrid>
+
+
+                                                <p:dataTable id="agentesa" value="#{proyectoAgenteController.equipotrabajo}"
+                                                             var="agentea" editable="true" editMode="cell"
+                                                             rowIndexVar="indice"
                                                              rowStyleClass="#{(indice mod 2) eq 0 ? 'filaResaltada1' : 'filaResaltada2'}"
-                                                             styleClass="tabla tablaAjustada">
-                                                    <f:facet name="header">
-                                                        Equipo de Trabajo de la Idea-Proyecto
-                                                    </f:facet>
+                                                             styleClass="tabla tablaAjustada TablaColorEncabezado">
                                                     <p:column styleClass="TexAlCenter">
                                                         <f:facet name="header">
                                                             <h:outputText value="Cuil"/>
@@ -679,7 +694,7 @@
                                                                 <p:tooltip id="toolTipInputFuncion" for="ifuncion" showEvent="focus" hideEvent="blur" />
                                                             </f:facet>
                                                         </p:cellEditor>
-                                                    </p:column>   
+                                                    </p:column>
 
                                                     <p:column styleClass="TexAlCenter" style="vertical-align: middle;" >
                                                         <f:facet name="header">
@@ -693,23 +708,23 @@
                                                         <p:cellEditor>
                                                             <f:facet name="output">
                                                                 <!--<p:selectBooleanCheckbox  id="ssconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " />-->
-                                                                <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="oconsultorexterno" value="#{agentea.consultorexterno}" styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"   >
-                                                                        <!--<p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />-->
+                                                                <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="oconsultorexterno" value="#{agentea.consultorexterno}" styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'PurpleButton'}"   >
+                                                                    <!--<p:ajax update="@this :formprincipal:tabviewTodo:agentesa"  />-->
                                                                 </p:selectBooleanButton>
-                                                                <!--<h:outputLabel  id="labelConsultorexterno" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  />--> 
+                                                                <!--<h:outputLabel  id="labelConsultorexterno" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}" style="font-size: 18px; "  />-->
                                                             </f:facet>
                                                             <f:facet name="input">
-                                                                <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="#{agentea.consultorexterno}" 
-                                                                                       styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'CyanButton'}"  >
+                                                                <p:selectBooleanButton onLabel="Consultor" offLabel="Docente" id="sconsultorexterno" value="#{agentea.consultorexterno}"
+                                                                                       styleClass="#{agentea.consultorexterno eq 'TRUE' ? 'OrangeButton':'PurpleButton'}"  >
                                                                     <p:ajax update="@this oconsultorexterno ihorasdisponibles horasdedicacion" listener="#{proyectoController.resetearIPValorHorasDedicadas(agentea)}"  />
                                                                 </p:selectBooleanButton>
-<!--                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " >
-                                                                    <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion" oncomplete="$(function(){PrimeFaces.focus(':tabviewTodo:formTabEquipoTrabajo:horasdedicacion');});"  />
-                                                                </p:selectBooleanCheckbox>-->
-                                                                <!--<h:outputLabel  id="labelConsultorexterno2" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"  style="font-size: 18px; " />--> 
-                                                            </f:facet>    
+                                                                <!--                                                                <p:selectBooleanCheckbox  id="sconsultorexterno" value="# {agentea.consultorexterno}" style="width:20px; " >
+                                                                                                                                <p:ajax update="ssconsultorexterno labelConsultorexterno labelConsultorexterno2 ihorasdisponibles horasdedicacion" oncomplete="$(function(){PrimeFaces.focus(':tabviewTodo:formTabEquipoTrabajo:horasdedicacion');});"  />
+                                                                                                                            </p:selectBooleanCheckbox>-->
+                                                                <!--<h:outputLabel  id="labelConsultorexterno2" value="# {agentea.consultorexterno eq 'TRUE' ? ' Consultor ':' Docente '}"  style="font-size: 18px; " />-->
+                                                            </f:facet>
                                                         </p:cellEditor>
-                                                    </p:column>   
+                                                    </p:column>
                                                     <p:column styleClass="TexAlCenter">
                                                         <f:facet name="header">
                                                             <h:outputText value="Dedicación [hs/semana]" style="font-weight: bold;" title="Ingrese las horas dedicadas al proyecto por semana." />
@@ -741,9 +756,8 @@
                                                         </p:commandButton>
                                                     </p:column>
                                                 </p:dataTable>
-
                                             </div>
-                                            
+
                                             <p:separator />
                                             <br />
                                             <div align="center">
