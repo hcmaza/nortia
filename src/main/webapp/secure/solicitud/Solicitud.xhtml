@@ -217,73 +217,124 @@
 
                                     </p:tab>
 
-                                    <p:tab id="tabdocumentacion" title="Documentación">
+                                    <p:tab id="tabdocumentacion" title="Descripción">
 
                                         <h:form id="formTabDocumentacion" enctype="multipart/form-data" >
 
-                                            <p:fieldset legend="Descripción de la Idea-Proyecto" style="margin-bottom:5px">
-                                                <!-- DESCRIPCIÓN -->
-                                                <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank" style="width: 100%;">
-                                                    <p:row>
-                                                        <p:column style="width: 100%;" colspan="2">
-                                                            <p:outputLabel style="font-weight:bold;font-size:larger"  value="Resumen" for="resumen" />                                            
-                                                            <p:inputTextarea rows="5" id="resumen" value="#{proyectoController.selected.resumen}" title="Resumen" maxlength="2500" autoResize="true" required="true" requiredMessage="Ingrese Diagnostico y resumen descriptivo " counter="contadorResumen"  counterTemplate="{0} caracteres restantes." style="width: 100%;" placeholder="Diagnóstico y Descripción del Proyecto" />
-                                                            <h:outputText id="contadorResumen" />
-                                                        </p:column>
-                                                    </p:row>
-                                                    <p:row>
-                                                        <p:column style="width: 100%;" colspan="2" >
-                                                            <p:outputLabel style="font-weight:bold;font-size:larger" value="Objetivos" for="observaciones" />                                                                                
-                                                            <p:inputTextarea rows="5" id="observaciones" value="#{proyectoController.selected.observaciones}" title="Observaciones" maxlength="2500" autoResize="true" required="true" requiredMessage="Objetivos y Resultados Esperados" style="width: 100%;" counter="contadorObservaciones"  counterTemplate="{0} caracteres restantes." placeholder="Objetivos generales, particulares y resultados esperados"/>
-                                                            <h:outputText id="contadorObservaciones" />
-                                                        </p:column>                                
-                                                    </p:row>
+                                            <div class="Container100">
 
-                                                    <p:row>
-                                                        <p:column style="width: 25%;">
-                                                            <p:outputLabel style="font-weight:bold;font-size:larger" value="Lugar (Domicilio)" for="localizacion" />
-                                                        </p:column>
-                                                        <p:column style="width: 75%;">
-                                                            <p:inputTextarea rows="1" id="localizacion" value="#{proyectoController.selected.localizacion}" title="localizacion" placeholder="Por ejemplo = Martin Fierro 1054 - Chilecito, La Rioja" required="true" requiredMessage="Ingrese la localización" style="width: 100%;" />
-                                                        </p:column>                                
-                                                    </p:row>
-                                                    <p:row>
-                                                        <p:column style="width: 25%;">
-                                                            <p:outputLabel style="font-weight:bold;font-size:larger" value="Duración (Meses)" for="duracion" />
-                                                        </p:column>
-                                                        <p:column style="width: 75%;">
-                                                            <p:spinner id="duracion" value="#{proyectoController.selected.duracion}" 
-                                                                       title="duracion" min="1" maxlength="3" 
-                                                                       required="true" requiredMessage="Por favor, ingrese la duración (meses) del proyecto." style="width: 100px;"  />
-                                                        </p:column>                                
-                                                    </p:row>
-                                                </p:panelGrid>                                
-                                            </p:fieldset>
+                                                <div class="ContainerIndent">
 
-                                            <p:fieldset legend="Documentación" style="margin-bottom:5px">
-                                                <!-- DOCUMENTACION -->
-                                                <p:panelGrid columnClasses="right,left" columns="3" layout="grid" styleClass="ui-panelgrid-blank">    
+                                                    <!-- DESCRIPCIÓN -->
+                                                    <div class="Card">
+                                                        <div class="CardTopic">
+                                                            <i class="icon-quote Fs30 Fleft MarRight10"></i>
 
-                                                    <h:form id="fupload" enctype="multipart/form-data">
-                                                        <p:fileUpload label="Documentación para subir" id="documentacion" fileUploadListener="#{archivoproyectoController.handleFileUpload}" mode="advanced"  
-                                                                      sizeLimit="10000000" multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"   >
+                                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                                            Descripción
+                                                            <br/>
+                                                            <span class="CardSubTopic">Ingresar el resumen y observaciones de la Idea-Proyecto. </span>
+                                                        </div>
 
-                                                        </p:fileUpload>    
-                                                    </h:form>
-                                                    <p:dataTable id="tdocumentacionnombre1" var="arc" value="#{archivoproyectoController.collectorArchivoProyecto}" >  
+                                                        <div class="SeparatorFull"></div>
 
-                                                        <p:column headerText="Archivos">  
-                                                            <h:outputText value="#{arc.nombre}" />  
-                                                        </p:column> 
-                                                        <p:column headerText="">  
-                                                            <p:commandLink immediate="true" value="Eliminar" action="#{archivoproyectoController.removerArchivoCollection}" update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"  >
-                                                                <f:setPropertyActionListener value="#{arc}" target="#{archivoproyectoController.selected}" />  
-                                                            </p:commandLink>
-                                                        </p:column> 
-                                                    </p:dataTable>
+                                                        <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank Wid100">
+                                                            <p:row>
+                                                                <p:column style="width: 100%;" colspan="2">
+                                                                    <p:outputLabel value="Resumen" for="resumen" styleClass="FontAdamantiumBold Fs14 " style="color: #439fe0;" />
+                                                                    <p:inputTextarea rows="5" id="resumen" value="#{proyectoController.selected.resumen}" title="Resumen" maxlength="2500" autoResize="true" required="true" requiredMessage="Ingrese Diagnostico y resumen descriptivo " counter="contadorResumen"  counterTemplate="{0} caracteres restantes." style="width: 100%;" />
+                                                                    <h:outputText id="contadorResumen" />
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
 
-                                                </p:panelGrid>         
-                                            </p:fieldset>
+                                                        <div class="Separator"></div>
+
+                                                        <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank Wid100">
+                                                            <p:row>
+                                                                <p:column style="width: 100%;" colspan="2" >
+                                                                    <p:outputLabel value="Objetivos" for="observaciones" styleClass="FontAdamantiumBold Fs14 " style="color: #439fe0;" />
+                                                                    <p:inputTextarea rows="5" id="observaciones" value="#{proyectoController.selected.observaciones}" title="Observaciones" maxlength="2500" autoResize="true" required="true" requiredMessage="Objetivos y Resultados Esperados" style="width: 100%;" counter="contadorObservaciones"  counterTemplate="{0} caracteres restantes." />
+                                                                    <h:outputText id="contadorObservaciones" />
+                                                                </p:column>
+                                                            </p:row>
+
+                                                        </p:panelGrid>
+
+                                                        <div class="Separator"></div>
+
+                                                        <p:panelGrid columnClasses="right,left" styleClass="ui-panelgrid-blank Wid100">
+
+                                                            <p:row>
+                                                                <p:column style="width: 25%;">
+                                                                    <p:outputLabel value="Lugar (Domicilio)" for="localizacion" styleClass="FontAdamantiumBold Fs14 " style="color: #439fe0;" />
+                                                                </p:column>
+                                                                <p:column style="width: 75%;">
+                                                                    <p:inputTextarea rows="1" id="localizacion" value="#{proyectoController.selected.localizacion}" title="localizacion" placeholder="Por ejemplo = Martin Fierro 1054 - Chilecito, La Rioja" required="true" requiredMessage="Ingrese la localización" style="width: 100%;" />
+                                                                </p:column>
+                                                            </p:row>
+                                                            <p:row>
+                                                                <p:column style="width: 25%;">
+                                                                    <p:outputLabel value="Duración (Meses)" for="duracion" styleClass="FontAdamantiumBold Fs14 " style="color: #439fe0;" />
+                                                                </p:column>
+                                                                <p:column style="width: 75%;">
+                                                                    <p:spinner id="duracion" value="#{proyectoController.selected.duracion}"
+                                                                               title="duracion" min="1" maxlength="3"
+                                                                               required="true" requiredMessage="Por favor, ingrese la duración (meses) del proyecto." style="width: 100px;"  />
+                                                                </p:column>
+                                                            </p:row>
+                                                        </p:panelGrid>
+                                                    </div>
+
+                                                    <!-- DOCUMENTACION -->
+                                                    <div class="Card MarTop20">
+                                                        <div class="CardTopic">
+                                                            <i class="fa fa-file-text Fs30 Fleft MarRight10"></i>
+
+                                                            <div class="EmptyBox10 ShowOnMobile"></div>
+                                                            Documentación
+                                                            <br/>
+                                                            <span class="CardSubTopic">Subir archivos de documentación extra de la Idea-Proyecto. Se permite gif, jpg, png, doc, docx y pdf.</span>
+                                                        </div>
+
+                                                        <div class="SeparatorFull"></div>
+
+                                                        <p:panelGrid columnClasses="ui-grid-col-4,ui-grid-col-8" columns="2" layout="grid" styleClass="ui-panelgrid-blank">
+
+                                                            <p:fileUpload label="Subir Archivos" id="documentacion"
+                                                                          fileUploadListener="#{archivoproyectoController.handleFileUpload}" mode="advanced"
+                                                                          sizeLimit="10000000" multiple="true" auto="true" styleClass="SubirArchivo"
+                                                                          allowTypes="/(\.|\/)(gif|jpe?g|png|doc|docx|pdf)$/"
+                                                                          update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"
+                                                                          invalidFileMessage="El archivo no es del tipo permitido. Los tipos permitidos son: gif, jpg, png, doc, docx, pdf."
+                                                                          invalidSizeMessage="El archivo no tiene el tamaño permitido. El tamaño máximo es de 10 MBytes."  >
+
+                                                            </p:fileUpload>
+
+                                                            <p:dataTable id="tdocumentacionnombre1" var="arc"
+                                                                         value="#{archivoproyectoController.collectorArchivoProyecto}"
+                                                                         styleClass="tabla tablaAjustada TablaColorEncabezado" emptyMessage="No se subieron archivos." >
+
+                                                                <p:column headerText="Archivos">
+                                                                    <h:outputText value="#{arc.nombre}" />
+                                                                </p:column>
+                                                                <p:column headerText="">
+                                                                    <p:commandButton immediate="true" icon="fa fa-trash" title="Quitar el Archivo"
+                                                                                     action="#{archivoproyectoController.removerArchivoCollection}"
+                                                                                     update=":tabviewTodo:formTabDocumentacion:tdocumentacionnombre1"
+                                                                                     styleClass="RedButton White" style="width: auto; " >
+                                                                        <f:setPropertyActionListener value="#{arc}" target="#{archivoproyectoController.selected}" />
+                                                                    </p:commandButton>
+
+                                                                </p:column>
+                                                            </p:dataTable>
+
+                                                        </p:panelGrid>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
 
                                         </h:form>
 

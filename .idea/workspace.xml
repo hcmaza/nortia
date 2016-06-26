@@ -47,8 +47,8 @@
       <file leaf-file-name="Solicitud.xhtml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3329223">
-              <caret line="534" column="137" selection-start-line="534" selection-start-column="137" selection-end-line="534" selection-end-column="137" />
+            <state vertical-scroll-proportion="0.81450653">
+              <caret line="315" column="143" selection-start-line="315" selection-start-column="143" selection-end-line="315" selection-end-column="143" />
               <folding />
             </state>
           </provider>
@@ -87,8 +87,8 @@
       <file leaf-file-name="estilos.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="218" column="29" selection-start-line="218" selection-start-column="29" selection-end-line="218" selection-end-column="29" />
+            <state vertical-scroll-proportion="-19.866667">
+              <caret line="499" column="13" selection-start-line="499" selection-start-column="13" selection-end-line="499" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -1114,12 +1114,12 @@
       <workItem from="1466063717233" duration="1090000" />
       <workItem from="1466584458808" duration="1712000" />
       <workItem from="1466925592441" duration="38000" />
-      <workItem from="1466928449091" duration="6993000" />
+      <workItem from="1466928449091" duration="10365000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="530661000" />
+    <option name="totallyTimeSpent" value="534033000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1602,16 +1602,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/estilos.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="218" column="29" selection-start-line="218" selection-start-column="29" selection-end-line="218" selection-end-column="29" />
+        <state vertical-scroll-proportion="-19.866667">
+          <caret line="499" column="13" selection-start-line="499" selection-start-column="13" selection-end-line="499" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/secure/solicitud/Solicitud.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3329223">
-          <caret line="534" column="137" selection-start-line="534" selection-start-column="137" selection-end-line="534" selection-end-column="137" />
+        <state vertical-scroll-proportion="0.81450653">
+          <caret line="315" column="143" selection-start-line="315" selection-start-column="143" selection-end-line="315" selection-end-column="143" />
           <folding />
         </state>
       </provider>
