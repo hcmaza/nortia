@@ -97,6 +97,23 @@
         <auth-constraint>
             <role-name>Docente</role-name>
             <role-name>Administrador</role-name>
+            <role-name>No Docente</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Área Restringida - Usuario Autenticado</web-resource-name>
+            <description/>
+            <url-pattern>/secure/*</url-pattern>
+            <url-pattern>/secure/reportes/*</url-pattern>
+        </web-resource-collection>
+        <web-resource-collection>
+            <web-resource-name>Inicio</web-resource-name>
+            <description/>
+            <url-pattern>/index.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>*</role-name>
         </auth-constraint>
     </security-constraint>
     <!-- Login page -->

@@ -285,15 +285,21 @@ public class ConvocatoriaController implements Serializable {
     }
     
     // buscar convocatorias por tipo de proyecto, tipo de financiamiento, abierta en una fecha determinada
-    public void findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(int tipoproyecto, int tipofinanciamiento){
+    public void findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta(Integer tipoproyecto, Integer tipofinanciamiento){
 
-        try{
+        if(null == tipoproyecto || null == tipofinanciamiento){
+            items= new ListDataModel(getFacade().findConvocatoriasEnFecha(new Date()));
+            listaConvocatorias  = getFacade().findConvocatoriasEnFecha(new Date());
+        }
 
+        try {
             System.out.println("Tipo de Proyecto= " + tipoproyecto + " - Tipo de Financiamiento= " + tipofinanciamiento);
-
             items = new ListDataModel(getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date()));
             listaConvocatorias = getFacade().findConvocatoriasPorTipoProyectoTipoFinanciamientoYFecha(tipoproyecto, tipofinanciamiento, new Date());
-
+        }catch (NullPointerException npe){
+            System.out.println("findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta >> NullPointerException");
+            items= new ListDataModel(getFacade().findConvocatoriasEnFecha(new Date()));
+            listaConvocatorias  = getFacade().findConvocatoriasEnFecha(new Date());
         }catch(IllegalArgumentException iae){
             System.out.println("findConvocatoriasPorTipoProyectoTipoFinanciamientoAbierta >> IllegalArgumentException");
             // en caso de argumento ilegal, se buscan las convocatorias solo por fecha
